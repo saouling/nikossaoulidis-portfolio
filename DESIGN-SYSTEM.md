@@ -19,11 +19,15 @@ CSS, each with a darker "-ink" sibling for use as text:
 | `--gold` | `#C9A227` | Decorative only: pill fills, borders, large numerals |
 | `--gold-ink` | `#7A5E13` | Gold at text size (the "Industry / School / Research" eyebrow labels) |
 
-**Why two shades of each colour:** the bright versions, especially gold,
-fail WCAG AA contrast (4.5:1) against the page background at body/small
-text sizes. Never use `--red`, `--blue` or `--gold` directly as text colour;
-use the `-ink` variant. The bright versions are for anything large,
-decorative, or non-text: borders, fills, big numerals, hover-line strokes.
+**Why two shades of each colour:** computed contrast against `--bg`
+(#FFFFFF) for every token: `--red` 6.15:1, `--blue` 9.27:1, `--gold` 2.42:1.
+Only `--gold` actually fails WCAG AA (4.5:1) as text — bright `--red` and
+`--blue` already pass on their own and are used directly as text in a few
+places (project titles, inline links). Use `--gold-ink` whenever gold needs
+to carry text (it's the one real requirement here); the `-ink` variants of
+red/blue exist for extra margin at small sizes or on `--paper`/`--bg-alt`,
+not because the bright versions are unsafe. `--gold` itself stays
+decorative-only: pill fills, borders, large numerals, never text.
 
 Neutrals:
 

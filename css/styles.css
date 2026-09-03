@@ -118,6 +118,7 @@ h1, h2, h3 {
 h1 { font-size: var(--fs-h1); }
 h2 { font-size: var(--fs-h2); margin-top: var(--space-6); }
 h3 { font-size: var(--fs-h3); margin-top: var(--space-5); }
+h1, h2, h3 { scroll-margin-top: calc(72px + var(--space-4)); }
 
 p { max-width: var(--measure); text-align: left; }
 p + p { margin-top: var(--space-3); }
@@ -414,6 +415,23 @@ figcaption {
   .two-col { grid-template-columns: 1fr 1fr; }
 }
 
+/* Sticky companion column: text (first child) scrolls normally in one
+   consistent column; its media (second child) pins in place while this
+   section is in view, then hands off to the next section's own sticky
+   media as you scroll past — pure CSS, no JS. Used instead of repeating
+   full-width-text/half-width-two-col sections down a case-study page,
+   which reads as confusing column-switching. Text stays on the same side
+   throughout a page (no .flip here — that's a homepage-row-only choice). */
+@media (min-width: 768px) {
+  .two-col.sticky-media {
+    align-items: start;
+  }
+  .two-col.sticky-media > :last-child {
+    position: sticky;
+    top: calc(72px + var(--space-5));
+  }
+}
+
 /* Bento-style cluster of 2–4 images inside one side of a .two-col, matching
    the live Readymag case-study pages' text-column-plus-image-collage rhythm,
    without copying its freeform overlap: everything here stays grid-aligned
@@ -453,7 +471,7 @@ figcaption {
   .about-grid { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 .entry { margin-bottom: var(--space-5); }
-.entry h3 { margin-bottom: var(--space-1); }
+.entry h3 { margin-bottom: var(--space-1); color: var(--blue); }
 .entry .meta { color: var(--muted); font-size: var(--fs-small); }
 .entry .detail { font-size: var(--fs-small); font-style: italic; color: var(--body); margin-top: var(--space-1); }
 .col-heading {
@@ -522,6 +540,76 @@ blockquote.pull cite {
 .quote-attribution {
   margin-top: var(--space-4);
   color: var(--muted);
+}
+
+/* ---------- Photo cluster (About page) ----------
+   A small collage of die-cut, transparent-background photos, leaning and
+   overlapping with a couple of accent circles behind them — echoing the
+   cutout-photo language already established on the Ericsson collage,
+   rather than inventing a new visual style. Desktop only positions things
+   absolutely; mobile collapses to a plain stack so nothing overlaps text
+   or another photo at narrow widths. */
+.photo-cluster {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 480px;
+  margin-inline: auto;
+}
+.photo-cluster .accent-shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+.photo-cluster .accent-shape.a-blue { background: var(--blue); width: 220px; height: 220px; right: -30px; bottom: 10px; }
+.photo-cluster .accent-shape.a-red { background: var(--red); width: 110px; height: 110px; left: -10px; top: 0; }
+.photo-cluster picture {
+  position: absolute;
+}
+.photo-cluster img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 20px rgba(22, 22, 26, 0.18));
+}
+.photo-cluster .photo-main {
+  z-index: 2;
+  top: 12%;
+  left: 30%;
+  width: 54%;
+  transform: rotate(-3deg);
+}
+.photo-cluster .photo-profile {
+  z-index: 1;
+  top: 0;
+  right: 2%;
+  width: 40%;
+  transform: rotate(5deg);
+}
+.photo-cluster .photo-armchair {
+  z-index: 3;
+  bottom: 2%;
+  left: -12%;
+  width: 56%;
+  transform: rotate(-6deg);
+}
+@media (max-width: 640px) {
+  .photo-cluster {
+    height: auto;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .photo-cluster .accent-shape { display: none; }
+  .photo-cluster picture {
+    position: static;
+  }
+  .photo-cluster img {
+    width: 70%;
+    margin-inline: auto;
+    transform: none;
+  }
 }
 
 /* ---------- Full-bleed breakout ----------
@@ -762,7 +850,9 @@ blockquote.pull cite {
 .form-field textarea {
   width: 100%;
   padding: var(--space-3);
-  border: 1px solid var(--hairline);
+  /* --muted, not --hairline: WCAG 1.4.11 wants 3:1 for an identifiable
+     UI boundary like a form field's edge — --hairline is only 1.29:1. */
+  border: 1px solid var(--muted);
   border-radius: var(--radius);
   background: var(--bg);
   font-size: var(--fs-body);
