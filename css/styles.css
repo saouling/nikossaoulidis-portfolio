@@ -328,12 +328,12 @@ section, .section {
 }
 
 .hero-figure { margin-top: var(--space-6); }
-.hero-figure img, .hero-figure video { width: 100%; border-radius: var(--radius); }
+.hero-figure img, .hero-figure video { width: 100%; height: auto; border-radius: var(--radius); }
 .hero-figure.portrait { max-width: 360px; }
 
 /* hero video + sound toggle (Don't Be a Stranger) */
 .hero-video { position: relative; }
-.hero-video video, .hero-video img { width: 100%; border-radius: var(--radius); }
+.hero-video video, .hero-video img { width: 100%; height: auto; border-radius: var(--radius); }
 .hero-video button {
   position: absolute;
   left: var(--space-3);
@@ -379,7 +379,7 @@ section, .section {
 
 /* ---------- Figure / captions ---------- */
 figure { margin: var(--space-6) 0; }
-figure img, figure video { width: 100%; border-radius: var(--radius); }
+figure img, figure video { width: 100%; height: auto; border-radius: var(--radius); }
 figcaption {
   font-size: var(--fs-small);
   color: var(--muted);
@@ -414,16 +414,33 @@ figcaption {
   .two-col { grid-template-columns: 1fr 1fr; }
 }
 
-/* Cluster of 2–4 smaller images inside one side of a .two-col, matching the
-   live Readymag case-study pages' text-column-plus-image-collage rhythm.
-   Not yet used on any existing case-study page — ready for the next retrofit pass. */
+/* Bento-style cluster of 2–4 images inside one side of a .two-col, matching
+   the live Readymag case-study pages' text-column-plus-image-collage rhythm,
+   without copying its freeform overlap: everything here stays grid-aligned
+   (no overlap), varied sizes signal which image is the anchor. Each tile is
+   a fixed-shape cell (object-fit: cover crops to fit it, same non-distorting
+   crop `.row-media` already uses) — this is deliberate cropping, not the
+   stretch bug fixed above. */
 .image-cluster {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 100px;
   gap: var(--space-3);
 }
-.image-cluster img { border-radius: var(--radius); width: 100%; }
-.image-cluster .offset { margin-top: var(--space-5); }
+.image-cluster picture {
+  display: block;
+  grid-column: span 2;
+  grid-row: span 2;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+.image-cluster img { width: 100%; height: 100%; object-fit: cover; }
+.image-cluster .cluster-lg { grid-column: span 4; grid-row: span 3; }
+@media (max-width: 640px) {
+  .image-cluster { grid-template-columns: 1fr; grid-auto-rows: auto; }
+  .image-cluster picture,
+  .image-cluster .cluster-lg { grid-column: span 1; grid-row: span 1; aspect-ratio: 4 / 3; }
+}
 
 /* Independent stacked columns (About page), no vertical centering */
 .about-grid {
@@ -506,6 +523,23 @@ blockquote.pull cite {
   margin-top: var(--space-4);
   color: var(--muted);
 }
+
+/* ---------- Full-bleed breakout ----------
+   Same escape-the-.wrap trick .break-band already relies on below (just an
+   element outside any .wrap, not requiring a page-wide grid rewrite): centre
+   on the viewport instead of the 1120px container, capped generous so a very
+   wide monitor doesn't blow an image up absurdly. Use where a case-study
+   image or cluster would benefit from more room than the 1120px content
+   width gives it — not for body text, at-a-glance facts, or pull-quotes,
+   which stay narrow on purpose. */
+.breakout, .full-bleed {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  padding-inline: var(--space-4);
+}
+.breakout { max-width: 1600px; }
+.full-bleed { max-width: 1800px; }
 
 /* ---------- Break band (Don't Be a Stranger refusals) ---------- */
 .break-band {
@@ -651,7 +685,7 @@ blockquote.pull cite {
 .project-row .tag-word {
   font-family: var(--font-display);
   color: var(--red-ink);
-  font-size: var(--fs-small);
+  font-size: var(--fs-body);
 }
 .project-row .row-eyebrow {
   display: block;
@@ -663,7 +697,7 @@ blockquote.pull cite {
   margin-bottom: var(--space-1);
 }
 .project-row .desc { margin-top: var(--space-3); color: var(--body); }
-.project-row .outcome { margin-top: var(--space-3); color: var(--red-ink); font-size: var(--fs-small); }
+.project-row .outcome { margin-top: var(--space-3); color: var(--red-ink); font-size: var(--fs-body); }
 .project-row .row-media {
   aspect-ratio: 4 / 3;
   overflow: hidden;

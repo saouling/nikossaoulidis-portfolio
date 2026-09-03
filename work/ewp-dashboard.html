@@ -48,7 +48,7 @@
     <h1>EWP Dashboard</h1>
     <p class="standfirst">Redesigning the tool European universities use to manage Erasmus+ mobility, as one coherent system instead of five disconnected modules.</p>
   </div>
-  <div class="wrap">
+  <div class="breakout">
     <figure class="hero-figure">
       <picture>
         <source srcset="/images/ewp/hero.webp" type="image/webp">
@@ -69,17 +69,67 @@
 </section>
 
 <section class="section">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <h2 class="mt-0">The problem</h2>
+        <p>The EWP Dashboard is a tool higher education institutions across Europe use to manage Erasmus+ mobility students. The previous version had significant usability issues, a major barrier for hundreds of institutions relying on it. As my first large-scale UI/UX project, I took on redesigning the app to improve the experience, establish a cohesive visual identity, and lead the development process.</p>
+      </div>
+      <figure class="mt-0">
+        <picture>
+          <source srcset="/images/ewp/app-screenshot.webp" type="image/webp">
+          <img src="/images/ewp/app-screenshot.jpg" width="619" height="363" alt="A real screen from the redesigned dashboard: an Erasmus+ application record with status, academic term, student details and institution nominations." loading="lazy">
+        </picture>
+        <figcaption>An application record in the redesigned dashboard.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <h2 class="mt-0">What I did</h2>
+        <h3>User research</h3>
+        <p>To ground my design decisions, I designed and ran a user survey to gather feedback from the institutions using the tool. Data from hundreds of users shaped the foundation of the redesign, including mapping status to colour throughout the interface (accepted, pending, rejected) so people could scan a long list of applications at a glance instead of reading every row. I later presented the results in a webinar, speaking to over 1,000 users and stakeholders from the European University Foundation.</p>
+      </div>
+      <figure class="mt-0">
+        <picture>
+          <source srcset="/images/ewp/status-legend.webp" type="image/webp">
+          <img src="/images/ewp/status-legend.jpg" width="402" height="532" alt="The status colour-coding legend: blue, yellow and green mark each stage of an outgoing or incoming student's agreement, from unsigned through to signed by everyone." loading="lazy">
+        </picture>
+        <figcaption>Status mapped to colour, outgoing and incoming agreements.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="breakout">
+    <div class="two-col">
+      <div>
+        <h3 class="mt-0">Design system &amp; visual identity</h3>
+        <p>I built a design system, based on Bootstrap, as the foundation for the new interface: a type scale, a button system with every interaction state (active, hover, click, disabled), and a consistent icon set, so the same components behaved the same way everywhere. I also designed the visual identity, including the logo, refreshing the app from a plain placeholder mark to a proper brand.</p>
+      </div>
+      <div class="image-cluster">
+        <picture class="cluster-lg">
+          <source srcset="/images/ewp/brand-identity.webp" type="image/webp">
+          <img src="/images/ewp/brand-identity.jpg" width="1008" height="437" alt="Before and after: the old plain 'E+ Dashboard' placeholder logo beside the new EWP Dashboard identity, with its brand colour palette and styled buttons." loading="lazy">
+        </picture>
+        <picture>
+          <source srcset="/images/ewp/type-system.webp" type="image/webp">
+          <img src="/images/ewp/type-system.jpg" width="492" height="636" alt="The type scale: body, h6 through h1, each specimen set in the chosen typeface at its defined size." loading="lazy">
+        </picture>
+        <picture>
+          <source srcset="/images/ewp/button-system.webp" type="image/webp">
+          <img src="/images/ewp/button-system.jpg" width="476" height="664" alt="The button system: primary, secondary and outlined variants across every colour and state." loading="lazy">
+        </picture>
+        <picture>
+          <source srcset="/images/ewp/icon-states.webp" type="image/webp">
+          <img src="/images/ewp/icon-states.jpg" width="553" height="635" alt="Action icons, accept, reject, delete, edit, add and download, each shown active, on hover, on click and disabled." loading="lazy">
+        </picture>
+      </div>
+    </div>
+  </div>
+
   <div class="wrap col">
-    <h2 class="mt-0">The problem</h2>
-    <p>The EWP Dashboard is a tool higher education institutions across Europe use to manage Erasmus+ mobility students. The previous version had significant usability issues, a major barrier for hundreds of institutions relying on it. As my first large-scale UI/UX project, I took on redesigning the app to improve the experience, establish a cohesive visual identity, and lead the development process.</p>
-
-    <h2>What I did</h2>
-    <h3>User research</h3>
-    <p>To ground my design decisions, I designed and ran a user survey to gather feedback from the institutions using the tool. Data from hundreds of users shaped the foundation of the redesign. I later presented the results in a webinar, speaking to over 1,000 users and stakeholders from the European University Foundation.</p>
-
-    <h3>Design system &amp; visual identity</h3>
-    <p>I built a design system, based on Bootstrap, as the foundation for the new interface, keeping it consistent and usable across every feature. I also designed the visual identity, including the logo, to refresh the app's branding.</p>
-
     <h3>Prototyping &amp; development</h3>
     <p>I prototyped the redesigned dashboard in Figma and handed it to the development team, then oversaw development to make sure the final product matched the spec and stayed as user-friendly as intended.</p>
 
