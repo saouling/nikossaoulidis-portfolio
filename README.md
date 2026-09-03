@@ -26,16 +26,23 @@ images/<project>/                      per-project images, .jpg or .png master +
 assets/Nikos-Saoulidis-CV.pdf          the CV, linked directly
 ```
 
+See [`DESIGN-SYSTEM.md`](./DESIGN-SYSTEM.md) for the full colour/type/component
+reference before making visual changes.
+
 ## Editing content
 
 Every page is a plain HTML file, there's no templating at runtime. Open the file,
 edit the text or swap an image `src`, save, refresh.
 
 The header and footer are byte-identical across all 9 pages (look for the
-`<!-- SHARED: header -->` / `<!-- SHARED: footer -->` comments). If you change the
-nav or footer, copy the exact same block into every page. There's no build step
-enforcing this, it's a manual discipline call from the brief, to keep the site
-framework-free.
+`<!-- SHARED: header -->` / `<!-- SHARED: footer -->` comments), with one
+deliberate exception: `aria-current="page"` on the current nav link, which
+also drives the solid-vs-dotted underline (see DESIGN-SYSTEM.md's Motion
+section). `index.html`/`about.html`/`contact.html` each mark their own link;
+every `work/*.html` page keeps none marked. If you change anything else in
+the nav or footer, copy the exact same block into every page. There's no
+build step enforcing this, it's a manual discipline call from the brief, to
+keep the site framework-free.
 
 ## Adding a new case study
 
@@ -89,6 +96,34 @@ which can't be legally self-hosted. Body font stays **Inter**.
 - The homepage Work section deliberately mirrors the live site's row layout
   (image and text side by side, alternating), restyled with the tokens above
   instead of Readymag's five-plus ad hoc colours.
+
+## Version control
+
+Git is already set up locally with one initial commit on `main`. To connect it to
+your GitHub account and start tracking progress there:
+
+```bash
+cd nikossaoulidis-portfolio
+
+# check these match an email on your GitHub account, or commits won't
+# show up on your contribution graph — fix if needed before pushing:
+git config user.name
+git config user.email
+# git config user.name "Your Name"
+# git config user.email "the-email-on-your-github-account@example.com"
+
+# create the empty repo on GitHub (needs the gh CLI, already logged in),
+# or create it manually at github.com/new and skip this line
+gh repo create nikossaoulidis-portfolio --private --source=. --remote=origin
+
+# push
+git push -u origin main
+```
+
+Every future change becomes `git add -A && git commit -m "..." && git push`,
+and that history is what shows up as your commit activity on GitHub. The
+"Deploying" section below reuses this same repo, so pushing and going live
+end up being the same step once Pages is turned on.
 
 ## Deploying (GitHub Pages)
 

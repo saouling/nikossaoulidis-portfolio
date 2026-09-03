@@ -656,7 +656,13 @@ blockquote.pull cite {
   transition: transform .3s ease;
 }
 @media (min-width: 800px) {
-  .project-row .row-media { aspect-ratio: auto; height: 100%; }
+  /* A fixed height, not a percentage: a percentage height inside a CSS
+     Grid row that's sized "auto" resolves to auto too, so a tall source
+     photo would still drive its own height from its intrinsic aspect
+     ratio instead of matching the text column. A fixed cap sidesteps
+     that circularity entirely and keeps every row a similar height,
+     matching the live site's own images-are-cropped-to-fit behaviour. */
+  .project-row .row-media { aspect-ratio: auto; height: 380px; align-self: center; }
 }
 .project-row:hover .row-media img { transform: scale(1.02); }
 
