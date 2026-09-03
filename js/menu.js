@@ -29,17 +29,16 @@ document.body.classList.remove('no-js');
     });
   }
 
-  // Scroll reveal: fade/rise .reveal blocks in as they enter the viewport.
-  // Content is already visible without this, so a missing observer is safe.
+  // Scroll reveal: .reveal blocks fade/lift in as they enter the viewport
+  // and fade back out as they leave it, in either scroll direction — kept
+  // observing indefinitely rather than a one-time reveal. Content is
+  // already visible without this, so a missing observer is safe.
   if (!reduceMotion && 'IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
   } else {
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });

@@ -80,39 +80,45 @@
     <p>One line: our developers used AI to turn Figma into code, but it kept building the annotations instead of the interface, so I built a way to fix that.</p>
   </div>
   <div class="wrap">
-    <figure>
-      <picture>
-        <source srcset="/images/ericsson/case1-before-after.webp" type="image/webp">
-        <img src="/images/ericsson/case1-before-after.jpg" width="1400" height="798" alt="Abstract before-and-after diagram. Left: a cluttered canvas of screens buried under overlapping note blocks and arrows. Right: an ordered canvas with clean screens in labelled sections and three tidy spec blocks." loading="lazy">
-      </picture>
-      <figcaption>Redrawn abstractly to stay NDA-safe: no real screens or product text.</figcaption>
-    </figure>
+    <div class="two-col">
+      <div>
+        <h3 class="mt-0">The problem</h3>
+        <p>Developers in our organisation were using AI agents to generate UI code straight from the UX team's Figma files. The files were built for humans: screens buried under sticky notes, arrows, colour overlays, design rationale sitting right on top of the interface.</p>
+        <p>The AI could not tell the difference. It tried to build the sticky notes too.</p>
+        <blockquote class="pull">&ldquo;Annotations confuse the AI.&rdquo;<cite>&mdash; one of our developers</cite></blockquote>
+      </div>
+      <figure class="mt-0">
+        <picture>
+          <source srcset="/images/ericsson/case1-before-after.webp" type="image/webp">
+          <img src="/images/ericsson/case1-before-after.jpg" width="1400" height="798" alt="Abstract before-and-after diagram. Left: a cluttered canvas of screens buried under overlapping note blocks and arrows. Right: an ordered canvas with clean screens in labelled sections and three tidy spec blocks." loading="lazy">
+        </picture>
+        <figcaption>Redrawn abstractly to stay NDA-safe: no real screens or product text.</figcaption>
+      </figure>
+    </div>
   </div>
   <div class="wrap col">
-    <h3>The problem</h3>
-    <p>Developers in our organisation were using AI agents to generate UI code straight from the UX team's Figma files. The files were built for humans: screens buried under sticky notes, arrows, colour overlays, design rationale sitting right on top of the interface.</p>
-    <p>The AI could not tell the difference. It tried to build the sticky notes too.</p>
-    <blockquote class="pull">&ldquo;Annotations confuse the AI.&rdquo;<cite>&mdash; one of our developers</cite></blockquote>
-
     <h3>What I did</h3>
     <p>First I went and looked. I documented two real developer workflows in our organisation to understand where it actually broke, and set up a Slack channel so the feedback could keep coming rather than arriving once at the end.</p>
     <p>Then I read around. About twenty case studies, industry write-ups from teams like Atlassian, Spotify, Miro and Figma, plus academic papers. The pattern was the same everywhere: structured input produces better output. Every team that cleaned up what they gave the AI saw the quality go up.</p>
     <p>I also needed a way to say how bad our files were, so I put together a small audit framework: five dimensions, scored out of ten. It is my own framework rather than an industry standard, but it meant we could talk about a file being more or less AI-ready instead of just &ldquo;messy&rdquo;.</p>
-
-    <h3>The tool</h3>
-    <p>I built a Kiro skill called <strong>delivery-for-ai</strong>. You point it at a polish page and it produces a clean, AI-readable delivery page in the same file.</p>
-    <p>The structure is simple. On the left, clean screens organised into feature-specific sections. On the right, a small number of structured notes: interaction behaviour, style tokens, and a summary of what changed.</p>
   </div>
   <div class="wrap">
-    <figure>
-      <picture>
-        <source srcset="/images/ericsson/case1-the-rule.webp" type="image/webp">
-        <img src="/images/ericsson/case1-the-rule.jpg" width="1400" height="630" alt="Diagram of the delivery-for-ai structure: clean screens on one side, and three labelled note types, interaction behaviour, style tokens, and a changes summary, on the other." loading="lazy">
-      </picture>
-    </figure>
+    <div class="two-col">
+      <div>
+        <h3 class="mt-0">The tool</h3>
+        <p>I built a Kiro skill called <strong>delivery-for-ai</strong>. You point it at a polish page and it produces a clean, AI-readable delivery page in the same file.</p>
+        <p>The structure is simple. On the left, clean screens organised into feature-specific sections. On the right, a small number of structured notes: interaction behaviour, style tokens, and a summary of what changed.</p>
+        <blockquote class="pull">The rule that made it work: the screens show what it looks like, the notes say how it behaves. Never both.</blockquote>
+      </div>
+      <figure class="mt-0">
+        <picture>
+          <source srcset="/images/ericsson/case1-the-rule.webp" type="image/webp">
+          <img src="/images/ericsson/case1-the-rule.jpg" width="1400" height="630" alt="Diagram of the delivery-for-ai structure: clean screens on one side, and three labelled note types, interaction behaviour, style tokens, and a changes summary, on the other." loading="lazy">
+        </picture>
+      </figure>
+    </div>
   </div>
   <div class="wrap col">
-    <blockquote class="pull">The rule that made it work: the screens show what it looks like, the notes say how it behaves. Never both.</blockquote>
     <p>When I let the notes describe the interface as well, the AI started inventing things that weren't there. So I kept them strictly about behaviour.</p>
 
     <h3>Testing it</h3>
@@ -156,28 +162,25 @@
     </div>
   </div>
 
-  <div class="wrap col">
-    <h3>Four habits for the rest of the week</h3>
-    <p>Workshops are the easy part. None of it sticks unless the ordinary days change too: public channels instead of DMs, mini demos the moment something is visual, a habit of inviting one person from another discipline into your next session, and a dedicated UX improvements channel anyone can report into.</p>
-
-    <h3>We printed it</h3>
-    <p>We handed out a one-page version at the conference so people could start the next day without needing us in the room. That mattered more to me than the talk did. A talk is forty minutes and then it is over. The handout is still on people's desks.</p>
-  </div>
-
   <div class="wrap">
-    <div class="figure-grid cols-2">
-      <figure>
+    <div class="two-col">
+      <div>
+        <h3 class="mt-0">Four habits for the rest of the week</h3>
+        <p>Workshops are the easy part. None of it sticks unless the ordinary days change too: public channels instead of DMs, mini demos the moment something is visual, a habit of inviting one person from another discipline into your next session, and a dedicated UX improvements channel anyone can report into.</p>
+
+        <h3>We printed it</h3>
+        <p>We handed out a one-page version at the conference so people could start the next day without needing us in the room. That mattered more to me than the talk did. A talk is forty minutes and then it is over. The handout is still on people's desks.</p>
+      </div>
+      <div class="image-cluster">
         <picture>
           <source srcset="/images/ericsson/case2-photo-a.webp" type="image/webp">
           <img src="/images/ericsson/case2-photo-a.jpg" width="1400" height="933" alt="Photo from the Ericsson Developer Conference talk on design and development collaboration." loading="lazy">
         </picture>
-      </figure>
-      <figure>
-        <picture>
+        <picture class="offset">
           <source srcset="/images/ericsson/case2-photo-b.webp" type="image/webp">
           <img src="/images/ericsson/case2-photo-b.jpg" width="900" height="597" alt="Photo from the Ericsson Developer Conference talk, audience view." loading="lazy">
         </picture>
-      </figure>
+      </div>
     </div>
     <p class="fs-small" style="margin-top: var(--space-3)">The printed one-page handout from the talk is the strongest artifact from this case and will replace these conference photos once it's exported. See the build notes.</p>
   </div>
@@ -197,17 +200,21 @@
     <h3>The problem</h3>
     <p>Our dashboards hold an enormous amount of telecom data. What any one person needs to see depends on their role and on what the network is doing right now. A static dashboard can't keep up with that, and building a new one for every case is slow.</p>
 
-    <h3>Fix the foundation first</h3>
-    <p>Before anything clever, the card had to work. It was a fixed-size box that broke the moment a layout became dynamic, and it limited what data we could show at all.</p>
-    <p>So we rebuilt it as a content-driven component that responds to whatever width the grid gives it. One component instead of a set of special cases.</p>
   </div>
   <div class="wrap">
-    <figure>
-      <picture>
-        <source srcset="/images/ericsson/case3-card.webp" type="image/webp">
-        <img src="/images/ericsson/case3-card.jpg" width="1000" height="450" alt="Abstract diagram comparing a fixed-size card, which breaks under a dynamic layout, to a flexible, content-driven card that adapts to any width." loading="lazy">
-      </picture>
-    </figure>
+    <div class="two-col">
+      <div>
+        <h3 class="mt-0">Fix the foundation first</h3>
+        <p>Before anything clever, the card had to work. It was a fixed-size box that broke the moment a layout became dynamic, and it limited what data we could show at all.</p>
+        <p>So we rebuilt it as a content-driven component that responds to whatever width the grid gives it. One component instead of a set of special cases.</p>
+      </div>
+      <figure class="mt-0">
+        <picture>
+          <source srcset="/images/ericsson/case3-card.webp" type="image/webp">
+          <img src="/images/ericsson/case3-card.jpg" width="1000" height="450" alt="Abstract diagram comparing a fixed-size card, which breaks under a dynamic layout, to a flexible, content-driven card that adapts to any width." loading="lazy">
+        </picture>
+      </figure>
+    </div>
   </div>
   <div class="wrap col">
     <h3>Grounded in research, not vibes</h3>
@@ -218,31 +225,36 @@
       <li>IEEE Drillboards, 2025: dashboards should adapt to how expert the user is.</li>
     </ul>
     <p>Across the industry guidance the same principles kept coming back: design for outcomes rather than screens, keep containers consistent, let AI suggest and humans approve, and always show where the data came from and how fresh it is.</p>
-
-    <h3>The proposal</h3>
-    <p>An assistant and a canvas. Roughly 30% steering panel, 70% canvas.</p>
-    <p>The assistant assembles a whole layout from context rather than one card at a time. Cards arrive pre-filled and you can edit, pin or dismiss them. You steer it two ways: talk to it, or just move the cards yourself.</p>
-    <blockquote class="pull">The deliverable wasn't a screen. It was a system.</blockquote>
   </div>
   <div class="wrap">
-    <figure>
-      <picture>
-        <source srcset="/images/ericsson/case3-assistant-canvas.webp" type="image/webp">
-        <img src="/images/ericsson/case3-assistant-canvas.jpg" width="1400" height="616" alt="Abstract diagram of a narrow assistant panel next to a large canvas of content cards that assemble themselves from context." loading="lazy">
-      </picture>
-    </figure>
-  </div>
-  <div class="wrap col">
-    <h3>Building it</h3>
-    <p>We built a flexible card component in Figma, wrote the component specs in markdown and versioned them in GitLab, then generated a working HTML prototype straight from those specs to check they held up. A front-end developer adapted the real component from the same specs, and a back-end team in the US used it to display live data and graphs. Then we shared what we found with other teams.</p>
+    <div class="two-col">
+      <div>
+        <h3 class="mt-0">The proposal</h3>
+        <p>An assistant and a canvas. Roughly 30% steering panel, 70% canvas.</p>
+        <p>The assistant assembles a whole layout from context rather than one card at a time. Cards arrive pre-filled and you can edit, pin or dismiss them. You steer it two ways: talk to it, or just move the cards yourself.</p>
+        <blockquote class="pull">The deliverable wasn't a screen. It was a system.</blockquote>
+      </div>
+      <figure class="mt-0">
+        <picture>
+          <source srcset="/images/ericsson/case3-assistant-canvas.webp" type="image/webp">
+          <img src="/images/ericsson/case3-assistant-canvas.jpg" width="1400" height="616" alt="Abstract diagram of a narrow assistant panel next to a large canvas of content cards that assemble themselves from context." loading="lazy">
+        </picture>
+      </figure>
+    </div>
   </div>
   <div class="wrap">
-    <figure>
-      <picture>
-        <source srcset="/images/ericsson/case3-spec-to-code.webp" type="image/webp">
-        <img src="/images/ericsson/case3-spec-to-code.jpg" width="1400" height="434" alt="Abstract flow diagram: a component in a design tool, a written spec in version control, a generated prototype, and a real front-end component wired to live data." loading="lazy">
-      </picture>
-    </figure>
+    <div class="two-col">
+      <div>
+        <h3 class="mt-0">Building it</h3>
+        <p>We built a flexible card component in Figma, wrote the component specs in markdown and versioned them in GitLab, then generated a working HTML prototype straight from those specs to check they held up. A front-end developer adapted the real component from the same specs, and a back-end team in the US used it to display live data and graphs. Then we shared what we found with other teams.</p>
+      </div>
+      <figure class="mt-0">
+        <picture>
+          <source srcset="/images/ericsson/case3-spec-to-code.webp" type="image/webp">
+          <img src="/images/ericsson/case3-spec-to-code.jpg" width="1400" height="434" alt="Abstract flow diagram: a component in a design tool, a written spec in version control, a generated prototype, and a real front-end component wired to live data." loading="lazy">
+        </picture>
+      </figure>
+    </div>
   </div>
   <div class="wrap col">
     <h3>What it taught me</h3>
