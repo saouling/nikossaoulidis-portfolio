@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interactive Sound-Mediating Table — Nikos Saoulidis</title>
+<meta name="description" content="A playful, ambiguous table that turns bare-skin touch into sound and light between strangers. Exhibited at ACM DIS 2024, Copenhagen.">
+<link rel="canonical" href="https://nikossaoulidis.xyz/work/interactive-table.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Interactive Sound-Mediating Table — Nikos Saoulidis">
+<meta property="og:description" content="A playful, ambiguous table that turns bare-skin touch into sound and light between strangers. Exhibited at ACM DIS 2024, Copenhagen.">
+<meta property="og:image" content="https://nikossaoulidis.xyz/images/table/diagram.jpg">
+<meta property="og:url" content="https://nikossaoulidis.xyz/work/interactive-table.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Interactive Sound-Mediating Table — Nikos Saoulidis">
+<meta name="twitter:description" content="A playful, ambiguous table that turns bare-skin touch into sound and light between strangers. Exhibited at ACM DIS 2024, Copenhagen.">
+<meta name="twitter:image" content="https://nikossaoulidis.xyz/images/table/diagram.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="no-js" id="top">
+<!-- SHARED: header - keep identical across all pages, EXCEPT the one
+     aria-current="page" attribute below, which marks the current nav item.
+     index.html/about.html/contact.html each mark their own link; every
+     work/*.html page keeps none of the three marked. See DESIGN-SYSTEM.md. -->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/index.html">Nikos Saoulidis</a>
+    <nav class="nav" aria-label="Primary">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="visually-hidden">Menu</span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/index.html#work">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- /SHARED: header -->
+
+<main id="main">
+<section class="hero">
+  <div class="wrap col">
+    <h1>Interactive Sound-Mediating Table</h1>
+    <p class="standfirst">A playful, ambiguous table that turns bare-skin touch into sound and light between strangers.</p>
+  </div>
+  <div class="wrap">
+    <figure class="hero-figure">
+      <picture>
+        <source srcset="/images/table/diagram.webp" type="image/webp">
+        <img src="/images/table/diagram.jpg" width="1500" height="1468" alt="Diagram of the table: touch closes a circuit, an Arduino Uno sends MIDI to a synthesizer, speakers play a melody and an LED strip lights up in the matching colour." loading="eager">
+      </picture>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap col">
+  <dl class="at-a-glance" style="max-width: var(--container)">
+    <div><dt>Role</dt><dd>Co-designer, with David Hagberg, Mafalda Gamboa and Sjoerd Hendriks</dd></div>
+    <div><dt>When</dt><dd>2024</dd></div>
+    <div><dt>Where</dt><dd>Chalmers University of Technology, Gothenburg</dd></div>
+    <div><dt>Type</dt><dd>Research and exhibition, physical prototype</dd></div>
+  </dl>
+  <p class="outcome-line">Accepted and exhibited at ACM DIS 2024, demo track, Copenhagen.</p>
+</section>
+
+<section class="section">
+  <div class="wrap col">
+    <h2 class="mt-0">The idea</h2>
+    <p>Three discreet touch points, green, red and blue, sit on opposite sides of the table. When two people each touch a point, and touch each other, they close a circuit and trigger a melody and matching light. Seven states come out of the possible colour combinations, so the table stays open to interpretation rather than teaching one correct way to play it.</p>
+    <p>It builds on Hobye and L&ouml;wgren's idea of bare-skin touch: giving strangers a playful excuse to touch, mediated through an object rather than each other directly.</p>
+
+    <h2>How it works</h2>
+    <p>Touch closes a circuit read by an Arduino Uno, which sends a MIDI signal to a KORG Volca Keys synthesizer. The synthesizer's audio goes out through speakers, and an LED strip lights up in the colour of whichever point was touched.</p>
+  </div>
+  <div class="wrap">
+    <figure>
+      <picture>
+        <source srcset="/images/table/diagram-top.webp" type="image/webp">
+        <img src="/images/table/diagram-top.jpg" width="1833" height="1032" alt="Top-view schematic of two people playing with the table, sound and light effects modulated by bare-skin touch, from the ACM DIS 2024 paper." loading="lazy">
+      </picture>
+      <figcaption>Figure 1 from the paper: a top-view schematic of two people playing the table.</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap col">
+    <h2>Testing it</h2>
+    <p>We deployed the table in a student environment and recruited 13 pairs of students, with a camera and microphone set up to record. Each pair got five uninterrupted minutes, followed by a semi-structured interview.</p>
+    <p>How long it took people to understand the table ranged from as quick as five seconds to as long as forty-five. Some pairs touched fingers and hands, others found more unusual contacts: ankle to ankle, forehead to forehead. Several started trying to play a song together.</p>
+    <blockquote class="pull">&ldquo;Blue feels a bit spooky. The others just feel like tones, white feels like classical music. Green feels Japanese, like sitting and drinking tea. Yellow feels a bit futuristic.&rdquo;</blockquote>
+    <p>Participants negotiated their own strategies for touch, some enjoyed the collaborative puzzle of it, and a few noted they could technically activate the table alone, but found that &ldquo;boring&rdquo;, a sign the design was doing its job of needing two people.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="embed">
+      <iframe src="https://www.youtube.com/embed/d99zzlIpXJk" title="The Interactive Sound-Mediating Table in use" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="embed">
+      <iframe src="https://www.youtube.com/embed/e0et8bGytBw" title="The Interactive Sound-Mediating Table, demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="wrap col">
+    <h2>Outcome</h2>
+    <p>The work was accepted to the ACM DIS 2024 demo track in Copenhagen, co-authored with David Hagberg, Mafalda Gamboa and Sjoerd Hendriks.</p>
+    <p><a href="https://dl.acm.org/doi/10.1145/3656156.3665424" target="_blank" rel="noopener">Read the full paper, &ldquo;Prototyping Playful Touch with a Sound-Mediating Table,&rdquo; on the ACM Digital Library &#8599;</a></p>
+  </div>
+</section>
+
+</main>
+<!-- SHARED: footer - keep identical across all pages -->
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="fs-small">Nikos Saoulidis &copy; 2026</p>
+    <nav aria-label="Footer">
+      <a href="mailto:niksaoul@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/nikolaos-saoulidis-a90434186/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="back-to-top" href="#top">Back to top</a>
+    </nav>
+  </div>
+</footer>
+<script src="/js/menu.js" defer></script>
+<!-- /SHARED: footer -->
+
+</body>
+</html>

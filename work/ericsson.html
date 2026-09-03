@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ericsson — AI-Ready Design Delivery — Nikos Saoulidis</title>
+<meta name="description" content="UX design on dense private-5G software at Ericsson: making Figma deliveries AI-readable, getting design and development to build together, and a generative UI proposal for data-dense dashboards.">
+<link rel="canonical" href="https://nikossaoulidis.xyz/work/ericsson.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ericsson — AI-Ready Design Delivery — Nikos Saoulidis">
+<meta property="og:description" content="UX design on dense private-5G software at Ericsson: making Figma deliveries AI-readable, getting design and development to build together, and a generative UI proposal for data-dense dashboards.">
+<meta property="og:image" content="https://nikossaoulidis.xyz/images/ericsson/collage.jpg">
+<meta property="og:url" content="https://nikossaoulidis.xyz/work/ericsson.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ericsson — AI-Ready Design Delivery — Nikos Saoulidis">
+<meta name="twitter:description" content="UX design on dense private-5G software at Ericsson: making Figma deliveries AI-readable, getting design and development to build together, and a generative UI proposal for data-dense dashboards.">
+<meta name="twitter:image" content="https://nikossaoulidis.xyz/images/ericsson/collage.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="no-js" id="top">
+<!-- SHARED: header - keep identical across all pages, EXCEPT the one
+     aria-current="page" attribute below, which marks the current nav item.
+     index.html/about.html/contact.html each mark their own link; every
+     work/*.html page keeps none of the three marked. See DESIGN-SYSTEM.md. -->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/index.html">Nikos Saoulidis</a>
+    <nav class="nav" aria-label="Primary">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="visually-hidden">Menu</span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/index.html#work">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- /SHARED: header -->
+
+<main id="main">
+<section class="hero">
+  <div class="wrap col">
+    <h1>Ericsson</h1>
+    <p class="standfirst">UX Designer on dense private-5G software, where my job was making complex, technical tools clear for expert users.</p>
+  </div>
+  <div class="wrap">
+    <figure class="hero-figure">
+      <picture>
+        <source srcset="/images/ericsson/collage.webp" type="image/webp">
+        <img src="/images/ericsson/collage.jpg" width="1900" height="1031" alt="A black-and-white collage: Nikos presenting at the Ericsson Developer Conference, the Ericsson logo, and a slide on the history of enabling communication." loading="eager">
+      </picture>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap col">
+  <dl class="at-a-glance" style="max-width: var(--container)">
+    <div><dt>Role</dt><dd>UX Designer and Scrum Master</dd></div>
+    <div><dt>When</dt><dd>2025 to 2026</dd></div>
+    <div><dt>Where</dt><dd>Enterprise Wireless Solutions, Gothenburg. One of twelve designers.</dd></div>
+    <div><dt>Worked with</dt><dd>Product and engineering, closely and daily</dd></div>
+  </dl>
+  <p class="fs-small" style="margin-top: var(--space-3)">A note: the work is under NDA, so this shows the method, not the screens.</p>
+
+  <blockquote class="pull">Three cases I'm proud of: making our design deliveries AI-readable, getting design and development to build together, and a generative UI proposal for data-dense dashboards.</blockquote>
+
+  <h2>The context</h2>
+  <p>Private 5G software is dense. A lot of state, a lot of configuration, a lot of things that go wrong in ways only an expert would recognise. The interesting part of the job was rarely the screen itself. It was working out what a network engineer actually needs to see at the moment they look.</p>
+  <p>Most of what I'm proudest of ended up being about the space between design and engineering, rather than the design on its own.</p>
+</section>
+
+<section class="section">
+  <div class="wrap col">
+    <h2 class="mt-0">Case 1 &middot; Making our Figma deliveries AI-readable</h2>
+    <p>One line: our developers used AI to turn Figma into code, but it kept building the annotations instead of the interface, so I built a way to fix that.</p>
+  </div>
+  <div class="wrap">
+    <figure>
+      <picture>
+        <source srcset="/images/ericsson/case1-before-after.webp" type="image/webp">
+        <img src="/images/ericsson/case1-before-after.jpg" width="1400" height="798" alt="Abstract before-and-after diagram. Left: a cluttered canvas of screens buried under overlapping note blocks and arrows. Right: an ordered canvas with clean screens in labelled sections and three tidy spec blocks." loading="lazy">
+      </picture>
+      <figcaption>Redrawn abstractly to stay NDA-safe: no real screens or product text.</figcaption>
+    </figure>
+  </div>
+  <div class="wrap col">
+    <h3>The problem</h3>
+    <p>Developers in our organisation were using AI agents to generate UI code straight from the UX team's Figma files. The files were built for humans: screens buried under sticky notes, arrows, colour overlays, design rationale sitting right on top of the interface.</p>
+    <p>The AI could not tell the difference. It tried to build the sticky notes too.</p>
+    <blockquote class="pull">&ldquo;Annotations confuse the AI.&rdquo;<cite>&mdash; one of our developers</cite></blockquote>
+
+    <h3>What I did</h3>
+    <p>First I went and looked. I documented two real developer workflows in our organisation to understand where it actually broke, and set up a Slack channel so the feedback could keep coming rather than arriving once at the end.</p>
+    <p>Then I read around. About twenty case studies, industry write-ups from teams like Atlassian, Spotify, Miro and Figma, plus academic papers. The pattern was the same everywhere: structured input produces better output. Every team that cleaned up what they gave the AI saw the quality go up.</p>
+    <p>I also needed a way to say how bad our files were, so I put together a small audit framework: five dimensions, scored out of ten. It is my own framework rather than an industry standard, but it meant we could talk about a file being more or less AI-ready instead of just &ldquo;messy&rdquo;.</p>
+
+    <h3>The tool</h3>
+    <p>I built a Kiro skill called <strong>delivery-for-ai</strong>. You point it at a polish page and it produces a clean, AI-readable delivery page in the same file.</p>
+    <p>The structure is simple. On the left, clean screens organised into feature-specific sections. On the right, a small number of structured notes: interaction behaviour, style tokens, and a summary of what changed.</p>
+  </div>
+  <div class="wrap">
+    <figure>
+      <picture>
+        <source srcset="/images/ericsson/case1-the-rule.webp" type="image/webp">
+        <img src="/images/ericsson/case1-the-rule.jpg" width="1400" height="630" alt="Diagram of the delivery-for-ai structure: clean screens on one side, and three labelled note types, interaction behaviour, style tokens, and a changes summary, on the other." loading="lazy">
+      </picture>
+    </figure>
+  </div>
+  <div class="wrap col">
+    <blockquote class="pull">The rule that made it work: the screens show what it looks like, the notes say how it behaves. Never both.</blockquote>
+    <p>When I let the notes describe the interface as well, the AI started inventing things that weren't there. So I kept them strictly about behaviour.</p>
+
+    <h3>Testing it</h3>
+    <p>I tested it with a developer over four rounds and fixed what broke each time.</p>
+    <blockquote class="pull">It went from the AI inventing a toolbar that didn't exist to &ldquo;this is pretty good, the issues are on my side now.&rdquo;</blockquote>
+    <p>I wrote the whole approach up as a shared standard so it wasn't just a thing I did on my own files.</p>
+
+    <h3>What I take from it</h3>
+    <p>Clean, organised input produces better code with fewer mistakes. That sounds obvious written down, but it changes what a design deliverable is for. And it only worked because I built it with the developers rather than for them.</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap col">
+    <h2 class="mt-0">Case 2 &middot; Build better together</h2>
+    <p>One line: design and development kept working in sequence instead of together, so Frida Edstam and I put together a set of methods people could start using the next morning, and gave a talk about it at the Ericsson Developer Conference.</p>
+
+    <h3>The handoff trap</h3>
+    <p>PM to design, design to front-end, front-end to back-end. Everyone reacting to what the person before them already decided, and nobody in the room when the decision actually got made.</p>
+    <p>What we ended up asking for is smaller than it sounds: invite one person from another discipline one step earlier than you normally would.</p>
+    <blockquote class="pull">You are giving them context, not extra work.</blockquote>
+
+    <h3>Three ways to actually work together</h3>
+    <p>We did not want to hand out principles. Principles are easy to nod along to and impossible to act on. So every method came with a time box, a group size and a source, because &ldquo;collaborate more&rdquo; is not something anyone can put in a calendar.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="col-grid cols-3">
+      <div>
+        <h3>Brainwriting</h3>
+        <p>15 to 20 minutes, 3 to 8 people, mixed. Write the problem up where everyone can see it. Everyone writes ideas in silence for five minutes, rotates the papers and builds on each other's for three, then discusses the strongest directions. Nobody dominates, and you get more ideas in less time.</p>
+      </div>
+      <div>
+        <h3>UX and front-end pairing</h3>
+        <p>15 to 30 minutes, one designer and one developer. Sit at the same screen when you review a feature. Small issues get fixed on the spot, bigger ones get ticketed together. The designer sees the real constraints, the developer gets clarity on the intent.</p>
+      </div>
+      <div>
+        <h3>UX bug bash</h3>
+        <p>30 to 60 minutes, 2 to 5 people, mixed. Developers and designers sitting together trying to break the experience rather than the code: behaviour, copy, empty and error states, edge cases like long text or a slow connection.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap col">
+    <h3>Four habits for the rest of the week</h3>
+    <p>Workshops are the easy part. None of it sticks unless the ordinary days change too: public channels instead of DMs, mini demos the moment something is visual, a habit of inviting one person from another discipline into your next session, and a dedicated UX improvements channel anyone can report into.</p>
+
+    <h3>We printed it</h3>
+    <p>We handed out a one-page version at the conference so people could start the next day without needing us in the room. That mattered more to me than the talk did. A talk is forty minutes and then it is over. The handout is still on people's desks.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="figure-grid cols-2">
+      <figure>
+        <picture>
+          <source srcset="/images/ericsson/case2-photo-a.webp" type="image/webp">
+          <img src="/images/ericsson/case2-photo-a.jpg" width="1400" height="933" alt="Photo from the Ericsson Developer Conference talk on design and development collaboration." loading="lazy">
+        </picture>
+      </figure>
+      <figure>
+        <picture>
+          <source srcset="/images/ericsson/case2-photo-b.webp" type="image/webp">
+          <img src="/images/ericsson/case2-photo-b.jpg" width="900" height="597" alt="Photo from the Ericsson Developer Conference talk, audience view." loading="lazy">
+        </picture>
+      </figure>
+    </div>
+    <p class="fs-small" style="margin-top: var(--space-3)">The printed one-page handout from the talk is the strongest artifact from this case and will replace these conference photos once it's exported. See the build notes.</p>
+  </div>
+
+  <div class="wrap col">
+    <p>I also helped run an AI design-review forum with Jakob Kitzing and Mats Kullerstrand, which came out of the same instinct: fewer handovers, more looking at things together.</p>
+    <p>Case 1 only worked because the developers were in it from the first week. This was Frida and me trying to make that normal instead of lucky.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap col">
+    <h2 class="mt-0">Case 3 &middot; Generative UI for data-dense dashboards</h2>
+    <p>One line: a hackathon project on dashboards that assemble themselves from context, and what building it taught me about where UX is going.</p>
+    <p class="fs-small"><strong>Credit where it's due:</strong> this was a Tweak Week team project with three other designers and a front-end developer. My part was the card component, the specs, the prototype and the proposal.</p>
+
+    <h3>The problem</h3>
+    <p>Our dashboards hold an enormous amount of telecom data. What any one person needs to see depends on their role and on what the network is doing right now. A static dashboard can't keep up with that, and building a new one for every case is slow.</p>
+
+    <h3>Fix the foundation first</h3>
+    <p>Before anything clever, the card had to work. It was a fixed-size box that broke the moment a layout became dynamic, and it limited what data we could show at all.</p>
+    <p>So we rebuilt it as a content-driven component that responds to whatever width the grid gives it. One component instead of a set of special cases.</p>
+  </div>
+  <div class="wrap">
+    <figure>
+      <picture>
+        <source srcset="/images/ericsson/case3-card.webp" type="image/webp">
+        <img src="/images/ericsson/case3-card.jpg" width="1000" height="450" alt="Abstract diagram comparing a fixed-size card, which breaks under a dynamic layout, to a flexible, content-driven card that adapts to any width." loading="lazy">
+      </picture>
+    </figure>
+  </div>
+  <div class="wrap col">
+    <h3>Grounded in research, not vibes</h3>
+    <p>Generative UI is easy to get excited about, so I went looking for what had actually been shown.</p>
+    <ul style="list-style: disc; padding-left: 1.25em; max-width: var(--measure)">
+      <li>Stanford and Georgia Tech, 2025: people prefer dynamic card interfaces over chat, by roughly 72%.</li>
+      <li>Google Research, 2025: LLM-generated interfaces match expert designs about half the time, and constrained component catalogs beat free-form generation.</li>
+      <li>IEEE Drillboards, 2025: dashboards should adapt to how expert the user is.</li>
+    </ul>
+    <p>Across the industry guidance the same principles kept coming back: design for outcomes rather than screens, keep containers consistent, let AI suggest and humans approve, and always show where the data came from and how fresh it is.</p>
+
+    <h3>The proposal</h3>
+    <p>An assistant and a canvas. Roughly 30% steering panel, 70% canvas.</p>
+    <p>The assistant assembles a whole layout from context rather than one card at a time. Cards arrive pre-filled and you can edit, pin or dismiss them. You steer it two ways: talk to it, or just move the cards yourself.</p>
+    <blockquote class="pull">The deliverable wasn't a screen. It was a system.</blockquote>
+  </div>
+  <div class="wrap">
+    <figure>
+      <picture>
+        <source srcset="/images/ericsson/case3-assistant-canvas.webp" type="image/webp">
+        <img src="/images/ericsson/case3-assistant-canvas.jpg" width="1400" height="616" alt="Abstract diagram of a narrow assistant panel next to a large canvas of content cards that assemble themselves from context." loading="lazy">
+      </picture>
+    </figure>
+  </div>
+  <div class="wrap col">
+    <h3>Building it</h3>
+    <p>We built a flexible card component in Figma, wrote the component specs in markdown and versioned them in GitLab, then generated a working HTML prototype straight from those specs to check they held up. A front-end developer adapted the real component from the same specs, and a back-end team in the US used it to display live data and graphs. Then we shared what we found with other teams.</p>
+  </div>
+  <div class="wrap">
+    <figure>
+      <picture>
+        <source srcset="/images/ericsson/case3-spec-to-code.webp" type="image/webp">
+        <img src="/images/ericsson/case3-spec-to-code.jpg" width="1400" height="434" alt="Abstract flow diagram: a component in a design tool, a written spec in version control, a generated prototype, and a real front-end component wired to live data." loading="lazy">
+      </picture>
+    </figure>
+  </div>
+  <div class="wrap col">
+    <h3>What it taught me</h3>
+    <p>This is the part I keep thinking about.</p>
+    <blockquote class="pull">UX is moving from designing screens to designing systems of rules.</blockquote>
+    <p>You end up writing for two audiences at once, humans and AI agents, and they want different things from the same document. Version control and specs are quietly becoming design tools. And the valuable part of the job shifts towards defining the constraints, then evaluating and curating what comes back.</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap col">
+    <p class="outcome-line mt-0">The way I work: take something complex, understand it, make it clear for the people using it, design it as a system, and build it with the people involved.</p>
+  </div>
+</section>
+
+</main>
+<!-- SHARED: footer - keep identical across all pages -->
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="fs-small">Nikos Saoulidis &copy; 2026</p>
+    <nav aria-label="Footer">
+      <a href="mailto:niksaoul@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/nikolaos-saoulidis-a90434186/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="back-to-top" href="#top">Back to top</a>
+    </nav>
+  </div>
+</footer>
+<script src="/js/menu.js" defer></script>
+<!-- /SHARED: footer -->
+
+</body>
+</html>
