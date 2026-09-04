@@ -29,24 +29,46 @@ document.body.classList.remove('no-js');
     });
   }
 
-  // Hero shapes: drift a few pixels toward the cursor. Skipped entirely for
-  // reduced motion or a non-hover (touch) pointer, in which case the shapes
-  // just sit still -- their static position is already the fallback.
+  // Hero shapes + custom cursor: both gated on the same conditions (a real
+  // hover-capable pointer, motion allowed) since neither means anything on
+  // touch and reduced-motion users get the plain static hero either way.
   var heroShapes = document.querySelector('.hero-shapes');
   var hero = document.querySelector('.hero');
-  if (heroShapes && hero && !reduceMotion && window.matchMedia('(hover: hover)').matches) {
-    var shapes = Array.prototype.slice.call(heroShapes.querySelectorAll('.shape'));
-    hero.addEventListener('mousemove', function (e) {
-      var rect = hero.getBoundingClientRect();
-      var nx = (e.clientX - rect.left) / rect.width - 0.5;
-      var ny = (e.clientY - rect.top) / rect.height - 0.5;
-      shapes.forEach(function (el) {
-        var depth = parseFloat(el.getAttribute('data-depth')) || 20;
-        el.style.transform = 'translate(' + (nx * depth) + 'px,' + (ny * depth) + 'px)';
+  if (hero && !reduceMotion && window.matchMedia('(hover: hover)').matches) {
+    if (heroShapes) {
+      var shapes = Array.prototype.slice.call(heroShapes.querySelectorAll('.shape'));
+      hero.addEventListener('mousemove', function (e) {
+        var rect = hero.getBoundingClientRect();
+        var nx = (e.clientX - rect.left) / rect.width - 0.5;
+        var ny = (e.clientY - rect.top) / rect.height - 0.5;
+        shapes.forEach(function (el) {
+          var depth = parseFloat(el.getAttribute('data-depth')) || 20;
+          el.style.transform = 'translate(' + (nx * depth) + 'px,' + (ny * depth) + 'px)';
+        });
       });
+      hero.addEventListener('mouseleave', function () {
+        shapes.forEach(function (el) { el.style.transform = 'translate(0,0)'; });
+      });
+    }
+
+    // Custom cursor: a ring that tracks the pointer while over the hero,
+    // filling solid red over a link. The real cursor is never removed
+    // globally -- only `.hero` gets `cursor:none`, and only once this dot
+    // exists to replace it.
+    var dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    document.body.appendChild(dot);
+    hero.addEventListener('mouseenter', function () {
+      hero.classList.add('custom-cursor');
     });
     hero.addEventListener('mouseleave', function () {
-      shapes.forEach(function (el) { el.style.transform = 'translate(0,0)'; });
+      hero.classList.remove('custom-cursor');
+      dot.style.transform = 'translate(-100px, -100px)';
+    });
+    hero.addEventListener('mousemove', function (e) {
+      dot.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+      var over = e.target.closest('a');
+      dot.classList.toggle('is-link', !!over);
     });
   }
 
