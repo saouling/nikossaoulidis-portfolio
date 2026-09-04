@@ -29,6 +29,27 @@ document.body.classList.remove('no-js');
     });
   }
 
+  // Hero shapes: drift a few pixels toward the cursor. Skipped entirely for
+  // reduced motion or a non-hover (touch) pointer, in which case the shapes
+  // just sit still -- their static position is already the fallback.
+  var heroShapes = document.querySelector('.hero-shapes');
+  var hero = document.querySelector('.hero');
+  if (heroShapes && hero && !reduceMotion && window.matchMedia('(hover: hover)').matches) {
+    var shapes = Array.prototype.slice.call(heroShapes.querySelectorAll('.shape'));
+    hero.addEventListener('mousemove', function (e) {
+      var rect = hero.getBoundingClientRect();
+      var nx = (e.clientX - rect.left) / rect.width - 0.5;
+      var ny = (e.clientY - rect.top) / rect.height - 0.5;
+      shapes.forEach(function (el) {
+        var depth = parseFloat(el.getAttribute('data-depth')) || 20;
+        el.style.transform = 'translate(' + (nx * depth) + 'px,' + (ny * depth) + 'px)';
+      });
+    });
+    hero.addEventListener('mouseleave', function () {
+      shapes.forEach(function (el) { el.style.transform = 'translate(0,0)'; });
+    });
+  }
+
   // Scroll reveal: .reveal blocks fade/lift in as they enter the viewport
   // and fade back out as they leave it, in either scroll direction — kept
   // observing indefinitely rather than a one-time reveal. Content is

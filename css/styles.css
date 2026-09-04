@@ -309,6 +309,35 @@ section, .section {
 .hero {
   padding-block: var(--space-7) var(--space-6);
 }
+.hero .wrap { position: relative; }
+
+/* Bauhaus-influenced accent shapes: decorative, hidden below 900px where
+   there's no spare width beside the headline. Sit behind the text flow
+   (negative z-index) so any edge overlap never touches legibility. Drift
+   toward the cursor via js/menu.js; static and harmless without JS,
+   reduced motion, or a hover-capable pointer. */
+.hero-shapes {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none; display: none;
+}
+/* Needs the text measure (720px) plus a real gutter beside it to avoid any
+   overlap with the standfirst paragraphs, hence a taller breakpoint than
+   the sitewide 900px one. */
+@media (min-width: 1050px) {
+  .hero-shapes { display: block; }
+}
+.hero-shapes .shape {
+  position: absolute; border-radius: 50%; transition: transform .3s cubic-bezier(.2, .7, .2, 1);
+}
+.hero-shapes .ring { background: none; border: 3px solid; }
+.hero-shapes .square { border-radius: 4px; }
+/* All positioned from the right edge and sized to stay inside the gutter
+   right of the 720px text column -- never a left-based offset, which is
+   what let a shape drift over running text before. */
+.hero-shapes .s1 { width: clamp(120px, 15vw, 220px); aspect-ratio: 1; right: 0; top: -6%; background: var(--blue); opacity: .92; }
+.hero-shapes .s2 { width: clamp(48px, 5vw, 72px); aspect-ratio: 1; right: 4%; top: 48%; background: var(--red); opacity: .92; }
+.hero-shapes .s3 { width: clamp(40px, 4.5vw, 64px); aspect-ratio: 1; right: 22%; bottom: 4%; border-color: var(--gold); }
+.hero-shapes .s4 { width: 26px; height: 26px; left: -4px; top: 6%; background: var(--gold); }
+.hero-shapes .s5 { width: clamp(70px, 8vw, 120px); aspect-ratio: 1; right: -2%; bottom: 10%; border-color: var(--blue); }
 .hero h1 {
   font-size: var(--fs-hero);
   max-width: 16ch;
