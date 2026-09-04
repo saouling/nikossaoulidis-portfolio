@@ -33,7 +33,7 @@ document.body.classList.remove('no-js');
   // hover-capable pointer, motion allowed) since neither means anything on
   // touch and reduced-motion users get the plain static hero either way.
   var heroShapes = document.querySelector('.hero-shapes');
-  var hero = document.querySelector('.hero');
+  var hero = document.querySelector('.hero.hero-home');
   if (hero && !reduceMotion && window.matchMedia('(hover: hover)').matches) {
     if (heroShapes) {
       var shapes = Array.prototype.slice.call(heroShapes.querySelectorAll('.shape'));

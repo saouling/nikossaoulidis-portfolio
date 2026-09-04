@@ -307,12 +307,21 @@ section, .section {
 
 /* ---------- Hero ---------- */
 .hero {
+  padding-block: var(--space-7) var(--space-6);
+}
+/* Homepage hero only -- poster-scale type, full-height flex centring, and
+   the shape/cursor layer below. Scoped separately from the shared .hero so
+   case-study pages (whose .breakout hero figures need .hero to stay a plain
+   block, not a flex container -- a flex item can't use the 100vw/negative-
+   margin breakout technique the same way) are unaffected. */
+.hero.hero-home {
   padding-block: clamp(var(--space-7), 14vh, 8rem) var(--space-6);
   min-height: 88vh;
   display: flex;
   align-items: center;
 }
-.hero .wrap { position: relative; width: 100%; }
+.hero .wrap { position: relative; }
+.hero.hero-home .wrap { width: 100%; }
 
 /* Custom cursor: a simple ring that tracks the pointer 1:1 while over the
    hero, filling solid red over a link. Desktop/hover/motion-enabled only --
@@ -372,6 +381,10 @@ section, .section {
 }
 
 .hero h1 {
+  font-size: var(--fs-hero);
+  max-width: 16ch;
+}
+.hero.hero-home h1 {
   font-size: clamp(3.552rem, 2.4rem + 5vw, 7.2rem);
   line-height: 1.02;
   max-width: 18ch;
