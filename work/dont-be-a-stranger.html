@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="A permanent museum installation where two strangers pick up old rotary phones and talk to each other, live, across two museums in Gothenburg.">
 <meta name="twitter:image" content="https://nikossaoulidis.xyz/images/dbas/01-hero-installation-room.jpg">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/css/styles.css?v=7">
+<link rel="stylesheet" href="/css/styles.css?v=8">
 </head>
 <body class="no-js" id="top">
 <!-- SHARED: header - keep identical across all pages, EXCEPT the one
@@ -231,14 +231,19 @@
     <h2 class="mt-0">It went live</h2>
   </div>
   <div class="wrap">
-    <figure>
+    <div class="hero-video">
+      <video src="/videos/rohsska-installation.mp4" autoplay muted loop playsinline></video>
+      <button type="button" aria-pressed="false">Sound off</button>
+    </div>
+    <p class="fs-small" style="margin-top: var(--space-2)">R&ouml;hsska Museum, filmed on site.</p>
+    <figure style="margin-top: var(--space-6)">
       <picture><source srcset="/images/dbas/03-visitors-at-the-piece.webp" type="image/webp"><img src="/images/dbas/03-visitors-at-the-piece.jpg" width="1400" height="787" alt="Visitors at the installation, one on the phone." loading="lazy"></picture>
     </figure>
     <div class="figure-grid cols-4">
       <figure class="mt-0"><picture><source srcset="/images/dbas/04-visitors-b.webp" type="image/webp"><img src="/images/dbas/04-visitors-b.jpg" width="506" height="900" alt="A visitor using the installation." loading="lazy"></picture></figure>
       <figure class="mt-0"><picture><source srcset="/images/dbas/05-visitors-c.webp" type="image/webp"><img src="/images/dbas/05-visitors-c.jpg" width="505" height="900" alt="Another visitor using the installation." loading="lazy"></picture></figure>
-      <figure class="mt-0"><picture><source srcset="/images/dbas/20-installation-molndal-a.webp" type="image/webp"><img src="/images/dbas/20-installation-molndal-a.jpg" width="900" height="689" alt="The installation at M&ouml;lndals City Museum." loading="lazy"></picture></figure>
-      <figure class="mt-0"><picture><source srcset="/images/dbas/21-installation-molndal-b.webp" type="image/webp"><img src="/images/dbas/21-installation-molndal-b.jpg" width="900" height="675" alt="The M&ouml;lndal installation, a different angle." loading="lazy"></picture></figure>
+      <figure class="mt-0"><picture><source srcset="/images/dbas/20-installation-molndal-a.webp" type="image/webp"><img src="/images/dbas/20-installation-molndal-a.jpg" width="900" height="675" alt="The M&ouml;lndal installation: a beige Ericsson Dialog phone on a wooden table beside a red vintage armchair, bilingual posters on the wall above, in the archival &ldquo;&Ouml;ppna Magasinet&rdquo; room." loading="lazy"></picture></figure>
+      <figure class="mt-0"><picture><source srcset="/images/dbas/21-installation-molndal-b.webp" type="image/webp"><img src="/images/dbas/21-installation-molndal-b.jpg" width="900" height="675" alt="A closer view of the M&ouml;lndal posters and instructions above the phone table and red armchair." loading="lazy"></picture></figure>
     </div>
   </div>
 
@@ -264,8 +269,18 @@
     <p><strong>In a shared space you design the situation, not just the object.</strong></p>
 
     <h2>Five guidelines</h2>
-    <p>The installation was the artefact. The actual output of the thesis was a set of design guidelines for anyone building an interactive museum exhibition about communication, drawn from the themes that came out of the analysis.</p>
-    <p class="fs-small"><em>The full list of guidelines from the thesis isn't in here yet. I'll add the numbered list once I pull the exact wording from the report, rather than paraphrase it from memory.</em></p>
+    <p>The installation was the artefact. The actual output of the thesis was a set of design guidelines for anyone building an interactive museum exhibition about communication, drawn from five themes that ran across every phase of testing, pre-pilot interviews, the campus pilot, and the museum feedback.</p>
+  </div>
+  <div class="wrap">
+    <dl class="at-a-glance" style="max-width: var(--container); grid-template-columns: 1fr;">
+      <div><dt>Emotional presence through analog voice</dt><dd>Kept it voice-only and anonymous. No screens, no names, no visual feedback, even where I could have added them.</dd></div>
+      <div><dt>Friction and vulnerability as invitations</dt><dd>Separated meaningful friction from broken friction. Fixed the sound quality and stability; kept the weight, the dial, the wait.</dd></div>
+      <div><dt>Defamiliarisation and improvisation</dt><dd>Explained enough, left room for exploration. The prompt cards help a conversation without prescribing it.</dd></div>
+      <div><dt>Social context and spatial norms</dt><dd>Placement became a design decision, not an afterthought. Semi-sheltered but visible, with signage that gives permission.</dd></div>
+      <div><dt>Material memory and nostalgia</dt><dd>Kept the original hardware rather than replicating it. The tactile detail, the weight, the click of the dial, is the entry point.</dd></div>
+    </dl>
+  </div>
+  <div class="wrap col">
 
     <h2>What I learned</h2>
     <ul style="list-style: disc; padding-left: 1.25em; max-width: var(--measure)">
@@ -299,7 +314,7 @@
     </nav>
   </div>
 </footer>
-<script src="/js/menu.js?v=7" defer></script>
+<script src="/js/menu.js?v=8" defer></script>
 <!-- /SHARED: footer -->
 
 </body>
