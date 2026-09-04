@@ -4,6 +4,7 @@ except every response carries Cache-Control: no-store, so the browser
 always fetches the current file from disk -- no stale-image or
 stale-CSS surprises while iterating locally."""
 import http.server
+import os
 import sys
 
 
@@ -16,7 +17,9 @@ class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 8123
-    directory = sys.argv[2] if len(sys.argv) > 2 else "."
+    # Port comes from PORT (set by the preview tool's autoPort), never a
+    # hardcoded flag -- falls back to 8000 for a manual, non-tool run.
+    port = int(os.environ.get("PORT", 8000))
+    directory = sys.argv[1] if len(sys.argv) > 1 else "."
     handler = lambda *args, **kwargs: NoCacheHandler(*args, directory=directory, **kwargs)
     http.server.ThreadingHTTPServer(("", port), handler).serve_forever()
