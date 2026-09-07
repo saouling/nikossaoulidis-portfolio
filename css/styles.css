@@ -309,15 +309,106 @@ section, .section {
 .hero {
   padding-block: var(--space-7) var(--space-6);
 }
+/* Homepage hero only -- poster-scale type, full-height flex centring, and
+   the shape/cursor layer below. Scoped separately from the shared .hero so
+   case-study pages (whose .breakout hero figures need .hero to stay a plain
+   block, not a flex container -- a flex item can't use the 100vw/negative-
+   margin breakout technique the same way) are unaffected. */
+.hero.hero-home {
+  padding-block: clamp(var(--space-7), 14vh, 8rem) var(--space-6);
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+}
+.hero .wrap { position: relative; }
+.hero.hero-home .wrap { width: 100%; }
+
+/* Custom cursor: a simple ring that tracks the pointer 1:1 while over the
+   hero, filling solid red over a link. Desktop/hover/motion-enabled only --
+   guarded the same way as the shapes below, and the real system cursor
+   never truly disappears (cursor:auto fallback) if JS never attaches it. */
+.hero.custom-cursor { cursor: none; }
+.hero.custom-cursor a { cursor: none; }
+.cursor-dot {
+  position: fixed; top: 0; left: 0; width: 32px; height: 32px; margin: -16px 0 0 -16px;
+  border-radius: 50%; border: 2px solid var(--ink); pointer-events: none; z-index: 1000;
+  transform: translate(-100px, -100px); transition: background-color .15s ease, border-color .15s ease, transform .05s linear, scale .15s ease;
+}
+.cursor-dot.is-link { background: var(--red); border-color: var(--red); scale: 1.4; }
+
+/* Bauhaus-influenced accent shapes: decorative, hidden below 900px where
+   there's no spare width beside the headline. Sit behind the text flow
+   (negative z-index) so any edge overlap never touches legibility.
+   Two independent motions compose on nested elements so they don't fight
+   over the same CSS property: .shape-drift plays a slow ambient float
+   (always on, whether or not JS runs), and the inner .shape gets an
+   additional cursor-parallax offset from js/menu.js. Both are inert
+   without JS/hover/motion. */
+.hero-shapes {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none; display: none;
+}
+/* Needs the text measure (720px) plus a real gutter beside it to avoid any
+   overlap with the standfirst paragraphs, hence a taller breakpoint than
+   the sitewide 900px one. */
+@media (min-width: 1050px) {
+  .hero-shapes { display: block; }
+}
+.hero-shapes .shape-drift { position: absolute; animation: heroDrift 10s ease-in-out infinite; }
+.hero-shapes .shape {
+  position: absolute; inset: 0; border-radius: 50%; transition: transform .3s cubic-bezier(.2, .7, .2, 1);
+}
+.hero-shapes .ring { background: none; border: 3px solid; }
+.hero-shapes .square { border-radius: 4px; }
+/* All positioned from the right edge and sized to stay inside the gutter
+   right of the 720px text column -- never a left-based offset, which is
+   what let a shape drift over running text before. */
+.hero-shapes .d1 { width: clamp(120px, 15vw, 220px); aspect-ratio: 1; right: 0; top: -6%; animation-duration: 12s; }
+.hero-shapes .d2 { width: clamp(48px, 5vw, 72px); aspect-ratio: 1; right: 4%; top: 48%; animation-duration: 8s; animation-direction: reverse; }
+.hero-shapes .d3 { width: clamp(40px, 4.5vw, 64px); aspect-ratio: 1; right: 22%; bottom: 4%; animation-duration: 9s; }
+.hero-shapes .d4 { width: 26px; height: 26px; left: -4px; top: 6%; animation-duration: 7s; animation-direction: reverse; }
+.hero-shapes .d5 { width: clamp(70px, 8vw, 120px); aspect-ratio: 1; right: -2%; bottom: 10%; animation-duration: 14s; }
+.hero-shapes .s1 { background: var(--blue); opacity: .92; }
+.hero-shapes .s2 { background: var(--red); opacity: .92; }
+.hero-shapes .s3 { border-color: var(--gold); }
+.hero-shapes .s4 { background: var(--gold); }
+.hero-shapes .s5 { border-color: var(--blue); }
+@keyframes heroDrift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10px, -14px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-shapes .shape-drift { animation: none; }
+}
+
 .hero h1 {
   font-size: var(--fs-hero);
   max-width: 16ch;
+}
+.hero.hero-home h1 {
+  font-size: clamp(3.552rem, 2.4rem + 5vw, 7.2rem);
+  line-height: 1.02;
+  max-width: 18ch;
+}
+/* A quiet bit of kinetic type: the closing line slowly cycles through the
+   three brand colours rather than sitting static -- the "some of it can
+   be dynamic" ask. Frozen to blue under reduced motion. */
+.accent-cycle {
+  display: inline-block;
+  animation: accentCycle 9s ease-in-out infinite;
+}
+@keyframes accentCycle {
+  0%, 100% { color: var(--blue); }
+  33% { color: var(--red); }
+  66% { color: var(--gold-ink); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .accent-cycle { animation: none; color: var(--blue); }
 }
 .hero .standfirst {
   font-size: var(--fs-h3);
   color: var(--body);
   max-width: var(--measure);
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
 }
 .hero-links {
   display: flex;
@@ -330,6 +421,15 @@ section, .section {
 
 .hero-figure { margin-top: var(--space-6); }
 .hero-figure img, .hero-figure video { width: 100%; height: auto; border-radius: var(--radius); }
+
+/* Caps a portrait photo/poster at a sane width instead of letting object-fit-less
+   `img { width: 100% }` stretch it to the full .wrap/.breakout container height.
+   Used wherever a single portrait image sits alone in the single-column flow
+   (no landscape crop available, and no second portrait to pair it with). */
+.portrait { max-width: 420px; margin-inline: auto; }
+/* Extra-tall (near 2:1) portraits still dominate the page even at 420px —
+   cap those noticeably smaller rather than shrinking every .portrait figure. */
+.portrait-sm { max-width: 260px; }
 .hero-figure.portrait { max-width: 360px; }
 
 /* hero video + sound toggle (Don't Be a Stranger) */
@@ -391,6 +491,7 @@ figcaption {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
+  margin-top: var(--space-5);
 }
 .figure-grid.cols-2 { grid-template-columns: 1fr; }
 .figure-grid.cols-3 { grid-template-columns: 1fr; }
@@ -439,6 +540,17 @@ figcaption {
    a fixed-shape cell (object-fit: cover crops to fit it, same non-distorting
    crop `.row-media` already uses) — this is deliberate cropping, not the
    stretch bug fixed above. */
+/* Two posters as visible equals (bilingual signage), not one dominant +
+   one small the way .image-cluster's bento sizing would read. */
+.poster-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+.poster-pair picture { display: block; border-radius: var(--radius); overflow: hidden; }
+.poster-pair img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 640px) { .poster-pair { grid-template-columns: 1fr; } }
+
 .image-cluster {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -521,24 +633,45 @@ blockquote.pull cite {
   margin-top: var(--space-2);
 }
 
-/* Large visitor-style quotes (Don't Be a Stranger payoff) */
-.quote-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-5);
+/* Visitor quotes as a post-it board (Don't Be a Stranger payoff) — the real
+   feedback mechanism WAS literal post-its (see the curator-notes decision
+   card and Museum-reflection-mechanisms.png), so this isn't decoration, it's
+   the actual object. Fixed per-card rotation (not JS random) so the layout
+   is stable across reloads; straightens and lifts on hover. */
+.postit-board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-5) var(--space-4);
   margin-block: var(--space-6);
+  padding-block: var(--space-3);
 }
-@media (min-width: 768px) {
-  .quote-grid { grid-template-columns: 1fr 1fr; }
-}
-.quote-lg {
+.postit {
+  width: 240px;
+  min-height: 190px;
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  background: var(--paper);
+  box-shadow: 0 6px 16px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08);
   font-family: var(--font-display);
-  font-size: var(--fs-quote-lg);
+  font-size: var(--fs-body);
   line-height: var(--lh-tight);
   color: var(--ink);
+  transition: transform .2s ease, box-shadow .2s ease;
 }
+.postit:hover { transform: rotate(0deg) translateY(-5px); box-shadow: 0 12px 26px rgba(0,0,0,.2); z-index: 2; }
+.postit:nth-child(1) { transform: rotate(-3deg); }
+.postit:nth-child(2) { transform: rotate(2deg); background: color-mix(in srgb, var(--red) 10%, var(--paper)); }
+.postit:nth-child(3) { transform: rotate(-1.5deg); background: color-mix(in srgb, var(--blue) 10%, var(--paper)); }
+.postit:nth-child(4) { transform: rotate(2.5deg); }
+.postit:nth-child(5) { transform: rotate(-2.5deg); background: color-mix(in srgb, var(--red) 10%, var(--paper)); }
+.postit:nth-child(1):hover, .postit:nth-child(2):hover, .postit:nth-child(3):hover,
+.postit:nth-child(4):hover, .postit:nth-child(5):hover { transform: rotate(0deg) translateY(-5px); }
+@media (prefers-reduced-motion: reduce) { .postit { transition: none; } }
 .quote-attribution {
   margin-top: var(--space-4);
+  text-align: center;
   color: var(--muted);
 }
 
@@ -815,9 +948,288 @@ blockquote.pull cite {
 }
 @media (min-width: 768px) {
   .col-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .col-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
 }
 .col-grid h3 { margin-bottom: var(--space-2); }
 .col-grid p { max-width: none; }
+
+/* ---------- Bauhaus diagram blocks (Don't Be a Stranger) ----------
+   Flat-colour poster blocks matching the Ericsson case study's diagram
+   language (bold condensed display type, solid ink/navy/red/gold fields)
+   and the thesis's own Lab/Field/Showroom figure — built in HTML/CSS
+   instead of exported PNGs so they stay crisp and, via <details>, are
+   keyboard/touch-interactive with no JS. */
+/* Credit/technical caption directly under a video or photo — left-aligned,
+   editorial photo-credit convention (distinct from .diagram-caption's
+   centered interpretive captions under a diagram). */
+.media-caption { margin-top: var(--space-2); }
+.media-caption-center { text-align: center; opacity: .7; }
+
+.diagram-caption {
+  margin-top: var(--space-3);
+  margin-inline: auto;
+  text-align: center;
+  font-style: italic;
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+.museum-link {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+}
+.museum-card {
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius);
+  color: var(--on-dark);
+  text-align: center;
+}
+.museum-card.navy { background: var(--blue); }
+.museum-card.red  { background: var(--red); }
+.museum-card .phone-glyph { width: 56px; height: 56px; margin: 0 auto var(--space-3); color: var(--on-dark); }
+/* Real catalogue phone photo, pinned like a print on the flat colour block
+   instead of floating directly on it (the Dialog's red background would
+   otherwise fight the red Mölndal card). */
+.museum-card .phone-photo {
+  width: 84px;
+  margin: 0 auto var(--space-3);
+  background: var(--on-dark);
+  padding: var(--space-1);
+  border-radius: 3px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.25);
+}
+.museum-card .phone-photo img { display: block; width: 100%; height: 96px; object-fit: cover; border-radius: 1px; }
+.museum-card .museum-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: var(--lh-tight);
+}
+.museum-card .museum-city { opacity: .82; font-style: italic; margin-top: var(--space-1); }
+
+.call-line { position: relative; width: 100%; min-width: 56px; height: 2px;
+  background-image: repeating-linear-gradient(to right, var(--gold) 0 8px, transparent 8px 16px); }
+.call-line .pulse {
+  position: absolute; top: 50%; left: 0; width: 10px; height: 10px;
+  border-radius: 50%; background: var(--gold);
+  transform: translate(-50%, -50%);
+  animation: call-travel 3.2s ease-in-out infinite;
+}
+@keyframes call-travel { 0%, 100% { left: 0%; } 50% { left: 100%; } }
+@media (max-width: 640px) {
+  .museum-link { grid-template-columns: 1fr; justify-items: center; }
+  .call-line { width: 2px; height: 48px; background-image: repeating-linear-gradient(to bottom, var(--gold) 0 8px, transparent 8px 16px); }
+  .call-line .pulse { top: 0; left: 50%; animation-name: call-travel-v; }
+  @keyframes call-travel-v { 0%, 100% { top: 0%; } 50% { top: 100%; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .call-line .pulse { animation: none; left: 50%; top: 50%; }
+}
+
+/* The thesis's actual research question, given real weight instead of
+   sitting as a bolded sentence — reuses the ink-block poster language. */
+.question-band {
+  background: var(--ink);
+  color: var(--on-dark);
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  border-radius: var(--radius);
+}
+.question-band .eyebrow-label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: var(--fs-small);
+  color: var(--gold);
+  margin-bottom: var(--space-4);
+}
+.question-band p {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3.6vw, 2.3rem);
+  line-height: var(--lh-tight);
+  color: var(--on-dark);
+  max-width: 22ch;
+  margin-inline: auto;
+}
+
+.statement-block {
+  background: var(--ink);
+  color: var(--on-dark);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  border-radius: var(--radius);
+}
+.statement-block .statement-icon { width: 72px; height: 72px; margin: 0 auto var(--space-4); color: var(--gold); }
+.statement-block .icon-strip {
+  display: block;
+  max-width: 420px;
+  margin: 0 auto var(--space-4);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.statement-block .icon-strip img { display: block; width: 100%; height: auto; }
+.statement-block h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  letter-spacing: -0.02em;
+  color: var(--on-dark);
+  margin: 0;
+}
+.statement-block .statement-sub {
+  color: var(--gold);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: var(--fs-small);
+  margin-top: var(--space-3);
+}
+
+/* Process stepper: radio inputs + labels instead of six independent
+   <details>. The nav row (labels + arrows) never changes height no matter
+   which pane is open, so the arrows connecting each label never move —
+   the previous <details>-per-card version grew each card individually,
+   which shifted the arrows every time a step opened. One shared panel
+   below the row (a real flex sibling, so the ~ combinator can reach it)
+   swaps its visible pane via :checked, no JS. */
+.stepper { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+.stepper input[type="radio"] {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+.stepper-btn {
+  flex: 1 1 130px;
+  cursor: pointer;
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: var(--fs-small);
+  letter-spacing: .02em;
+  color: var(--on-dark);
+  text-align: center;
+  transition: box-shadow .15s ease;
+}
+.stepper input:checked + .stepper-btn { box-shadow: inset 0 0 0 3px var(--gold); }
+.stepper input:focus-visible + .stepper-btn { outline: 2px solid var(--ink); outline-offset: 2px; }
+.timeline-arrow { display: none; }
+@media (min-width: 768px) {
+  .timeline-arrow {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+}
+/* :nth-of-type, not :nth-child — the (visually hidden) inputs and the
+   arrow spans are also children, so counting by tag name (all six
+   .stepper-btn are <label>) is what keeps this correct. */
+.stepper-btn:nth-of-type(1) { background: var(--blue); }
+.stepper-btn:nth-of-type(2) { background: var(--red); }
+.stepper-btn:nth-of-type(3) { background: var(--ink); }
+.stepper-btn:nth-of-type(4) { background: var(--gold-ink); }
+.stepper-btn:nth-of-type(5) { background: var(--blue-ink); }
+.stepper-btn:nth-of-type(6) { background: var(--red-ink); }
+
+.stepper-panel {
+  flex-basis: 100%;
+  width: 100%;
+  margin-top: var(--space-2);
+  padding: var(--space-5);
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+}
+.stepper-pane { display: none; }
+.stepper-pane p { max-width: var(--measure); }
+.stepper-pane figure { max-width: 320px; margin: var(--space-4) 0 0; }
+.stepper-pane img { border-radius: var(--radius); }
+#phase-1:checked ~ .stepper-panel .pane-1,
+#phase-2:checked ~ .stepper-panel .pane-2,
+#phase-3:checked ~ .stepper-panel .pane-3,
+#phase-4:checked ~ .stepper-panel .pane-4,
+#phase-5:checked ~ .stepper-panel .pane-5,
+#phase-6:checked ~ .stepper-panel .pane-6 { display: block; }
+
+/* One systematic gap between "What I decided" sub-sections, instead of an
+   inline margin-top on whichever wrap div happened to come first in each. */
+.decision-block + .decision-block { margin-top: var(--space-6); }
+
+/* Real decision quotes, replacing document screenshots */
+.decision-cards { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
+@media (min-width: 768px) { .decision-cards { grid-template-columns: 1fr 1fr; } }
+.decision-card {
+  border-left: 6px solid var(--red);
+  background: var(--bg-alt);
+  padding: var(--space-4);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.decision-card:nth-child(2n) { border-left-color: var(--blue); }
+.decision-card blockquote {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-tight);
+  color: var(--ink);
+  margin: 0;
+}
+.decision-card cite { display: block; margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); font-style: normal; }
+
+/* Five guidelines: one restrained background, a bold numeral as the
+   Bauhaus device instead of five different saturated fills in a row. */
+.guideline-cards { display: grid; gap: var(--space-3); margin-top: var(--space-4); }
+@media (min-width: 640px) { .guideline-cards { grid-template-columns: 1fr 1fr; } }
+.guideline-card { padding: var(--space-5) var(--space-4); border-radius: var(--radius); background: var(--bg-alt); }
+.guideline-card .card-num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: 1;
+  color: var(--red-ink);
+  margin-bottom: var(--space-2);
+}
+.guideline-card h3 { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-body); color: var(--ink); margin: 0 0 var(--space-2); letter-spacing: -.01em; }
+.guideline-card p { color: var(--body); margin: 0; max-width: none; }
+
+/* Baudrillard terms, styled like the user's own thesis-deck red section
+   splashes: bold flat colour, one line per term, no essay. */
+.term-strip {
+  display: grid;
+  gap: 2px;
+  margin-block: var(--space-5);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+@media (min-width: 640px) { .term-strip { grid-template-columns: repeat(3, 1fr); } }
+.term-strip div { background: var(--red); color: var(--on-dark); padding: var(--space-4); }
+.term-strip dt { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; font-size: var(--fs-body); }
+.term-strip dd { margin-top: var(--space-2); font-size: var(--fs-small); opacity: .88; }
+
+/* A real email, quoted plainly rather than screenshotted */
+.email-card {
+  max-width: var(--measure);
+  margin-block: var(--space-4);
+  padding: var(--space-4);
+  background: var(--bg-alt);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.email-card .email-meta { font-size: var(--fs-small); color: var(--muted); margin-bottom: var(--space-3); }
+.email-card p { margin: 0; max-width: none; }
+.email-card p + p { margin-top: var(--space-3); }
 
 /* ---------- Footer ---------- */
 .site-footer {
