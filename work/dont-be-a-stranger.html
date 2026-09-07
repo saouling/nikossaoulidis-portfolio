@@ -9,14 +9,14 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Don't Be a Stranger — Nikos Saoulidis">
 <meta property="og:description" content="A permanent museum installation where two strangers pick up old rotary phones and talk to each other, live, across two museums in Gothenburg.">
-<meta property="og:image" content="https://nikossaoulidis.xyz/images/dbas/01-hero-installation-room.jpg">
+<meta property="og:image" content="https://nikossaoulidis.xyz/images/dbas/hero-video-poster.jpg">
 <meta property="og:url" content="https://nikossaoulidis.xyz/work/dont-be-a-stranger.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Don't Be a Stranger — Nikos Saoulidis">
 <meta name="twitter:description" content="A permanent museum installation where two strangers pick up old rotary phones and talk to each other, live, across two museums in Gothenburg.">
-<meta name="twitter:image" content="https://nikossaoulidis.xyz/images/dbas/01-hero-installation-room.jpg">
+<meta name="twitter:image" content="https://nikossaoulidis.xyz/images/dbas/hero-video-poster.jpg">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/styles.css?v=12">
 </head>
 <body class="no-js" id="top">
 <!-- SHARED: header - keep identical across all pages, EXCEPT the one
@@ -49,13 +49,11 @@
     <p class="standfirst">A permanent museum installation where two strangers pick up old rotary phones and talk to each other, live, across two museums in Gothenburg.</p>
   </div>
   <div class="wrap">
-    <figure class="hero-figure">
-      <picture>
-        <source srcset="/images/dbas/01-hero-installation-room.webp" type="image/webp">
-        <img src="/images/dbas/01-hero-installation-room.jpg" width="1011" height="1800" alt="The installation in the museum: a rotary phone on a table between two windows, warm light in the room." loading="eager">
-      </picture>
-      <figcaption>R&ouml;hsska Museum, Gothenburg.</figcaption>
-    </figure>
+    <div class="hero-video">
+      <video src="/videos/rohsska-installation.mp4" poster="/images/dbas/hero-video-poster.jpg" autoplay muted loop playsinline></video>
+      <button type="button" aria-pressed="false">Sound off</button>
+    </div>
+    <p class="fs-small media-caption">R&ouml;hsska Museum, filmed on site.</p>
   </div>
 </section>
 
@@ -70,28 +68,31 @@
 </section>
 
 <section class="section">
-  <div class="breakout">
-    <div class="two-col sticky-media">
-      <div class="col">
-        <h2 class="mt-0">The idea</h2>
-        <p>Pick up the phone in one museum and you are suddenly talking, right now, with a stranger standing in the other one. No screens, no profiles, no matching. Just a voice, and the small act of dialling and waiting for someone to answer.</p>
-        <p>The phone is an Ericofon, the one people in Sweden call the Kobra.</p>
-      </div>
-      <figure class="mt-0">
-        <picture>
-          <source srcset="/images/dbas/dbas-two-museums.webp" type="image/webp">
-          <img src="/images/dbas/dbas-two-museums.png" width="1200" height="456" alt="Diagram of the two-museum connection: a phone in R&ouml;hsska Museum linked live to a phone in M&ouml;lndals City Museum." loading="lazy">
-        </picture>
-      </figure>
-    </div>
+  <div class="wrap col">
+    <h2 class="mt-0">The idea</h2>
+    <p>Pick up the phone in one museum and you are suddenly talking, right now, with a stranger standing in the other one. No screens, no profiles, no matching. Just a voice, and the small act of dialling and waiting for someone to answer.</p>
+    <p>The phone is an Ericofon, the one people in Sweden call the Kobra.</p>
   </div>
-  <div class="wrap">
-    <figure>
-      <picture>
-        <source srcset="/images/dbas/02-person-on-the-phone.webp" type="image/webp">
-        <img src="/images/dbas/02-person-on-the-phone.jpg" width="820" height="1600" alt="Someone holding the rotary phone to their ear, mid-conversation with a stranger in the other museum." loading="lazy">
-      </picture>
-    </figure>
+  <div class="breakout">
+    <div class="museum-link">
+      <div class="museum-card navy">
+        <figure class="phone-photo mt-0">
+          <picture><source srcset="/images/dbas/ericofon-catalogue.webp" type="image/webp"><img src="/images/dbas/ericofon-catalogue.jpg" width="479" height="600" alt="The Ericsson Ericofon, the Kobra." loading="lazy"></picture>
+        </figure>
+        <div class="museum-name">R&ouml;hsska Museum</div>
+        <div class="museum-city">Gothenburg</div>
+      </div>
+      <div class="call-line" aria-hidden="true"><span class="pulse"></span></div>
+      <div class="museum-card red">
+        <figure class="phone-photo mt-0">
+          <picture><source srcset="/images/dbas/dialog-catalogue.webp" type="image/webp"><img src="/images/dbas/dialog-catalogue.jpg" width="481" height="600" alt="The Ericsson Dialog." loading="lazy"></picture>
+        </figure>
+        <div class="museum-name">M&ouml;lndals City Museum</div>
+        <div class="museum-city">M&ouml;lndal</div>
+      </div>
+    </div>
+    <p class="fs-small media-caption media-caption-center">Phone photos: official Ericsson catalogue &amp; Ericsson Review Journal.</p>
+    <p class="diagram-caption">One number in each museum. Pick up, dial, and you're talking to a stranger standing in the other one, right now.</p>
   </div>
 </section>
 
@@ -109,21 +110,27 @@
 </section>
 
 <section class="section section-alt">
+  <div class="wrap col">
+    <h2 class="mt-0">The question</h2>
+    <p>We message people on the other side of the world without thinking about it, and somewhere in there the act of reaching out lost its weight. Museums have the opposite problem: they spend a lot of effort telling you to look and not touch.</p>
+  </div>
   <div class="breakout">
-    <div class="two-col sticky-media">
-      <div>
-        <h2 class="mt-0">The question</h2>
-        <p>We message people on the other side of the world without thinking about it, and somewhere in there the act of reaching out lost its weight. Museums have the opposite problem: they spend a lot of effort telling you to look and not touch.</p>
-        <p><strong>What should be considered when designing an interactive museum exhibition about meaningful communication?</strong></p>
-      </div>
-      <div class="image-cluster">
-        <picture class="cluster-lg"><source srcset="/images/dbas/07-do-not-touch-a.webp" type="image/webp"><img src="/images/dbas/07-do-not-touch-a.jpg" width="697" height="700" alt="A &ldquo;do not touch&rdquo; sign in a museum gallery." loading="lazy"></picture>
-        <picture><source srcset="/images/dbas/08-do-not-touch-b.webp" type="image/webp"><img src="/images/dbas/08-do-not-touch-b.jpg" width="700" height="645" alt="Another &ldquo;do not touch&rdquo; sign, a different gallery." loading="lazy"></picture>
-        <picture><source srcset="/images/dbas/09-do-not-touch-c.webp" type="image/webp"><img src="/images/dbas/09-do-not-touch-c.jpg" width="700" height="664" alt="A third &ldquo;do not touch&rdquo; sign." loading="lazy"></picture>
-      </div>
+    <div class="question-band">
+      <span class="eyebrow-label">The research question</span>
+      <p>What should be considered when designing an interactive museum exhibition about meaningful communication?</p>
     </div>
   </div>
   <div class="wrap col">
+    <div class="col-grid cols-2">
+      <div>
+        <h3 class="mt-0">R&ouml;hsska Museum</h3>
+        <p>Roughly 100,000 visitors a year. Its <em>Design Stories</em> exhibition groups the collection into six themes &mdash; desire, innovation, creativity, efficiency, change, belonging &mdash; and adds hands-on stations like a chair you build yourself. Even so, most of it stays look-only.</p>
+      </div>
+      <div>
+        <h3 class="mt-0">M&ouml;lndals stadsmuseum</h3>
+        <p>Its <em>Open Storage</em> exhibition holds over 10,000 everyday objects with no glass cases at all. Visitors are already expected to touch, just not to talk to a stranger through what they're touching.</p>
+      </div>
+    </div>
     <div class="col-grid cols-3">
       <div>
         <h3>Communication theory</h3>
@@ -144,17 +151,54 @@
 <section class="section">
   <div class="wrap col">
     <h2 class="mt-0">How I worked</h2>
+    <p>Six phases, Lab to Field to Showroom, each one feeding the next. Tap a phase for what actually happened in it.</p>
   </div>
-  <div class="wrap">
-    <figure>
-      <picture>
-        <source srcset="/images/dbas/dbas-process-detailed.webp" type="image/webp">
-        <img src="/images/dbas/dbas-process-detailed.png" width="1600" height="688" alt="Process diagram: lab pilots (6 interviews), field testing (15 feedback forms), and the museum installation (4 interviews), leading to five guidelines from a reflexive thematic analysis." loading="lazy">
-      </picture>
-    </figure>
+  <div class="breakout">
+    <div class="stepper">
+      <input type="radio" name="phase" id="phase-1" checked>
+      <label for="phase-1" class="stepper-btn">Discover</label>
+      <span class="timeline-arrow" aria-hidden="true">&rarr;</span>
+      <input type="radio" name="phase" id="phase-2">
+      <label for="phase-2" class="stepper-btn">Define</label>
+      <span class="timeline-arrow" aria-hidden="true">&rarr;</span>
+      <input type="radio" name="phase" id="phase-3">
+      <label for="phase-3" class="stepper-btn">Pre-pilot</label>
+      <span class="timeline-arrow" aria-hidden="true">&rarr;</span>
+      <input type="radio" name="phase" id="phase-4">
+      <label for="phase-4" class="stepper-btn">Pilot v.1</label>
+      <span class="timeline-arrow" aria-hidden="true">&rarr;</span>
+      <input type="radio" name="phase" id="phase-5">
+      <label for="phase-5" class="stepper-btn">Pilot v.2</label>
+      <span class="timeline-arrow" aria-hidden="true">&rarr;</span>
+      <input type="radio" name="phase" id="phase-6">
+      <label for="phase-6" class="stepper-btn">Museums</label>
+
+      <div class="stepper-panel">
+        <div class="stepper-pane pane-1">
+          <p>Phone booths between cities, first &mdash; connecting two distant locations by turning a dial. Theory pulled from three fields: communication, museum studies, interaction design. Then documenting how museums actually handle touch, before building anything.</p>
+          <figure class="mt-0"><picture><source srcset="/images/dbas/phonebooth-concept-crop.webp" type="image/webp"><img src="/images/dbas/phonebooth-concept-crop.jpg" width="320" height="450" alt="Early concept sketch: a world map and a rotary phone, the first version of the two-city idea." loading="lazy"></picture></figure>
+        </div>
+        <div class="stepper-pane pane-2">
+          <p>The pivot to museums. Leaflets and pitches to find a partner, starting with Ericsson. Sourcing the actual phones, and the Bluetooth hardware needed to make an old rotary handset carry a live call over a normal phone network.</p>
+        </div>
+        <div class="stepper-pane pane-3">
+          <p>The first working prototype, on a desk in the IxD studio, tested with six IxD students. Two phones, a power strip, a laptop, and a lot of tangled cable.</p>
+          <figure class="mt-0"><picture><source srcset="/images/dbas/24-prototyping-desk.webp" type="image/webp"><img src="/images/dbas/24-prototyping-desk.jpg" width="1600" height="1328" alt="Overhead shot of the prototyping desk: two rotary phones, a power strip, a laptop, scissors, and tangled cable." loading="lazy"></picture></figure>
+        </div>
+        <div class="stepper-pane pane-4">
+          <p>Full install on campus. Watched who picked up and who walked past, then reworked the supporting material and the phones themselves based on what actually happened, not what I assumed would happen.</p>
+        </div>
+        <div class="stepper-pane pane-5">
+          <p>Rebuilt from what v.1 showed. Fifteen feedback forms and four interviews this time, collected formally instead of just observed.</p>
+        </div>
+        <div class="stepper-pane pane-6">
+          <p>Co-designed with curators, communicators and graphic designers, across two institutions. Live, permanently, since May 2025.</p>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="wrap col">
-    <p>I ran it as research through design, because the question can't be answered on paper. You build something real and watch what happens. Lab, then field, then the real thing, each step adding realism and stakes.</p>
+    <p>I ran it as research through design, because the question can't be answered on paper. You build something real and watch what happens. Lab, then field, then the real thing, each step adding realism and stakes. The output was five transferable design guidelines, not just the installation.</p>
     <blockquote class="pull">I changed the design because the pilots told me to, not because I guessed.</blockquote>
   </div>
 </section>
@@ -183,44 +227,48 @@
     <h2 class="mt-0">What I decided</h2>
   </div>
 
-  <div class="breakout">
-    <div class="two-col sticky-media">
-      <div>
-        <h3 class="mt-0">Give permission</h3>
-        <p>Warm, co-designed signage and instructions, Rolodex prompt cards so people know what to say, placement that's visible but a little sheltered.</p>
-      </div>
-      <div class="image-cluster">
-        <picture class="cluster-lg"><source srcset="/images/dbas/12-poster-minns-du-kobran.webp" type="image/webp"><img src="/images/dbas/12-poster-minns-du-kobran.jpg" width="636" height="900" alt="The Swedish poster: Minns du Kobran?" loading="lazy"></picture>
-        <picture><source srcset="/images/dbas/13-poster-remember-the-kobra.webp" type="image/webp"><img src="/images/dbas/13-poster-remember-the-kobra.jpg" width="636" height="900" alt="The English poster: Remember the Kobra?" loading="lazy"></picture>
-        <picture><source srcset="/images/dbas/14-prompt-card.webp" type="image/webp"><img src="/images/dbas/14-prompt-card.jpg" width="900" height="558" alt="A Rolodex-style prompt card suggesting what to say to a stranger on the line." loading="lazy"></picture>
-      </div>
+  <div class="decision-block">
+    <div class="wrap col">
+      <h3 class="mt-0">Give permission</h3>
+      <p>Warm, co-designed signage and instructions, Rolodex prompt cards so people know what to say, placement that's visible but a little sheltered.</p>
     </div>
-  </div>
-
-  <div class="breakout" style="margin-top: var(--space-6)">
-    <div class="two-col sticky-media">
-      <div>
-        <h3 class="mt-0">Fine-tune friction</h3>
-        <p>Keep the weight, the dial, the wait, on purpose, because the ritual is what makes it meaningful. Then scaffold it with voice-only anonymity, prompts and clear instructions, all tuned by testing.</p>
-        <blockquote class="pull">I kept the friction on purpose. The discomfort is what makes it feel like it matters.</blockquote>
+    <div class="breakout">
+      <div class="poster-pair">
+        <picture><source srcset="/images/dbas/12-poster-minns-du-kobran.webp" type="image/webp"><img src="/images/dbas/12-poster-minns-du-kobran.jpg" width="636" height="900" alt="The Swedish poster: Minns du Kobran?" loading="lazy"></picture>
+        <picture><source srcset="/images/dbas/13-poster-remember-the-kobra.webp" type="image/webp"><img src="/images/dbas/13-poster-remember-the-kobra.jpg" width="636" height="900" alt="The English poster: Remember the Kobra?" loading="lazy"></picture>
       </div>
-      <figure class="mt-0">
-        <picture><source srcset="/images/dbas/15-poster-text-layout.webp" type="image/webp"><img src="/images/dbas/15-poster-text-layout.jpg" width="636" height="900" alt="The full poster text and layout, showing the instructions given to visitors." loading="lazy"></picture>
+      <p class="diagram-caption">Swedish and English, same size, same weight.</p>
+    </div>
+    <div class="wrap">
+      <figure class="mt-0 portrait">
+        <picture><source srcset="/images/dbas/rolodex-prompt-cards.webp" type="image/webp"><img src="/images/dbas/rolodex-prompt-cards.jpg" width="718" height="968" alt="Hand-cutting the Rolodex prompt cards: scissors, the rolodex itself, and cards reading &ldquo;If this phone had a feeling, what would it be?&rdquo; and &ldquo;What do you think this phone would say, if it could talk?&rdquo;" loading="lazy"></picture>
       </figure>
     </div>
   </div>
 
-  <div class="breakout" style="margin-top: var(--space-6)">
-    <div class="two-col sticky-media">
-      <div>
-        <h3 class="mt-0">Lead and align</h3>
-        <p>Tailored pitches and co-design sessions so each stakeholder shaped their own piece rather than reviewing mine.</p>
-      </div>
-      <div class="image-cluster">
-        <picture class="cluster-lg"><source srcset="/images/dbas/16-rotating-prompt-cards-doc.webp" type="image/webp"><img src="/images/dbas/16-rotating-prompt-cards-doc.jpg" width="762" height="800" alt="The rotating prompt card proposal document." loading="lazy"></picture>
-        <picture><source srcset="/images/dbas/17-placement-proposal-doc.webp" type="image/webp"><img src="/images/dbas/17-placement-proposal-doc.jpg" width="776" height="800" alt="The placement and furniture proposal document." loading="lazy"></picture>
-        <picture><source srcset="/images/dbas/18-curator-meeting-notes.webp" type="image/webp"><img src="/images/dbas/18-curator-meeting-notes.jpg" width="800" height="789" alt="Meeting notes from a working session with museum curators." loading="lazy"></picture>
-        <picture><source srcset="/images/dbas/19-prompt-question-bank.webp" type="image/webp"><img src="/images/dbas/19-prompt-question-bank.jpg" width="800" height="782" alt="The question bank the prompt cards were drawn from." loading="lazy"></picture>
+  <div class="decision-block">
+    <div class="wrap col">
+      <h3 class="mt-0">Fine-tune friction</h3>
+      <p>Keep the weight, the dial, the wait, on purpose, because the ritual is what makes it meaningful. Then scaffold it with voice-only anonymity, prompts and clear instructions, all tuned by testing.</p>
+      <blockquote class="pull">I kept the friction on purpose. The discomfort is what makes it feel like it matters.</blockquote>
+    </div>
+  </div>
+
+  <div class="decision-block">
+    <div class="wrap col">
+      <h3 class="mt-0">Lead and align</h3>
+      <p>Tailored pitches and co-design sessions so each stakeholder shaped their own piece rather than reviewing mine. Two decisions that came directly out of those sessions, kept in the words they were made in:</p>
+    </div>
+    <div class="wrap">
+      <div class="decision-cards">
+        <div class="decision-card">
+          <blockquote>&ldquo;The feedback mechanism isn't for collecting data. It's for encouraging visitor reflection.&rdquo;</blockquote>
+          <cite>From a working session with R&ouml;hsska's curator &mdash; the reason the feedback system ended up as post-its, not a survey.</cite>
+        </div>
+        <div class="decision-card">
+          <blockquote>&ldquo;Suggested location: the Belonging room, next to the Minecraft station.&rdquo;</blockquote>
+          <cite>M&ouml;lndal placement proposal &mdash; where the phone landed wasn't my call to make alone.</cite>
+        </div>
       </div>
     </div>
   </div>
@@ -231,23 +279,21 @@
     <h2 class="mt-0">It went live</h2>
   </div>
   <div class="wrap">
-    <figure>
-      <picture><source srcset="/images/dbas/03-visitors-at-the-piece.webp" type="image/webp"><img src="/images/dbas/03-visitors-at-the-piece.jpg" width="1400" height="787" alt="Visitors at the installation, one on the phone." loading="lazy"></picture>
-    </figure>
     <div class="figure-grid cols-4">
       <figure class="mt-0"><picture><source srcset="/images/dbas/04-visitors-b.webp" type="image/webp"><img src="/images/dbas/04-visitors-b.jpg" width="506" height="900" alt="A visitor using the installation." loading="lazy"></picture></figure>
       <figure class="mt-0"><picture><source srcset="/images/dbas/05-visitors-c.webp" type="image/webp"><img src="/images/dbas/05-visitors-c.jpg" width="505" height="900" alt="Another visitor using the installation." loading="lazy"></picture></figure>
-      <figure class="mt-0"><picture><source srcset="/images/dbas/20-installation-molndal-a.webp" type="image/webp"><img src="/images/dbas/20-installation-molndal-a.jpg" width="900" height="689" alt="The installation at M&ouml;lndals City Museum." loading="lazy"></picture></figure>
-      <figure class="mt-0"><picture><source srcset="/images/dbas/21-installation-molndal-b.webp" type="image/webp"><img src="/images/dbas/21-installation-molndal-b.jpg" width="900" height="675" alt="The M&ouml;lndal installation, a different angle." loading="lazy"></picture></figure>
+      <figure class="mt-0"><picture><source srcset="/images/dbas/20-installation-molndal-a.webp" type="image/webp"><img src="/images/dbas/20-installation-molndal-a.jpg" width="900" height="675" alt="The M&ouml;lndal installation: a beige Ericsson Dialog phone on a wooden table beside a red vintage armchair, bilingual posters on the wall above, in the archival &ldquo;&Ouml;ppna Magasinet&rdquo; room." loading="lazy"></picture></figure>
+      <figure class="mt-0"><picture><source srcset="/images/dbas/21-installation-molndal-b.webp" type="image/webp"><img src="/images/dbas/21-installation-molndal-b.jpg" width="900" height="675" alt="A closer view of the M&ouml;lndal posters and instructions above the phone table and red armchair." loading="lazy"></picture></figure>
     </div>
   </div>
 
   <div class="wrap">
-    <div class="quote-grid">
-      <p class="quote-lg">&ldquo;I became happy :)&rdquo;</p>
-      <p class="quote-lg">&ldquo;I felt scared to talk on the phone. Maybe it reminded me of talking on the house phone when I was a kid.&rdquo;</p>
-      <p class="quote-lg">&ldquo;Social media is the death of sincerity.&rdquo;</p>
-      <p class="quote-lg">&ldquo;I am grateful for the ability to connect, and also weary of being constantly connected.&rdquo;</p>
+    <div class="postit-board">
+      <p class="postit">&ldquo;I became happy :)&rdquo;</p>
+      <p class="postit">&ldquo;I felt scared to talk on the phone. Maybe it reminded me of talking on the house phone when I was a kid.&rdquo;</p>
+      <p class="postit">&ldquo;Social media is the death of sincerity.&rdquo;</p>
+      <p class="postit">&ldquo;I am grateful for the ability to connect, and also weary of being constantly connected.&rdquo;</p>
+      <p class="postit">&ldquo;I don't want my mobile phone, I rarely get any pleasure from it. Give me a horse and a Kobra phone and I'll be happy.&rdquo;</p>
     </div>
     <p class="quote-attribution fs-small">Visitor feedback. R&ouml;hsska Museum staff called it one of the most talked-about pieces in the programme.</p>
   </div>
@@ -264,8 +310,38 @@
     <p><strong>In a shared space you design the situation, not just the object.</strong></p>
 
     <h2>Five guidelines</h2>
-    <p>The installation was the artefact. The actual output of the thesis was a set of design guidelines for anyone building an interactive museum exhibition about communication, drawn from the themes that came out of the analysis.</p>
-    <p class="fs-small"><em>The full list of guidelines from the thesis isn't in here yet. I'll add the numbered list once I pull the exact wording from the report, rather than paraphrase it from memory.</em></p>
+    <p>The installation was the artefact. The actual output of the thesis was a set of design guidelines for anyone building an interactive museum exhibition about communication, drawn from five themes that ran across every phase of testing, pre-pilot interviews, the campus pilot, and the museum feedback.</p>
+  </div>
+  <div class="wrap">
+    <div class="guideline-cards">
+      <div class="guideline-card">
+        <span class="card-num">01</span>
+        <h3>Emotional presence through analog voice</h3>
+        <p>Kept it voice-only and anonymous. No screens, no names, no visual feedback, even where I could have added them.</p>
+      </div>
+      <div class="guideline-card">
+        <span class="card-num">02</span>
+        <h3>Friction and vulnerability as invitations</h3>
+        <p>Separated meaningful friction from broken friction. Fixed the sound quality and stability; kept the weight, the dial, the wait.</p>
+      </div>
+      <div class="guideline-card">
+        <span class="card-num">03</span>
+        <h3>Defamiliarisation and improvisation</h3>
+        <p>Explained enough, left room for exploration. The prompt cards help a conversation without prescribing it.</p>
+      </div>
+      <div class="guideline-card">
+        <span class="card-num">04</span>
+        <h3>Social context and spatial norms</h3>
+        <p>Placement became a real design decision. Semi-sheltered but visible, with signage that gives permission.</p>
+      </div>
+      <div class="guideline-card">
+        <span class="card-num">05</span>
+        <h3>Material memory and nostalgia</h3>
+        <p>Kept the original hardware rather than replicating it. The weight, the click of the dial, is the entry point.</p>
+      </div>
+    </div>
+  </div>
+  <div class="wrap col">
 
     <h2>What I learned</h2>
     <ul style="list-style: disc; padding-left: 1.25em; max-width: var(--measure)">
@@ -277,8 +353,31 @@
     </ul>
 
     <h2>Reflection</h2>
-    <p>The first thing I would improve is accessibility. It leans hard on sound and on touch, and that leaves some people out.</p>
-    <p>But I am proud that it is real. It is out in the world, it has been running for over a year, and it does something genuinely human.</p>
+    <p>I grew up in a small village in Greece, and telecommunication wasn't a luxury for me, it was how I kept people close. I saved every prepaid phone card from calling home, and I still remember playing with my great-grandmother's rotary phone as a kid, just to hear the dial click back into place.</p>
+    <blockquote class="pull">A friend introduced me to Baudrillard's <em>Ecstasy of Communication</em> &mdash; while we were on a phone call. That's when I started noticing how much modern media floods us with signals while emptying out the depth of actually talking to someone.</blockquote>
+    <p>McLuhan said the medium is the message.</p>
+
+    <dl class="term-strip">
+      <div><dt>Transparency</dt><dd>Everything visible. Nothing left to the imagination.</dd></div>
+      <div><dt>Obscenity</dt><dd>Not sexual &mdash; too much presence, too fast, without mediation.</dd></div>
+      <div><dt>Ecstasy of communication</dt><dd>Not pleasure. Excess. We don't reflect, we just circulate.</dd></div>
+    </dl>
+
+    <h2>Moments that stayed with me</h2>
+    <ul style="list-style: disc; padding-left: 1.25em; max-width: var(--measure)">
+      <li>The first time someone picked up during the pilot studies, and we had a real conversation.</li>
+      <li>Reading the post-it notes people left, for the first time.</li>
+      <li>Calling from the Ericsson Dialog in M&ouml;lndal and having an amazing conversation with a stranger who picked up in R&ouml;hsska.</li>
+    </ul>
+
+    <p>An email from R&ouml;hsska's curator, a few months in:</p>
+    <div class="email-card">
+      <p class="email-meta">Jessica Andersson Sj&ouml;ger&eacute;n &mdash; R&ouml;hsska Museum &middot; 3 June 2025</p>
+      <p>&ldquo;Hi Niko! Everything is working well. Our visitors are interacting and we keep moving notes to make space for more. The notes are a nice spread from single words and nostalgic memories to responses on your questions and philosophical notes.</p>
+      <p>The front staff are also confirming this. They want the installation to stay on all summer. Well done!&rdquo;</p>
+    </div>
+
+    <p>The first thing I would improve is accessibility. It leans hard on sound and on touch, and that leaves some people out. But I am proud that it is real, and that it is still out there, doing something genuinely human.</p>
   </div>
   <div class="wrap">
     <figure>
@@ -299,7 +398,7 @@
     </nav>
   </div>
 </footer>
-<script src="/js/menu.js" defer></script>
+<script src="/js/menu.js?v=12" defer></script>
 <!-- /SHARED: footer -->
 
 </body>
