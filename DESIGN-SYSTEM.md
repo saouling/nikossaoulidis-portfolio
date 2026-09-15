@@ -162,6 +162,7 @@ fully visible end state.
 | Embeds | — | `.embed` (+ `.tall` modifier) | YouTube/Figma iframes, 16:9 or 4:3 |
 | Project rows (homepage) | — | `.project-rows` / `.project-row` (+ `.flip`) | Homepage Work section, alternating image/text, no dividers between rows |
 | Tier-2 project cards | `ProjectCard.astro` | `.project-grid` / `.project-card` | Homepage-only cards for Interactive Table, LightHouse, Synodia (decision 10). Wired in Session B10. |
+| Fact grid | — | `.fact-grid` | Case-study Outcome/Learnings sections (added Session B8, refined same session on Nikos's feedback). Asymmetric rectangles with thin ink gaps, one colour accent cell (`.accent`, or `.accent.blue`) and the rest plain white — deliberately *not* a filled block per cell, since a filled-every-cell version read as messy. Replaces the `.todo` styling those sections used before real content existed. |
 | Two-column split | — | `.two-col` | Still valid — the About page's text-beside-photo-cluster split. **Not** the case-study image pattern; see below. |
 | Placeholder/TODO block | — | `.todo` | Marks copy still waiting on the real text |
 

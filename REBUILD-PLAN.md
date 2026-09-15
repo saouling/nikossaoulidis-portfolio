@@ -557,3 +557,21 @@ review" instead of the B7 placeholder's "TODO — Session B8" — the schema now
 real content, but nothing here should be treated as approved copy yet. §6 above rewritten to
 point future sessions (B9, B11) at the new `portfolio-content-assets` folder Nikos
 consolidated, which supersedes several of the old scattered `~/Downloads` paths.
+
+2026-09-15 · B8 (continued) · Nikos reviewed the `.todo`-styled Outcome/Learnings and asked
+for two changes: the prose was too long to actually read, and he didn't want the yellowish
+`.todo` dashed-box treatment for real content. Rather than pick a direction myself, showed
+him three concrete visual options (a Bauhaus numeral-card grid, a Mondrian-style colour-block
+grid, a single-line Rams-style minimal cut) rendered against his real tokens, all built from
+patterns already in `styles.css` rather than a new aesthetic. He picked the Mondrian
+direction but called the first pass "messy" — it filled every grid cell with a different
+colour, which is the opposite of how Mondrian actually composed (mostly white canvas, one or
+two colour accents). Rebuilt on that correction: new `.fact-grid` pattern in
+`src/styles/global.css`, one accent-coloured cell (red for Outcome, blue for Learnings) plus
+plain white cells, thin ink gaps between. Content condensed from long paragraphs to one stat
+plus two short facts per section, addressing the readability complaint at the same time.
+Verified via the DOM (computed styles, grid column widths at both mobile and desktop
+breakpoints) since the Browser pane was hidden and its screenshot tool returned blank the
+whole session — not a rendering bug, confirmed via `tabs_context`. Nikos approved the visual
+direction; the specific wording in each cell is still explicitly provisional and will be
+revisited. Documented in `DESIGN-SYSTEM.md`'s Components table.

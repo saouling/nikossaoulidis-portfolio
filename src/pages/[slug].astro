@@ -60,15 +60,24 @@ const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
 	<section class="section section-alt">
 		<div class="wrap col">
 			<h2 class="mt-0">Outcome</h2>
-			<div class="todo">
-				<span class="todo-label">Draft — pending Nikos's review</span>
-				<p>{outcome}</p>
+			{/* Facts are still under revision with Nikos — approved is the fact-grid shape, not this exact wording. */}
+			<div class="fact-grid">
+				<div class="accent">
+					<span class="stat">2.4 → 9.5<small style="font-size: 0.5em;">/10</small></span>
+					<span class="stat-label">AI-readiness score after the skill shipped</span>
+				</div>
+				<div><p>Adopted as the team-wide standard, not just something I used on my own work.</p></div>
+				<div><p>A developer and a US backend team shipped real code from my specs.</p></div>
 			</div>
 
 			<h2>Learnings</h2>
-			<div class="todo">
-				<span class="todo-label">Draft — pending Nikos's review</span>
-				<p>{learnings}</p>
+			<div class="fact-grid">
+				<div class="accent blue">
+					<span class="stat" style="font-size: var(--fs-h3);">Screens show it. Specs say how it behaves.</span>
+					<span class="stat-label">Mixing the two is what broke our AI-readability</span>
+				</div>
+				<div><p>My job shifted: defining constraints and judging what comes back, not just handing off a screen.</p></div>
+				<div><p>None of it worked solo. Developers were in it from week one, every time.</p></div>
 			</div>
 		</div>
 	</section>

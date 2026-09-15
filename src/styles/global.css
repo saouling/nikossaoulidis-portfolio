@@ -1317,6 +1317,44 @@ blockquote.pull cite {
   margin-bottom: var(--space-2);
 }
 
+/* ---------- Fact grid ----------
+   Outcome/Learnings on case-study pages. Asymmetric rectangles, thin ink
+   gaps, mostly white — one colour accent, not a filled block per cell.
+   Real Mondrian compositions are mostly white space with one or two colour
+   accents, not every cell filled — the first version tried here filled
+   every cell and read as messy for exactly that reason. */
+.fact-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3px;
+  background: var(--ink);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-block: var(--space-5);
+}
+.fact-grid > div { background: var(--bg); padding: var(--space-4); }
+.fact-grid .accent {
+  grid-row: span 2;
+  background: var(--red);
+  color: var(--on-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.fact-grid .accent.blue { background: var(--blue); }
+.fact-grid .accent .stat {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: 1;
+}
+.fact-grid .accent .stat-label { font-size: var(--fs-small); opacity: .9; margin-top: var(--space-2); }
+.fact-grid p { font-family: var(--font-display); font-size: var(--fs-body); color: var(--ink); max-width: none; }
+@media (max-width: 640px) {
+  .fact-grid { grid-template-columns: 1fr; }
+  .fact-grid .accent { grid-row: auto; }
+}
+
 /* ---------- Utility ---------- */
 .center { text-align: center; }
 .mt-0 { margin-top: 0; }
