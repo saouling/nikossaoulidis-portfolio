@@ -1345,8 +1345,8 @@ blockquote.pull cite {
 .fact-grid .accent .stat {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--fs-h2);
-  line-height: 1;
+  font-size: var(--fs-h3);
+  line-height: 1.15;
 }
 .fact-grid .accent .stat-label { font-size: var(--fs-small); opacity: .9; margin-top: var(--space-2); }
 .fact-grid p { font-family: var(--font-display); font-size: var(--fs-body); color: var(--ink); max-width: none; }

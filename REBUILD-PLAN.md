@@ -337,7 +337,7 @@ way this plan slips.
   line was decided. Draft with Nikos, don't write it for him.
   **Done when:** all three sections exist and the schema validates.
 
-- [ ] **B9 · Deepen EWP.** Currently 510 words with the best raw material in the
+- [x] **B9 · Deepen EWP.** Currently 510 words with the best raw material in the
   portfolio and none of it written up: 2,700+ institutions, a webinar to over 1,000
   users, a design system, a research survey, four developers led. Same spine as Ericsson,
   including outcome and learnings.
@@ -575,3 +575,45 @@ breakpoints) since the Browser pane was hidden and its screenshot tool returned 
 whole session — not a rendering bug, confirmed via `tabs_context`. Nikos approved the visual
 direction; the specific wording in each cell is still explicitly provisional and will be
 revisited. Documented in `DESIGN-SYSTEM.md`'s Components table.
+
+2026-09-15 · B9 · EWP Dashboard deepened from 510 words with nothing written up to a full
+tier-1 case study at `/ewp-dashboard/`, same spine as Ericsson. Resolved a real factual
+conflict before writing anything: the current site's homepage row says "2,700+
+institutions" with no qualifier, while `story-bank.md` has an explicit house rule that this
+number is the platform's *current, platform-wide* scale, not his-era — his portfolio wording
+for his own era should be "hundreds of institutions." The EWP page itself already got this
+right in one place (its own outcome line) but the homepage row didn't. Fixed by grounding
+the new page's Outcome fact-grid explicitly in the platform-now framing, per Nikos's
+confirmed choice.
+
+Asked two structural questions before drafting (whether to lead with "there was no UX role,
+I created one" — story-bank flags this as unused, strong material — and how prominent to
+make the platform-scale numbers); he confirmed both recommended options, then this was
+drafted from `story-bank.md`'s already-fact-checked EWP section (§7, STAR-structured) rather
+than the deck alone, surfacing detail not on the current site at all: the 17-question,
+~1,000-participant survey with quoted real complaints, the Jacob's-Law/recognition-over-
+recall reasoning behind the colour-coding, and the app being centre stage at the EAIE
+Conference, Gothenburg, September 2025. The existing reflection-slide content (what he'd do
+differently now) mapped directly onto the Learnings fact-grid with barely any rewriting —
+it was already specific and honest.
+
+**Schema/template fix, found while starting this session**: Ericsson's fact-grid content
+from B8 turned out to be hardcoded directly in the shared `[slug].astro` template, not
+driven by `entry.data` at all — so EWP would have silently rendered Ericsson's outcome/
+learnings instead of its own. Fixed properly: `outcome`/`learnings` are now a structured
+`{ stat, statLabel, facts: [exactly 2] }` shape in the schema (not a plain string), the
+template renders generically from whichever entry it's given, and Ericsson's frontmatter was
+converted to match. `facts` is pinned to exactly 2, not "up to 3", because the CSS grid's
+accent cell spans two rows assuming exactly three total cells — a variable count would have
+broken the layout silently instead of failing the build. Also fixed a real markup mistake
+while building EWP's image cluster: used `.image-cluster`'s `cluster-lg` class inside a
+`.figure-grid`, which doesn't have that modifier — corrected to a standalone full-width
+`Figure` plus a proper `.figure-grid.cols-3` below it.
+
+Verified thoroughly, including one genuine rabbit hole: four EWP images briefly reported
+`naturalWidth: 0` / `complete: false` in the DOM despite correct markup and a 200 response.
+Chased it to ground rather than assume a real bug — confirmed via `fetch()` +
+`createImageBitmap()` that the actual bytes are valid, correctly-sized images (matches the
+same family of Browser-pane rendering glitches as this session's blank screenshots and stale
+network/console history, not a site bug). Homepage → `/ewp-dashboard/` link confirmed
+end-to-end by clicking through. `npm run build` produces all five pages cleanly.
