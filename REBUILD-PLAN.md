@@ -266,7 +266,7 @@ way this plan slips.
   closes the "never deployed anything" gap, which is the real defect in the old repo.*
   **Done when:** a Vercel preview URL loads a default Astro page. Domain untouched.
 
-- [ ] **B2 · Port the design tokens and global CSS.** Move `css/styles.css` (1329 lines,
+- [x] **B2 · Port the design tokens and global CSS.** Move `css/styles.css` (1329 lines,
   77 class selectors, 28 media queries) and both self-hosted variable fonts across
   near-verbatim. Do not redesign anything.
   *Concept: why Vite's content-hashed filenames retire the `?v=N` ritual permanently —
@@ -387,3 +387,13 @@ the real domain), Preview environment auto-tracks every other branch, so `astro-
 gets its own preview URL on every push with no extra config. Confirmed locally: `npm run
 dev` renders the default Astro page, `npm run build` produces static output in `dist/`.
 No surprises in the plan itself — the only gap was the Node version assumption.
+
+2026-09-15 · B2 · `css/styles.css` copied verbatim to `src/styles/global.css` (no CSS
+edits — only two `@font-face` urls in the whole file, both already absolute `/fonts/...`
+paths, so nothing needed rewriting). Fonts copied to `public/fonts/`, served as-is at the
+same URLs the CSS expects. `src/pages/index.astro` (temporary test page, not final
+content) imports the CSS and exercises headings, body text, the pull-quote, tags,
+buttons, at-a-glance grid and all six colour tokens. Confirmed in the browser: both
+variable fonts report `loaded` via `document.fonts`, colours and the fluid type scale
+match the design system doc. `npm run build` output shows `_astro/index.C3oOCaFj.css` —
+the content-hashed filename Session B2's concept line was about. No surprises.
