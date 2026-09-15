@@ -259,7 +259,7 @@ way this plan slips.
 
 ### Track B — the build
 
-- [ ] **B1 · Scaffold and first deploy.** `npm create astro`, static output, connect the
+- [x] **B1 · Scaffold and first deploy.** `npm create astro`, static output, connect the
   repo to Vercel, get a preview URL rendering. Nothing else.
   *Concept: what a build step actually is, why `package.json` matters, and how a preview
   deployment differs from the `python3 dev-server.py` setup used until now. This session
@@ -376,4 +376,14 @@ anything that changed a decision above.
 
 <!-- e.g. 2026-09-20 · B1 · Astro 5 scaffold, Vercel preview live at <url>. No surprises. -->
 
-_Nothing completed yet._
+2026-09-15 · B1 · Node upgraded 20.8.0 → 26.8.2 via Homebrew (latest Astro tooling now
+requires ≥22.12; done with Nikos's sign-off, see risk note below). Astro 7.3.2 scaffolded
+(minimal template) into the repo root alongside the existing static site — old
+`index.html`/`css/`/`images/` etc. left untouched, will be ported in later sessions.
+Vercel project created via GitHub import (Nikos completed the GitHub OAuth/app-install
+steps himself since Claude can't enter credentials); repo scoped to this one project only.
+Production environment tracks `main` (harmless — serves the old static HTML as-is, not
+the real domain), Preview environment auto-tracks every other branch, so `astro-rebuild`
+gets its own preview URL on every push with no extra config. Confirmed locally: `npm run
+dev` renders the default Astro page, `npm run build` produces static output in `dist/`.
+No surprises in the plan itself — the only gap was the Node version assumption.
