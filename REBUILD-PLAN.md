@@ -279,7 +279,7 @@ way this plan slips.
   maintenance problem in the old repo.*
   **Done when:** two pages share one layout and the nav marks the correct current page.
 
-- [ ] **B4 · Home, About, Contact.** The three lowest-risk pages. Prove the pattern
+- [x] **B4 · Home, About, Contact.** The three lowest-risk pages. Prove the pattern
   before touching a case study. Keep the homepage structure — headline, numbers, three
   CTAs, project rows with outcome lines.
   *Concept: file-based routing, and how a file path becomes a URL.*
@@ -411,3 +411,19 @@ correctly; confirmed the build output is directory-style (`/about/`), which alre
 matches decision 09's `/ericsson/`-style shape — no extra config needed there. Two stub
 pages (`/` and `/about`, both marked not-final-content) exist only to prove the pattern;
 their real content is B4's job. No surprises.
+
+2026-09-15 · B4 · Home, About and Contact rebuilt with real content, ported unchanged
+from `index.html`/`about.html`/`contact.html` — copy untouched, only markup/href updates
+(old `.html` paths → real Astro routes; homepage work-row links point at the final
+`/ericsson/`-style slugs from decision 09, which will 404 until B7/B9/B11 build those
+pages — expected, site isn't live). Homepage keeps all six project rows exactly as the
+live site has them; decision 10's tier-1/tier-2 split (three full rows vs. three lighter
+cards) is B10's job, not retroactively applied here. Copied the exact images each page
+needs into `public/images/` (12 files for the six homepage rows, 6 for About's photo
+cluster) plus the CV PDF — not the full `images/` folder, the rest arrives per-case-study
+in later sessions. Verified in-browser at mobile and desktop widths: all images load
+(checked `naturalWidth`/`complete`, not just visually), mobile menu toggle works, About's
+photo-cluster collage stacks correctly on mobile, Contact's form renders with working
+labels/hints. `npm run build` produces all three pages with zero errors. No surprises,
+though the Browser pane's own screenshot tool intermittently froze mid-session (stale
+frames after a scroll) — unrelated to the site itself, worked around by reloading.

@@ -1,17 +1,119 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const description =
+	"Nikos Saoulidis is a designer and researcher who came into design sideways, from engineering. Education, work experience, talks and exhibitions.";
 ---
 
-<Layout title="B3 layout check — About — Nikos Saoulidis" currentPage="about">
-	<div class="wrap col" style="padding-block: var(--space-6);">
-		<p class="eyebrow">B3 — shared layout test page, not final content</p>
-		<h1>About (placeholder)</h1>
-		<p>
-			The real About page is built in Session B4. This stub exists only to
-			prove two different pages can share one <code>Layout.astro</code> and
-			each get the correct nav item marked current — "About" should show the
-			solid underline here, not "Work".
-		</p>
-		<p><a href="/">&larr; Back to home</a></p>
-	</div>
+<Layout title="About — Nikos Saoulidis" description={description} currentPage="about">
+	<section class="hero">
+		<div class="wrap">
+			<div class="two-col">
+				<div class="col">
+					<h1>About</h1>
+					<p class="standfirst">Hi! I'm <strong>Nikos</strong>, a designer and researcher who came into design sideways, from engineering, and stayed for the human part of it.</p>
+					<p>I recently wrapped up a year as a <strong>UX Designer and Scrum Master</strong> at Ericsson in Gothenburg, working on dense private-5G software where the job was making genuinely complicated tools clear for expert users. Most of what I'm proudest of there sat between design and engineering: a tool I built that makes Figma files readable by AI coding agents, a set of co-creation methods I created and presented with a colleague at the Ericsson Developer Conference, and a generative UI proposal for data-dense dashboards. Before that I did a Master's in Interaction Design and Technologies at Chalmers, where my thesis turned into a museum installation that has been running in two Gothenburg museums since 2025.</p>
+					<p>I'm passionate about music, sound, light, and interfaces, and how they intersect with design to create immersive, emotional experiences. I like living in the in-between of design, technology, and human connection.</p>
+				</div>
+				<div class="photo-cluster">
+					<div class="accent-shape a-blue" aria-hidden="true"></div>
+					<div class="accent-shape a-red" aria-hidden="true"></div>
+					<picture class="photo-profile">
+						<source srcset="/images/about/photo-profile.webp" type="image/webp" />
+						<img src="/images/about/photo-profile.png" width="800" height="914" alt="A side profile photo of Nikos with a lanyard, cut out against a transparent background." loading="eager" />
+					</picture>
+					<picture class="photo-armchair">
+						<source srcset="/images/about/photo-armchair.webp" type="image/webp" />
+						<img src="/images/about/photo-armchair.png" width="706" height="493" alt="Nikos sitting in a vintage armchair beside an old television cabinet, cut out against a transparent background." loading="eager" />
+					</picture>
+					<picture class="photo-main">
+						<source srcset="/images/about/photo.webp" type="image/webp" />
+						<img src="/images/about/photo.png" width="1200" height="1593" alt="Nikos laughing while holding an Ericofon rotary phone, the same model at the centre of his Don't Be a Stranger installation." loading="eager" />
+					</picture>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section section-alt">
+		<div class="wrap">
+			<div class="about-grid">
+
+				<div>
+					<h2 class="col-heading mt-0">Education</h2>
+
+					<div class="entry">
+						<h3>MSc in Interaction Design &amp; Technologies</h3>
+						<p class="meta">Chalmers University of Technology &middot; 2023&ndash;2025</p>
+						<p class="detail">Onassis Foundation scholarship. Thesis: Don't Be a Stranger.</p>
+					</div>
+
+					<div class="entry">
+						<h3>MSc in Electrical &amp; Computer Engineering</h3>
+						<p class="meta">Aristotle University of Thessaloniki &middot; 2016&ndash;2022</p>
+						<p class="detail">Thesis published in IET Software.</p>
+					</div>
+
+					<h2 class="col-heading" style="margin-top: var(--space-6)">Talks &amp; exhibitions</h2>
+
+					<div class="entry">
+						<h3>Build Better Together</h3>
+						<p class="meta">Ericsson Developer Conference, Kista &middot; Apr 2026</p>
+						<p class="detail">Co-created and co-presented with Frida Edstam.</p>
+					</div>
+
+					<div class="entry">
+						<h3>Don't Be a Stranger</h3>
+						<p class="meta">R&ouml;hsska Museum &amp; M&ouml;lndals City Museum &middot; permanent since May 2025</p>
+					</div>
+
+					<div class="entry">
+						<h3>Interactive Sound-Mediating Table</h3>
+						<p class="meta">ACM DIS 2024 demo track, Copenhagen &middot; Jul 2024</p>
+					</div>
+
+					<div class="entry">
+						<h3>Erasmus Goes Digital</h3>
+						<p class="meta">European University Foundation webinar &middot; Dec 2022</p>
+						<p class="detail">Co-presented with Ghent University and DG EAC.</p>
+					</div>
+				</div>
+
+				<div>
+					<h2 class="col-heading mt-0">Work experience</h2>
+
+					<div class="entry">
+						<h3>UX Designer &amp; Scrum Master</h3>
+						<p class="meta">Ericsson &middot; Jun 2025&ndash;Jul 2026</p>
+						<p class="detail">Private-5G software. Built delivery-for-ai, led the design and development collaboration work, proposed a generative UI for data-dense dashboards.</p>
+					</div>
+
+					<div class="entry">
+						<h3>Teaching Assistant in Interaction Design Methodology</h3>
+						<p class="meta">Chalmers University of Technology &middot; Aug 2024&ndash;Nov 2024</p>
+					</div>
+
+					<div class="entry">
+						<h3>UI/UX Designer</h3>
+						<p class="meta">Aristotle University IT Center &middot; Aug 2022&ndash;Jun 2023</p>
+					</div>
+
+					<div class="entry">
+						<h3>UI Designer &amp; Web Developer Intern</h3>
+						<p class="meta">Aristotle University IT Center &middot; Dec 2019&ndash;Jul 2022</p>
+					</div>
+
+					<div class="entry">
+						<h3>Satellite Control Engineer</h3>
+						<p class="meta">Aristotle Space &amp; Aeronautics Team &middot; Sep 2018&ndash;Nov 2019</p>
+					</div>
+				</div>
+
+			</div>
+
+			<p class="col" style="margin-top: var(--space-7)">
+				If you want the short version, <a href="/assets/Nikos-Saoulidis-CV.pdf">here's my CV</a>. If you want to talk, I'm at <a href="mailto:niksaoul@gmail.com">niksaoul@gmail.com</a> or on <a href="https://www.linkedin.com/in/nikolaos-saoulidis-a90434186/" target="_blank" rel="noopener">LinkedIn</a>.
+			</p>
+		</div>
+	</section>
 </Layout>

@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const description = "Get in touch with Nikos Saoulidis by email or LinkedIn.";
+---
+
+<Layout title="Contact — Nikos Saoulidis" description={description} currentPage="contact">
+	<section class="hero">
+		<div class="wrap col">
+			<h1>Get in touch</h1>
+			<p class="standfirst">I'm always happy to talk about design, research, or a role that might be a fit. The fastest way to reach me is email.</p>
+			<div class="hero-links">
+				<a class="btn" href="mailto:niksaoul@gmail.com">niksaoul@gmail.com</a>
+				<a class="btn btn-outline" href="https://www.linkedin.com/in/nikolaos-saoulidis-a90434186/" target="_blank" rel="noopener">LinkedIn</a>
+				<a class="btn btn-outline" href="/assets/Nikos-Saoulidis-CV.pdf">CV</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="section section-alt">
+		<div class="wrap">
+			<div class="col">
+				<h2 class="mt-0">Or send a note here</h2>
+				<p class="fs-small">This opens your email app with the message filled in, nothing is sent from this page or stored anywhere.</p>
+
+				<form action="mailto:niksaoul@gmail.com" method="post" enctype="text/plain" style="margin-top: var(--space-5)">
+					<div class="form-field">
+						<label for="name">Name</label>
+						<input type="text" id="name" name="Name" required autocomplete="name" />
+					</div>
+					<div class="form-field">
+						<label for="email">Your email</label>
+						<input type="email" id="email" name="Reply-to" required autocomplete="email" aria-describedby="email-hint" />
+						<p class="form-hint" id="email-hint">So I know how to reply.</p>
+					</div>
+					<div class="form-field">
+						<label for="message">Message</label>
+						<textarea id="message" name="Message" rows="6" required aria-describedby="message-hint"></textarea>
+						<p class="form-hint" id="message-hint">What you're working on, or what you'd like to talk about.</p>
+					</div>
+					<button class="btn" type="submit">Open in email app</button>
+				</form>
+			</div>
+		</div>
+	</section>
+</Layout>

@@ -1,46 +1,139 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const description =
+	"Product and UX designer working in the in-between of design, technology, and human connection. Enterprise software at Ericsson, a permanent museum installation, and a platform used by 2,700+ institutions.";
 ---
 
-<Layout title="B3 layout check — Nikos Saoulidis" currentPage="work">
-	<div class="wrap col" style="padding-block: var(--space-6);">
-		<p class="eyebrow">B3 — shared layout test page, not final content</p>
-
-		<h1>Hero heading — fs-hero, Jost 500</h1>
-		<h2>Section heading — fs-h2</h2>
-		<h3>Sub heading — fs-h3</h3>
-
-		<p>
-			This page and <a href="/about">/about</a> both render through the same
-			<code>Layout.astro</code>. Check the nav above: "Work" should show the
-			solid underline here, and "About" should show it on that page instead.
-		</p>
-
-		<blockquote class="pull">
-			A pull-quote, set in Jost at fs-h2 with the red accent bar on the left.
-			<cite>— attribution line</cite>
-		</blockquote>
-
-		<div class="tags">
-			<span class="tag">Design systems</span>
-			<span class="tag">UX research</span>
-			<span class="tag">Prototyping</span>
+<Layout title="Nikos Saoulidis — Product & UX Designer, Gothenburg" description={description} currentPage="work">
+	<section class="hero hero-home">
+		<div class="wrap">
+			<div class="hero-shapes" aria-hidden="true">
+				<span class="shape-drift d1"><span class="shape s1" data-depth="16"></span></span>
+				<span class="shape-drift d2"><span class="shape s2" data-depth="26"></span></span>
+				<span class="shape-drift d3"><span class="shape s3 ring" data-depth="10"></span></span>
+				<span class="shape-drift d4"><span class="shape s4 square" data-depth="34"></span></span>
+				<span class="shape-drift d5"><span class="shape s5 ring" data-depth="20"></span></span>
+			</div>
+			<h1>Nikos Saoulidis<br />Product &amp; UX designer, <span class="accent-cycle">Gothenburg.</span></h1>
+			<p class="standfirst">I came into design sideways, from engineering, and stayed for the human part of it. I've shipped dense enterprise software at Ericsson, redesigned a platform now used across 2,700+ institutions, and built a museum installation that's been running for over a year.</p>
+			<p class="standfirst">I like living in the in-between of design, technology, and human connection.</p>
+			<div class="hero-links">
+				<a class="btn" href="#work">See my work &#8595;</a>
+				<a class="btn btn-outline" href="/assets/Nikos-Saoulidis-CV.pdf">CV</a>
+				<a class="btn btn-outline" href="https://www.linkedin.com/in/nikolaos-saoulidis-a90434186/" target="_blank" rel="noopener">LinkedIn</a>
+			</div>
 		</div>
+	</section>
 
-		<p style="margin-top: var(--space-5);">
-			<a class="btn" href="#">Primary button</a>
-			<a class="btn btn-outline" href="#">Outline button</a>
-		</p>
+	<section class="section" id="work">
+		<div class="wrap">
+			<p class="eyebrow">Selected work</p>
+			<h2 class="mt-0">Work</h2>
 
-		<dl class="at-a-glance" style="margin-top: var(--space-6);">
-			<div>
-				<dt>Role</dt>
-				<dd>Product &amp; UX designer</dd>
+			<div class="project-rows">
+
+				<a class="project-row reveal" href="/ericsson/">
+					<div class="row-media">
+						<picture>
+							<source srcset="/images/ericsson/collage.webp" type="image/webp" />
+							<img src="/images/ericsson/collage.jpg" width="1900" height="1031" alt="A black-and-white collage: Nikos presenting at the Ericsson Developer Conference, the Ericsson logo, and a slide on the history of enabling communication." loading="lazy" />
+						</picture>
+					</div>
+					<div class="row-text">
+						<span class="row-eyebrow">Industry</span>
+						<h3>Ericsson</h3>
+						<div class="tags"><span class="tag-word">UI/UX Design · Scrum Master · AI-assisted design · Workshop facilitation</span></div>
+						<p class="desc">UX Designer on dense private-5G software, where my job was making complex, technical tools clear for expert users. Proudest of a skill that turns messy Figma files into AI-readable deliveries, and a set of co-creation methods I built with a colleague and presented at the Ericsson Developer Conference.</p>
+						<p class="outcome">Adopted as a team-wide AI-readiness standard.</p>
+					</div>
+				</a>
+
+				<a class="project-row flip reveal" href="/dont-be-a-stranger/">
+					<div class="row-media">
+						<picture>
+							<source srcset="/images/dbas/01-hero-installation-room.webp" type="image/webp" />
+							<img src="/images/dbas/01-hero-installation-room.jpg" width="1011" height="1800" alt="The Don't Be a Stranger installation, a rotary phone on a table between two windows." loading="lazy" />
+						</picture>
+					</div>
+					<div class="row-text">
+						<span class="row-eyebrow">School</span>
+						<h3>Don't Be a Stranger</h3>
+						<div class="tags"><span class="tag-word">Research through Design · Physical Installation · Solo Project</span></div>
+						<p class="desc">A permanent museum installation where two strangers pick up old rotary phones and talk to each other, live, across two Gothenburg museums. No screens, no profiles, just a voice and the small act of dialling.</p>
+						<p class="outcome">Running in both museums since May 2025.</p>
+					</div>
+				</a>
+
+				<a class="project-row reveal" href="/ewp-dashboard/">
+					<div class="row-media">
+						<picture>
+							<source srcset="/images/ewp/hero.webp" type="image/webp" />
+							<img src="/images/ewp/hero.jpg" width="1833" height="952" alt="The EWP Dashboard logo and a screenshot of its document-settings table." loading="lazy" />
+						</picture>
+					</div>
+					<div class="row-text">
+						<span class="row-eyebrow">School / Industry</span>
+						<h3>EWP Dashboard</h3>
+						<div class="tags"><span class="tag-word">UI/UX Design · User Research · Design Systems · Team Lead</span></div>
+						<p class="desc">Redesigned the tool European universities use to manage Erasmus+ mobility students, my first large-scale project: research and surveys, a full design system, Figma prototyping, and leading four developers through the build.</p>
+						<p class="outcome">Now the gold standard across 2,700+ institutions.</p>
+					</div>
+				</a>
+
+				<a class="project-row flip reveal" href="/interactive-table/">
+					<div class="row-media">
+						<picture>
+							<source srcset="/images/table/diagram.webp" type="image/webp" />
+							<img src="/images/table/diagram.jpg" width="1500" height="1468" alt="Diagram of the interactive table: touch closes a circuit, an Arduino sends MIDI to a synthesizer, speakers play a melody and an LED strip lights up." loading="lazy" />
+						</picture>
+					</div>
+					<div class="row-text">
+						<span class="row-eyebrow">Research</span>
+						<h3>Interactive Sound-Mediating Table</h3>
+						<div class="tags"><span class="tag-word">Sound Design · Prototyping · User Testing · Ambiguous Design</span></div>
+						<p class="desc">Co-designed a table that invites playful, ambiguous bare-skin touch between two people, turning it into musical and light responses. Accepted to the ACM DIS 2024 demo track in Copenhagen.</p>
+						<p class="outcome">Exhibited at ACM DIS 2024, Copenhagen.</p>
+					</div>
+				</a>
+
+				<a class="project-row reveal" href="/synodia/">
+					<div class="row-media">
+						<picture>
+							<source srcset="/images/synodia/device.webp" type="image/webp" />
+							<img src="/images/synodia/device.jpg" width="1000" height="1866" alt="Synodia, a round white portable music device with a speaker grille and a single record button." loading="lazy" />
+						</picture>
+					</div>
+					<div class="row-text">
+						<span class="row-eyebrow">Product Design</span>
+						<h3>Synodia</h3>
+						<div class="tags"><span class="tag-word">Concept-Driven Design · Prototyping · Sound</span></div>
+						<p class="desc">A slow, portable music player that plays one song a day, a quiet argument against algorithm-driven streaming, and for the personal connection in sharing music with people you're synced to.</p>
+						<p class="outcome">An exploration of what listening together could feel like.</p>
+					</div>
+				</a>
+
+				<a class="project-row flip reveal" href="/lighthouse/">
+					<div class="row-media">
+						<picture>
+							<source srcset="/images/lighthouse/hero.webp" type="image/webp" />
+							<img src="/images/lighthouse/hero.jpg" width="1472" height="952" alt="The LightHouse app: a dark-mode interface for grouping stage lights, building scenes and sequences, with a 3D stage preview." loading="lazy" />
+						</picture>
+					</div>
+					<div class="row-text">
+						<span class="row-eyebrow">School / Industry</span>
+						<h3>LightHouse</h3>
+						<div class="tags"><span class="tag-word">UI Design · Prototyping · User Requirements · Market Research</span></div>
+						<p class="desc">A beginner-friendly app for managing stage light rigs, balancing advanced functionality with an intuitive interface, a timeline mode, live control, and a 3D stage preview.</p>
+						<p class="outcome">Craft and clarity inside a genuinely complex tool.</p>
+					</div>
+				</a>
+
 			</div>
-			<div>
-				<dt>Timeline</dt>
-				<dd>2024–2025</dd>
-			</div>
-		</dl>
-	</div>
+
+			<p class="fs-small" style="margin-top: var(--space-6)">
+				There's also a <a href="https://www.figma.com/deck/pygH7CpZVJ0LSkNgFMkvkw" target="_blank" rel="noopener">full case deck</a> if you want more depth on a couple of these.
+			</p>
+		</div>
+	</section>
 </Layout>
