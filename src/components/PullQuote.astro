@@ -1,0 +1,16 @@
+---
+// The quote text itself (curly quotes and all) is the author's to write —
+// it's a slot, not a prop, so it can carry inline markup. The em dash
+// before an attribution is the one thing the component owns, so it's
+// never typed inconsistently from one pull-quote to the next.
+interface Props {
+	cite?: string;
+}
+
+const { cite } = Astro.props;
+---
+
+<blockquote class="pull">
+	<slot />
+	{cite && <cite>— {cite}</cite>}
+</blockquote>

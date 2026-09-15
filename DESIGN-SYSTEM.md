@@ -149,20 +149,21 @@ fully visible end state.
 
 ## Components
 
-| Component | Class | Where |
-|---|---|---|
-| Buttons | `.btn`, `.btn-outline` | Hero CTAs, contact form submit |
-| Tags/pills | `.tag` | Case-study skill tags |
-| Coloured inline tags | `.tag-word`, `.row-eyebrow` | Homepage project rows only; `.row-eyebrow` sits above the title, not beside it |
-| At-a-glance facts | `.at-a-glance` (a `<dl>`) | Every case-study hero |
-| Pull-quote | `blockquote.pull` | Case-study body copy |
-| Large payoff quotes | `.quote-grid` / `.quote-lg` | Don't Be a Stranger visitor quotes |
-| Full-bleed tinted band | `.break-band` | Don't Be a Stranger's three "refusal" moments |
-| Embeds | `.embed` (+ `.tall` modifier) | YouTube/Figma iframes, 16:9 or 4:3 |
-| Project rows (homepage) | `.project-rows` / `.project-row` (+ `.flip`) | Homepage Work section, alternating image/text, no dividers between rows |
-| Two-column split | `.two-col` | Text beside one image or an `.image-cluster` |
-| Image cluster | `.image-cluster` (+ `.offset`) | 2–4 smaller images beside a `.two-col` text column |
-| Placeholder/TODO block | `.todo` | Marks copy still waiting on the real text |
+| Component | Astro component | Class | Where |
+|---|---|---|---|
+| Buttons | — | `.btn`, `.btn-outline` | Hero CTAs, contact form submit |
+| Tags/pills | — | `.tag` | Case-study skill tags |
+| Coloured inline tags | — | `.tag-word`, `.row-eyebrow` | Homepage project rows only; `.row-eyebrow` sits above the title, not beside it |
+| At-a-glance facts | `AtAGlance.astro` | `.at-a-glance` (a `<dl>`) | Every case-study hero |
+| Pull-quote | `PullQuote.astro` | `blockquote.pull` | Case-study body copy |
+| Large payoff quotes | `PostitBoard.astro` | `.postit-board` / `.postit` | Don't Be a Stranger visitor quotes. **Corrected in Session B6**: this table previously named the classes `.quote-grid` / `.quote-lg`, which don't exist anywhere in `styles.css` or the site — the real mechanism is the post-it board built for the museum-feedback payoff moment. |
+| Full-bleed tinted band | `BreakBand.astro` | `.break-band` | Don't Be a Stranger's three "refusal" moments |
+| Figure with one caption convention | `Figure.astro` | `figure` / `figcaption` (+ `.diagram-caption` variant) | Every case-study image. See "Case-study image placement" below — single column only as of Session B6. |
+| Embeds | — | `.embed` (+ `.tall` modifier) | YouTube/Figma iframes, 16:9 or 4:3 |
+| Project rows (homepage) | — | `.project-rows` / `.project-row` (+ `.flip`) | Homepage Work section, alternating image/text, no dividers between rows |
+| Tier-2 project cards | `ProjectCard.astro` | `.project-grid` / `.project-card` | Homepage-only cards for Interactive Table, LightHouse, Synodia (decision 10). Wired in Session B10. |
+| Two-column split | — | `.two-col` | Still valid — the About page's text-beside-photo-cluster split. **Not** the case-study image pattern; see below. |
+| Placeholder/TODO block | — | `.todo` | Marks copy still waiting on the real text |
 
 ### Homepage row images
 
@@ -175,27 +176,40 @@ so a tall portrait photo still drove its own height from its intrinsic
 aspect ratio. A fixed cap sidesteps that circularity and keeps every row a
 consistent height, matching the live site's own cropped-to-fit images.)
 
-### Case-study image placement — two verified patterns
+### Case-study image placement — single column only
 
-Confirmed against the live Readymag site (`/ewp-dashboard/`):
+**Superseded in Session B6.** This section used to document a second,
+verified-against-Readymag pattern — a narrower text column beside a
+`.two-col.sticky-media` image or `.image-cluster` collage, used for
+"Key Contributions"-style sections. That pattern is **retired** (decision
+08): every case study is single column now, `.wrap.col` for text and
+`.breakout`/`.full-bleed` for images, exactly like the rest of the site.
+`.two-col` itself isn't gone — the About page's text-beside-photo-cluster
+split still uses it — but `.two-col.sticky-media` (the case-study variant
+that pinned an image while its text scrolled past) has no more call sites
+once Ericsson is rebuilt in Session B7.
 
-1. **Full-width figure** — a single dominant image or diagram that needs
-   reading in detail (hero shots, the Sound-Mediating Table's circuit
-   diagram, Don't Be a Stranger's process diagram and closing image). Plain
-   `<figure>`.
-2. **Text column + image cluster** — a narrower text column beside 2–4
-   smaller images, the pattern Readymag uses for most of its
-   "Key Contributions"-style sections. `.two-col` for the split,
-   `.image-cluster` inside one side for a collage of 2+ images (single
-   image: just a `<figure>` as the second `.two-col` child, no cluster
-   needed).
+One pattern now, covering what both old patterns used to:
 
-**Applied so far**: Ericsson (all three cases) and Don't Be a Stranger ("The
-question", "Give permission", "Fine-tune friction", "Lead and align") use
-pattern 2 for their supporting-image sections; their hero images and any
-image meant to be read in detail stay pattern 1. EWP Dashboard, Interactive
-Table, Synodia and LightHouse still use full-width figures throughout — the
-`.two-col`/`.image-cluster` retrofit for those four is a follow-up pass.
+- **`Figure.astro`** — one image, or slotted composite content, with one
+  caption prop. Two visual variants: `default` (left-aligned, muted, small
+  — the plain figcaption look) and `diagram` (centred, italic — for an
+  interpretive caption under a diagram or composite block, replacing the
+  old loose `.diagram-caption` paragraphs).
+- **`.figure-grid`** (+ `.cols-2`/`.cols-3`/`.cols-4`) — for what used to
+  need an `.image-cluster` beside a `.two-col` split, wrap multiple
+  `<Figure>` instances in a `.figure-grid` div instead. It's a plain CSS
+  grid, single column at narrow widths and multi-column at wider ones, but
+  never paired with a text column beside it — the grid itself sits in the
+  normal single-column flow.
+
+**Where this lands**: Ericsson's layout rebuild (Session B7) is the first
+real test of this — six existing `.two-col.sticky-media` instances become
+single-column `Figure`/`.figure-grid` usage there. EWP Dashboard (B9) has
+three more of the same to migrate when it's deepened. Don't Be a Stranger
+(B11) is being rebuilt from thesis source rather than migrated from HTML
+(decision 13), so it never had the old pattern to begin with — it starts
+single-column from day one.
 
 ## Accessibility commitments
 

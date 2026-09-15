@@ -1,0 +1,46 @@
+---
+// Tier-2 homepage cards (Interactive Table, LightHouse, Synodia — decision
+// 10). Wired into the homepage in Session B10; the CSS (.project-grid /
+// .project-card) already exists in styles.css but nothing in the current
+// site uses it yet, so this component's shape follows the CSS and
+// DESIGN-SYSTEM.md's "image, one paragraph, outcome line, anchor id"
+// description rather than an existing markup instance.
+interface Props {
+	/** Anchor id for the card, e.g. "interactive-table" → links as /#interactive-table. */
+	id: string;
+	href: string;
+	image: string;
+	webp?: string;
+	imageWidth: number;
+	imageHeight: number;
+	imageAlt: string;
+	title: string;
+	description: string;
+	outcome: string;
+}
+
+const {
+	id,
+	href,
+	image,
+	webp = image.replace(/\.(jpe?g|png)$/i, '.webp'),
+	imageWidth,
+	imageHeight,
+	imageAlt,
+	title,
+	description,
+	outcome,
+} = Astro.props;
+---
+
+<a class="project-card" id={id} href={href}>
+	<div class="thumb">
+		<picture>
+			<source srcset={webp} type="image/webp" />
+			<img src={image} width={imageWidth} height={imageHeight} alt={imageAlt} loading="lazy" />
+		</picture>
+	</div>
+	<h3>{title}</h3>
+	<p class="desc">{description}</p>
+	<p class="outcome">{outcome}</p>
+</a>

@@ -1,0 +1,53 @@
+---
+// One caption convention for the whole site. The old repo had two ways to
+// caption something — four bare <figcaption> elements inside real <figure>s,
+// and two ".diagram-caption" paragraphs sitting loose next to composite
+// (non-image) diagram blocks. This component covers both: pass `src` for a
+// single image, or omit it and use the slot to wrap any composite content
+// (a diagram, a pair of cards, whatever). Either way there is exactly one
+// `caption` prop and one place that decides how a caption looks.
+interface Props {
+	/** Omit when wrapping composite content via the slot instead of a single image. */
+	src?: string;
+	/** Defaults to `src` with its extension swapped to .webp — every image in
+	 * this repo already ships a same-name .webp sibling. Override only if
+	 * that convention doesn't hold. */
+	webp?: string;
+	width?: number;
+	height?: number;
+	alt?: string;
+	caption?: string;
+	/** 'default': left-aligned, muted, small — the plain figcaption look.
+	 * 'diagram': centred, italic — for an interpretive caption under a
+	 * diagram or composite block. */
+	variant?: 'default' | 'diagram';
+	loading?: 'lazy' | 'eager';
+	class?: string;
+}
+
+const {
+	src,
+	webp = src?.replace(/\.(jpe?g|png)$/i, '.webp'),
+	width,
+	height,
+	alt = '',
+	caption,
+	variant = 'default',
+	loading = 'lazy',
+	class: className,
+} = Astro.props;
+---
+
+<figure class={className}>
+	{
+		src ? (
+			<picture>
+				<source srcset={webp} type="image/webp" />
+				<img src={src} width={width} height={height} alt={alt} loading={loading} />
+			</picture>
+		) : (
+			<slot />
+		)
+	}
+	{caption && <figcaption class={variant === 'diagram' ? 'diagram-caption' : undefined}>{caption}</figcaption>}
+</figure>

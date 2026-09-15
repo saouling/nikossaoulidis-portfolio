@@ -1,0 +1,19 @@
+---
+// Named for what it actually is in the CSS/HTML (.postit-board / .postit),
+// not for the ".quote-grid" / ".quote-lg" classes DESIGN-SYSTEM.md's
+// Components table names — those don't exist anywhere in styles.css or the
+// current site. See the B6 progress-log note for the correction. This is
+// Don't Be a Stranger's visitor-quote payoff moment: a fixed per-card
+// rotation (not random) so the board is stable across reloads.
+interface Props {
+	quotes: string[];
+	attribution?: string;
+}
+
+const { quotes, attribution } = Astro.props;
+---
+
+<div class="postit-board">
+	{quotes.map((quote) => <p class="postit">“{quote}”</p>)}
+</div>
+{attribution && <p class="quote-attribution fs-small">{attribution}</p>}

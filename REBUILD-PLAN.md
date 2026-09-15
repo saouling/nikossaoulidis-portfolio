@@ -176,7 +176,9 @@ src/
 │   ├── AtAGlance.astro
 │   ├── PullQuote.astro
 │   ├── BreakBand.astro
-│   ├── QuoteGrid.astro
+│   ├── PostitBoard.astro     ← named "QuoteGrid" below at first; renamed in B6
+│                                to match the real .postit-board CSS (there is
+│                                no .quote-grid/.quote-lg anywhere in the site)
 │   └── ProjectCard.astro     ← tier-2 homepage cards
 ├── content.config.ts          ← schema; outcome + learnings are required fields
 │                                (Astro 7's Content Layer API moved this out of
@@ -294,8 +296,9 @@ way this plan slips.
   into something the build enforces, so a study can't ship without an outcome.*
   **Done when:** a deliberately incomplete MDX file fails the build with a clear error.
 
-- [ ] **B6 · The component set.** `Figure`, `AtAGlance`, `PullQuote`, `BreakBand`,
-  `QuoteGrid`, `ProjectCard`. Built for single column only.
+- [x] **B6 · The component set.** `Figure`, `AtAGlance`, `PullQuote`, `BreakBand`,
+  `PostitBoard` (named `QuoteGrid` in this plan originally — corrected, see progress
+  log), `ProjectCard`. Built for single column only.
   *Concept: designing a prop interface — what varies, what stays fixed, and why one
   `Figure` makes the two-caption drift structurally impossible.*
   **Done when:** each renders correctly, and `DESIGN-SYSTEM.md` is updated to describe
@@ -443,3 +446,37 @@ a docs link; the same file with all fields present built cleanly. Test file remo
 after — no real case-study content in this session, that's Track A/B7/B9/B11's job. The
 collection is currently empty (0 files), which builds fine (an informational warning
 only). No surprises beyond the path correction above.
+
+2026-09-15 · B6 · Six components built in `src/components/`: `Figure` (one `caption` prop,
+`default`/`diagram` variants, optional single image or slotted composite content — covers
+both the old bare-`<figcaption>` and loose-`.diagram-caption` patterns), `AtAGlance`,
+`PullQuote` (owns the em-dash before an attribution so it's never typed inconsistently),
+`BreakBand` (`wide` prop for the one instance that isn't a narrow single blockquote),
+`PostitBoard`, `ProjectCard` (CSS already existed but was unused anywhere in the current
+site — built from `DESIGN-SYSTEM.md`'s description, real usage is B10). Every prop shape
+was checked against actual markup in `work/*.html` before writing the component, not
+guessed. **Two corrections found and fixed while doing that:**
+1. **`DESIGN-SYSTEM.md`'s Components table named this component's classes
+   `.quote-grid`/`.quote-lg`** — neither exists anywhere in `styles.css` or the site. The
+   real mechanism is `.postit-board`/`.postit` (Don't Be a Stranger's visitor-quote
+   board). Component built and named to match reality (`PostitBoard.astro`); table fixed;
+   §5's file tree above corrected too.
+2. **The plan's own invariant claim "there is no `.media-caption`" is wrong** —
+   `.media-caption`/`.media-caption-center` are real, used twice in `dont-be-a-stranger.html`
+   (a video credit line, a photo-credit line), just not as part of the figcaption pattern
+   `Figure` unifies — they caption things that aren't `<figure>` elements at all. Left
+   alone; flagged to Nikos rather than silently edited, since it's a plan-text claim, not
+   a bug in the code. No schema/decision changed.
+
+`DESIGN-SYSTEM.md`'s "Case-study image placement" section rewritten: the retired
+`.two-col.sticky-media`/`.image-cluster` pattern replaced with `Figure`/`.figure-grid`
+guidance. Verified the retirement's actual scope by grep, not assumption — Ericsson has 6
+`.two-col.sticky-media` instances to migrate in B7, EWP Dashboard has 3 more for B9, Don't
+Be a Stranger has zero (rebuilt from thesis source, decision 13, never had the pattern).
+`.two-col` itself is not retired — About's text-beside-photo-cluster split still uses it;
+only the `.sticky-media` case-study variant is gone.
+
+All six components verified on a temporary `/b6-check` page (real assets, not lorem
+ipsum) — diagram-caption variant's centred/italic styling confirmed via computed style,
+not just eyeballed. Page deleted after verification. `npm run build` clean throughout.
+No surprises beyond the two corrections above.
