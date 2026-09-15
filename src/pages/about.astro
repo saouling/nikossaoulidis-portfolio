@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="B3 layout check — About — Nikos Saoulidis" currentPage="about">
+	<div class="wrap col" style="padding-block: var(--space-6);">
+		<p class="eyebrow">B3 — shared layout test page, not final content</p>
+		<h1>About (placeholder)</h1>
+		<p>
+			The real About page is built in Session B4. This stub exists only to
+			prove two different pages can share one <code>Layout.astro</code> and
+			each get the correct nav item marked current — "About" should show the
+			solid underline here, not "Work".
+		</p>
+		<p><a href="/">&larr; Back to home</a></p>
+	</div>
+</Layout>

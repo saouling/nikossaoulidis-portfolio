@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+	/** Which nav item to mark aria-current="page". Omit on case-study pages,
+	 * which the live site never marks (see DESIGN-SYSTEM.md). */
+	currentPage?: 'work' | 'about' | 'contact';
+	ogImage?: string;
+}
+
+const {
+	title,
+	description = "Product and UX designer working in the in-between of design, technology, and human connection.",
+	currentPage,
+	ogImage = '/images/ericsson/hero.jpg',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageURL} />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+	</head>
+	<body class="no-js" id="top">
+		<a class="skip-link" href="#main">Skip to content</a>
+		<header class="site-header">
+			<div class="wrap">
+				<a class="logo" href="/">Nikos Saoulidis</a>
+				<nav class="nav" aria-label="Primary">
+					<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+						<span class="visually-hidden">Menu</span>
+						<span class="bar"></span><span class="bar"></span><span class="bar"></span>
+					</button>
+					<ul class="nav-links" id="nav-links">
+						<li><a href="/#work" aria-current={currentPage === 'work' ? 'page' : undefined}>Work</a></li>
+						<li><a href="/about" aria-current={currentPage === 'about' ? 'page' : undefined}>About</a></li>
+						<li><a href="/contact" aria-current={currentPage === 'contact' ? 'page' : undefined}>Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main id="main">
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="wrap">
+				<p class="fs-small">Nikos Saoulidis &copy; 2026</p>
+				<nav aria-label="Footer">
+					<a href="mailto:niksaoul@gmail.com">Email</a>
+					<a href="https://www.linkedin.com/in/nikolaos-saoulidis-a90434186/" target="_blank" rel="noopener">LinkedIn</a>
+					<a class="back-to-top" href="#top">Back to top</a>
+				</nav>
+			</div>
+		</footer>
+		<script src="/js/menu.js" defer></script>
+	</body>
+</html>

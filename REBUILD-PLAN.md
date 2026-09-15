@@ -273,7 +273,7 @@ way this plan slips.
   eighteen hand edits per CSS change, gone.*
   **Done when:** a test page renders with correct fonts, colours and type scale.
 
-- [ ] **B3 · `Layout.astro`.** One nav and footer for every page. Handle the
+- [x] **B3 · `Layout.astro`.** One nav and footer for every page. Handle the
   `aria-current="page"` difference via a prop rather than nine hand-synced copies.
   *Concept: components, props, and slots — the single idea that retires the biggest
   maintenance problem in the old repo.*
@@ -397,3 +397,17 @@ buttons, at-a-glance grid and all six colour tokens. Confirmed in the browser: b
 variable fonts report `loaded` via `document.fonts`, colours and the fluid type scale
 match the design system doc. `npm run build` output shows `_astro/index.C3oOCaFj.css` —
 the content-hashed filename Session B2's concept line was about. No surprises.
+
+2026-09-15 · B3 · `src/layouts/Layout.astro` built: one shared `<html>` shell (head
+meta/OG/twitter tags, skip link, header/nav, `<slot />`, footer, `menu.js`) replacing
+what was nine hand-synced copies. `currentPage` prop (`'work' | 'about' | 'contact'`,
+omitted on case-study pages) drives `aria-current="page"` — verified server-rendered HTML
+and in-browser that `/` marks Work and `/about` marks About, nothing else. `js/menu.js`
+copied unchanged to `public/js/`; mobile menu toggle confirmed working. Nav hrefs updated
+from the old `.html` paths (`/index.html`, `/about.html`) to Astro's real routes (`/`,
+`/about`, `/contact`) since the old extensions no longer exist. Added `site:
+'https://nikossaoulidis.xyz'` to `astro.config.mjs` so canonical/OG URLs generate
+correctly; confirmed the build output is directory-style (`/about/`), which already
+matches decision 09's `/ericsson/`-style shape — no extra config needed there. Two stub
+pages (`/` and `/about`, both marked not-final-content) exist only to prove the pattern;
+their real content is B4's job. No surprises.

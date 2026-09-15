@@ -1,69 +1,46 @@
 ---
-import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>B2 token check — Nikos Saoulidis</title>
-	</head>
-	<body>
-		<div class="wrap col" style="padding-block: var(--space-6);">
-			<p class="eyebrow">B2 — design tokens test page, not final content</p>
+<Layout title="B3 layout check — Nikos Saoulidis" currentPage="work">
+	<div class="wrap col" style="padding-block: var(--space-6);">
+		<p class="eyebrow">B3 — shared layout test page, not final content</p>
 
-			<h1>Hero heading — fs-hero, Jost 500</h1>
-			<h2>Section heading — fs-h2</h2>
-			<h3>Sub heading — fs-h3</h3>
+		<h1>Hero heading — fs-hero, Jost 500</h1>
+		<h2>Section heading — fs-h2</h2>
+		<h3>Sub heading — fs-h3</h3>
 
-			<p>
-				Body copy sits in Inter at <code>--fs-body</code>, 18px at the small
-				viewport end up to 20px at the large end, line height 1.6. This
-				paragraph exists to check the fluid type scale reads correctly and
-				that <a href="#">an inline link</a> shows the right blue.
-			</p>
+		<p>
+			This page and <a href="/about">/about</a> both render through the same
+			<code>Layout.astro</code>. Check the nav above: "Work" should show the
+			solid underline here, and "About" should show it on that page instead.
+		</p>
 
-			<p class="fs-small">
-				Small text / captions, muted colour, for at-a-glance labels and photo
-				credits.
-			</p>
+		<blockquote class="pull">
+			A pull-quote, set in Jost at fs-h2 with the red accent bar on the left.
+			<cite>— attribution line</cite>
+		</blockquote>
 
-			<blockquote class="pull">
-				A pull-quote, set in Jost at fs-h2 with the red accent bar on the left.
-				<cite>— attribution line</cite>
-			</blockquote>
-
-			<div class="tags">
-				<span class="tag">Design systems</span>
-				<span class="tag">UX research</span>
-				<span class="tag">Prototyping</span>
-			</div>
-
-			<p style="margin-top: var(--space-5);">
-				<a class="btn" href="#">Primary button</a>
-				<a class="btn btn-outline" href="#">Outline button</a>
-			</p>
-
-			<dl class="at-a-glance" style="margin-top: var(--space-6);">
-				<div>
-					<dt>Role</dt>
-					<dd>Product &amp; UX designer</dd>
-				</div>
-				<div>
-					<dt>Timeline</dt>
-					<dd>2024–2025</dd>
-				</div>
-			</dl>
-
-			<div style="margin-top: var(--space-6); display: flex; gap: var(--space-3); flex-wrap: wrap;">
-				<div style="background: var(--red); color: white; padding: var(--space-3); border-radius: var(--radius);">--red</div>
-				<div style="background: var(--red-ink); color: white; padding: var(--space-3); border-radius: var(--radius);">--red-ink</div>
-				<div style="background: var(--blue); color: white; padding: var(--space-3); border-radius: var(--radius);">--blue</div>
-				<div style="background: var(--blue-ink); color: white; padding: var(--space-3); border-radius: var(--radius);">--blue-ink</div>
-				<div style="background: var(--gold); color: var(--ink); padding: var(--space-3); border-radius: var(--radius);">--gold</div>
-				<div style="background: var(--gold-ink); color: white; padding: var(--space-3); border-radius: var(--radius);">--gold-ink</div>
-			</div>
+		<div class="tags">
+			<span class="tag">Design systems</span>
+			<span class="tag">UX research</span>
+			<span class="tag">Prototyping</span>
 		</div>
-	</body>
-</html>
+
+		<p style="margin-top: var(--space-5);">
+			<a class="btn" href="#">Primary button</a>
+			<a class="btn btn-outline" href="#">Outline button</a>
+		</p>
+
+		<dl class="at-a-glance" style="margin-top: var(--space-6);">
+			<div>
+				<dt>Role</dt>
+				<dd>Product &amp; UX designer</dd>
+			</div>
+			<div>
+				<dt>Timeline</dt>
+				<dd>2024–2025</dd>
+			</div>
+		</dl>
+	</div>
+</Layout>
