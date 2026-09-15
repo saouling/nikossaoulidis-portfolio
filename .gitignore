@@ -1,1 +1,10 @@
 .DS_Store
+
+# Astro / node — created during the rebuild, never committed
+node_modules/
+dist/
+.astro/
+.vercel/
+.env
+.env.production
+npm-debug.log*
