@@ -1,0 +1,75 @@
+---
+// One template for every tier-1 case study, at /ericsson/, /ewp-dashboard/,
+// /dont-be-a-stranger/ — decision 09. The structural pieces every case study
+// shares (hero, tags, at-a-glance, outcome, learnings) live here, driven by
+// the content schema; everything case-specific (the actual narrative,
+// pull-quotes, figures, jump-nav) is free-form MDX body content.
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import AtAGlance from '../components/AtAGlance.astro';
+
+export async function getStaticPaths() {
+	const caseStudies = await getCollection('case-studies');
+	return caseStudies.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, heading, standfirst, description, eyebrow, tags, heroImage, atAGlance, outcome, learnings } =
+	entry.data;
+const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
+---
+
+<Layout title={title} description={description} ogImage={heroImage.src}>
+	<section class="hero">
+		<div class="wrap col">
+			<p class="eyebrow">{eyebrow}</p>
+			<h1>{heading}</h1>
+			<p class="standfirst">{standfirst}</p>
+		</div>
+		<div class="breakout">
+			<figure class="hero-figure">
+				<picture>
+					<source srcset={heroWebp} type="image/webp" />
+					<img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} loading="eager" />
+				</picture>
+			</figure>
+		</div>
+	</section>
+
+	<section class="wrap col">
+		{
+			tags.length > 0 && (
+				<div class="tags">
+					{tags.map((tag) => (
+						<span class="tag">{tag}</span>
+					))}
+				</div>
+			)
+		}
+		<AtAGlance items={atAGlance} />
+	</section>
+
+	<section class="wrap col">
+		<Content />
+	</section>
+
+	<section class="section section-alt">
+		<div class="wrap col">
+			<h2 class="mt-0">Outcome</h2>
+			<div class="todo">
+				<span class="todo-label">TODO — Session B8</span>
+				<p>{outcome}</p>
+			</div>
+
+			<h2>Learnings</h2>
+			<div class="todo">
+				<span class="todo-label">TODO — Session B8</span>
+				<p>{learnings}</p>
+			</div>
+		</div>
+	</section>
+</Layout>

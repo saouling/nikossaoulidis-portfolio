@@ -304,7 +304,7 @@ way this plan slips.
   **Done when:** each renders correctly, and `DESIGN-SYSTEM.md` is updated to describe
   the single-column pattern instead of the retired `.two-col` one.
 
-- [ ] **B7 · Migrate Ericsson.** 1729 words of existing copy into MDX, layout rebuilt
+- [x] **B7 · Migrate Ericsson.** 1729 words of existing copy into MDX, layout rebuilt
   from `.two-col.sticky-media` (used six times) to single column. Copy unchanged in this
   session.
   *Concept: MDX — how prose and components compose in one file, and why that beats
@@ -480,3 +480,43 @@ All six components verified on a temporary `/b6-check` page (real assets, not lo
 ipsum) — diagram-caption variant's centred/italic styling confirmed via computed style,
 not just eyeballed. Page deleted after verification. `npm run build` clean throughout.
 No surprises beyond the two corrections above.
+
+2026-09-15 · B7 · `src/pages/[slug].astro` built — the one template for all three tier-1
+studies (decision 09), rendering the schema-driven structural pieces (hero, tags,
+at-a-glance, outcome, learnings) around free-form MDX body content. `ericsson.mdx`
+created with all 1729 words of existing copy, unchanged. The six `.two-col.sticky-media`
+instances became single-column: text in `.wrap.col`, each figure following in its own
+`.breakout`, per the invariant and Session B6's `DESIGN-SYSTEM.md` fix. Case 2's
+two-photo cluster became `Figure` × 2 inside `.figure-grid.cols-2`. Verified at both
+mobile and desktop widths — the before/after diagram that used to be squeezed into half
+a two-col split now reads clearly at full breakout width, and the two-photo grid
+correctly goes side-by-side at desktop, stacked at mobile.
+
+**Schema extended against real content, not guessed in the abstract.** B5's original
+four fields (`title`, `description`, `eyebrow`, `tags`, `heroImage`, `outcome`,
+`learnings`) turned out incomplete the moment real copy met them: the page's `<h1>`
+("Ericsson") and its `<title>` tag ("Ericsson — AI-Ready Design Delivery — Nikos
+Saoulidis") are genuinely different strings, as are the standfirst paragraph and the meta
+description — three separate pieces of existing copy, not one reused three times. Added
+`heading`, `standfirst`; turned `heroImage` into an object (needs width/height like every
+other image on the site) and added `atAGlance` as a structured field. This is expected
+schema iteration, not a first-draft mistake — B5 built a reasonable schema before any
+real content existed to check it against.
+
+**The outcome/learnings coupling, surfaced rather than papered over.** Decision 15
+(Session B8) adds an explicit outcome section, a learnings section and an NDA passage —
+meaning neither `outcome` nor `learnings` has real content to migrate in B7; nothing
+resembling a page-level "learnings" section exists anywhere in the current site. Writing
+that content myself would break the "ask before writing narrative copy" rule, so both
+fields hold a clearly-labelled placeholder string, and `[slug].astro` renders them inside
+`.todo` blocks (the exact pattern that CSS class already existed for) — visibly marked as
+unfinished on the page itself, not silently passing the schema behind the scenes.
+B7 and B8 are explicitly paired as one sitting in §0's suggested grouping, which is
+exactly why: B7 alone cannot produce a fully real page under decision 11's own schema
+enforcement. Flagged to Nikos at the end of this session to decide whether to continue
+straight into B8 or pick it up later.
+
+Homepage's `/ericsson/` link (pointing at this URL since Session B4, before the page
+existed) now resolves end-to-end — confirmed by clicking through, not just checking the
+URL. `npm run build` produces all four pages cleanly. No surprises beyond the schema
+extension and the outcome/learnings placeholder, both expected and explained above.
