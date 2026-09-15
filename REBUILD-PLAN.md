@@ -204,23 +204,43 @@ Note `[slug].astro` sits at the root, not under `/work/`, per decision 09.
 
 ## 6. Source material (outside the repo)
 
-- **Thesis LaTeX**: `~/Downloads/Nikos___DATX05_Master_s_Thesis___Name_of_Project/03 Don't be a Stranger Report/include/`
-  Read so far: `01_Introduction`, `04_Methodology`, `05_Design_Process` (lines 1–356),
-  `06_Results`, `07_Discussion`, `08_Conclusion`.
-  **Not yet read**: `02_Background`, `03_Theory`, and `05_Design_Process` lines 357–821
-  (Pre-Pilot detail, Pilot, Museum Phase decisions).
-- **Thesis figures**: same folder, `figure/05_Process/` and `figure/06_Results/`.
-  The `06_Results/pre-pilot/` and `pilot/` charts have not been reviewed.
-- **Raw photos/video**: `~/Downloads/*.HEIC` and `*.mov`, roughly 25 HEIC files.
-  Confirmed good unlabelled shots exist for: Röhsska installation, Mölndal red-armchair
-  room, visitors mid-call, post-it feedback tables, Rolodex card close-ups.
-  Regenerate contact sheets with `sips -s format jpeg -Z 900` plus a PIL montage.
-- **EDC conference material**: `~/Downloads/analyze-dbas-and-edc-conference/edc/`
-  (`cheatsheet-page1.html`, `EDC EDUX 2026 (1).pdf`). Never reviewed. Relevant to
-  Ericsson Case 2 if that section is revisited.
+**Primary, as of Session B8**: `~/Documents/portfolio-content-assets/` — Nikos consolidated
+source material here per-project; check this folder first before falling back to anything
+below. Structure:
+- `general/Portfolio Presentation.pdf` (57 pages) — the interview deck covering Don't Be a
+  Stranger, Ericsson (all three cases, with concrete numbers not on the current site — e.g.
+  the AI-readiness audit's 2.4→9.5-out-of-10 score) and EWP Dashboard. Read in full for
+  Ericsson in Session B8; **not yet read for Don't Be a Stranger or EWP** despite appearing
+  earlier in the deck — re-read those sections when those sessions come up.
+- `general/CV-Nikolaos-Saoulidis-2026.pdf` — not yet read.
+- `ericsson/edc-build-better-together/` — `EDC EDUX 2026 (1).pdf` and
+  `cheatsheet-page1.html`. Replaces the old `~/Downloads/analyze-dbas-and-edc-conference/`
+  path. Still not reviewed; relevant if Ericsson Case 2 is revisited.
+- `dont-be-a-stranger/report-thesis-latex-and-assets/03 Don't be a Stranger Report/` —
+  replaces the old `~/Downloads/Nikos___DATX05...` thesis path. Same read status as before
+  this session (see below): `01_Introduction`, `04_Methodology`, `05_Design_Process` lines
+  1–356, `06_Results`, `07_Discussion`, `08_Conclusion` done; `02_Background`, `03_Theory`,
+  `05_Design_Process` lines 357–821 still unread.
+- `dont-be-a-stranger/some-assets/` — a handful of real photos/logos/video
+  (`compressed-rohsska.mov`, `Mask group.png`, `Logo-white.png`, `Logo 1.png`,
+  `Ericsson-banner.png`, two presenting photos). Check against the `~/Downloads/*.HEIC`
+  set below before Session A2 — may already cover some of what that session needs.
+- `sound-mediating-table/sound-mediating-table.pdf`, `synodia/synodia.pdf` — source decks
+  for the two tier-2 projects, relevant to Session B10. Not yet read.
+
+**Still only in `~/Downloads/`, not yet consolidated**:
+- **Thesis figures**: `~/Downloads/Nikos___DATX05_Master_s_Thesis___Name_of_Project/figure/05_Process/`
+  and `figure/06_Results/`. The `06_Results/pre-pilot/` and `pilot/` charts unreviewed.
+- **Raw photos/video**: `~/Downloads/*.HEIC` and `*.mov`, roughly 25 HEIC files. Confirmed
+  good unlabelled shots exist for: Röhsska installation, Mölndal red-armchair room,
+  visitors mid-call, post-it feedback tables, Rolodex card close-ups. Regenerate contact
+  sheets with `sips -s format jpeg -Z 900` plus a PIL montage.
 - **Interview deck**: `~/Downloads/Magnet Presentation.pdf`, 68 pages. Structural
-  inspiration only, not copy.
-- **Job-search project**: `cv-master.md`, `story-bank.md`, `voice-guide.md`.
+  inspiration only, not copy. Likely an older draft of `general/Portfolio Presentation.pdf`
+  above — check before using, the newer one is probably sufficient on its own.
+
+**Job-search project**: `~/Claude/Projects/Job applications/reference/` —
+`cv-master.md`, `story-bank.md`, `voice-guide.md`.
 
 `ffmpeg` is installed. The hero video was re-encoded from 10-bit HDR to 8-bit `yuv420p`
 with `+faststart` to fix stutter — that fix is good, keep it.
@@ -311,7 +331,7 @@ way this plan slips.
   hand-written HTML for content you'll revise.*
   **Done when:** `/ericsson/` renders at parity, single column, on a preview URL.
 
-- [ ] **B8 · Ericsson content additions.** Three additions, per decision 15: an explicit
+- [x] **B8 · Ericsson content additions.** Three additions, per decision 15: an explicit
   **outcome** section, a **learnings** section, and an honest passage about the **NDA
   constraint** — what can't be shown, why the diagrams are redrawn abstractly, how the
   line was decided. Draft with Nikos, don't write it for him.
@@ -520,3 +540,20 @@ Homepage's `/ericsson/` link (pointing at this URL since Session B4, before the 
 existed) now resolves end-to-end — confirmed by clicking through, not just checking the
 URL. `npm run build` produces all four pages cleanly. No surprises beyond the schema
 extension and the outcome/learnings placeholder, both expected and explained above.
+
+2026-09-15 · B8 · Outcome, learnings and an expanded NDA note drafted for Ericsson, per
+decision 15. Did not write these unprompted — asked Nikos structural questions first (one
+unified outcome paragraph vs. per-case; expand the NDA note in place vs. a new section),
+then he pointed to `~/Documents/portfolio-content-assets/general/Portfolio Presentation.pdf`
+(57 pages, read in full for the Ericsson section) as the source rather than have me invent
+reflective content. Concrete facts pulled from there and traceable to it: the AI-readiness
+audit's 2.4→9.5-out-of-10 score after the delivery-for-ai skill ran, that it was adopted as
+a team-wide standard, the Build Better Together handout still being on people's desks, and
+Case 3's prototype being picked up by a real developer and a US back-end team. Drafted in
+Nikos's voice per `voice-guide.md` (no em dashes, no AI-tell constructions) and shown to him
+before touching any file. **Explicitly marked as draft, not final**: he said to put it in
+now and review later, so `[slug].astro`'s `.todo` labels read "Draft — pending Nikos's
+review" instead of the B7 placeholder's "TODO — Session B8" — the schema now validates with
+real content, but nothing here should be treated as approved copy yet. §6 above rewritten to
+point future sessions (B9, B11) at the new `portfolio-content-assets` folder Nikos
+consolidated, which supersedes several of the old scattered `~/Downloads` paths.
