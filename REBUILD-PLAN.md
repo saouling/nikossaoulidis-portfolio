@@ -178,8 +178,10 @@ src/
 │   ├── BreakBand.astro
 │   ├── QuoteGrid.astro
 │   └── ProjectCard.astro     ← tier-2 homepage cards
+├── content.config.ts          ← schema; outcome + learnings are required fields
+│                                (Astro 7's Content Layer API moved this out of
+│                                content/ itself — see progress log, Session B5)
 ├── content/
-│   ├── config.ts             ← schema; outcome + learnings are required fields
 │   └── case-studies/
 │       ├── ericsson.mdx
 │       ├── ewp-dashboard.mdx
@@ -285,7 +287,7 @@ way this plan slips.
   *Concept: file-based routing, and how a file path becomes a URL.*
   **Done when:** all three render correctly on a preview URL.
 
-- [ ] **B5 · Content collections and the schema.** Define the case-study schema in
+- [x] **B5 · Content collections and the schema.** Define the case-study schema in
   `src/content/config.ts`. Make `outcome` and `learnings` **required fields** per
   decision 11.
   *Concept: schema validation — how making a field required turns an editorial standard
@@ -427,3 +429,17 @@ photo-cluster collage stacks correctly on mobile, Contact's form renders with wo
 labels/hints. `npm run build` produces all three pages with zero errors. No surprises,
 though the Browser pane's own screenshot tool intermittently froze mid-session (stale
 frames after a scroll) — unrelated to the site itself, worked around by reloading.
+
+2026-09-15 · B5 · `@astrojs/mdx` installed via `astro add mdx` (auto-wired into
+`astro.config.mjs`). Case-study schema defined — `title`, `description`, `eyebrow`,
+`tags`, `heroImage`, plus `outcome` and `learnings` both required and non-empty per
+decision 11. **Correction to §5's target structure**: Astro 7's Content Layer API puts
+this file at `src/content.config.ts` (project src root), not `src/content/config.ts` as
+originally diagrammed — the framework moved this in a version after the plan's structure
+was sketched. Fixed in §5 above; not a decision change, just Astro's own convention.
+Proved the enforcement both directions: a test MDX file missing `outcome`/`learnings`
+failed the build with `InvalidContentEntryDataError`, naming both fields, the file, and
+a docs link; the same file with all fields present built cleanly. Test file removed
+after — no real case-study content in this session, that's Track A/B7/B9/B11's job. The
+collection is currently empty (0 files), which builds fine (an informational warning
+only). No surprises beyond the path correction above.
