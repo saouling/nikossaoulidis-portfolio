@@ -343,7 +343,7 @@ way this plan slips.
   including outcome and learnings.
   **Done when:** EWP reads as a tier-1 case study and the schema validates.
 
-- [ ] **B10 · Tier-2 project cards.** Interactive Table, LightHouse and Synodia become
+- [x] **B10 · Tier-2 project cards.** Interactive Table, LightHouse and Synodia become
   homepage cards — image, one paragraph, outcome line, anchor id. No dedicated pages.
   **Done when:** all three appear on the homepage with working anchors.
 
@@ -617,3 +617,18 @@ Chased it to ground rather than assume a real bug — confirmed via `fetch()` +
 same family of Browser-pane rendering glitches as this session's blank screenshots and stale
 network/console history, not a site bug). Homepage → `/ewp-dashboard/` link confirmed
 end-to-end by clicking through. `npm run build` produces all five pages cleanly.
+
+2026-09-16 · B10 · Interactive Table, Synodia and LightHouse demoted from full `.project-row`
+entries to the `ProjectCard.astro` component built (but unused) in B6, closing decision 10's
+tier-1/tier-2 split — homepage now shows 3 full rows and 3 lighter cards, matching the count
+exactly. Each card links out to a real existing artifact rather than nothing or an invented
+page: Interactive Table to its actual ACM DIS 2024 paper, Synodia and LightHouse to their
+real Figma prototypes, all still live at the URLs already embedded in the old (unlinked)
+`work/*.html` files. Decision 10 forbids a dedicated page per tier-2 project, not an outbound
+link to something that already exists, so this isn't scope creep, it's using material that
+was sitting unused. Copy is unchanged from the homepage rows it replaced. Verified: all three
+anchors (`#interactive-table`, `#synodia`, `#lighthouse`) resolve, all three hrefs and
+`target="_blank"` confirmed via the DOM, `npm run build` clean. Also decided B10 should run
+before Track A starts rather than after all of B, so Track A's slower, Nikos-dependent steps
+(picking photos, shaping a narrative) can start as early as possible rather than queuing
+behind B12–B15 — discussed and agreed in conversation, not a plan text change.

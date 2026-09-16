@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 
 const description =
 	"Product and UX designer working in the in-between of design, technology, and human connection. Enterprise software at Ericsson, a permanent museum installation, and a platform used by 2,700+ institutions.";
@@ -81,59 +82,49 @@ const description =
 					</div>
 				</a>
 
-				<a class="project-row flip reveal" href="/interactive-table/">
-					<div class="row-media">
-						<picture>
-							<source srcset="/images/table/diagram.webp" type="image/webp" />
-							<img src="/images/table/diagram.jpg" width="1500" height="1468" alt="Diagram of the interactive table: touch closes a circuit, an Arduino sends MIDI to a synthesizer, speakers play a melody and an LED strip lights up." loading="lazy" />
-						</picture>
-					</div>
-					<div class="row-text">
-						<span class="row-eyebrow">Research</span>
-						<h3>Interactive Sound-Mediating Table</h3>
-						<div class="tags"><span class="tag-word">Sound Design · Prototyping · User Testing · Ambiguous Design</span></div>
-						<p class="desc">Co-designed a table that invites playful, ambiguous bare-skin touch between two people, turning it into musical and light responses. Accepted to the ACM DIS 2024 demo track in Copenhagen.</p>
-						<p class="outcome">Exhibited at ACM DIS 2024, Copenhagen.</p>
-					</div>
-				</a>
-
-				<a class="project-row reveal" href="/synodia/">
-					<div class="row-media">
-						<picture>
-							<source srcset="/images/synodia/device.webp" type="image/webp" />
-							<img src="/images/synodia/device.jpg" width="1000" height="1866" alt="Synodia, a round white portable music device with a speaker grille and a single record button." loading="lazy" />
-						</picture>
-					</div>
-					<div class="row-text">
-						<span class="row-eyebrow">Product Design</span>
-						<h3>Synodia</h3>
-						<div class="tags"><span class="tag-word">Concept-Driven Design · Prototyping · Sound</span></div>
-						<p class="desc">A slow, portable music player that plays one song a day, a quiet argument against algorithm-driven streaming, and for the personal connection in sharing music with people you're synced to.</p>
-						<p class="outcome">An exploration of what listening together could feel like.</p>
-					</div>
-				</a>
-
-				<a class="project-row flip reveal" href="/lighthouse/">
-					<div class="row-media">
-						<picture>
-							<source srcset="/images/lighthouse/hero.webp" type="image/webp" />
-							<img src="/images/lighthouse/hero.jpg" width="1472" height="952" alt="The LightHouse app: a dark-mode interface for grouping stage lights, building scenes and sequences, with a 3D stage preview." loading="lazy" />
-						</picture>
-					</div>
-					<div class="row-text">
-						<span class="row-eyebrow">School / Industry</span>
-						<h3>LightHouse</h3>
-						<div class="tags"><span class="tag-word">UI Design · Prototyping · User Requirements · Market Research</span></div>
-						<p class="desc">A beginner-friendly app for managing stage light rigs, balancing advanced functionality with an intuitive interface, a timeline mode, live control, and a 3D stage preview.</p>
-						<p class="outcome">Craft and clarity inside a genuinely complex tool.</p>
-					</div>
-				</a>
-
 			</div>
 
 			<p class="fs-small" style="margin-top: var(--space-6)">
 				There's also a <a href="https://www.figma.com/deck/pygH7CpZVJ0LSkNgFMkvkw" target="_blank" rel="noopener">full case deck</a> if you want more depth on a couple of these.
 			</p>
+
+			<p class="eyebrow" style="margin-top: var(--space-7)">More work</p>
+			<h2 class="mt-0">Smaller projects</h2>
+			<div class="project-grid">
+				<ProjectCard
+					id="interactive-table"
+					href="https://dl.acm.org/doi/10.1145/3656156.3665424"
+					image="/images/table/diagram.jpg"
+					imageWidth={1500}
+					imageHeight={1468}
+					imageAlt="Diagram of the interactive table: touch closes a circuit, an Arduino sends MIDI to a synthesizer, speakers play a melody and an LED strip lights up."
+					title="Interactive Sound-Mediating Table"
+					description="Co-designed a table that invites playful, ambiguous bare-skin touch between two people, turning it into musical and light responses. Accepted to the ACM DIS 2024 demo track in Copenhagen."
+					outcome="Exhibited at ACM DIS 2024, Copenhagen. Read the paper ↗"
+				/>
+				<ProjectCard
+					id="synodia"
+					href="https://www.figma.com/proto/YerdDKO4Un9AvaYCk8PxS2/Individual-Project?page-id=0%3A1&node-id=502-16762&node-type=canvas&viewport=1345%2C40%2C0.03&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=502%3A16754"
+					image="/images/synodia/device.jpg"
+					imageWidth={1000}
+					imageHeight={1866}
+					imageAlt="Synodia, a round white portable music device with a speaker grille and a single record button."
+					title="Synodia"
+					description="A slow, portable music player that plays one song a day, a quiet argument against algorithm-driven streaming, and for the personal connection in sharing music with people you're synced to."
+					outcome="An exploration of what listening together could feel like. View the prototype ↗"
+				/>
+				<ProjectCard
+					id="lighthouse"
+					href="https://www.figma.com/proto/1fmZ5tjfIh1WemV0oGJ6nq/LightRig-GUI-Individual-Project?page-id=2680%3A19242&node-id=2680-19247&viewport=430%2C592%2C0.02&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2680%3A19247"
+					image="/images/lighthouse/hero.jpg"
+					imageWidth={1472}
+					imageHeight={952}
+					imageAlt="The LightHouse app: a dark-mode interface for grouping stage lights, building scenes and sequences, with a 3D stage preview."
+					title="LightHouse"
+					description="A beginner-friendly app for managing stage light rigs, balancing advanced functionality with an intuitive interface, a timeline mode, live control, and a 3D stage preview."
+					outcome="Craft and clarity inside a genuinely complex tool. View the prototype ↗"
+				/>
+			</div>
 		</div>
 	</section>
 </Layout>
