@@ -135,7 +135,10 @@ These hold for every session. Breaking one is a bug, not a judgement call.
 - **Every factual claim traces to a source** — `cv-master.md`, `story-bank.md`, or the
   thesis. Never carry a claim forward from the current site without checking it. The
   "five transferable design guidelines" line in the current DBAS copy is exactly the
-  failure this rule exists to catch (see Session A1).
+  failure this rule exists to catch — **now resolved, see the finding box under Session A1.**
+  A second instance was caught in the same session: the live outcome line's "five to twenty
+  minutes" on the phone traces to nothing, and appears to be the pre-pilot *interview*
+  length wearing a different hat.
 - **Landscape images for full-bleed moments.** Where only portraits exist, pair two side
   by side rather than blowing one up.
 - **Asset selection is collaborative.** Offer candidates, let Nikos choose. Do not pick
@@ -217,10 +220,21 @@ below. Structure:
   `cheatsheet-page1.html`. Replaces the old `~/Downloads/analyze-dbas-and-edc-conference/`
   path. Still not reviewed; relevant if Ericsson Case 2 is revisited.
 - `dont-be-a-stranger/report-thesis-latex-and-assets/03 Don't be a Stranger Report/` —
-  replaces the old `~/Downloads/Nikos___DATX05...` thesis path. Same read status as before
-  this session (see below): `01_Introduction`, `04_Methodology`, `05_Design_Process` lines
-  1–356, `06_Results`, `07_Discussion`, `08_Conclusion` done; `02_Background`, `03_Theory`,
-  `05_Design_Process` lines 357–821 still unread.
+  replaces the old `~/Downloads/Nikos___DATX05...` thesis path. **Fully read as of Session
+  A1** — all eight chapters plus `Dump.tex`, nothing outstanding. (`Dump.tex` is cut
+  material: an early ethics chapter now living in Appendix C, a superseded pilot-results
+  section, and two earlier phrasings of the research question. Nothing in it is quotable as
+  current.) Appendices A–I have **not** been read; they hold the full prompt lists, the
+  rejected ideas, the visual identity and the detailed statistics, and are worth a look in
+  A3 if the outline needs them.
+- `dont-be-a-stranger/dont-be-a-stranger-presentation.pdf` — 169 pages, Nikos's own thesis
+  defence deck (3 June 2025), distinct from `general/Portfolio Presentation.pdf`. **Read in
+  full in Session A1.** This is where his preferred narrative shape lives: the 20-word
+  summary, the four lenses framed by film stills and questions, the "practical guidelines"
+  label, the "bonus question" on talking with strangers with the rawest feedback quotes
+  ("Nude", "a little vulnerable… exciting but also risk of rejection"), the "some (life)
+  lessons i learned" slide, and "moments that stayed with me". Page count is inflated by
+  build animations, so many pages are near-duplicates.
 - `dont-be-a-stranger/some-assets/` — a handful of real photos/logos/video
   (`compressed-rohsska.mov`, `Mask group.png`, `Logo-white.png`, `Logo 1.png`,
   `Ericsson-banner.png`, two presenting photos). Check against the `~/Downloads/*.HEIC`
@@ -257,13 +271,75 @@ Mark each session `[x]` when done and add a one-line note about what actually ha
 The long pole. Prose and asset work, framework-independent. Starting it late is the main
 way this plan slips.
 
-- [ ] **A1 · Finish the thesis read.** Read `02_Background`, `03_Theory`, and
-  `05_Design_Process` lines 357–821. Then resolve the guidelines problem: the current
-  copy says "five transferable design guidelines" in one place and "drawn from five
-  themes" in another. Establish what the thesis actually claims and write it down here.
+- [x] **A1 · Finish the thesis read.** Scope widened at Nikos's instruction: read *every*
+  chapter in full, not only the ones marked unread, plus `Dump.tex` and the 169-page
+  `dont-be-a-stranger-presentation.pdf`. Guidelines problem resolved — see the box below,
+  which is the canonical statement this session existed to produce.
   *Concept: why a portfolio claim that can't be traced to a source is a liability in an
   interview, not just an inaccuracy.*
-  **Done when:** the real structure of the thesis output is stated in this file.
+  **Done when:** the real structure of the thesis output is stated in this file. ✔
+
+#### A1's finding — the real structure of the thesis output
+
+**Do not restate the "five guidelines" claim in any form. It is wrong three ways.**
+
+The thesis has two separate numbered sets, and the current site fused them:
+
+1. **Four research lenses — this is the thesis's answer to the research question, and the
+   thing a portfolio should present.** *Voice-Based Communication and Emotional Presence ·
+   Tactility, Materiality and Embodied Interaction · Invitation and Participation in Public
+   Space · Defamiliarization as Reflective Strategy.* Set up in `01_Introduction`, answered
+   as bullet lists in `06_Results` §"Addressing the Research Question" (roughly 17 concrete
+   considerations across the four), argued again in `07_Discussion` §7.1, restated in
+   `08_Conclusion`. The abstract's "four key experiential qualities" is the same four.
+   **Nikos's own deck labels these bullets "practical guidelines"** in the corner of each
+   lens slide. That is where the word "guidelines" legitimately comes from.
+
+2. **Five cross-phase RTA themes — an input, not an output.** *Emotional Presence Through
+   Analog Voice · Friction and Vulnerability as Invitations · Defamiliarization and
+   Playfulness · Social Norms and Spatial Hesitation · Material Memory and Nostalgia.*
+   Synthesised in `06_Results` §"Synthesizing RTA Pre-pilot and Pilot Results" from the
+   pre-pilot and campus pilot **only** — before either museum existed. Their stated job is
+   to guide iteration three: they "operated as design guides" for the museum phase. They
+   are Nikos's own design brief, not a transferable finding. Each carries one **Design
+   Implication**, so "five themes, each with a design implication" is accurate if it is ever
+   needed.
+
+Why the live claim fails: the five are themes, not guidelines; they are not transferable;
+and `07_Discussion` §"Limitations & Future Work" states in writing that the project produced
+"hands-on, practical recommendations, **without producing broad design guidelines**", with
+generalizable recommendations named as future work. The likely origin of the error is the
+deck: the word "guidelines" sits on the four-lens slides, but the five themes are the more
+card-shaped thing, so the label slid across.
+
+**Known contradictions inside the thesis itself** (expect these in an interview, don't
+"fix" them silently): `07_Discussion` §7.1 says "the **four** overarching themes from the
+RTA" when there are five; the Discussion names three themes that appear nowhere in Results
+("Friction and Slowness as Meaningful", "Playful Curiosity and Strange Familiarity",
+"Navigating Uncertainty and Social Space"); and theme 3 is "Defamiliarization and
+**Playfulness**" in the Results synthesis but "…and **Improvisation**" elsewhere in Results
+and on the deck's lens slides. Both spellings are in the source.
+
+**Decisions taken with Nikos in this session:**
+- Present the **four lenses as "practical guidelines"**, matching his deck. The five themes
+  are demoted or cut; they do not lead the page.
+- **Cut "five to twenty minutes" on the phone.** Unsourced. The thesis never measures call
+  duration and calls it deliberately unmeasured; the only "10 to 20 minutes" in the thesis
+  is how long the *pre-pilot interviews* ran. Treated as a number that drifted from
+  interview length to call length.
+- **Use the deck's four framing questions** as section openers ("what does the voice carry
+  that a text never could?", "how does it feel to hold a phone that doesn't fit in your
+  pocket?", "would you pick up a ringing phone in a public space?", "what happens when
+  something you know suddenly behaves a little bit strange?"). **No film stills** — the
+  questions carry it without the rights problem.
+- **Keep a fair amount of the personal register** from the deck (positionality, the "life
+  lessons" slide, "moments that stayed with me"). It is the differentiator, and §4's
+  "vector of growth" research supports it.
+
+**Still unverified, needs Nikos in A3/A4:** "Running permanently in both museums for a year
+and three months" — the thesis (June 2025) says no fixed end date and that continuation
+"depends on how long each museum wishes to host it". "Permanently" is stronger than the
+source supports and the duration is his knowledge, not the thesis's.
 
 - [ ] **A2 · Contact sheets and asset review.** Regenerate thumbnails from the ~25 HEIC
   files, build a contact sheet, review it *with Nikos* and let him pick. Prioritise
@@ -632,3 +708,42 @@ anchors (`#interactive-table`, `#synodia`, `#lighthouse`) resolve, all three hre
 before Track A starts rather than after all of B, so Track A's slower, Nikos-dependent steps
 (picking photos, shaping a narrative) can start as early as possible rather than queuing
 behind B12–B15 — discussed and agreed in conversation, not a plan text change.
+
+2026-09-16 · A1 · Thesis read in full at Nikos's instruction, wider than the plan's scope:
+every chapter rather than only the three marked unread, since this is the content-writing
+session and the "read" marks came from a scoping pass. That paid off — the decisive evidence
+was split across chapters previously marked done. Also read `Dump.tex` and all 169 pages of
+`dont-be-a-stranger-presentation.pdf`, his own defence deck, which had never been opened.
+
+**Guidelines problem resolved; canonical statement is in the finding box under Session A1
+above.** Short version: the thesis answers its research question through **four lenses**
+(~17 concrete considerations), and separately synthesises **five RTA themes** that are an
+*input* to the museum phase, not an output. The site fused them and called the result "five
+transferable design guidelines" — wrong on all three words. `07_Discussion`'s Limitations
+section explicitly disclaims producing design guidelines at all. The deck explains the
+origin of the error: **Nikos's own slides stamp "practical guidelines" on the four-lens
+slides**, and the label slid across to the five themes, which are the more card-shaped
+thing. So the framing is his; only the attachment point was wrong. Decision: present the
+four lenses as practical guidelines, matching the deck.
+
+**Second traceability failure found unprompted**: the live outcome line's "People stay on
+the phone with a stranger for five to twenty minutes" has no source. The thesis never
+measures call duration and calls it deliberately unmeasured; the only "10 to 20 minutes" in
+it is how long the pre-pilot *interviews* ran. Nikos confirmed it is wrong and to cut it.
+"Running permanently... for a year and three months" is still unverified and parked for A3.
+
+Also logged: three real contradictions inside the thesis itself (Discussion says "four"
+overarching RTA themes when there are five; names three themes that appear nowhere in
+Results; "Defamiliarization and Playfulness" vs "…and Improvisation" both in the source),
+recorded so a future session doesn't "fix" one silently, and so they don't ambush him in an
+interview. Deck's Lens 3 and Lens 4 "connection with theory" slides carry identical bullets,
+a copy-paste that survived to the presented deck.
+
+Per the session brief, **no copy and no outline were written** — this session was scoped to
+understanding the material well enough to ask good questions. Four structural questions put
+to Nikos, all answered and recorded as decisions in the A1 box: four lenses over five themes;
+cut the five-to-twenty-minutes claim; keep the deck's four framing questions but drop the
+film stills (rights, and the questions carry it alone); keep a fair amount of the personal
+register, which §4's "vector of growth" research supports. A3 inherits these as constraints
+rather than open questions. Appendices A–I remain unread and are the only DBAS source
+material left; flagged in §6 as optional for A3.
