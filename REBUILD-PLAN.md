@@ -428,9 +428,27 @@ paint is heavy — revisit at B13/B14, not before. `phonebooth-concept-crop` is 
   this plan stays the decision record above it. It also carries six open items, including
   the video-hero schema change B11 must make.
 
-- [ ] **A4 · Write the copy.** Against the outline, in his voice, no em dashes, every
-  claim traced.
-  **Done when:** the draft is reviewed and approved. It lands in MDX at Session 11.
+- [x] **A4 · Write the copy.** Written against the outline in
+  [`DBAS-DRAFT.md`](DBAS-DRAFT.md): 1,855 words of prose plus 192 of quoted material, zero em
+  dashes (checked by grep, not by ear), sources cited under every section.
+  **Done when:** the draft is reviewed and approved. It lands in MDX at Session 11. ✔ —
+  reviewed by Nikos, one change requested and made, approved.
+
+  **Track A is complete.** B11 builds the page from `DBAS-DRAFT.md` and `DBAS-OUTLINE.md`.
+  The outline's six open items still stand, the video-hero schema change being the first.
+
+  **Nikos's one correction:** the prank-calls story was cut. He said it "didn't really happen
+  like that." Replaced with a documented production incident from `07_Discussion` §Challenges,
+  a lapsed payment on the phone's cellular subscription that cut service for nearly two hours
+  during the exhibition with museum staff in front of visitors while it was down. Same point
+  about operating in a room you do not control, and this one traces.
+
+  **Two facts resolved rather than left flagged.** The current page captions
+  `17-placement-proposal-doc` as a Mölndal document; it is titled "Installation placement in
+  Design Stories", which is Röhsska's exhibition, so the caption is wrong and must not carry
+  into B11. The same document proposed the **Belonging** room while the installation went into
+  **Innovation**, so his placement proposal was overruled through co-design. That is now a
+  line in section 3.
 
 ### Track B — the build
 
@@ -895,3 +913,36 @@ are structurally locked to the end of the page** by `[slug].astro`, so no outlin
 them mid-narrative, and **the video hero Nikos chose in A2 is not supported** — `heroImage`
 is a required image object and the template hardcodes `<picture>`/`<img>`. Recorded as
 B11's first open item rather than quietly changed now.
+
+2026-09-16 · A4 · Copy drafted to `DBAS-DRAFT.md` against A3's outline: 1,855 words of prose
+plus 192 of quoted material, sources cited under every section, zero em dashes verified by
+grep rather than by ear, and checked against `voice-guide.md`'s AI-tell list (no puffed
+vocabulary, no "not X but Y" antithesis, no connector-word padding). Reviewed by Nikos and
+approved with one change. **Track A is complete.**
+
+**Nikos cut the prank-calls story**: "it didn't really happen like that." That story was the
+emotional centre of section 8 and also a full STAR entry in `story-bank.md` §3, so this was a
+real finding, not a copy tweak. Replaced with an incident that is documented in
+`07_Discussion` §Challenges: a lapsed payment on the phone's cellular subscription cut service
+for nearly two hours during the museum exhibition, with staff facing visitors while it was
+down. It makes the same point about running in a room you do not control, and it traces.
+
+**Resolved rather than flagged:** the current page captions `17-placement-proposal-doc` as a
+Mölndal document. It is titled "Installation placement in Design Stories", which is Röhsska's
+exhibition, so the caption is wrong and must not carry into B11. The same document proposed
+the *Belonging* room while the installation went into *Innovation*, meaning his own placement
+proposal was overruled through co-design. Better fact than the one it replaced, now in
+section 3.
+
+**The error propagated further than the repo.** Writing the copy required checking every claim,
+which surfaced the same disproved claims sitting in `~/Claude/Projects/Job applications/
+reference/story-bank.md`, the file his cover letters and interview prep are built from. Fixed
+there in a separate commit (`41415c3` in that repo), with Nikos's approval. Three corrections:
+the "five transferable design guidelines" line, the unsourced "5-20 minutes on a call", and
+the "1 year 3 months" duration. **The instructive part:** a guardrail retracting the guidelines
+claim had already been written in that file on 7 August 2026 and was correct, but it lived
+only in the guardrails section while the STAR story 100 lines below still asserted the wrong
+version. Five weeks of a correction that was recorded and never propagated. Same failure shape
+as A2's finding that fixing the MDX would have left the claim alive inside a diagram. Also
+flagged there, not fixed, since only Nikos can: story §3 "The museum children" needs his own
+rewrite and should not be told in an interview until then.
