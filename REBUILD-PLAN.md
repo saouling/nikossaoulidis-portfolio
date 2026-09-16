@@ -413,12 +413,20 @@ re-encode itself is the good one the plan says to keep, but 17 MB autoplaying on
 paint is heavy — revisit at B13/B14, not before. `phonebooth-concept-crop` is only
 320×450, so it can be an inline element but never full-bleed.
 
-- [ ] **A3 · Narrative outline, built together.** Offer structural options and ask
-  questions before writing any copy. Look at real museum storytelling for reference —
-  Google Arts & Culture's story format was confirmed useful. Match the visual language of
-  the thesis's own diagrams (`figure/04_Methodology/lab-field-showroom.png`).
+- [x] **A3 · Narrative outline, built together.** Four structures offered and questions
+  asked before any copy was written. Nikos chose the narrative spine with the four lenses as
+  the payoff, ~1,800 words, the two museums contrasted as their own section, and "Still
+  running" as the Outcome stat. He then asked for one addition the plan had not anticipated
+  — a section translating the project into UX/product terms for recruiters — which is now
+  section 8.
   **Done when:** an agreed section-by-section outline exists, with an explicit outcome
-  and learnings section per decision 11.
+  and learnings section per decision 11. ✔
+
+  **The outline lives in [`DBAS-OUTLINE.md`](DBAS-OUTLINE.md)**, not inline here — it runs
+  to nine sections with word budgets, per-section source citations and image assignments,
+  which would bloat this file. That document is what A4 writes against and B11 builds from;
+  this plan stays the decision record above it. It also carries six open items, including
+  the video-hero schema change B11 must make.
 
 - [ ] **A4 · Write the copy.** Against the outline, in his voice, no em dashes, every
   claim traced.
@@ -853,3 +861,37 @@ on the current site; thesis figures preferred over raw photos because they are a
 curated, with raw used only to fill real gaps; poster and leaflet design to feature
 prominently; observation footage in scope. A3 inherits a working set, not a running order —
 60 images is deliberately more than the page will use.
+
+2026-09-16 · A3 · Four structural options offered and questions asked before any copy was
+written, per the session's own rule. Nikos chose the narrative spine with the four lenses as
+the payoff (option C), ~1,800 words, the two museums contrasted as their own section, and
+"Still running" with no number as the Outcome stat — declining the unverified "a year and
+three months" rather than shipping it. Agreed outline written to `DBAS-OUTLINE.md`: nine
+sections with word budgets summing to ~1,880, per-section source citations, and image
+assignments drawn from A2's shortlist.
+
+**One addition the plan had not anticipated.** After seeing the outline Nikos asked for a
+section answering "what does this project and what I did say for me, and to potential
+recruiters?" — the translation from museum installation into UX/product terms. This is a
+real gap the plan's own §4 research implies but never states: a discursive-design thesis
+about rotary phones can read as art-school work to a product hiring manager unless the
+transferable skills are made explicit. Added as section 8, positioned after the four lenses
+and before the personal close, so it lands where a scanning reader's attention returns. It
+argues from evidence rather than assertion: it shipped and is still up; five named
+stakeholders across four disciplines, none reporting to him; he worked inside Röhsska's
+design system rather than his own; "You might connect. You might not." is empty-state copy
+written after curator feedback; three pilot rounds with 25 participants where he can name
+which change came from which finding; iterated onboarding; bilingual microcopy; privacy by
+design. Word budgets elsewhere trimmed to absorb it.
+
+**Third asset gap closed:** Nikos supplied a photo of the Ericofon tattoo, which nothing in
+A2's 60-image shortlist covered. Instagram UI chrome cropped out, added as
+`53-ericofon-tattoo` (portrait), shortlist now 61. Note for future sessions: the filename
+carried a U+202F narrow no-break space, so `ls` on a pasted path failed while `find` matched
+— worth remembering when Nikos pastes a macOS screenshot path.
+
+Also surfaced while checking the template rather than assuming it: **Outcome and Learnings
+are structurally locked to the end of the page** by `[slug].astro`, so no outline can place
+them mid-narrative, and **the video hero Nikos chose in A2 is not supported** — `heroImage`
+is a required image object and the template hardcodes `<picture>`/`<img>`. Recorded as
+B11's first open item rather than quietly changed now.
