@@ -334,7 +334,8 @@ and on the deck's lens slides. Both spellings are in the source.
   questions carry it without the rights problem.
 - **Keep a fair amount of the personal register** from the deck (positionality, the "life
   lessons" slide, "moments that stayed with me"). It is the differentiator, and §4's
-  "vector of growth" research supports it.
+  "vector of growth" research supports it. **The Ericofon tattoo stays in** — raised
+  separately and confirmed by Nikos, so A4 should not re-litigate it.
 
 **Still unverified, needs Nikos in A3/A4:** "Running permanently in both museums for a year
 and three months" — the thesis (June 2025) says no fixed end date and that continuation
