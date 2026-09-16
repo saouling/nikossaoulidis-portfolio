@@ -341,10 +341,76 @@ and three months" — the thesis (June 2025) says no fixed end date and that con
 "depends on how long each museum wishes to host it". "Permanently" is stronger than the
 source supports and the duration is his knowledge, not the thesis's.
 
-- [ ] **A2 · Contact sheets and asset review.** Regenerate thumbnails from the ~25 HEIC
-  files, build a contact sheet, review it *with Nikos* and let him pick. Prioritise
-  landscape for full-bleed.
-  **Done when:** a chosen shortlist is copied into `images/dbas/` and listed here.
+- [x] **A2 · Contact sheets and asset review.** Four contact sheets built and reviewed with
+  Nikos; he chose. **Done when:** a chosen shortlist is copied into `images/dbas/` and
+  listed here. ✔ — see the box below.
+
+#### A2's result — the DBAS asset shortlist
+
+**`images/dbas/` now holds 60 images (38 landscape / 22 portrait), mirrored into
+`public/images/dbas/` as JPEG+WebP pairs (120 files, 25 MB).** 26 are ≥1600px wide and so
+usable full-bleed. All 120 verified to decode cleanly.
+
+**The plan's picture of this session was wrong in three ways, all found at the start:**
+
+1. **`images/dbas/` was not empty.** It already held a curated 34-image shortlist from the
+   old hand-coded site — semantically named, JPEG+WebP pairs, including four custom
+   diagrams drawn for the website rather than exported from the thesis. A2 was therefore a
+   *gap-filling* job, not a from-scratch selection. Only 1 of the 34 had been ported to
+   `public/`; all are now.
+2. **The source pools are bigger than stated.** 46 HEIC, not ~25 (deduped to 40: one
+   zero-byte file, one exact duplicate, four holiday shots from Aug 2023 unrelated to the
+   project). 23 `.mov`, deduping to 17. And the thesis `figure/` tree holds ~90 images,
+   which the plan never mentioned as an asset source at all — it is the richest pool and
+   the most curated.
+3. **`sips` silently ignores EXIF rotation on these HEIC files.** The first contact sheet
+   came out with half the frames sideways and, worse, counted rotated portraits as
+   landscapes — 38 landscape when the true figure was 19. Regenerated through `qlmanage`,
+   which reads orientation correctly. **Any future session converting these files must use
+   `qlmanage -t`, not `sips`.** The plan's own suggested `sips -s format jpeg -Z 900`
+   recipe produces wrong output here.
+
+**Nikos's decisions this session:** he has permission for the visitor photos, so faces can
+be used (worth a line in the copy saying consent was obtained — it turns the tension with
+the project's own privacy-by-design ethics into evidence he thought about it). Hero is the
+**looping video**, as on the current Readymag site, already in the repo at
+`videos/rohsska-installation.mp4`. Register: **thesis figures preferred over raw photos**
+("they're more curated"), raw only where it fills a real gap; **poster and leaflet design
+prominently**; **video including the observation footage**.
+
+**Rights triage — these were deliberately excluded and must stay excluded:** the
+related-work project photos (Undertable, Portals, Megaphonebooth, Metaphone, Talk to God,
+Hello Machine); Röhsska's and Mölndal's own press photos credited to their staff
+photographers (Kristin Lidell, Camilla Eliasson); the Tharp & Tharp book figures; the
+Futura and Volkswagen advertising references; and `auxiliary/in-the-mood-for-love.png`.
+**Still in the set and still questionable:** `ericofon-catalogue` and `dialog-catalogue`
+(E31/E28) are Ericsson's official catalogue and Review Journal images, not Nikos's
+photographs — same category as the excluded ones. Flagged to him, left in, undecided.
+`11-tower-of-babel` is a Bruegel painting from 1563, so public domain and safe, but it
+appears nowhere in the thesis and its relevance should be re-checked in A3.
+
+**Two factual errors found baked into image assets, now quarantined** in
+`images/dbas/_quarantine/` with a README explaining each. This is the important find of the
+session: fixing A1's guidelines error in the MDX copy alone would **not** have been enough,
+because the wrong claim also lives inside a picture.
+- `dbas-process-detailed.png` ends, in gold, with *"Output: five transferable design
+  guidelines, not just the installation."* — the exact claim A1 disproved.
+- `dbas-process.png` maps Constructive Design Research with **Lab and Field swapped**
+  (it puts the campus pilots in Lab and the museums in Field; the thesis puts prototyping
+  in the Lab and names the campus pilot as one of two Field contexts). Lab–Field–Showroom
+  is a framework Nikos cites, so being wrong on it in his own diagram is worse than
+  omitting it. The thesis's own correct version is now in the set as
+  `50-lab-field-showroom`.
+Both need redrawing in A3/A4 once the four-lens framing is settled. Their non-broken parts
+are worth keeping — see the quarantine README.
+
+**Also fixed:** `24-prototyping-desk.jpg` was 3.6 MB at 1600px, a real performance defect
+inherited from the old site. Re-encoded to 817 KB. No file in the folder now exceeds 1 MB.
+
+**Open for later:** the hero video is 17 MB (1920×1080, h264, `yuv420p`, 28s). The
+re-encode itself is the good one the plan says to keep, but 17 MB autoplaying on first
+paint is heavy — revisit at B13/B14, not before. `phonebooth-concept-crop` is only
+320×450, so it can be an inline element but never full-bleed.
 
 - [ ] **A3 · Narrative outline, built together.** Offer structural options and ask
   questions before writing any copy. Look at real museum storytelling for reference —
@@ -747,3 +813,42 @@ film stills (rights, and the questions carry it alone); keep a fair amount of th
 register, which §4's "vector of growth" research supports. A3 inherits these as constraints
 rather than open questions. Appendices A–I remain unread and are the only DBAS source
 material left; flagged in §6 as optional for A3.
+
+2026-09-16 · A2 · Four contact sheets built and reviewed with Nikos (camera roll 40, thesis
+figures 46, video 17, plus the 34 already sitting in `images/dbas/`); he chose. Shortlist is
+now 60 images, 38 landscape, mirrored into `public/images/dbas/`. Full detail in the A2 box
+under Session A2 above.
+
+Three corrections to the plan's own description of this session, all found before any
+selection happened: `images/dbas/` was **not** empty but already held a curated 34-image
+shortlist from the old site, making A2 a gap-filling job; the source pools are roughly
+double what §6 said (46 HEIC not ~25, 23 movs, plus ~90 thesis figures that §6 never listed
+as an asset source at all); and **`sips` silently ignores EXIF rotation on these HEIC
+files**, so the plan's own suggested recipe produced a sheet with half the frames sideways
+and counted rotated portraits as landscapes — 38 landscape reported when the truth was 19.
+Rebuilt via `qlmanage -t`, which is correct. Noted in the A2 box so a future session doesn't
+repeat it.
+
+**The find that matters: A1's error was also baked into an image.** `dbas-process-detailed.png`
+ends in gold with "Output: five transferable design guidelines, not just the installation."
+Fixing the MDX copy alone would have left the disproved claim asserted in a picture, as the
+punchline of the process graphic. A second asset, `dbas-process.png`, has Lab and Field
+swapped relative to the thesis's own Constructive Design Research mapping. Both quarantined
+to `images/dbas/_quarantine/` with a README explaining the error and what to keep on redraw;
+Nikos chose quarantine-now-redraw-later rather than a rushed fix, since the redraw depends on
+A3 settling the four-lens framing. The thesis's correct Lab–Field–Showroom diagram is now in
+the set as `50-lab-field-showroom` and can replace the bad one.
+
+Rights triage done and recorded: excluded every related-work project photo, both museums'
+credited press photos, the Tharp & Tharp book figures and the film still. Two Ericsson
+catalogue images inherited from the old site (`ericofon-catalogue`, `dialog-catalogue`) are
+the same category — flagged to Nikos, left in place, undecided. Also re-encoded
+`24-prototyping-desk.jpg` from 3.6 MB to 817 KB; nothing in the folder now exceeds 1 MB.
+
+Nikos's decisions: he has permission for the visitor photos so faces are usable (A4 should
+add a line saying consent was obtained, which converts the tension with the project's own
+privacy-by-design ethics into evidence rather than a liability); hero is the looping video as
+on the current site; thesis figures preferred over raw photos because they are already
+curated, with raw used only to fill real gaps; poster and leaflet design to feature
+prominently; observation footage in scope. A3 inherits a working set, not a running order —
+60 images is deliberately more than the page will use.
