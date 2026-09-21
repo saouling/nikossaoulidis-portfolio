@@ -33,7 +33,7 @@ typography:
     fontWeight: 500
     lineHeight: 1.12
   body:
-    fontFamily: "EB Garamond, Georgia, serif"
+    fontFamily: "Source Serif 4, Georgia, serif"
     fontSize: "clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem)"
     fontWeight: 400
     lineHeight: 1.6
@@ -105,9 +105,9 @@ cutout photograph — never applied as generic "lift."
 The type pairing carries the same duality: **Jost**, a free Futura-homage
 geometric sans, for anything structural (headings, labels, buttons, nav) —
 functional, poster-like, closer to a diagram title than a display font — set
-against **EB Garamond**, a classical serif, for the actual reading experience
-of the case-study prose. Structure is Bauhaus; the reading itself is
-editorial.
+against **Source Serif 4**, a serif built for on-screen text rather than a
+print revival, for the actual reading experience of the case-study prose.
+Structure is Bauhaus; the reading itself is editorial.
 
 **Key characteristics:**
 - Mostly white space, one color accent per composition — never every cell filled.
@@ -147,11 +147,22 @@ functional neutral scale built for a pure-white page.
 ## Typography
 
 **Display/Structural Font:** Jost (with Century Gothic, system-ui fallback)
-**Body/Reading Font:** EB Garamond (with Georgia, serif fallback)
+**Body/Reading Font:** Source Serif 4 (with Georgia, serif fallback)
 
-**Character:** a functional geometric sans paired with a classical serif — structure reads as engineered and labeled, prose reads as considered and literary. This is a deliberate shift from the system's original Jost+Inter pairing (both sans, one workhorse): EB Garamond moves the reading experience toward editorial rather than product-UI, while Jost keeps every structural element (nav, buttons, labels, headings) legible at a glance and unmistakably geometric.
+**Character:** a functional geometric sans paired with a serif built for
+screen reading — structure reads as engineered and labeled, prose reads as
+considered but sturdy. This pairing went through two iterations this
+session: the original Jost+Inter pairing (both sans, one workhorse) was
+first replaced with Jost+EB Garamond, but EB Garamond's thin, high-contrast
+strokes read as too light at body size even pushed to 600 weight (which
+then looked semi-bold, wrong for continuous reading). Source Serif 4's
+lower stroke contrast reads substantial at its normal weight, so the body
+font landed there instead — Jost's structural role is unchanged throughout.
 
-EB Garamond is self-hosted the same way as Jost (`/fonts/eb-garamond-var.woff2`, latin-subset variable woff2 from Google Fonts, weight range 400–700); Inter's `@font-face` and font file have been removed.
+Source Serif 4 is self-hosted the same way as Jost
+(`/fonts/source-serif-4-var.woff2`, latin-subset variable woff2 from Google
+Fonts, weight range 400–600); EB Garamond and Inter's `@font-face`
+declarations and font files have both been removed.
 
 ### Hierarchy
 - **Display** (500, hero clamp 56.8–63.1px, 1.12 line-height): the homepage hero `<h1>` only.
@@ -163,7 +174,7 @@ EB Garamond is self-hosted the same way as Jost (`/fonts/eb-garamond-var.woff2`,
 **Scale method:** the Utopia (utopia.fyi) fluid type-scale approach, Perfect Fourth ratio (1.333), interpolated between a 320px and 1240px viewport via `clamp()` rather than jumping at breakpoints — a deliberately bold step between sizes so headings carry real presence against body text.
 
 ### Named Rules
-**The Structural-Sans Rule.** Jost is never used for reading prose, only for anything the reader scans rather than reads: headings, labels, nav, buttons, captions-as-labels. EB Garamond owns continuous prose exclusively.
+**The Structural-Sans Rule.** Jost is never used for reading prose, only for anything the reader scans rather than reads: headings, labels, nav, buttons, captions-as-labels. Source Serif 4 owns continuous prose exclusively.
 
 ## Layout
 
@@ -247,6 +258,6 @@ Three deliberately distinct corner languages, each tied to a role rather than ap
 ### Don't:
 - **Don't** add drop shadows, blur, or soft ambient elevation to the ledger family (fact-grid, ink-grid, museum-block, lens, label-plate captions) — they stay flat and hairline-bordered.
 - **Don't** reintroduce a two-column sticky-media case-study layout — tried, retired, and the reason ("still there, just not easy to read") is on record.
-- **Don't** use Inter for body copy — retired this session in favor of EB Garamond; Jost remains structural-only and was never body copy.
+- **Don't** use Inter or EB Garamond for body copy — both tried and retired this session in favor of Source Serif 4; Jost remains structural-only and was never body copy.
 - **Don't** add a persistent floating in-page navigation rail (rotated-text rail, fanned cards) — tried twice, both read as "awkward." The plain inline "jump to a case" text link already works and needs no component.
 - **Don't** apply a rounded corner to anything in the ledger family — sharp corners are what signal "this is a record," not decoration to soften.

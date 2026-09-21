@@ -102,7 +102,7 @@
   ],
   "narrative": {
     "northStar": "The Ink Ledger",
-    "overview": "The system reads like a ledger, not a brochure: flat ink-gapped grids, sharp corners, and a restraint borrowed from real Mondrian compositions, which are mostly white space with one or two color accents, never a filled block per cell. That restraint isn't decorative minimalism; it's an extension of the site's actual editorial discipline — every factual claim traces to a primary source, and the visual system is built to look like it's keeping the same kind of honest record. The type pairing carries the same duality: Jost for anything structural, EB Garamond for the actual reading experience of the case-study prose. Structure is Bauhaus; the reading itself is editorial.",
+    "overview": "The system reads like a ledger, not a brochure: flat ink-gapped grids, sharp corners, and a restraint borrowed from real Mondrian compositions, which are mostly white space with one or two color accents, never a filled block per cell. That restraint isn't decorative minimalism; it's an extension of the site's actual editorial discipline — every factual claim traces to a primary source, and the visual system is built to look like it's keeping the same kind of honest record. The type pairing carries the same duality: Jost for anything structural, Source Serif 4 for the actual reading experience of the case-study prose. Structure is Bauhaus; the reading itself is editorial.",
     "keyCharacteristics": [
       "Mostly white space, one color accent per composition — never every cell filled.",
       "Flat color fields; no gradients, no glassmorphism, no soft ambient shadows.",
@@ -113,7 +113,7 @@
     "rules": [
       { "name": "The Ink-Text Rule", "body": "Gold never carries text at its bright value — always substitute ochre-gold-ink the moment gold needs to be legible.", "section": "colors" },
       { "name": "The One-Accent Rule", "body": "Every Mondrian-style grid gets exactly one colored accent cell, never a filled-every-cell treatment.", "section": "colors" },
-      { "name": "The Structural-Sans Rule", "body": "Jost is never used for reading prose, only for anything the reader scans rather than reads. EB Garamond owns continuous prose exclusively.", "section": "typography" },
+      { "name": "The Structural-Sans Rule", "body": "Jost is never used for reading prose, only for anything the reader scans rather than reads. Source Serif 4 owns continuous prose exclusively.", "section": "typography" },
       { "name": "The Single-Column Rule", "body": "No case-study section pairs running text with a sticky or side-by-side image column.", "section": "layout" },
       { "name": "The Physical-Object Exception", "body": "A shadow is only added because the thing it's attached to is a real physical object in life — never as a generic elevation affordance.", "section": "elevation" },
       { "name": "Every State Sets Both", "body": "Every button state sets background-color and text-color together, never one without the other.", "section": "components" }

@@ -61,7 +61,7 @@ aspirational.
 - Personal identity: Bauhaus / Dieter Rams influence, a three-brand-color system
   (red / blue / gold, each with a darker "-ink" variant for text-size contrast), Jost
   for display/titles.
-- Body font: EB Garamond, paired with Jost — decided this session, replacing Inter.
+- Body font: Source Serif 4, paired with Jost — decided this session, replacing Inter. (EB Garamond was tried first and retired the same session — too thin at body size.)
 - The visual language that came out of the Don't Be a Stranger case study (Mondrian-
   style ink fact-grids, ink-bordered "label plate" captions, card-stack galleries) is
   native to the material (drawn from Nikos's own thesis artifacts) and is being

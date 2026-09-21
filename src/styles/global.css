@@ -13,9 +13,9 @@
   font-display: swap;
 }
 @font-face {
-  font-family: "EB Garamond";
-  src: url("/fonts/eb-garamond-var.woff2") format("woff2");
-  font-weight: 400 700;
+  font-family: "Source Serif 4";
+  src: url("/fonts/source-serif-4-var.woff2") format("woff2");
+  font-weight: 400 600;
   font-style: normal;
   font-display: swap;
 }
@@ -66,12 +66,15 @@ ul, ol { list-style: none; padding: 0; }
   --on-dark:    #FDFCFA;
 
   /* type: a Futura-alike (Jost) for anything structural (headings, nav,
-     labels, buttons), EB Garamond — a classical serif — for the actual
-     reading experience of case-study prose. Structure is Bauhaus; the
-     reading itself is editorial. Replaces the original Jost+Inter pairing
-     (both sans) this session; see DESIGN.md's Typography section. */
+     labels, buttons), Source Serif 4 for the actual reading experience of
+     case-study prose — a serif built for screen text, not a print revival:
+     EB Garamond was tried first and read too thin at body size even pushed
+     to 600 (which then looked semi-bold instead of just sturdier). Source
+     Serif 4's lower stroke contrast reads substantial at its normal weight.
+     Structure is Bauhaus; the reading itself is editorial. See DESIGN.md's
+     Typography section. */
   --font-display: "Jost", "Century Gothic", system-ui, sans-serif;
-  --font-body:    "EB Garamond", Georgia, serif;
+  --font-body:    "Source Serif 4", Georgia, serif;
 
   /* Fluid type scale: Utopia method (utopia.fyi), Perfect Fourth ratio
      (1.333), viewport 320–1240px, base (body) 18px min / 20px max. Each
