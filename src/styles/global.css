@@ -6,15 +6,15 @@
 
 /* ---------- Fonts (self-hosted, variable) ---------- */
 @font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-var.woff2") format("woff2");
+  font-family: "Jost";
+  src: url("/fonts/jost-var.woff2") format("woff2");
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Jost";
-  src: url("/fonts/jost-var.woff2") format("woff2");
+  font-family: "EB Garamond";
+  src: url("/fonts/eb-garamond-var.woff2") format("woff2");
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -65,10 +65,13 @@ ul, ol { list-style: none; padding: 0; }
   --accent-ink: var(--red-ink);
   --on-dark:    #FDFCFA;
 
-  /* type: a Futura-alike (Jost) for display, Inter for body, matching the
-     live site's geometric-sans-plus-workhorse-body pairing */
+  /* type: a Futura-alike (Jost) for anything structural (headings, nav,
+     labels, buttons), EB Garamond — a classical serif — for the actual
+     reading experience of case-study prose. Structure is Bauhaus; the
+     reading itself is editorial. Replaces the original Jost+Inter pairing
+     (both sans) this session; see DESIGN.md's Typography section. */
   --font-display: "Jost", "Century Gothic", system-ui, sans-serif;
-  --font-body:    "Inter", system-ui, -apple-system, sans-serif;
+  --font-body:    "EB Garamond", Georgia, serif;
 
   /* Fluid type scale: Utopia method (utopia.fyi), Perfect Fourth ratio
      (1.333), viewport 320–1240px, base (body) 18px min / 20px max. Each

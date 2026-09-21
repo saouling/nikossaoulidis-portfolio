@@ -11,3 +11,7 @@ npm-debug.log*
 yarn-debug.log*
 pnpm-debug.log*
 .idea/
+
+# Impeccable's downloaded platform engine binary — re-fetched by `npx impeccable
+# install`/first run, not portable across platforms, no reason to version it.
+.claude/skills/impeccable/scripts/bin/

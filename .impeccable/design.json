@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-21T00:00:00Z",
+  "title": "Design System: Nikos Saoulidis — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "signal-red": {
+        "role": "primary",
+        "displayName": "Signal Red",
+        "canonical": "#BE1E2D",
+        "tonalRamp": ["#3D0A0F", "#5C1017", "#7B171F", "#9A1D27", "#BE1E2D", "#D14A55", "#E28289", "#F3C3C7"]
+      },
+      "ultramarine": {
+        "role": "secondary",
+        "displayName": "Ultramarine",
+        "canonical": "#21409A",
+        "tonalRamp": ["#0A1533", "#101F4D", "#162A67", "#1B3580", "#21409A", "#4C68B3", "#8AA0D2", "#C7D2EA"]
+      },
+      "ochre-gold": {
+        "role": "tertiary",
+        "displayName": "Ochre Gold",
+        "canonical": "#C9A227",
+        "tonalRamp": ["#3F3209", "#5E4B0D", "#7D6512", "#A57F1D", "#C9A227", "#D6B858", "#E4CE8E", "#F2E4C3"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#16161A",
+        "tonalRamp": ["#000000", "#0B0B0D", "#16161A", "#3A3A40", "#5E5E66", "#83838C", "#B4B4BA", "#E6E6E9"]
+      },
+      "bg-alt": {
+        "role": "neutral",
+        "displayName": "Bg Alt",
+        "canonical": "#F4F1EC",
+        "tonalRamp": ["#B5A98F", "#CFC5B0", "#E3DCCE", "#EEE9DF", "#F4F1EC", "#F8F6F2", "#FBFAF8", "#FFFFFF"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Homepage hero headline only." },
+      "headline": { "displayName": "Headline", "purpose": "Case-study page titles." },
+      "title": { "displayName": "Title", "purpose": "Section headings within a case study." },
+      "body": { "displayName": "Body", "purpose": "All continuous reading prose, capped at a 720px measure." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, nav links, tags, at-a-glance labels, buttons — never continuous prose." }
+    },
+    "shadows": [
+      { "name": "postit-lift", "value": "0 6px 16px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08)", "purpose": "The Don't Be a Stranger post-it board — real paper notes, the one place a shadow represents an actual object." },
+      { "name": "cutout-photo-drop", "value": "drop-shadow(0 12px 20px rgba(22,22,26,.18))", "purpose": "The About page's die-cut photo cluster; reads as a lifted photograph, not a UI elevation cue." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "ease", "purpose": "Default transition easing (color/background/transform state changes)." },
+      { "name": "duration-fast", "value": "0.15s", "purpose": "Button and link color/background transitions." },
+      { "name": "duration-reveal", "value": "0.5s", "purpose": "Scroll-reveal fade/lift (.reveal), both directions." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "900px" },
+      { "name": "container", "value": "1120px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The default CTA button — ink fill, pill shape, hover fills signal-red.",
+      "html": "<button class=\"ds-btn-primary\">See my work</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; font-family: Jost, sans-serif; font-size: 14px; text-decoration: none; color: #FDFCFA; background: #16161A; padding: 8px 24px; border-radius: 999px; border: 1px solid #16161A; transition: background-color .15s ease, color .15s ease, border-color .15s ease; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #8E1620; border-color: #8E1620; color: #FDFCFA; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary button — transparent fill, hairline border, fills solid ink on hover.",
+      "html": "<button class=\"ds-btn-outline\">CV</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 8px; font-family: Jost, sans-serif; font-size: 14px; color: #16161A; background: transparent; padding: 8px 24px; border-radius: 999px; border: 1px solid #E6E2DB; transition: background-color .15s ease, color .15s ease, border-color .15s ease; } .ds-btn-outline:hover, .ds-btn-outline:focus-visible { background: #16161A; border-color: #16161A; color: #FDFCFA; }"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Case-study skill tag — flat pill, muted, never an accent color.",
+      "html": "<span class=\"ds-tag\">UI/UX Design</span>",
+      "css": ".ds-tag { display: inline-block; font-family: Jost, sans-serif; font-size: 14px; color: #33333A; background: #F4F1EC; border: 1px solid #E6E2DB; border-radius: 999px; padding: 4px 16px; }"
+    },
+    {
+      "name": "Fact Grid",
+      "kind": "card",
+      "refersTo": "fact-grid",
+      "description": "Signature Outcome/Learnings component — one accent cell, rest plain white, thin ink gaps standing in for borders. Never fill every cell.",
+      "html": "<div class=\"ds-fact-grid\"><div class=\"ds-fact-accent\"><span class=\"ds-fact-stat\">2,700+</span><span class=\"ds-fact-stat-label\">institutions now use it</span></div><div class=\"ds-fact-cell\">Led four developers through the build.</div><div class=\"ds-fact-cell\">Full design system shipped alongside the redesign.</div></div>",
+      "css": ".ds-fact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3px; background: #16161A; border-radius: 6px; overflow: hidden; } .ds-fact-grid > div { background: #FFFFFF; padding: 24px; } .ds-fact-accent { grid-row: span 2; background: #BE1E2D; color: #FDFCFA; display: flex; flex-direction: column; justify-content: center; } .ds-fact-stat { font-family: Jost, sans-serif; font-weight: 700; font-size: 26px; line-height: 1.15; } .ds-fact-stat-label { font-size: 15px; opacity: .9; margin-top: 8px; } .ds-fact-cell { font-family: Jost, sans-serif; font-size: 20px; color: #16161A; }"
+    },
+    {
+      "name": "Ink Grid",
+      "kind": "custom",
+      "refersTo": "ink-grid",
+      "description": "Generalized ledger grid for text/photo cells (case-study 'moments'), sharp corners, no outer radius, same ink-gap mechanism as Fact Grid.",
+      "html": "<ul class=\"ds-ink-grid\"><li class=\"ds-ink-cell\"><p>The first time someone picked up during the pilot and we had a real conversation.</p></li><li class=\"ds-ink-cell\"><p>Reading the post-its for the first time.</p></li></ul>",
+      "css": ".ds-ink-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #16161A; } .ds-ink-cell { background: #FFFFFF; margin: 0; display: flex; align-items: center; padding: 24px; min-height: 120px; } .ds-ink-cell p { font-family: Jost, sans-serif; font-size: 20px; color: #16161A; margin: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Ink Ledger",
+    "overview": "The system reads like a ledger, not a brochure: flat ink-gapped grids, sharp corners, and a restraint borrowed from real Mondrian compositions, which are mostly white space with one or two color accents, never a filled block per cell. That restraint isn't decorative minimalism; it's an extension of the site's actual editorial discipline — every factual claim traces to a primary source, and the visual system is built to look like it's keeping the same kind of honest record. The type pairing carries the same duality: Jost for anything structural, EB Garamond for the actual reading experience of the case-study prose. Structure is Bauhaus; the reading itself is editorial.",
+    "keyCharacteristics": [
+      "Mostly white space, one color accent per composition — never every cell filled.",
+      "Flat color fields; no gradients, no glassmorphism, no soft ambient shadows.",
+      "Shadows appear only where they represent a real physical object, never as generic elevation.",
+      "Sharp corners on the ledger family; a small 6px softening only on photographic/color containers.",
+      "Fully round (pill) shapes reserved for interactive affordances only."
+    ],
+    "rules": [
+      { "name": "The Ink-Text Rule", "body": "Gold never carries text at its bright value — always substitute ochre-gold-ink the moment gold needs to be legible.", "section": "colors" },
+      { "name": "The One-Accent Rule", "body": "Every Mondrian-style grid gets exactly one colored accent cell, never a filled-every-cell treatment.", "section": "colors" },
+      { "name": "The Structural-Sans Rule", "body": "Jost is never used for reading prose, only for anything the reader scans rather than reads. EB Garamond owns continuous prose exclusively.", "section": "typography" },
+      { "name": "The Single-Column Rule", "body": "No case-study section pairs running text with a sticky or side-by-side image column.", "section": "layout" },
+      { "name": "The Physical-Object Exception", "body": "A shadow is only added because the thing it's attached to is a real physical object in life — never as a generic elevation affordance.", "section": "elevation" },
+      { "name": "Every State Sets Both", "body": "Every button state sets background-color and text-color together, never one without the other.", "section": "components" }
+    ],
+    "dos": [
+      "Do keep exactly one colored accent per Mondrian-style grid composition.",
+      "Do set background-color and text-color together on every interactive state.",
+      "Do use ochre-gold-ink, never bright ochre-gold, whenever gold needs to carry legible text.",
+      "Do reserve shadows for things that are physical objects in real life.",
+      "Do keep every case-study section single-column."
+    ],
+    "donts": [
+      "Don't add drop shadows, blur, or soft ambient elevation to the ledger family.",
+      "Don't reintroduce a two-column sticky-media case-study layout.",
+      "Don't use Inter for body copy.",
+      "Don't add a persistent floating in-page navigation rail.",
+      "Don't apply a rounded corner to anything in the ledger family."
+    ]
+  }
+}
