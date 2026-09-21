@@ -246,6 +246,17 @@ Three deliberately distinct corner languages, each tied to a role rather than ap
 ### Navigation
 - **Style:** Jost label type, dotted blue underline animating in on hover/focus (`transform: scaleX()`), solid instead of dotted for the current page (`aria-current="page"`). Mobile collapses to a full-screen stacked menu; a no-JS fallback renders the links as a plain static row.
 
+### Quoted Evidence family (deliberate exception to the Ledger family's flat, borderless language)
+A left-border-accent convention, distinct from the Ledger family above, used
+specifically to mark real quoted content that replaces a document
+screenshot — a pull-quote, a decision quote, a real email — never used as
+generic card decoration. Each weight and color is semantic, not arbitrary:
+- **Pull-quote (`blockquote.pull`):** 3px signal-red left rule, the lightest weight — a quoted line inline with running prose. The `boxed` variant replaces the rule with a full ink border for a standout statement instead.
+- **Decision card (`.decision-card`):** 6px left border, alternating signal-red/ultramarine by position — a real quoted decision, color-coded the same way the two-museum content is elsewhere on the site.
+- **Email card (`.email-card`):** 4px ochre-gold left border — a real email quoted plainly, gold marking it as primary-source correspondence rather than authored prose.
+
+A thick colored left-border on a card is usually a generic AI-interface tell; it's kept here specifically because each instance carries real, sourced content and a semantic color, not a decorative accent applied to filler.
+
 ## Do's and Don'ts
 
 ### Do:

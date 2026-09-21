@@ -2,6 +2,16 @@
   "detector": {
     "ignoreRules": [],
     "ignoreFiles": [],
-    "ignoreValues": []
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "src/styles/global.css"
+        ],
+        "createdAt": "2026-09-21T15:43:27.728Z",
+        "reason": "Agent: pull-quote/decision-card/email-card are a deliberate quoted-evidence family predating this session — each border-left uses the project's own red/blue/gold semantic color-coding (not arbitrary decoration) at a distinct weight (3px/6px/4px) per content type, and decision-card/email-card are explicitly commented as replacing document screenshots with real quoted content"
+      }
+    ]
   }
 }
