@@ -18,8 +18,20 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, heading, standfirst, description, eyebrow, tags, heroImage, atAGlance, outcome, learnings } =
-	entry.data;
+const {
+	title,
+	heading,
+	standfirst,
+	description,
+	eyebrow,
+	tags,
+	heroImage,
+	heroVideo,
+	heroVideoCaption,
+	atAGlance,
+	outcome,
+	learnings,
+} = entry.data;
 const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
 ---
 
@@ -31,12 +43,40 @@ const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
 			<p class="standfirst">{standfirst}</p>
 		</div>
 		<div class="breakout">
-			<figure class="hero-figure">
-				<picture>
-					<source srcset={heroWebp} type="image/webp" />
-					<img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} loading="eager" />
-				</picture>
-			</figure>
+			{
+				heroVideo ? (
+					<>
+						<figure class="hero-figure">
+							<div class="hero-video">
+								<video
+									id="hero-video"
+									width={heroImage.width}
+									height={heroImage.height}
+									poster={heroImage.src}
+									muted
+									autoplay
+									loop
+									playsinline
+								>
+									<source src={heroVideo} type="video/mp4" />
+									<img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} loading="eager" />
+								</video>
+								<button type="button" aria-pressed="false">
+									Sound off
+								</button>
+							</div>
+						</figure>
+						{heroVideoCaption && <p class="fs-small media-caption">{heroVideoCaption}</p>}
+					</>
+				) : (
+					<figure class="hero-figure">
+						<picture>
+							<source srcset={heroWebp} type="image/webp" />
+							<img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} loading="eager" />
+						</picture>
+					</figure>
+				)
+			}
 		</div>
 	</section>
 

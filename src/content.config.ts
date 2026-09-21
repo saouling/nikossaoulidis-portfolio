@@ -42,6 +42,14 @@ const caseStudies = defineCollection({
 			height: z.number(),
 			alt: z.string().min(1),
 		}),
+		// Session B11 (Don't Be a Stranger): optional looping video hero,
+		// additive to heroImage rather than replacing it. heroImage keeps
+		// doing exactly what it already does for every page — poster frame,
+		// OG image, width/height, and the <img> fallback for browsers that
+		// can't render <video> — so Ericsson and EWP are untouched. Only
+		// [slug].astro branches on whether heroVideo is present.
+		heroVideo: z.string().min(1).optional(),
+		heroVideoCaption: z.string().min(1).optional(),
 		atAGlance: z
 			.array(z.object({ label: z.string().min(1), value: z.string().min(1) }))
 			.min(1),

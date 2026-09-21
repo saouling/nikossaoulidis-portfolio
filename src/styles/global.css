@@ -180,6 +180,14 @@ section, .section {
   section, .section { padding-block: var(--space-7); }
 }
 .section-alt { background: var(--bg-alt); }
+/* [slug].astro (Ericsson/EWP/DBAS) renders the tags+at-a-glance block and
+   the MDX body as two adjacent plain <section class="wrap col"> elements
+   — each getting its own padding-block above doubles the gap between them
+   against every other section boundary on the page (confirmed live, DBAS
+   round 7 audit). Scoped to this exact adjacency only, not a blanket
+   section+section rule, so the hero->at-a-glance and body->outcome
+   boundaries (untested, may be intentionally more spaced) are untouched. */
+.wrap.col + .wrap.col { padding-top: 0; }
 
 .eyebrow {
   display: block;
@@ -505,6 +513,341 @@ figcaption {
   .figure-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
 }
 .figure-grid figure { margin: 0; }
+/* Session B11: crop every grid image to one ratio so mismatched source
+   photos (a scan next to a 4:3 print) still line up as clean rows instead
+   of a jagged mix of heights. Full, uncropped view lives in the caption's
+   figcaption is still the real photo — this only affects the grid preview. */
+.figure-grid img { aspect-ratio: 4 / 3; object-fit: cover; }
+
+/* A single full-bleed "hero" photo (not a diagram — diagrams keep their
+   natural ratio so nothing gets cropped out of a labelled figure). Caps
+   height so a very tall or very wide source doesn't dominate a widescreen
+   breakout the way an uncropped one does. */
+.figure-photo img { max-height: 640px; width: 100%; object-fit: cover; }
+
+/* ---------- Caption overlay (Session B11) ----------
+   Numeral chip + a full-width ink strip along the photo's own bottom
+   edge — an overlay, not a figcaption sitting in the flow below the
+   image, so a grid of photos reads as one tight block instead of a
+   photo/caption/photo/caption ladder. Same ink/red/Jost language as the
+   .fact-grid cells: flat colour, no blur or shadow, sharp corners. Only
+   for real photographs — the annotated concept-board scans already carry
+   their own on-image labels and get no caption at all (see B11's finding
+   in REBUILD-PLAN.md). */
+.cap-overlay-host { position: relative; }
+.cap-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--ink);
+  color: var(--on-dark);
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  padding: var(--space-2) var(--space-3);
+}
+.cap-overlay .cap-num {
+  background: var(--red);
+  color: var(--on-dark);
+  font-weight: 700;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cap-overlay .cap-num.blue { background: var(--blue); }
+
+/* A plain corner flag (Figure's `flag` prop) — no text, for a self-labelled
+   image that gets no caption. Same museum colour-coding, smaller footprint. */
+.cap-flag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 40px 40px 0 0;
+  border-color: var(--red) transparent transparent transparent;
+}
+.cap-flag.blue { border-color: var(--blue) transparent transparent transparent; }
+
+/* A supporting image, not a section's lead photo (Session B11): sits at a
+   fraction of the breakout width so it reads as "one more detail," not
+   another full-bleed moment. Centred since it's usually alone. */
+.figure-support {
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+/* ---------- Label-plate caption (Session B11 round 5) ----------
+   The `Figure` `plate` variant: an ink-bordered caption sitting just
+   under the image, same flat fact-grid visual language as the overlay
+   (no shadow, no blur, sharp corners) minus the numeral chip — built for
+   `figure-support`-sized images, where the overlay strip was found to
+   cover too much of a short photo and the old plain grey figcaption read
+   as an afterthought with no visual weight of its own. */
+.cap-plate-host { position: relative; }
+.cap-plate {
+  position: relative;
+  margin-top: var(--space-2);
+  border: 1px solid var(--hairline);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  color: var(--ink);
+}
+.cap-plate-tab {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: var(--space-2);
+  height: 100%;
+  background: var(--red);
+}
+.cap-plate-tab.blue { background: var(--blue); }
+.cap-plate:has(.cap-plate-tab) { padding-left: calc(var(--space-3) + var(--space-2)); }
+
+/* ---------- Two museums (Session B11 round 5) ----------
+   Each museum's paragraph and its own annotated photo merged into one
+   bordered unit, so Röhsska reads top-to-bottom as one thing rather than
+   two paragraphs followed by a separate image pair. A coloured top edge
+   carries the same red/blue museum coding the rest of the page uses;
+   the photo inside keeps its natural ratio (no crop) since the whole
+   point of the annotated pair is the on-image labels staying legible. */
+.museum-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-block: var(--space-5);
+}
+@media (min-width: 700px) {
+  .museum-pair { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+.museum-block {
+  border: 1px solid var(--hairline);
+  border-top: 4px solid var(--red);
+  padding: var(--space-4);
+}
+.museum-block.blue { border-top-color: var(--blue); }
+.museum-block p { margin: 0 0 var(--space-4); max-width: none; }
+.museum-block figure { margin: 0; }
+.museum-block img { aspect-ratio: auto; object-fit: initial; width: 100%; }
+
+/* ---------- Ink grid (Session B11 round 6, generalised round 7) ----------
+   The same Mondrian ink-gapped-cell language as the Outcome/Learnings
+   fact-grid and the research-question block, generalised into a reusable
+   two-or-more-cell grid rather than a one-off "moments" component — round
+   7's audit found the 25/44 "It went live" pair was the last spot still
+   using the older numbered-overlay-chip caption style, so it moved to
+   this same family instead of staying a third distinct pattern. A cell
+   is either `.ink-grid-text` (centred paragraph, no image) or
+   `.ink-grid-photo` (full-width image + caption below); default photo
+   crop is 3:4 for the portrait "moments" sources, `.ink-grid.natural`
+   drops the crop entirely (same convention as `.figure-grid.natural`)
+   for cells whose source images aren't portrait. */
+.ink-grid {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-5) 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3px;
+  background: var(--ink);
+}
+@media (min-width: 640px) {
+  .ink-grid { grid-template-columns: 1fr 1fr; }
+}
+.ink-grid > li {
+  background: var(--bg);
+  margin: 0;
+}
+.ink-grid .ink-grid-text {
+  display: flex;
+  align-items: center;
+  padding: var(--space-4);
+  min-height: 120px;
+}
+.ink-grid .ink-grid-text p {
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  margin: 0;
+  max-width: none;
+}
+.ink-grid .ink-grid-photo figure { margin: 0; }
+.ink-grid .ink-grid-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
+.ink-grid.natural .ink-grid-photo img { aspect-ratio: auto; object-fit: initial; }
+.ink-grid .ink-grid-photo p {
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  margin: 0;
+  padding: var(--space-4);
+  max-width: none;
+}
+
+/* Session B11, second attempt at in-page nav: dropped entirely. Two tries
+   at a persistent floating element (rotated-text rail, then fanned cards)
+   both read as "awkward." Ericsson's plain inline "Jump to a case" links
+   already prove the boring pattern works — DBAS now uses the same one,
+   hand-written in its own MDX body rather than a dedicated component,
+   exactly like Ericsson's. No CSS of its own: `.hero-links`/`.btn` below
+   already style it. */
+
+/* A pair of images where every part matters (Session B11: the two-museums
+   annotated photos) — skips the grid's default crop entirely and keeps
+   each image at its own natural ratio. Use when cropping would cut off
+   a label the image exists to show. */
+.figure-grid.natural img { aspect-ratio: auto; object-fit: initial; }
+
+/* ---------- Card stack (Session B11 round 5, motion round 6, fixed round 7) ----------
+   Radio inputs drive which .card is visible, same zero-JS mechanism the
+   old slideshow used. Round 6 tried crossfading by stacking all three
+   cards in one CSS Grid cell — but Grid's default `align-items: stretch`
+   stretches every card (including the hidden ones) to the tallest card's
+   height, so a short image sat inside a box sized for the tallest one,
+   leaving dead space below it (confirmed live via getBoundingClientRect
+   — this is the round-7 bug report). Fixed properly this time: back to
+   one card in normal flow at a time (`display: none` -> `block`), so the
+   frame's height always matches *that* card's own natural height, no
+   dead space possible — but animated via `@starting-style` +
+   `transition-behavior: allow-discrete`, a real CSS-only crossfade on
+   browsers that support it (Safari 17.4+, Chrome 117+, Firefox 129+);
+   everything else just gets the old instant swap, never a broken state,
+   no JS either way. The frame itself (not the individual cards) carries
+   a permanent offset/rotated ::before/::after pair, so the "flipping
+   through a rolodex" stack is always visible behind whichever card is
+   showing. Selectors use :nth-of-type on the input and the card rather
+   than hardcoded ids, so the same CSS serves any number of .card-stack
+   instances on the page; each input/label pair still needs its own
+   unique id for the label's `for` to target, but the logic itself
+   doesn't care what that id is. */
+.card-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 620px;
+  margin-inline: auto;
+  padding-top: var(--space-3);
+}
+.card-stack input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.card-stack-frame {
+  position: relative;
+  width: 100%;
+}
+.card-stack-frame::before,
+.card-stack-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-alt);
+  border: 1px solid var(--hairline);
+  z-index: 0;
+}
+.card-stack-frame::before { transform: rotate(-2.5deg) translate(6px, 8px); }
+.card-stack-frame::after { transform: rotate(2deg) translate(-6px, 10px); }
+.card-stack .card {
+  display: none;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  opacity: 0;
+  transition: opacity .4s ease, display .4s allow-discrete;
+}
+.card-stack .card picture {
+  display: block;
+  border: 1px solid var(--hairline);
+  background: var(--bg);
+}
+.card-stack-tabs {
+  order: -1;
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.card-stack-tabs label {
+  cursor: pointer;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-small);
+  color: var(--muted);
+  background: var(--bg);
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+.card-stack input:nth-of-type(1):checked ~ .card-stack-frame .card:nth-of-type(1),
+.card-stack input:nth-of-type(2):checked ~ .card-stack-frame .card:nth-of-type(2),
+.card-stack input:nth-of-type(3):checked ~ .card-stack-frame .card:nth-of-type(3) {
+  display: block;
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
+}
+.card-stack input:nth-of-type(1):checked ~ .card-stack-tabs label:nth-of-type(1),
+.card-stack input:nth-of-type(2):checked ~ .card-stack-tabs label:nth-of-type(2),
+.card-stack input:nth-of-type(3):checked ~ .card-stack-tabs label:nth-of-type(3) {
+  background: var(--red);
+  color: var(--on-dark);
+  border-color: var(--red);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-stack .card { transition: none; }
+}
+
+/* ---------- Guideline disclosures (Session B11 round 5) ----------
+   Each of the four lenses: the film question is the clickable <summary>,
+   the guideline text is hidden until opened — a native <details>, same
+   zero-JS mechanism the Filmstrip used, but a full-width card rather
+   than a small pill, since the point here is separating "the question"
+   from "the guideline" physically, not just visually. */
+.lens {
+  border: 1px solid var(--hairline);
+  margin-top: var(--space-3);
+}
+.lens summary {
+  cursor: pointer;
+  list-style: none;
+  padding: var(--space-4);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.lens summary::-webkit-details-marker { display: none; }
+.lens summary::marker { content: ''; }
+.lens summary::after {
+  content: '+';
+  margin-left: auto;
+  font-size: var(--fs-h3);
+  color: var(--red);
+  flex: none;
+  line-height: 1;
+}
+.lens[open] summary { border-bottom: 1px solid var(--hairline); }
+.lens[open] summary::after { content: '\2212'; }
+.lens-body { padding: var(--space-4); }
+.lens-body p:last-child { margin-bottom: 0; }
 
 .two-col {
   display: grid;
@@ -631,6 +974,19 @@ blockquote.pull cite {
   font-size: var(--fs-small);
   color: var(--muted);
   margin-top: var(--space-2);
+}
+
+/* 'boxed' (Session B11 round 5): an ink-bordered box, no fill, for a
+   standout statement or question — the same bordered-box language
+   already visible in Nikos's own diagram titles, sized down from a
+   short all-caps title to a full sentence at normal case so it reads as
+   a graphic statement rather than shouting. Replaces the left-rule
+   entirely rather than combining both. */
+blockquote.pull.boxed {
+  border-left: none;
+  border: 1px solid var(--ink);
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--fs-h3);
 }
 
 /* Visitor quotes as a post-it board (Don't Be a Stranger payoff) — the real

@@ -5,12 +5,17 @@
 // never typed inconsistently from one pull-quote to the next.
 interface Props {
 	cite?: string;
+	/** 'boxed' (Session B11 round 5): an ink-bordered box with no fill,
+	 * for a standout statement or question — reuses the same bordered-box
+	 * language already visible in Nikos's own diagram titles (28/34),
+	 * rather than the default left-rule blockquote. */
+	variant?: 'default' | 'boxed';
 }
 
-const { cite } = Astro.props;
+const { cite, variant = 'default' } = Astro.props;
 ---
 
-<blockquote class="pull">
+<blockquote class={variant === 'boxed' ? 'pull boxed' : 'pull'}>
 	<slot />
 	{cite && <cite>— {cite}</cite>}
 </blockquote>

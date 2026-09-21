@@ -19,10 +19,36 @@ interface Props {
 	caption?: string;
 	/** 'default': left-aligned, muted, small — the plain figcaption look.
 	 * 'diagram': centred, italic — for an interpretive caption under a
-	 * diagram or composite block. */
-	variant?: 'default' | 'diagram';
+	 * diagram or composite block.
+	 * 'overlay' (Session B11): numeral chip + ink strip sitting on the
+	 * photo's own bottom edge, not in the flow below it. Only for real
+	 * photographs — an annotated scan that already carries on-image
+	 * labels gets no caption prop at all rather than fighting an overlay.
+	 * 'plate' (Session B11 round 5): an ink-bordered label plate sitting
+	 * just under the image — same flat fact-grid visual language as
+	 * 'overlay' minus the numeral chip, but never covers the photo. For a
+	 * `figure-support`-sized image, where 'overlay' was found to hide too
+	 * much of a short image and the plain 'default' caption read as an
+	 * afterthought. */
+	variant?: 'default' | 'diagram' | 'overlay' | 'plate';
+	/** 'overlay' only: the numeral chip's text, e.g. "01". Omit the chip
+	 * entirely (caption-only strip) by leaving this unset. */
+	number?: string;
+	/** 'overlay' and 'plate': the accent colour — a numeral chip for
+	 * 'overlay', a small corner tab for 'plate'. Session B11's museum
+	 * colour-coding — red for a Röhsska moment, blue for Mölndal's, unset
+	 * for anything not tied to one specific museum. */
+	accent?: 'red' | 'blue';
+	/** A plain corner flag, no text — the same museum colour-coding for a
+	 * self-labelled image that gets no caption at all (an annotated scan
+	 * already carries its own on-image text; a caption overlay would
+	 * double up on it, per B11's finding). */
+	flag?: 'red' | 'blue';
 	loading?: 'lazy' | 'eager';
 	class?: string;
+	/** Only needed when something outside the component targets this exact
+	 * figure by id — the zero-JS slideshow's CSS sibling-selector, e.g. */
+	id?: string;
 }
 
 const {
@@ -33,12 +59,18 @@ const {
 	alt = '',
 	caption,
 	variant = 'default',
+	number,
+	accent,
+	flag,
 	loading = 'lazy',
 	class: className,
+	id,
 } = Astro.props;
+
+const figureClass = [className, (variant === 'overlay' || flag) && 'cap-overlay-host', variant === 'plate' && 'cap-plate-host'].filter(Boolean).join(' ') || undefined;
 ---
 
-<figure class={className}>
+<figure class={figureClass} id={id}>
 	{
 		src ? (
 			<picture>
@@ -49,5 +81,20 @@ const {
 			<slot />
 		)
 	}
-	{caption && <figcaption class={variant === 'diagram' ? 'diagram-caption' : undefined}>{caption}</figcaption>}
+	{flag && <span class={`cap-flag ${flag}`} aria-hidden="true" />}
+	{
+		caption && variant === 'overlay' ? (
+			<figcaption class="cap-overlay">
+				{number && <span class={`cap-num${accent ? ` ${accent}` : ''}`}>{number}</span>}
+				{caption}
+			</figcaption>
+		) : caption && variant === 'plate' ? (
+			<figcaption class="cap-plate">
+				{accent && <span class={`cap-plate-tab ${accent}`} aria-hidden="true" />}
+				{caption}
+			</figcaption>
+		) : (
+			caption && <figcaption class={variant === 'diagram' ? 'diagram-caption' : undefined}>{caption}</figcaption>
+		)
+	}
 </figure>

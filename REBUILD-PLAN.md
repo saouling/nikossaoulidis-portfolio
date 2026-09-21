@@ -519,14 +519,26 @@ paint is heavy — revisit at B13/B14, not before. `phonebooth-concept-crop` is 
 - [ ] **B11 · Build the DBAS page.** Using Track A's approved copy and assets.
   **Done when:** `/dont-be-a-stranger/` renders on a preview URL and the schema validates.
 
-- [ ] **B12 · Redirects, sitemap, 404.** Map every live Readymag URL to its new
-  equivalent. The three demoted projects redirect to their homepage card anchors per
-  decision 10. Regenerate the sitemap for the new URL shape. Build a real 404 page — the
-  repo has never had one.
+- [ ] **B12 · Redirects, sitemap, 404, agent-readability.** Map every live Readymag URL
+  to its new equivalent. The three demoted projects redirect to their homepage card
+  anchors per decision 10. Regenerate the sitemap for the new URL shape. Build a real
+  404 page — the repo has never had one. **Also, discoverability for AI agents/crawlers,
+  decided in a brainstorm 2026-09-16** (see `CHAT-CONCEPT.md` for the related, separately
+  deferred chat-interface idea — this is not that, this is metadata on the site being
+  built right now): a `public/llms.txt` markdown index pointing at the case-study pages;
+  JSON-LD `Person` schema (name, `jobTitle`, `alumniOf`, `knowsAbout`, `sameAs` →
+  LinkedIn) on home/about, `CreativeWork` schema per case study; `robots.txt` explicitly
+  allowing AI crawlers, **including training bots** (GPTBot, ClaudeBot, etc.) — decided
+  deliberately rather than defaulting to the general 2026 "block training, allow search"
+  posture, since there's no proprietary content here and being in training data plausibly
+  helps a candidate get surfaced when someone asks an AI about him.
   *Concept: why a redirect map matters more than it looks — links already sent in
-  applications, on LinkedIn and in the CV PDF all point at the old URLs.*
-  **Done when:** every old URL is listed here with its destination, and each is tested
-  against the preview deployment.
+  applications, on LinkedIn and in the CV PDF all point at the old URLs. Also: the same
+  zero-JS, single-`<h1>`, real-alt-text invariants that make this site accessible already
+  make it close to ideal for an agent to read — this session is metadata on top of that,
+  not new structure.*
+  **Done when:** every old URL is listed here with its destination and tested against the
+  preview deployment; `llms.txt`, JSON-LD, and `robots.txt` are live and validated.
 
 - [ ] **B13 · Analytics.** Plausible or Umami. One script, no cookie banner.
   **Done when:** the preview deployment reports a pageview.
@@ -560,6 +572,9 @@ Recorded so they can be checked against rather than rediscovered.
    until then it actively misleads.
 5. **`NOTES-handoff.md` is stale** and predates every decision here. Superseded by this
    file.
+6. **A chat/gen-UI feature was brainstormed 2026-09-16 and explicitly parked for after
+   B15** — see [`CHAT-CONCEPT.md`](CHAT-CONCEPT.md). Not a session, not scheduled. Do
+   not start it before cutover; noted here only so it isn't mistaken for in-scope work.
 
 ---
 

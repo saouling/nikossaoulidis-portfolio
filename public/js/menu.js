@@ -75,13 +75,20 @@ document.body.classList.remove('no-js');
   // Hero video: starts muted+looping (autoplay-with-sound is blocked by
   // browsers anyway); the button unmutes on request. Plain <video controls>
   // without this file works identically, just without the custom button.
+  // Session B11 addition: also pause for reduced-motion, reusing the same
+  // `reduceMotion` check the hero shapes/cursor and smooth-scroll already use.
   document.querySelectorAll('.hero-video').forEach(function (wrap) {
     var video = wrap.querySelector('video');
     var button = wrap.querySelector('button');
-    if (!video || !button) return;
+    if (!video) return;
+    if (reduceMotion) video.pause();
+    if (!button) return;
     button.addEventListener('click', function () {
       video.muted = !video.muted;
-      button.textContent = video.muted ? 'Sound on' : 'Sound off';
+      // Label reflects current state (muted -> "Sound off"), matching the
+      // button's own initial server-rendered text. Fixed in Session B11:
+      // this was inverted, unnoticed because no page had used .hero-video yet.
+      button.textContent = video.muted ? 'Sound off' : 'Sound on';
       button.setAttribute('aria-pressed', String(!video.muted));
     });
   });
