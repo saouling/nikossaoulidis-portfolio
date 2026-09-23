@@ -22,3 +22,8 @@ pnpm-debug.log*
 # Impeccable local artifacts: decision-page answers and review captures
 .impeccable/questions/
 .impeccable/review/
+
+# Raw text extracts of the source decks, thesis and CV. Local only: the repo is
+# public and some sources are marked Ericsson Internal or contain personal data.
+# The committed, publishable summary is reference/PROJECT-REFERENCE.md.
+reference/sources/
