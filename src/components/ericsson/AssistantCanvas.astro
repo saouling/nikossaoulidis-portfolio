@@ -1,0 +1,93 @@
+---
+// Ericsson 01c: the proposal, an assistant plus a canvas, as a layout
+// rather than a picture. About 30% steering panel, 70% canvas. Cards arrive
+// pre-filled, and each one shows its source and freshness; the user can pin
+// or dismiss. Abstract content (NDA): the annotations name the principles
+// from the research, not product data.
+const cards = [
+	{ span: 'w2', kind: 'Trend', state: 'new' },
+	{ span: '', kind: 'KPI', state: '' },
+	{ span: 'h2', kind: 'List', state: 'pinned' },
+	{ span: '', kind: 'KPI', state: '' },
+	{ span: 'w2', kind: 'Trend', state: '' },
+	{ span: '', kind: 'Status', state: '' },
+];
+---
+
+<figure class="ac">
+	<div class="ac-frame" role="img" aria-label="An assistant panel taking about 30 percent of the width, beside a canvas of cards taking about 70 percent. One card is newly suggested, one is pinned, and every card shows its data source and how fresh it is.">
+		<div class="ac-assistant">
+			<span class="ac-label">Assistant · ~30%</span>
+			<span class="ac-bubble you"></span>
+			<span class="ac-bubble it"></span>
+			<span class="ac-bubble you short"></span>
+			<span class="ac-bubble it"></span>
+			<span class="ac-input"></span>
+		</div>
+		<div class="ac-canvas">
+			<span class="ac-label">Canvas of cards · ~70%</span>
+			<div class="ac-grid">
+				{cards.map((c) => (
+					<div class:list={['ac-card', c.span, c.state]}>
+						<span class="ac-kind">
+							{c.kind}
+							{c.state === 'new' && <em>suggested</em>}
+							{c.state === 'pinned' && <em>pinned</em>}
+						</span>
+						<span class="ac-body" />
+						<span class="ac-source">source · updated</span>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+	<ul class="ac-principles">
+		<li><strong>Whole layouts,</strong> assembled from context, not one card at a time.</li>
+		<li><strong>Consistent containers:</strong> content varies, the card shell doesn't.</li>
+		<li><strong>AI suggests, the person decides:</strong> pin, edit or dismiss any card.</li>
+		<li><strong>Transparency:</strong> every card shows its source and freshness.</li>
+	</ul>
+</figure>
+
+<style>
+	.ac { margin: 0; }
+	.ac-frame {
+		display: grid;
+		grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+		gap: 3px;
+		background: var(--ink);
+		border: 3px solid var(--ink);
+	}
+	@media (max-width: 599px) {
+		.ac-frame { grid-template-columns: 1fr; }
+	}
+	.ac-assistant, .ac-canvas { background: var(--bg); padding: var(--space-3); display: flex; flex-direction: column; gap: 8px; }
+	.ac-assistant { border-top: 6px solid var(--gold); }
+	.ac-label { font-family: var(--font-display); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
+	.ac-bubble { height: 28px; width: 80%; border: 1px solid var(--ink); }
+	.ac-bubble.you { align-self: flex-end; background: var(--bg-alt); width: 70%; }
+	.ac-bubble.short { width: 45%; }
+	.ac-bubble.it { background: var(--bg); }
+	.ac-input { margin-top: auto; height: 30px; border: 1px solid var(--ink); border-top-width: 2px; }
+	.ac-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+		grid-auto-rows: 78px;
+		grid-auto-flow: dense;
+		gap: 8px;
+	}
+	.ac-card { border: 1px solid var(--ink); padding: 6px 8px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+	.ac-card.w2 { grid-column: span 2; }
+	.ac-card.h2 { grid-row: span 2; }
+	.ac-card.new { border: 2px solid var(--gold); }
+	.ac-card.pinned { border-top: 4px solid var(--ink); }
+	.ac-kind { font-family: var(--font-display); font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink); display: flex; justify-content: space-between; gap: 4px; }
+	.ac-kind em { font-style: normal; color: var(--gold-ink); text-transform: none; letter-spacing: 0; }
+	.ac-body { flex: 1; background: repeating-linear-gradient(to bottom, var(--hairline) 0 2px, transparent 2px 9px); }
+	.ac-source { font-family: var(--font-display); font-size: .62rem; color: var(--muted); border-top: 1px solid var(--hairline); padding-top: 2px; }
+	.ac-principles { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; gap: var(--space-2); font-size: var(--fs-small); color: var(--body); }
+	@media (min-width: 700px) {
+		.ac-principles { grid-template-columns: 1fr 1fr; column-gap: var(--space-4); }
+	}
+	.ac-principles strong { font-family: var(--font-display); font-weight: 600; color: var(--ink); }
+</style>
