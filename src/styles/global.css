@@ -19,6 +19,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/fonts/source-serif-4-italic-var.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: italic;
+  font-display: swap;
+}
 
 /* ---------- Cross-page transitions ----------
    Native, zero-JS: Chromium browsers cross-fade/morph between same-origin
@@ -970,8 +977,20 @@ blockquote.pull {
   line-height: var(--lh-tight);
   max-width: var(--measure);
   margin-block: var(--space-5);
-  padding-left: var(--space-4);
-  border-left: 3px solid var(--accent);
+  padding-top: var(--space-4);
+  position: relative;
+}
+/* A short signal-red rule above the quote, not a full-height left border:
+   the same colored-top-edge language as museum-block, and it avoids the
+   generic "side-tab" card accent. */
+blockquote.pull::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--space-6);
+  height: 3px;
+  background: var(--accent);
 }
 blockquote.pull cite {
   display: block;
@@ -986,10 +1005,10 @@ blockquote.pull cite {
    standout statement or question — the same bordered-box language
    already visible in Nikos's own diagram titles, sized down from a
    short all-caps title to a full sentence at normal case so it reads as
-   a graphic statement rather than shouting. Replaces the left-rule
+   a graphic statement rather than shouting. Replaces the top rule
    entirely rather than combining both. */
+blockquote.pull.boxed::before { content: none; }
 blockquote.pull.boxed {
-  border-left: none;
   border: 1px solid var(--ink);
   padding: var(--space-4) var(--space-5);
   font-size: var(--fs-h3);
@@ -1530,25 +1549,6 @@ blockquote.pull.boxed {
    inline margin-top on whichever wrap div happened to come first in each. */
 .decision-block + .decision-block { margin-top: var(--space-6); }
 
-/* Real decision quotes, replacing document screenshots */
-.decision-cards { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
-@media (min-width: 768px) { .decision-cards { grid-template-columns: 1fr 1fr; } }
-.decision-card {
-  border-left: 6px solid var(--red);
-  background: var(--bg-alt);
-  padding: var(--space-4);
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
-.decision-card:nth-child(2n) { border-left-color: var(--blue); }
-.decision-card blockquote {
-  font-family: var(--font-display);
-  font-size: var(--fs-h3);
-  line-height: var(--lh-tight);
-  color: var(--ink);
-  margin: 0;
-}
-.decision-card cite { display: block; margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); font-style: normal; }
-
 /* Five guidelines: one restrained background, a bold numeral as the
    Bauhaus device instead of five different saturated fills in a row. */
 .guideline-cards { display: grid; gap: var(--space-3); margin-top: var(--space-4); }
@@ -1579,19 +1579,6 @@ blockquote.pull.boxed {
 .term-strip div { background: var(--red); color: var(--on-dark); padding: var(--space-4); }
 .term-strip dt { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; font-size: var(--fs-body); }
 .term-strip dd { margin-top: var(--space-2); font-size: var(--fs-small); opacity: .88; }
-
-/* A real email, quoted plainly rather than screenshotted */
-.email-card {
-  max-width: var(--measure);
-  margin-block: var(--space-4);
-  padding: var(--space-4);
-  background: var(--bg-alt);
-  border-left: 4px solid var(--gold);
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
-.email-card .email-meta { font-size: var(--fs-small); color: var(--muted); margin-bottom: var(--space-3); }
-.email-card p { margin: 0; max-width: none; }
-.email-card p + p { margin-top: var(--space-3); }
 
 /* ---------- Footer ---------- */
 .site-footer {

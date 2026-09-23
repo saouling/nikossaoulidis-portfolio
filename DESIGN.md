@@ -122,7 +122,7 @@ Three brand colors, restrained to one accent per composition, plus a
 functional neutral scale built for a pure-white page.
 
 ### Primary
-- **Signal Red** (`#BE1E2D`): tags, eyebrow labels, the pull-quote left rule, the fact-grid's default accent cell, focus outlines. The most-used accent; carries urgency without being alarmist.
+- **Signal Red** (`#BE1E2D`): tags, eyebrow labels, the short rule above a pull-quote, the fact-grid's default accent cell, focus outlines. The most-used accent; carries urgency without being alarmist.
 
 ### Secondary
 - **Ultramarine** (`#21409A`): project titles, inline prose links, the alternate (blue) fact-grid/museum accent. Used wherever the red accent is already spoken for on the same composition (e.g. the two-museum color coding: red = Röhsska, blue = Mölndal).
@@ -160,8 +160,10 @@ lower stroke contrast reads substantial at its normal weight, so the body
 font landed there instead — Jost's structural role is unchanged throughout.
 
 Source Serif 4 is self-hosted the same way as Jost
-(`/fonts/source-serif-4-var.woff2`, latin-subset variable woff2 from Google
-Fonts, weight range 400–600); EB Garamond and Inter's `@font-face`
+(`/fonts/source-serif-4-var.woff2` plus a matching
+`source-serif-4-italic-var.woff2`, latin-subset variable woff2s from Google
+Fonts with the optical-size and weight axes, weight range 400–600; the
+italic file is real, so italics are never browser-synthesized); EB Garamond and Inter's `@font-face`
 declarations and font files have both been removed.
 
 ### Hierarchy
@@ -246,16 +248,20 @@ Three deliberately distinct corner languages, each tied to a role rather than ap
 ### Navigation
 - **Style:** Jost label type, dotted blue underline animating in on hover/focus (`transform: scaleX()`), solid instead of dotted for the current page (`aria-current="page"`). Mobile collapses to a full-screen stacked menu; a no-JS fallback renders the links as a plain static row.
 
-### Quoted Evidence family (deliberate exception to the Ledger family's flat, borderless language)
-A left-border-accent convention, distinct from the Ledger family above, used
-specifically to mark real quoted content that replaces a document
-screenshot — a pull-quote, a decision quote, a real email — never used as
-generic card decoration. Each weight and color is semantic, not arbitrary:
-- **Pull-quote (`blockquote.pull`):** 3px signal-red left rule, the lightest weight — a quoted line inline with running prose. The `boxed` variant replaces the rule with a full ink border for a standout statement instead.
-- **Decision card (`.decision-card`):** 6px left border, alternating signal-red/ultramarine by position — a real quoted decision, color-coded the same way the two-museum content is elsewhere on the site.
-- **Email card (`.email-card`):** 4px ochre-gold left border — a real email quoted plainly, gold marking it as primary-source correspondence rather than authored prose.
+### Pull-quote
+- **Default (`blockquote.pull`):** Jost at `--fs-h2`, ink, 720px measure, with a short 3px signal-red rule (64px wide) sitting *above* the quote. That's the same colored-top-edge language as museum-block, never a full-height left border.
+- **Boxed (`variant="boxed"`):** a 1px ink border with no fill and no red rule, at `--fs-h3`, for a standout statement or question. It borrows the bordered-title language from Nikos's own thesis diagrams.
 
-A thick colored left-border on a card is usually a generic AI-interface tell; it's kept here specifically because each instance carries real, sourced content and a semantic color, not a decorative accent applied to filler.
+## Accessibility commitments
+
+Carried over from the retired `DESIGN-SYSTEM.md`. These are the checks run before any cutover:
+
+- One accent per semantic role (never more than the three), and always the `-ink` variant for text, verified against WCAG AA.
+- `lang="en"`, a skip link, one `<h1>` per page, no skipped heading levels.
+- Every meaningful image has real `alt` text; decorative images get `alt=""`.
+- Visible `:focus-visible` states on every interactive element, including the dotted/solid nav underline (keyboard focus triggers it, not just mouse hover).
+- `prefers-reduced-motion` disables all transitions and animations.
+- Works fully with JavaScript disabled (progressive enhancement only).
 
 ## Do's and Don'ts
 
@@ -271,4 +277,5 @@ A thick colored left-border on a card is usually a generic AI-interface tell; it
 - **Don't** reintroduce a two-column sticky-media case-study layout — tried, retired, and the reason ("still there, just not easy to read") is on record.
 - **Don't** use Inter or EB Garamond for body copy — both tried and retired this session in favor of Source Serif 4; Jost remains structural-only and was never body copy.
 - **Don't** add a persistent floating in-page navigation rail (rotated-text rail, fanned cards) — tried twice, both read as "awkward." The plain inline "jump to a case" text link already works and needs no component.
+- **Don't** mark a card or quote with a thick colored left border (the generic "side-tab" accent). Pull-quotes use a short rule on top instead; two earlier left-bordered cards (decision, email) were removed as unused.
 - **Don't** apply a rounded corner to anything in the ledger family — sharp corners are what signal "this is a record," not decoration to soften.
