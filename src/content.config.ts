@@ -40,15 +40,13 @@ const caseStudies = defineCollection({
 		tags: z.array(z.string()).optional(),
 		// The catalogue summary: one sentence per fixed section, shown beside
 		// the label plate and linking to #problem, #what-i-did, #how-it-went
-		// and #what-i-learned. Present once a study is restructured.
-		summary: z
-			.object({
-				problem: z.string().min(1),
-				did: z.string().min(1),
-				went: z.string().min(1),
-				learned: z.string().min(1),
-			})
-			.optional(),
+		// and #what-i-learned. Required: it is every study's skim layer.
+		summary: z.object({
+			problem: z.string().min(1),
+			did: z.string().min(1),
+			went: z.string().min(1),
+			learned: z.string().min(1),
+		}),
 		heroImage: z.object({
 			src: z.string().min(1),
 			width: z.number(),
@@ -81,6 +79,30 @@ const caseStudies = defineCollection({
 	}),
 });
 
+// Compact catalogue entries for the smaller objects (04 to 06): the same
+// label plate as a case study, but a short body, no four-section summary
+// and no fact-grids. Catalogue fields (number, year, medium, status) come
+// from src/data/collection.ts, like the case studies.
+const entries = defineCollection({
+	loader: glob({ pattern: '**/*.mdx', base: './src/content/entries' }),
+	schema: z.object({
+		title: z.string().min(1),
+		heading: z.string().min(1),
+		standfirst: z.string().min(1),
+		description: z.string().min(1),
+		heroImage: z.object({
+			src: z.string().min(1),
+			width: z.number(),
+			height: z.number(),
+			alt: z.string().min(1),
+		}),
+		atAGlance: z.array(z.object({ label: z.string().min(1), value: z.string().min(1) })).min(1),
+		// Outbound links shown under the label plate (the paper, a prototype).
+		links: z.array(z.object({ label: z.string().min(1), href: z.string().url() })).default([]),
+	}),
+});
+
 export const collections = {
 	'case-studies': caseStudies,
+	entries,
 };

@@ -490,7 +490,6 @@ section, .section {
 .cat-minor .cat-object { font-size: var(--fs-body); }
 .cat-minor .cat-no { font-size: var(--fs-small); padding-top: .2em; }
 .cat-minor .cat-status { padding-top: .15em; }
-.cat-ext { color: var(--blue-ink); }
 .cat-deck { margin-top: var(--space-5); }
 
 /* Phones and tablets: no hover, so the display case unfolds into the
@@ -679,6 +678,7 @@ section, .section {
 .case-body > * { grid-column: content; }
 .case-body > .breakout,
 .case-body > .full-bleed {
+  margin-block: var(--space-5);
   grid-column: full;
   width: 100%;
   margin-left: 0;
@@ -687,7 +687,6 @@ section, .section {
 }
 .case-body > h2:first-child { margin-top: 0; }
 .case-body > h2 { padding-top: var(--space-4); border-top: 1px solid var(--ink); }
-.case-close { padding-top: 0; }
 
 /* Sub-records inside one object (Ericsson 01a to 01c): a heading with its
    catalogue number, a lead line, and a two-row label in the plate style. */
@@ -719,6 +718,38 @@ section, .section {
 .sub-plate dd { color: var(--ink); }
 .sub-plate > div:last-child dd { color: var(--red-ink); }
 .col-grid h4 { font-family: var(--font-display); font-size: var(--fs-body); font-weight: 600; color: var(--ink); margin-bottom: var(--space-2); }
+
+/* Compact entries (04 to 06): outbound links sit where a case study's
+   summary would, as a short ruled list. */
+.obj-links { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); align-self: start; }
+.obj-links li { border-bottom: 1px solid var(--hairline); }
+.obj-links a {
+  display: block;
+  padding: var(--space-3) 0;
+  font-family: var(--font-display);
+  color: var(--blue-ink);
+  text-decoration: none;
+}
+.obj-links a:hover, .obj-links a:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
+
+/* A live prototype or video: sharp ink frame, like the display case,
+   with a small label strip and a plain link out. */
+.embed { margin: var(--space-6) 0; }
+.embed-frame { border: 1px solid var(--ink); background: var(--bg-alt); }
+.embed-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.embed-label {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--ink);
+  border-top: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+}
+.embed-label span:first-child { text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.embed-label a { color: var(--blue-ink); }
 
 /* The close: the next object in the collection, and a way to talk. */
 .obj-next { border-top: 1px solid var(--ink); padding-block: var(--space-6); }

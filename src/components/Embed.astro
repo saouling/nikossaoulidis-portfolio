@@ -1,0 +1,37 @@
+---
+// A live prototype or video inside a catalogue entry: a Figma prototype
+// (via embed.figma.com) or a YouTube video (via the privacy-enhanced
+// youtube-nocookie domain). Lazy-loaded, no JS of our own. Sits in a sharp
+// ink frame like the homepage display case, with a small label strip, and
+// always offers a plain link out for anyone the iframe fails.
+interface Props {
+	kind: 'figma' | 'youtube';
+	/** Figma: the full embed.figma.com URL. YouTube: the video id. */
+	src: string;
+	title: string;
+	/** Where the plain fallback link goes (defaults to the embed itself). */
+	href?: string;
+	ratio?: string;
+}
+
+const { kind, src, title, href, ratio = kind === 'figma' ? '4 / 3' : '16 / 9' } = Astro.props;
+const url = kind === 'youtube' ? `https://www.youtube-nocookie.com/embed/${src}` : src;
+const link = href ?? (kind === 'youtube' ? `https://www.youtube.com/watch?v=${src}` : src);
+const label = kind === 'figma' ? 'Figma prototype' : 'Video';
+---
+
+<figure class="embed">
+	<div class="embed-frame" style={`aspect-ratio: ${ratio}`}>
+		<iframe
+			src={url}
+			title={title}
+			loading="lazy"
+			allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+			allowfullscreen
+		></iframe>
+	</div>
+	<figcaption class="embed-label">
+		<span>{label}</span>
+		<a href={link} target="_blank" rel="noopener">{title}<span class="visually-hidden"> (opens in a new tab)</span></a>
+	</figcaption>
+</figure>

@@ -1,23 +1,23 @@
 ---
-// One template for every case study, at /ericsson/, /ewp-dashboard/ and
-// /dont-be-a-stranger/, built as a catalogue entry. Every study opens the
-// same way: title, standfirst, then the label plate beside a four-line
-// summary that links to the four fixed sections (The problem, What I did,
-// How it went, What I learned). The MDX body carries those four sections
-// and places <FactGrid data={frontmatter.outcome} /> (and learnings) at the
-// top of the last two. Until a study has a `summary`, the old closing
-// Outcome/Learnings block renders instead. It
-// closes with the next object in the collection and a way to get in touch.
+// One template for every object in the collection, built as a catalogue
+// entry. Case studies (01 to 03, collection 'case-studies') open with the
+// title, standfirst, then the label plate beside a four-line summary that
+// links to the four fixed sections (The problem, What I did, How it went,
+// What I learned); the MDX body places <FactGrid data={frontmatter.outcome} />
+// and the learnings grid at the top of the last two. Compact entries (04 to
+// 06, collection 'entries') share the same header, with outbound links in
+// place of the summary, and a short body. Every object closes with the next
+// one in the collection and a way to get in touch.
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import LabelPlate from '../components/LabelPlate.astro';
-import FactGrid from '../components/FactGrid.astro';
 import KForm from '../components/KForm.astro';
-import { mainObjects, nextMainObject } from '../data/collection';
+import { allObjects, nextObject } from '../data/collection';
 
 export async function getStaticPaths() {
 	const caseStudies = await getCollection('case-studies');
-	return caseStudies.map((entry) => ({
+	const entries = await getCollection('entries');
+	return [...caseStudies, ...entries].map((entry) => ({
 		params: { slug: entry.id },
 		props: { entry },
 	}));
@@ -25,14 +25,18 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, heading, standfirst, description, heroImage, heroVideo, heroVideoCaption, atAGlance, outcome, learnings, summary } =
-	entry.data;
+const { title, heading, standfirst, description, heroImage, atAGlance } = entry.data;
+const isCaseStudy = entry.collection === 'case-studies';
+const heroVideo = isCaseStudy ? entry.data.heroVideo : undefined;
+const heroVideoCaption = isCaseStudy ? entry.data.heroVideoCaption : undefined;
+const summary = isCaseStudy ? entry.data.summary : undefined;
+const links = isCaseStudy ? [] : entry.data.links;
 const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
 
 const href = `/${entry.id}/`;
-const object = mainObjects.find((o) => o.href === href);
+const object = allObjects.find((o) => o.href === href);
 if (!object) throw new Error(`${href} is not in src/data/collection.ts`);
-const next = nextMainObject(href);
+const next = nextObject(href);
 
 // Year, medium and status come from the collection; the label plate keeps
 // only the people-and-place rows from the at-a-glance frontmatter.
@@ -46,11 +50,10 @@ const summaryRows = summary
 			{ id: 'what-i-learned', label: 'What I learned', text: summary.learned },
 		]
 	: [];
-
 ---
 
 <Layout title={title} description={description} ogImage={heroImage.src}>
-	<article class="obj" data-form={object.form}>
+	<article class:list={['obj', !isCaseStudy && 'obj-compact']} data-form={object.form}>
 		<header class="obj-head">
 			<div class="wrap">
 				<h1 class="obj-title" style={`view-transition-name: obj-${object.no}`}>
@@ -73,6 +76,18 @@ const summaryRows = summary
 								))}
 							</ol>
 						</nav>
+					)}
+					{links.length > 0 && (
+						<ul class="obj-links">
+							{links.map((l) => (
+								<li>
+									<a href={l.href} target="_blank" rel="noopener">
+										{l.label}
+										<span class="visually-hidden"> (opens in a new tab)</span>
+									</a>
+								</li>
+							))}
+						</ul>
 					)}
 				</div>
 			</div>
@@ -106,17 +121,6 @@ const summaryRows = summary
 		<div class="case-body">
 			<Content />
 		</div>
-
-		{
-			!summary && (
-				<section class="case-body case-close">
-					<h2>Outcome</h2>
-					<FactGrid data={outcome} />
-					<h2>Learnings</h2>
-					<FactGrid data={learnings} tone="ink" />
-				</section>
-			)
-		}
 
 		<nav class="obj-next" aria-label="Next in the collection">
 			<div class="wrap">

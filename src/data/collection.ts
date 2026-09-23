@@ -16,12 +16,10 @@ export interface CollectionObject {
 	year: string;
 	medium: string;
 	status: string;
-	/** Case-study slug for the three main objects; external link for the rest. */
+	/** The object's catalogue page: a case study for 01 to 03, a compact entry for 04 to 06. */
 	href: string;
-	external?: boolean;
 	form?: Form;
 	summary?: string;
-	linkLabel?: string;
 	image: { src: string; webp?: string; width: number; height: number; alt: string; position?: string; contain?: boolean };
 }
 
@@ -89,9 +87,7 @@ export const minorObjects: CollectionObject[] = [
 		year: '2024',
 		medium: 'Tangible interaction',
 		status: 'Published, ACM DIS 2024',
-		href: 'https://dl.acm.org/doi/10.1145/3656156.3665424',
-		external: true,
-		linkLabel: 'Read the paper',
+		href: '/sound-mediating-table/',
 		image: {
 			src: '/images/table/diagram.jpg',
 			webp: '/images/table/diagram.webp',
@@ -107,9 +103,7 @@ export const minorObjects: CollectionObject[] = [
 		year: '2024',
 		medium: 'Concept device',
 		status: 'Prototype',
-		href: 'https://www.figma.com/proto/YerdDKO4Un9AvaYCk8PxS2/Individual-Project?page-id=0%3A1&node-id=502-16762&node-type=canvas&viewport=1345%2C40%2C0.03&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=502%3A16754',
-		external: true,
-		linkLabel: 'View the prototype',
+		href: '/synodia/',
 		image: {
 			src: '/images/synodia/device.jpg',
 			webp: '/images/synodia/device.webp',
@@ -125,9 +119,7 @@ export const minorObjects: CollectionObject[] = [
 		year: '2024',
 		medium: 'App concept',
 		status: 'Prototype',
-		href: 'https://www.figma.com/proto/1fmZ5tjfIh1WemV0oGJ6nq/LightRig-GUI-Individual-Project?page-id=2680%3A19242&node-id=2680-19247&viewport=430%2C592%2C0.02&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2680%3A19247',
-		external: true,
-		linkLabel: 'View the prototype',
+		href: '/lighthouse/',
 		image: {
 			src: '/images/lighthouse/hero.jpg',
 			webp: '/images/lighthouse/hero.webp',
@@ -141,8 +133,8 @@ export const minorObjects: CollectionObject[] = [
 
 export const allObjects = [...mainObjects, ...minorObjects];
 
-/** The object after this one among the three case studies, wrapping around. */
-export function nextMainObject(href: string): CollectionObject {
-	const i = mainObjects.findIndex((o) => o.href === href);
-	return mainObjects[(i + 1) % mainObjects.length];
+/** The object after this one in catalogue order, wrapping from 06 back to 01. */
+export function nextObject(href: string): CollectionObject {
+	const i = allObjects.findIndex((o) => o.href === href);
+	return allObjects[(i + 1) % allObjects.length];
 }

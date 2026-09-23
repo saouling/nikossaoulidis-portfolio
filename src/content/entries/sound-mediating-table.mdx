@@ -1,0 +1,40 @@
+---
+title: "Interactive Sound-Mediating Table — Nikos Saoulidis"
+heading: "Interactive Sound-Mediating Table"
+standfirst: "A playful, ambiguous table that turns bare-skin touch between two people into sound and light."
+description: "An interactive table where two people close a circuit by touching each other, triggering melodies and light. A demo paper at ACM DIS 2024, Copenhagen."
+heroImage:
+  src: "/images/table/diagram-top.jpg"
+  width: 1833
+  height: 1032
+  alt: "Top-view schematic from the paper: two people at the table, each touching a coloured point and each other, with green light and a green melody as the response."
+atAGlance:
+  - label: "Role"
+    value: "Co-designer, one of four authors"
+  - label: "Where"
+    value: "Chalmers University of Technology; exhibited at ACM DIS 2024, Copenhagen"
+  - label: "Worked with"
+    value: "David Hagberg, Mafalda Gamboa and Sjoerd Hendriks"
+links:
+  - label: "Read the paper (ACM Digital Library)"
+    href: "https://dl.acm.org/doi/10.1145/3656156.3665424"
+---
+
+import Figure from '../../components/Figure.astro';
+import Embed from '../../components/Embed.astro';
+
+Three discreet touch points, green, red and blue, sit on each side of the table. When two people each touch a point and touch each other, they close a circuit and trigger a melody with matching light. Seven states come out of the possible colour combinations, so the table stays open to interpretation rather than teaching one correct way to play it.
+
+It builds on Hobye and Löwgren's idea of bare-skin touch: giving strangers a playful excuse to touch, mediated through an object rather than asked of them directly. Touch closes a circuit read by an Arduino Uno, which sends MIDI to a KORG Volca Keys synthesizer, and an LED strip lights up in the colour of the point that was touched.
+
+<Figure
+  src="/images/table/prototyping-stages.jpg"
+  width={766}
+  height={906}
+  alt="Six prototyping stages from the paper: conductive paint tests, light and sound experimentation, prototyping touch responses, assembling the table, integrating electronics, and evaluating the design."
+  caption="From conductive-paint tests to the evaluated table (Figure 2 of the paper)."
+/>
+
+We tested it with 13 pairs of students, five uninterrupted minutes each, then a short interview. Understanding the table took anywhere from five to forty-five seconds. Some pairs touched fingers and hands, others went ankle to ankle or forehead to forehead, and several tried to play a song together. A few noticed they could technically trigger it alone, and found that "boring", which is a sign it was doing its job of needing two people.
+
+<Embed kind="youtube" src="d99zzlIpXJk" title="The table in use" />

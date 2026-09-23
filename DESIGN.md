@@ -368,8 +368,8 @@ This is the complete set of patterns the site ships, checked against the build o
 | Catalogue index (main + minor rows) | `.cat-index`, `.cat-row`, `.cat-head` | homepage |
 | Display case | `.cat-case`, `.cat-case-item` | homepage (≥1000px) |
 | Phone plates and thumbnails | `.cat-plate`, `.cat-thumb` | homepage (<1000px) |
-| Catalogue entry head | `.obj-head`, `.obj-title`, `.obj-standfirst`, `.obj-record` | every case study |
-| Label plate | `LabelPlate` / `.label-plate` | every case study |
+| Catalogue entry head | `.obj-head`, `.obj-title`, `.obj-standfirst`, `.obj-record` | every object page (case studies and compact entries) |
+| Label plate | `LabelPlate` / `.label-plate` | every object page |
 | Four-line summary | `.obj-summary` | every case study |
 | Case body (named-lines grid) | `.case-body` | every case study |
 | Fact-grid (Outcome/Learnings) | `FactGrid` / `.fact-grid` | every case study; DBAS also uses it inline for its research question |
@@ -385,7 +385,9 @@ This is the complete set of patterns the site ships, checked against the build o
 | Ink-grid | `.ink-grid` | DBAS |
 | Lens disclosure | `.lens` | DBAS |
 | Post-it board | `PostitBoard` | DBAS |
-| Next-object footer | `.obj-next` | every case study |
+| Next-object footer | `.obj-next` | every object page, in catalogue order 01 → 06 → 01 |
+| Entry links | `.obj-links` | compact entries 04–06 (where a case study has its summary) |
+| Embed (Figma prototype / YouTube) | `Embed` / `.embed`, `.embed-frame`, `.embed-label` | compact entries 04–06 |
 | Photo cluster | `.photo-cluster` | About |
 | CV entries | `.about-grid`, `.entry`, `.col-heading` | About |
 | Buttons | `.btn`, `.btn-outline` | Contact |

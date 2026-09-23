@@ -53,15 +53,15 @@ const description =
 					<ol class="cat-index cat-minor">
 						{minorObjects.map((o) => (
 							<li>
-								<a class="cat-row" href={o.href} data-no={o.no} target="_blank" rel="noopener">
+								<a class="cat-row" href={o.href} data-no={o.no}>
 									<picture class="cat-thumb">
 										{o.image.webp && <source srcset={o.image.webp} type="image/webp" />}
 										<img src={o.image.src} width={o.image.width} height={o.image.height} alt="" loading="lazy" style={o.image.position ? `object-position: ${o.image.position}` : undefined} />
 									</picture>
 									<span class="cat-no">{o.no}</span>
 									<span class="cat-body">
-										<span class="cat-object">{o.title}</span>
-										<span class="cat-meta">{o.year} · {o.medium} · <span class="cat-ext">{o.linkLabel}<span class="visually-hidden"> (opens in a new tab)</span></span></span>
+										<span class="cat-object" style={`view-transition-name: obj-${o.no}`}>{o.title}</span>
+										<span class="cat-meta">{o.year} · {o.medium}</span>
 									</span>
 									<span class="cat-status">{o.status}</span>
 								</a>
