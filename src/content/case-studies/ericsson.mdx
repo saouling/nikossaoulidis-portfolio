@@ -44,6 +44,7 @@ import DeliveryBeforeAfter from '../../components/ericsson/DeliveryBeforeAfter.a
 import SpecRule from '../../components/ericsson/SpecRule.astro';
 import AuditFramework from '../../components/ericsson/AuditFramework.astro';
 import HandoffLoop from '../../components/ericsson/HandoffLoop.astro';
+import HandoutSheet from '../../components/ericsson/HandoutSheet.astro';
 
 <h2 id="problem">The problem</h2>
 
@@ -107,39 +108,9 @@ PM to design, design to front-end, front-end to back-end. Everyone reacting to w
 
 We did not want to hand out principles. Principles are easy to nod along to and impossible to act on. So every method came with a time box, a group size and a source, because "collaborate more" is not something anyone can put in a calendar.
 
-<div class="col-grid cols-3">
-  <div>
-    <h4>Brainwriting</h4>
-    <p>15 to 20 minutes, 3 to 8 people, mixed. Everyone writes ideas in silence for five minutes, rotates the papers and builds on each other's for three, then discusses the strongest directions. Nobody dominates, and you get more ideas in less time.</p>
-  </div>
-  <div>
-    <h4>UX and front-end pairing</h4>
-    <p>15 to 30 minutes, one designer and one developer at the same screen when you review a feature. Small issues get fixed on the spot, bigger ones get ticketed together.</p>
-  </div>
-  <div>
-    <h4>UX bug bash</h4>
-    <p>30 to 60 minutes, 2 to 5 people, mixed, trying to break the experience rather than the code: behaviour, copy, empty and error states, edge cases like long text or a slow connection.</p>
-  </div>
-</div>
+<HandoutSheet />
 
-Workshops are the easy part. None of it sticks unless the ordinary days change too: public channels instead of DMs, mini demos the moment something is visual, and a dedicated UX improvements channel anyone can report into.
-
-<div class="breakout">
-  <div class="figure-grid cols-2">
-    <Figure
-      src="/images/ericsson/case2-photo-a.jpg"
-      width={1400}
-      height={933}
-      alt="Photo from the Ericsson Developer Conference talk on design and development collaboration."
-    />
-    <Figure
-      src="/images/ericsson/case2-photo-b.jpg"
-      width={900}
-      height={597}
-      alt="Photo from the Ericsson Developer Conference talk, audience view."
-    />
-  </div>
-</div>
+Workshops are the easy part. None of it sticks unless the ordinary days change too, which is why half the handout is daily habits rather than methods.
 
 I also helped run an AI design-review forum with Jakob Kitzing and Mats Kullerstrand, which came out of the same instinct: fewer handovers, more looking at things together.
 

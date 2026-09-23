@@ -685,6 +685,10 @@ section, .section {
   transform: none;
   justify-self: center;
 }
+/* .wide: the prose column plus the spare column beside it, i.e. the full
+   1120px container, for dense content (a handout sheet) that is too
+   cramped at the reading measure but shouldn't bleed full-width. */
+.case-body > .wide { grid-column: content-start / -2; }
 .case-body > h2:first-child { margin-top: 0; }
 .case-body > h2 { padding-top: var(--space-4); border-top: 1px solid var(--ink); }
 

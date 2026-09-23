@@ -1,0 +1,240 @@
+---
+// Ericsson 01b: the one-page handout from the Build Better Together talk
+// (EDC 2026, with Frida Edstam), re-set as a catalogue sheet in the site's
+// own system instead of a photo of paper. Content is the handout's,
+// including its sources: every claim links to where it came from, as it
+// did on the printed page.
+const methods = [
+	{
+		kind: 'Ideation',
+		name: 'Brainwriting',
+		when: 'Complex problem · many directions',
+		steps: ['Write the problem statement visibly', 'Everyone writes ideas in silence · 5 min', "Rotate papers, build on others' ideas · 3 min", 'Discuss the most promising directions'],
+		why: [
+			{ t: 'Silent writing removes loud-voice bias and ' },
+			{ t: 'production blocking', href: 'https://www.researchgate.net/publication/228210918' },
+			{ t: '. Groups generate ' },
+			{ t: '20% more and better ideas', href: 'https://www.axios.com/2024/01/26/brainstorming-brainwriting-remote-work-jobs' },
+			{ t: ' than brainstorming.' },
+		],
+		time: '15–20 min',
+		group: '3–8, mixed',
+	},
+	{
+		kind: 'Review',
+		name: 'UX + front-end pairing',
+		when: 'Feature has working UI · before release',
+		steps: ['Designer and developer, same screen', 'Walk through the real implementation', 'Small issues: fix on the spot', 'Bigger issues: write the ticket together'],
+		why: [
+			{ t: '95% of developers enjoy pairing more', href: 'https://artium.ai/insights/types-of-pairing-and-integrating-it-into-your-design-practice' },
+			{ t: ', with 15% fewer defects. ' },
+			{ t: 'Removes suspicion', href: 'https://www.thoughtworks.com/insights/blog/developers-and-designers-can-pair-too' },
+			{ t: ' between disciplines.' },
+		],
+		time: '15–30 min',
+		group: '1 designer + 1 developer',
+	},
+	{
+		kind: 'Quality',
+		name: 'UX bug bash',
+		when: 'Once per sprint · before release',
+		steps: ['Break the experience, not the code', 'Behaviour: does it feel right?', 'Copy: clear and consistent?', 'States and edge cases: empty, loading, error, long text, zero items'],
+		why: [
+			{ t: 'Applies the ' },
+			{ t: 'shift-left principle', href: 'https://www.browserstack.com/guide/what-is-shift-left-testing' },
+			{ t: ' to experience quality. Developers notice what designers miss.' },
+		],
+		time: '30–60 min',
+		group: '2–5, mixed',
+	},
+	{
+		kind: 'Ideation',
+		name: 'Design Studio',
+		when: 'Early in a feature · wide problem space',
+		steps: ['Everyone sketches 6–8 ideas · 5 min', 'Present and critique · 2–3 min each', 'Sketch again with the feedback · 5 min', 'Converge on the strongest directions'],
+		why: [
+			{ t: 'Cross-disciplinary sketching', href: 'https://labspractices.com/practices/design-studio/' },
+			{ t: ' surfaces unknowns a designer alone would miss. ' },
+			{ t: 'Recommended by NN/g', href: 'https://www.nngroup.com/articles/facilitating-design-studio-workshop/' },
+			{ t: '.' },
+		],
+		time: '60–90 min',
+		group: '4–8, mixed',
+	},
+	{
+		kind: 'Ideation',
+		name: 'Crazy Eights',
+		when: 'Many visual ideas fast · any stage',
+		steps: ['Fold paper into 8 panels', 'Sketch 8 ideas in 8 minutes', 'Present all the sketches', 'Dot-vote on the strongest'],
+		why: [
+			{ t: 'Time pressure forces quantity over quality, producing more creative output. A core exercise in the ' },
+			{ t: 'Google Design Sprint', href: 'https://design.google/library/design-sprints/' },
+			{ t: '.' },
+		],
+		time: '15 min',
+		group: 'Any size',
+	},
+];
+const habits = [
+	{ name: 'Public channels', text: 'Feature or design decision? Shared channel, not a DM. Knowledge stays visible and decisions keep their context.', rule: 'About the product? Shared channel.' },
+	{ name: 'Mid-sprint demos', text: 'Something visual working, even rough? Invite the designer for 15 minutes. It catches misalignments while they are still cheap to fix.', rule: 'Show early. Fix cheap.' },
+	{ name: 'One-person invite', text: 'Every share-out or review: invite one person from another discipline. A developer in a design review. A designer in planning.', rule: 'One person, one step earlier.' },
+	{ name: 'UX improvements channel', text: 'Anyone reports UX issues: confusing labels, slow transitions, missing states. Designers triage them into a backlog.', rule: 'Anyone posts · triage · backlog.' },
+];
+---
+
+<figure class="sheet wide">
+	<div class="sheet-page">
+		<header class="sheet-head">
+			<p class="sheet-title">Build better together</p>
+			<p class="sheet-sub">Practical methods and habits for cross-discipline collaboration · EDC 2026</p>
+		</header>
+
+		<p class="sheet-section"><span class="sheet-mark square" aria-hidden="true"></span>Co-creation methods</p>
+		<ol class="sheet-methods">
+			{methods.map((m) => (
+				<li class="sheet-card">
+					<span class="sheet-kind">{m.kind}</span>
+					<span class="sheet-name">{m.name}</span>
+					<span class="sheet-when">{m.when}</span>
+					<ol class="sheet-steps">{m.steps.map((s) => <li>{s}</li>)}</ol>
+					<p class="sheet-why">
+						{m.why.map((w) => (w.href ? <a href={w.href} target="_blank" rel="noopener">{w.t}</a> : w.t))}
+					</p>
+					<dl class="sheet-meta">
+						<div><dt>Time</dt><dd>{m.time}</dd></div>
+						<div><dt>Group</dt><dd>{m.group}</dd></div>
+					</dl>
+				</li>
+			))}
+			<li class="sheet-card sheet-ask">
+				<span class="sheet-name">The one simple ask</span>
+				<p class="sheet-text">On your next feature, invite one person from another discipline one step earlier than usual, and try one small method: a brainwriting session, a mini-demo, a pairing session.</p>
+			</li>
+		</ol>
+
+		<p class="sheet-section"><span class="sheet-mark circle" aria-hidden="true"></span>Daily habits</p>
+		<ul class="sheet-habits">
+			{habits.map((h) => (
+				<li class="sheet-card">
+					<span class="sheet-name">{h.name}</span>
+					<p class="sheet-text">{h.text}</p>
+					<p class="sheet-rule">{h.rule}</p>
+				</li>
+			))}
+		</ul>
+	</div>
+	<figcaption>The one-page handout Frida Edstam and I gave out at the talk, re-set here with its sources linked, so people could start the next morning without us in the room.</figcaption>
+</figure>
+
+<style>
+	.sheet { margin: var(--space-5) 0; }
+	.sheet-page {
+		border: 1px solid var(--ink);
+		padding: var(--space-5) var(--space-4);
+		background: var(--bg);
+	}
+	.sheet-head {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: var(--space-2) var(--space-4);
+		padding-bottom: var(--space-3);
+		border-bottom: 3px solid var(--ink);
+	}
+	.sheet-title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: var(--fs-h2);
+		line-height: 1.02;
+		letter-spacing: -0.02em;
+		color: var(--ink);
+		max-width: 12ch;
+	}
+	.sheet-sub { margin: 0; font-family: var(--font-display); font-size: var(--fs-small); color: var(--muted); max-width: 32ch; }
+	.sheet-section {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		margin: var(--space-5) 0 var(--space-3);
+		max-width: none;
+		font-family: var(--font-display);
+		font-size: var(--fs-small);
+		text-transform: uppercase;
+		letter-spacing: .12em;
+		color: var(--ink);
+	}
+	.sheet-section::after { content: ""; flex: 1; height: 1px; background: var(--hairline); }
+	.sheet-mark { width: 9px; height: 9px; background: var(--gold); flex: none; }
+	.sheet-mark.circle { border-radius: 50%; }
+	.sheet-methods, .sheet-habits { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+	@media (min-width: 720px) {
+		.sheet-methods { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+		.sheet-habits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	}
+	.sheet-card {
+		border: 1px solid var(--hairline);
+		padding: var(--space-3);
+		display: flex;
+		flex-direction: column;
+	}
+	.sheet-ask { border: 1px solid var(--ink); border-top: 6px solid var(--gold); justify-content: flex-end; }
+	.sheet-ask .sheet-name { font-size: var(--fs-h3); }
+	.sheet-kind {
+		align-self: flex-start;
+		margin-bottom: var(--space-2);
+		padding: 2px 8px;
+		background: var(--ink);
+		color: var(--on-dark);
+		font-family: var(--font-display);
+		font-size: .68rem;
+		text-transform: uppercase;
+		letter-spacing: .08em;
+	}
+	.sheet-name { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-body); color: var(--ink); }
+	.sheet-when {
+		font-family: var(--font-display);
+		font-size: .72rem;
+		text-transform: uppercase;
+		letter-spacing: .05em;
+		color: var(--muted);
+		margin-top: 2px;
+	}
+	.sheet-steps { list-style: decimal; margin: var(--space-2) 0 0; padding-left: 1.2em; font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+	.sheet-steps li + li { margin-top: 2px; }
+	.sheet-why {
+		margin: var(--space-3) 0 0;
+		padding-top: var(--space-2);
+		border-top: 1px solid var(--hairline);
+		font-size: var(--fs-small);
+		line-height: 1.45;
+		color: var(--body);
+		flex: 1;
+	}
+	.sheet-meta { display: flex; gap: var(--space-3); margin: var(--space-2) 0 0; font-family: var(--font-display); font-size: .72rem; color: var(--muted); }
+	.sheet-meta div { display: flex; gap: 4px; }
+	.sheet-meta dd { color: var(--ink); }
+	.sheet-text { margin: var(--space-1) 0 0; font-size: var(--fs-small); line-height: 1.45; flex: 1; }
+	.sheet-rule {
+		margin: var(--space-2) 0 0;
+		padding-top: var(--space-2);
+		border-top: 1px solid var(--hairline);
+		font-family: var(--font-display);
+		font-size: var(--fs-small);
+		font-weight: 600;
+		color: var(--ink);
+	}
+	.sheet-rule::before {
+		content: "";
+		display: inline-block;
+		width: .8em;
+		height: .8em;
+		margin-right: .4em;
+		vertical-align: -.05em;
+		background: var(--gold-ink);
+		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 8h13M8.5 2l6 6-6 6' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E") center / contain no-repeat;
+	}
+	.sheet figcaption { margin-top: var(--space-2); font-size: var(--fs-small); color: var(--muted); }
+</style>
