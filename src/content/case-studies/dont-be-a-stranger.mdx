@@ -3,11 +3,11 @@ title: "Don't Be a Stranger — Defamiliarizing Communication through Rotary Pho
 heading: "Don't Be a Stranger"
 standfirst: "A permanent museum installation where two strangers pick up old rotary phones and talk to each other, live, across two museums in Gothenburg."
 description: "A rotary-phone installation letting strangers talk live across two Gothenburg museums: an MSc thesis in research through design, still running at Röhsska and Mölndals stadsmuseum."
-eyebrow: "School"
-tags:
-  - "Research through Design"
-  - "Physical Installation"
-  - "Solo Project"
+summary:
+  problem: "Reaching out has lost its weight, and museums tell you not to touch."
+  did: "So I put working rotary phones back in visitors' hands, in two museums, and let strangers call each other. I tested it with 25 people over three rounds first."
+  went: "Open since May 2025 in both museums, with no end date. Röhsska kept it up because the table kept running out of space for post-its."
+  learned: "In a shared space you design the situation, not just the object, and you design for the call not happening."
 heroImage:
   src: "/images/dbas/hero-video-poster.jpg"
   width: 1920
@@ -24,8 +24,6 @@ atAGlance:
     value: "Röhsska Museum and Mölndals stadsmuseum, Gothenburg."
   - label: "Worked with"
     value: "Curators, a graphic designer, a communicator and a pedagogy lead across both museums."
-  - label: "Outcome"
-    value: "Open since May 2025 in both museums, no end date. Tested with 25 people over three rounds first."
 outcome:
   stat: "Still running"
   statLabel: "no end date set, in either museum"
@@ -43,25 +41,13 @@ learnings:
 import Figure from '../../components/Figure.astro';
 import PullQuote from '../../components/PullQuote.astro';
 import PostitBoard from '../../components/PostitBoard.astro';
+import FactGrid from '../../components/FactGrid.astro';
 
-<PullQuote>Reaching out has lost its weight, and museums tell you not to touch. So I put working rotary phones back in visitors' hands and let strangers call each other.</PullQuote>
-
-<nav class="hero-links" aria-label="Jump to a section">
-  <a class="btn btn-outline" href="#the-idea">The idea</a>
-  <a class="btn btn-outline" href="#two-museums">Two museums</a>
-  <a class="btn btn-outline" href="#how-i-worked">How I worked</a>
-  <a class="btn btn-outline" href="#it-went-live">It went live</a>
-  <a class="btn btn-outline" href="#guidelines">The practical guidelines</a>
-  <a class="btn btn-outline" href="#reflection">Reflection</a>
-</nav>
-
-<h2 id="the-idea">The idea</h2>
+<h2 id="problem">The problem</h2>
 
 Pick up the phone in one museum and you are talking, right now, with a stranger standing in the other one. No screens, no profiles, no matching. Just a voice, and the small act of dialling and waiting to see whether anyone answers.
 
-That was not the first version. I started with public phone booths between cities, because I grew up in a small village in Greece where the booth was how I called home, and I still have the prepaid cards I saved. I made leaflets, I wrote to telecom companies across Sweden and Denmark, and I went to Ericsson first because the phones I wanted were theirs. Everyone said no, and the reasons were reasonable. Infrastructure, cost, and nobody wanting to be responsible for a public phone when something goes wrong in it.
-
-Then I spent time inside museums in Gothenburg and found the Ericofon already sitting in a case at Röhsska. The exact phone I had been planning to put in a booth, behind glass, where nobody could touch it. I kept the concept and changed the setting.
+That was not the first version. I started with public phone booths between cities, because I grew up in a small village in Greece where the booth was how I called home, and I still have the prepaid cards I saved. I wrote to telecom companies across Sweden and Denmark, Ericsson first because the phones I wanted were theirs. Everyone said no, and the reasons were reasonable. Then I found the Ericofon already sitting in a case at Röhsska, the exact phone I had been planning to put in a booth, behind glass, where nobody could touch it. I kept the concept and changed the setting.
 
 <Figure
   class="figure-support"
@@ -71,26 +57,20 @@ Then I spent time inside museums in Gothenburg and found the Ericofon already si
   width={2500}
   height={1668}
   alt="Ericofons in several colours displayed on shelves behind glass at Röhsska, with a visitor looking in."
-  caption="Ericofons already behind glass at Röhsska — the exact model I'd been planning to put in a booth."
+  caption="Ericofons already behind glass at Röhsska, the exact model I'd been planning to put in a booth."
 />
+
+We message people on the other side of the world without thinking about it, and somewhere in there the act of reaching out lost its weight. Museums have the opposite problem. They spend a lot of effort telling you to look and not touch. I did not want to just assert that, so before designing anything I went around Gothenburg and photographed it: motion alarms at the Maritime Museum, and do-not-touch icons in four different visual styles across four institutions.
 
 <Figure
   class="figure-support"
   variant="plate"
-  src="/images/dbas/48-red-phone-and-cable.jpg"
-  width={2000}
-  height={1500}
-  alt="A red rotary handset mounted on a wooden board, rewired with a coil of cable beneath it."
-  caption="An early handset, rewired and ready for testing."
+  src="/images/dbas/do-not-touch-icons.jpg"
+  width={1239}
+  height={332}
+  alt="Four different 'do not touch' hand icons, in four different visual styles, photographed at four Gothenburg museums."
+  caption="Four museums, four different icons, one instinct: look, don't touch."
 />
-
-<PullQuote>A no is often about the context, not about the idea.</PullQuote>
-
-<h3>The question</h3>
-
-We message people on the other side of the world without thinking about it, and somewhere in there the act of reaching out lost its weight. Museums have the opposite problem. They spend a lot of effort telling you to look and not touch.
-
-I did not want to just assert that, so before designing anything I went around Gothenburg and photographed it. Motion alarms at the Maritime Museum that sound if you lean too close to a garment. Do-not-touch icons in four different visual styles across four institutions. A queue-ticket dispenser at Röhsska, the kind of thing you have touched a thousand times in a Swedish shop, sitting under a sign asking you not to.
 
 The question I ended up with:
 
@@ -102,17 +82,9 @@ The question I ended up with:
   <div><p>exploring themes of meaningful telecommunication technologies?</p></div>
 </div>
 
-<Figure
-  class="figure-support"
-  variant="plate"
-  src="/images/dbas/do-not-touch-icons.jpg"
-  width={1239}
-  height={332}
-  alt="Four different 'do not touch' hand icons, in four different visual styles, photographed at four Gothenburg museums."
-  caption="Four museums, four different icons, one instinct: look, don't touch. Photographed before I designed anything, so the instinct I was pushing against was documented, not assumed."
-/>
+<h2 id="what-i-did">What I did</h2>
 
-<h2 id="two-museums">Two museums, two installations</h2>
+<h3>Two museums, two installations</h3>
 
 One concept, two museums, and two installations that do not look much alike.
 
@@ -120,7 +92,7 @@ One concept, two museums, and two installations that do not look much alike.
   <div class="museum-pair">
     <div class="museum-block">
 
-Röhsska is a design museum. The piece went into the Innovation room of Design Stories, a few metres from a case holding Ericofons in every colour. The phone visitors could pick up was the same model as the ones they could not, which gave the guides something to point at. I had proposed the Belonging room in my placement document, and the curators moved it. They were right, and where it landed was never mine to decide alone. The feedback surface there was a wall of post-its, because the room was already conceptual and already a bit loud.
+Röhsska is a design museum. The piece went into the Innovation room of Design Stories, a few metres from a case holding Ericofons in every colour, so the phone visitors could pick up was the same model as the ones they could not. I had proposed the Belonging room, and the curators moved it. They were right. The feedback surface there was a wall of post-its, because the room was already conceptual and already a bit loud.
 
       <Figure
         src="/images/dbas/26-rohsska-annotated.jpg"
@@ -131,7 +103,7 @@ Röhsska is a design museum. The piece went into the Innovation room of Design S
     </div>
     <div class="museum-block blue">
 
-Mölndals stadsmuseum is a city museum about everyday life, and its Open Storage exhibition already lets people handle more than 10,000 objects with no glass at all. Putting the Kobra in there would have been wrong, because the Kobra is a design object and that is a room about ordinary things. I used the Ericsson Dialog instead, the plain desk phone that sat in normal Swedish homes, on a wooden table next to a red armchair, with the electronics hidden inside a vintage box from the museum's own collection. Feedback there was a guestbook rather than post-its, because a wall of yellow notes would have broken the quiet of a room that is pretending to be a living room.
+Mölndals stadsmuseum is a city museum about everyday life, where the Open Storage exhibition already lets people handle more than 10,000 objects with no glass at all. The Kobra is a design object and that is a room about ordinary things, so I used the Ericsson Dialog instead, the plain desk phone that sat in normal Swedish homes, with the electronics hidden inside a vintage box from the museum's own collection. Feedback there was a guestbook, because a wall of yellow notes would have broken the quiet of a room pretending to be a living room.
 
       <Figure
         src="/images/dbas/27-molndal-annotated.jpg"
@@ -143,9 +115,7 @@ Mölndals stadsmuseum is a city museum about everyday life, and its Open Storage
   </div>
 </div>
 
-The same questions came out differently in each place, and that was the point. Röhsska's staff wanted it to read as part of an argument about innovation. Mölndal's wanted it to feel like it had always been in that corner.
-
-<h2 id="how-i-worked">How I worked</h2>
+<h3>Lab, field, showroom</h3>
 
 Research through design, because the question cannot be answered on paper. You build the thing, put it in front of people, and watch what they do with it.
 
@@ -160,51 +130,40 @@ Research through design, because the question cannot be answered on paper. You b
   />
 </div>
 
-Lab first, in the IxD studio at Chalmers. Sweden has no working landline infrastructure any more, so an old rotary phone cannot simply be plugged into a wall. I paired the original dial mechanism with a Bluetooth adapter and a smartphone with a SIM card in it, so the phone places an ordinary mobile call while the person holding it is still rotating a dial designed in the 1950s. Finding the phones took months, across Tradera, Facebook Marketplace and second-hand shops around Gothenburg. I tested nine of them. Most had something broken, a dead ringer or a dial that would not return or a speaker that crackled, and I did not know how to repair any of it when I started.
+Lab first, in the IxD studio at Chalmers. Sweden has no working landline infrastructure any more, so I paired the original dial mechanism with a Bluetooth adapter and a smartphone with a SIM card in it. The phone places an ordinary mobile call while the person holding it is still rotating a dial designed in the 1950s. I tested nine second-hand phones, most had something broken, and I did not know how to repair any of it when I started.
 
-Field next, on campus. Three rounds in the student café and two different buildings, watching who picked up and who walked past. Fifteen feedback forms, four interviews, and six earlier conversations with interaction design students who annotated my instruction sheet by hand. The setup changed each round:
+Field next, on campus. Three rounds in the student café and two different buildings, watching who picked up and who walked past: fifteen feedback forms, four interviews, and six earlier conversations with interaction design students who annotated my instruction sheet by hand. The setup changed each round.
 
-<div class="card-stack">
-  <input type="radio" name="pilot-iteration" id="pilot-radio-1" checked />
-  <input type="radio" name="pilot-iteration" id="pilot-radio-2" />
-  <input type="radio" name="pilot-iteration" id="pilot-radio-3" />
-  <div class="card-stack-frame">
+<div class="breakout">
+  <div class="figure-grid cols-3 natural">
     <Figure
-      class="card"
       variant="plate"
       src="/images/dbas/31-pilot-iteration-1.jpg"
       width={2000}
       height={898}
       alt="Iteration one: a red rotary handset on a bench at House Patricia, and a beige rotary phone on a felt-covered table at Kokboken, each with a green instruction sign."
-      caption="Iteration 1: indoors, at House Patricia and Kokboken."
+      caption="Round 1: indoors, at House Patricia and Kokboken."
     />
     <Figure
-      class="card"
       variant="plate"
       src="/images/dbas/32-pilot-iteration-2.jpg"
       width={2000}
       height={1230}
       alt="Iteration two, moved outdoors: the same two phones on felt-covered stands at House Patricia and Kokboken, with a larger 'pick up the phone' poster."
-      caption="Iteration 2: moved outdoors, with bigger signage explaining what to do."
+      caption="Round 2: outdoors, with bigger signage."
     />
     <Figure
-      class="card"
       variant="plate"
       src="/images/dbas/33-pilot-iteration-3.jpg"
       width={2000}
       height={1386}
       alt="Iteration three: the phones set up at House Jupiter and Kokboken, with a question-card holder and a guestbook added alongside the instructions."
-      caption="Iteration 3: at House Jupiter and Kokboken, a question bank and guestbook added."
+      caption="Round 3: a question bank and guestbook added."
     />
-  </div>
-  <div class="card-stack-tabs">
-    <label for="pilot-radio-1">1</label>
-    <label for="pilot-radio-2">2</label>
-    <label for="pilot-radio-3">3</label>
   </div>
 </div>
 
-Showroom last, which was the two museums. The part that does not fit in a process diagram is that finding the second museum took five months of unanswered emails, LinkedIn messages and tailored proposals to museums and companies across Sweden and Denmark. What actually worked was Jessica at Röhsska calling someone she knew at Mölndal.
+Showroom last, which was the two museums. Finding the second museum took five months of unanswered emails, LinkedIn messages and tailored proposals to museums and companies across Sweden and Denmark. What actually worked was Jessica at Röhsska calling someone she knew at Mölndal.
 
 <PullQuote>I changed the design because the pilots told me to, not because I guessed.</PullQuote>
 
@@ -214,9 +173,9 @@ Showroom last, which was the two museums. The part that does not fit in a proces
 
 **No AI and no recorded voices.** If nobody picks up, nobody picks up. An answering machine would have made the silence safe, and the silence is part of it.
 
-**Keep the friction, fix the breakage.** The dial stays slow, because the slowness is the experience. I could have mapped the other museum to a single digit and I decided not to. But the sound quality in the pilot was genuinely bad and people told me so, and that got fixed before the museums.
+**Keep the friction, fix the breakage.** The dial stays slow, because the slowness is the experience. But the sound quality in the pilot was genuinely bad and people told me so, and that got fixed before the museums.
 
-**Do not promise a call.** This one came from the curators rather than from me. I had been writing signage that said talk to a stranger, and Röhsska's team pushed back: if the phone rings out, the visitor has failed at something, and that is not a feeling you want to hand someone in your museum. The poster became *You might connect. You might not. But the moment is yours.* Everything after that was designed for the call not happening, which is why there are prompt cards you can read on your own or with whoever you came in with.
+**Do not promise a call.** This one came from the curators. I had been writing signage that said talk to a stranger, and Röhsska's team pushed back: if the phone rings out, the visitor has failed at something. The poster became *You might connect. You might not. But the moment is yours.* Everything after that was designed for the call not happening, which is why there are prompt cards you can read on your own or with whoever you came in with.
 
 <Figure
   class="figure-support"
@@ -226,10 +185,10 @@ Showroom last, which was the two museums. The part that does not fit in a proces
   width={636}
   height={900}
   alt="An early text layout for the poster copy: 'Don't be a Stranger. This phone invites you to pause, to touch, to dial, and maybe connect. You might reach a stranger at Mölndals City Museum. You might not. But the experience is yours.'"
-  caption="An early draft: 'the experience is yours,' not yet the curator-pushed 'the moment is yours.'"
+  caption="An early draft: 'the experience is yours,' not yet the curators' 'the moment is yours.'"
 />
 
-**Feedback as reflection.** My structured form, in Röhsska's words, felt like it was trying to steer the replies in certain directions. It became post-its.
+**Feedback as reflection.** My structured form, in Röhsska's words, felt like it was trying to steer the replies. It became post-its.
 
 <div class="breakout">
   <Figure
@@ -237,19 +196,15 @@ Showroom last, which was the two museums. The part that does not fit in a proces
     src="/images/dbas/28-postit-vs-guestbook.jpg"
     width={2000}
     height={1003}
-    alt="Diagram: reflection feedback mechanisms compared — the post-it surface at Röhsska, and the notebook at Mölndals stadsmuseum, both asking what this made you think or feel."
+    alt="Diagram: reflection feedback mechanisms compared, the post-it surface at Röhsska and the notebook at Mölndals stadsmuseum, both asking what this made you think or feel."
   />
 </div>
 
-Somebody still has to explain a dial phone to a generation that has never used one, without putting a screen in front of it to do the explaining. That meant real graphic design, not an afterthought: laminated prompt cards, printed leaflets, instructions written and laid out in two languages, all physical enough to belong on the same table as the phone.
+Somebody still has to explain a dial phone to a generation that has never used one, without a screen doing the explaining. That meant real graphic design: laminated prompt cards, printed leaflets, instructions written and laid out in two languages, all physical enough to belong on the same table as the phone.
 
-<div class="card-stack">
-  <input type="radio" name="rolodex-making" id="rolodex-radio-1" checked />
-  <input type="radio" name="rolodex-making" id="rolodex-radio-2" />
-  <input type="radio" name="rolodex-making" id="rolodex-radio-3" />
-  <div class="card-stack-frame">
+<div class="breakout">
+  <div class="figure-grid cols-3 natural">
     <Figure
-      class="card"
       variant="plate"
       src="/images/dbas/40-making-the-rolodex-cards.jpg"
       width={2000}
@@ -258,7 +213,6 @@ Somebody still has to explain a dial phone to a generation that has never used o
       caption="Cutting and laminating the prompt cards."
     />
     <Figure
-      class="card"
       variant="plate"
       accent="red"
       src="/images/dbas/35-rohsska-instruction-leaflet.jpg"
@@ -268,7 +222,6 @@ Somebody still has to explain a dial phone to a generation that has never used o
       caption="Röhsska's instructions."
     />
     <Figure
-      class="card"
       variant="plate"
       accent="blue"
       src="/images/dbas/36-molndal-instruction-leaflet.jpg"
@@ -278,18 +231,13 @@ Somebody still has to explain a dial phone to a generation that has never used o
       caption="Mölndal's instructions."
     />
   </div>
-  <div class="card-stack-tabs">
-    <label for="rolodex-radio-1">1</label>
-    <label for="rolodex-radio-2">2</label>
-    <label for="rolodex-radio-3">3</label>
-  </div>
 </div>
 
-<h2 id="it-went-live">It went live</h2>
+<h2 id="how-it-went">How it went</h2>
 
-It opened in May 2025 and it is still running.
+<FactGrid data={frontmatter.outcome} />
 
-Visitors arrived in groups and started by watching. Once one person wrote on a post-it, others followed. Teenagers and young adults were the most likely to actually pick up and dial. Older visitors more often recognised the Kobra and stood looking at it. Plenty of calls went unanswered, especially the ones to Mölndal, and people stayed anyway, dialling, listening to the tone, turning the Rolodex.
+It opened in May 2025 and it is still running. Visitors arrived in groups and started by watching. Once one person wrote on a post-it, others followed. Teenagers and young adults were the most likely to actually pick up and dial. Plenty of calls went unanswered, especially the ones to Mölndal, and people stayed anyway, dialling, listening to the tone, turning the Rolodex.
 
 <ul class="ink-grid natural">
   <li class="ink-grid-photo">
@@ -323,15 +271,34 @@ Some of what they left behind:
   ]}
 />
 
-<h2 id="guidelines">The practical guidelines</h2>
+It is a museum installation, and the work was product work. It was co-designed with five named people across two museums, none of whom worked for me: a curator, a graphic designer, a communicator, a museum educator and a curator of pedagogy, plus the technicians and front-of-house staff who operate it every day. At Röhsska I worked inside their visual identity using their graphic designer's templates, and the posters look like Röhsska rather than like me.
 
-The thesis explored the question rather than settling it, and what came out was a set of considerations grouped under four lenses. These are the ones I would hand to someone building something similar. Click a question to open its lens.
+And it has to run without me. Two institutions operate it daily, so I wrote setup and troubleshooting instructions for receptionists and guides rather than for designers. It still broke. A lapsed payment on the phone's cellular subscription cut the service for nearly two hours during the exhibition, and the staff were the ones standing in front of visitors while it was down. Something that keeps working in a room you are not in is a different problem from something that demos well.
+
+<h2 id="what-i-learned">What I learned</h2>
+
+<FactGrid data={frontmatter.learnings} tone="ink" />
+
+I designed the failure state before the success state. *You might connect. You might not.* is empty-state copy, and it exists because a curator told me my first version would make visitors feel they had failed at something. I ran three rounds of testing with twenty-five people and I can tell you which design change came from which finding. The instruction leaflet went through hand annotation by students and three revisions before it worked.
+
+<div class="breakout">
+  <Figure
+    variant="diagram"
+    src="/images/dbas/34-cocreating-with-students.jpg"
+    width={2000}
+    height={1238}
+    alt="Diagram: co-creating with IxD students, three versions of the instruction leaflet side by side, a first draft, a version hand-annotated with questions and corrections, and the revised final."
+    caption="Version 0.2, annotated by students, then version 1.0."
+  />
+</div>
+
+The thesis ended in four lenses, the considerations I would hand to anyone building something similar.
 
 <details class="lens">
   <summary>What does the voice carry that a text never could?</summary>
   <div class="lens-body">
 
-**Voice-based communication and emotional presence.** Take the screens out and let the voice do the work. Place the phone so a person can speak without performing, semi-private but still visible, because full exposure makes people self-conscious and full privacy invites misuse. Write the invitation with whoever handles communication at the institution, and do not promise a connection you cannot guarantee.
+**Voice-based communication and emotional presence.** Take the screens out and let the voice do the work. Place the phone so a person can speak without performing, semi-private but still visible. Do not promise a connection you cannot guarantee.
 
   </div>
 </details>
@@ -363,34 +330,7 @@ The thesis explored the question rather than settling it, and what came out was 
   </div>
 </details>
 
-<h3>What this means for how I work</h3>
-
-It is a museum installation, and the work was product work.
-
-It shipped, and it is still running in two public institutions. It was co-designed with five named people across two museums, none of whom worked for me: a curator, a graphic designer, a communicator, a museum educator and a curator of pedagogy, plus the technicians and front-of-house staff who operate it every day. At Röhsska I worked inside their visual identity using their graphic designer's templates, and the posters look like Röhsska rather than like me.
-
-I designed the failure state before the success state. *You might connect. You might not.* is empty-state copy, and it exists because a curator told me my first version would make visitors feel they had failed at something.
-
-I ran three rounds of testing with twenty-five people and I can tell you which design change came from which finding. The instruction leaflet went through hand annotation by students and three revisions before it worked. The microcopy is bilingual and I wrote it with a communications team.
-
-<div class="breakout">
-  <Figure
-    variant="diagram"
-    src="/images/dbas/34-cocreating-with-students.jpg"
-    width={2000}
-    height={1238}
-    alt="Diagram: co-creating with IxD students — three versions of the instruction leaflet side by side, a first draft, a version hand-annotated with questions and corrections, and the revised final."
-    caption="Version 0.2, annotated by students, then version 1.0."
-  />
-</div>
-
-And it has to run without me. Two institutions operate it daily, which meant writing setup instructions, troubleshooting steps and a number to call, for receptionists and guides rather than for designers. It still broke. A lapsed payment on the phone's cellular subscription cut the service for nearly two hours during the exhibition, and the staff were the ones standing in front of visitors while it was down. Something that keeps working in a room you are not in is a different problem from something that demos well.
-
 <PullQuote>In a shared space you design the situation, not just the object.</PullQuote>
-
-<h2 id="reflection">Reflection and moments</h2>
-
-I grew up in a small village in Greece, and telecommunication was not a luxury there, it was how I kept people close. I still have the prepaid cards I saved from calling home.
 
 The moments I keep:
 
@@ -419,4 +359,4 @@ The moments I keep:
 
 The first thing I would fix is accessibility. It leans hard on sound and on touch, and that leaves people out. I wrote that in the thesis and it is still true.
 
-Everyone who used it was told, in writing and in both Swedish and English, that no call is recorded. The photographs of visitors on this page are published with their permission.
+<p class="fs-small">Everyone who used it was told, in writing and in both Swedish and English, that no call is recorded. The photographs of visitors on this page are published with their permission.</p>

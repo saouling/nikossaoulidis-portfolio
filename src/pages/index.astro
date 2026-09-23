@@ -39,7 +39,7 @@ const description =
 									</picture>
 									<span class="cat-no">{o.no}{o.form && <KForm form={o.form} class="cat-mark" />}</span>
 									<span class="cat-body">
-										<span class="cat-object">{o.title}</span>
+										<span class="cat-object" style={`view-transition-name: obj-${o.no}`}>{o.title}</span>
 										<span class="cat-meta">{o.year} · {o.medium}</span>
 										<span class="cat-summary">{o.summary}</span>
 									</span>

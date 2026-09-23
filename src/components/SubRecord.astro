@@ -1,0 +1,29 @@
+---
+// A sub-record inside one catalogue object (Ericsson's three cases, 01a to
+// 01c): its heading plus a small label with my part and the result. It
+// renders only the heading and label, never wraps the case's content, so
+// breakout figures stay direct children of the case-body grid.
+interface Props {
+	id: string;
+	no: string;
+	title: string;
+	lead: string;
+	part: string;
+	result: string;
+}
+
+const { id, no, title, lead, part, result } = Astro.props;
+---
+
+<h3 class="sub-title" id={id}><span class="cat-no">{no}</span> {title}</h3>
+<p class="sub-lead">{lead}</p>
+<dl class="sub-plate">
+	<div>
+		<dt>My part</dt>
+		<dd>{part}</dd>
+	</div>
+	<div>
+		<dt>Result</dt>
+		<dd>{result}</dd>
+	</div>
+</dl>

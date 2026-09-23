@@ -3,12 +3,11 @@ title: "EWP Dashboard — Redesigning Erasmus+ at Scale — Nikos Saoulidis"
 heading: "EWP Dashboard"
 standfirst: "Redesigning the tool European universities use to manage Erasmus+ mobility, as one coherent system instead of five disconnected modules."
 description: "Leading the redesign of the EWP Dashboard, the tool European universities use to manage Erasmus+ mobility, now the platform 2,700+ institutions across 31 countries rely on."
-eyebrow: "School / Industry"
-tags:
-  - "UI/UX Design"
-  - "User Research"
-  - "Design Systems"
-  - "Team Lead"
+summary:
+  problem: "Modules built at different times felt like separate apps stitched together, with no shared visual language."
+  did: "Surveyed close to 1,000 institutions, built a design system and a new identity, and led four developers through the build."
+  went: "The redesign I led is still the live version, used by 2,700+ institutions in 31 countries."
+  learned: "Bring developers in earlier, test with real users, and build accessibility in from day one."
 heroImage:
   src: "/images/ewp/hero.jpg"
   width: 1833
@@ -23,11 +22,9 @@ atAGlance:
     value: "Aristotle University IT Center, Thessaloniki, with the European University Foundation"
   - label: "Worked with"
     value: "The European University Foundation and the 4 developers I led"
-  - label: "Outcome"
-    value: "The redesign I led is still the live version, used by 2,700+ institutions in 31 countries."
 outcome:
   stat: "2,700+"
-  statLabel: "institutions, 31 countries — the platform's scale today"
+  statLabel: "institutions in 31 countries, the platform's scale today"
   facts:
     - "EC-funded, used by 217 of the 220 top-performing institutions."
     - "The redesign I led is the version still running, centre stage at the EAIE Conference, Gothenburg, September 2025."
@@ -41,10 +38,11 @@ learnings:
 
 import Figure from '../../components/Figure.astro';
 import PullQuote from '../../components/PullQuote.astro';
+import FactGrid from '../../components/FactGrid.astro';
+
+<h2 id="problem">The problem</h2>
 
 The EWP Dashboard is the tool European universities use to manage Erasmus+ student mobility. When I joined Aristotle University's IT Center, there wasn't a UX role on the team at all. Nobody was looking at why the tool was hard to use, so I made that my job.
-
-<h2>The problem</h2>
 
 It had grown into a hub of modules built at different times, Accounts, Learning Agreements, Institutional Agreements, Erasmus+ applications, so it felt like several separate apps stitched together rather than one tool. The interface complaints I kept hearing were only the symptoms. Underneath them: inconsistent components across modules, no shared visual language, and every team that had built a different part solving the same problem its own way. So instead of patching screens one at a time, I treated the whole thing as one system.
 
@@ -58,13 +56,13 @@ It had grown into a hub of modules built at different times, Accounts, Learning 
   />
 </div>
 
-<h2>What I did</h2>
+<h2 id="what-i-did">What I did</h2>
 
 <h3>Research</h3>
 
 I designed and ran a survey, 17 questions, close to 1,000 institutions responding. The complaints were specific: too much unnecessary information always present, no way to print a PDF version of an agreement, listings that were unintuitive and confusing. Two patterns stood out beyond the individual complaints: everything was shown at once regardless of relevance, and most people needed to do at least some of this from their phone.
 
-I mapped status to colour throughout the interface, accept, reject, pending, so people could scan a long list of applications at a glance instead of reading every row, leaning on Jacob's Law and recognition over recall rather than my own instinct for what would help. I presented the findings to over 1,000 users and stakeholders at a European University Foundation webinar, then ran a later task-based usability survey to measure whether it actually got easier, not just whether people said it did.
+I mapped status to colour throughout the interface, accept, reject, pending, so people could scan a long list of applications at a glance instead of reading every row, leaning on Jacob's Law and recognition over recall rather than my own instinct for what would help.
 
 <div class="breakout">
   <Figure
@@ -116,5 +114,15 @@ I prototyped the redesign in Figma, handed it to the development team, then stay
 <h3>Collaboration &amp; leadership</h3>
 
 I led four developers, keeping constant communication between them and the European University Foundation's stakeholders so the technical build tracked the design intent. It was the first time I'd managed a build like this, and it pushed my communication and project-management skills harder than the design work itself did.
+
+<h2 id="how-it-went">How it went</h2>
+
+<FactGrid data={frontmatter.outcome} />
+
+I presented the findings to over 1,000 users and stakeholders at a European University Foundation webinar, then ran a later task-based usability survey to measure whether it actually got easier, not just whether people said it did.
+
+<h2 id="what-i-learned">What I learned</h2>
+
+<FactGrid data={frontmatter.learnings} tone="ink" />
 
 <PullQuote>This project was a defining moment in my design career: research, design, leadership and communication, together, at a large-scale professional level.</PullQuote>

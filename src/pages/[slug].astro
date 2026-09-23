@@ -53,7 +53,7 @@ const summaryRows = summary
 	<article class="obj" data-form={object.form}>
 		<header class="obj-head">
 			<div class="wrap">
-				<h1 class="obj-title">
+				<h1 class="obj-title" style={`view-transition-name: obj-${object.no}`}>
 					{heading}
 					{object.form && <KForm form={object.form} class="obj-mark" />}
 				</h1>
