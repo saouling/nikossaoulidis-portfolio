@@ -380,6 +380,8 @@ This is the complete set of patterns the site ships, checked against the build o
 | Breakout | `.breakout` | every case study |
 | Hero image / video | `.hero-figure`, `.hero-video` | every case study; video on DBAS |
 | Sub-records | `SubRecord` / `.sub-index`, `.sub-plate` | Ericsson |
+| Case body wide column | `.case-body > .wide` | Ericsson (dense diagrams that are cramped at the reading measure) |
+| Ericsson diagrams (scoped styles, drawn in code, NDA-safe) | `components/ericsson/`: `DeliveryBeforeAfter`, `SpecRule`, `AuditFramework`, `HandoffLoop`, `HandoutSheet`, `CardSystem`, `AssistantCanvas`, `SpecToCode` | Ericsson only |
 | Column grid | `.col-grid.cols-3` | Ericsson |
 | Museum pair / block | `.museum-pair`, `.museum-block` | DBAS |
 | Ink-grid | `.ink-grid` | DBAS |
@@ -392,6 +394,9 @@ This is the complete set of patterns the site ships, checked against the build o
 | CV entries | `.about-grid`, `.entry`, `.col-heading` | About |
 | Buttons | `.btn`, `.btn-outline` | Contact |
 | Form fields | `.form-field` | Contact |
+
+### Named Rule: Diagrams drawn in code
+A diagram is built in HTML, CSS and SVG, not exported as an image, whenever its content is structure, numbers or text: real text stays selectable and translatable, it is crisp at any width, it reflows on phones (a loop becomes a list, side-by-side panels stack), and every number comes from the sources in `reference/PROJECT-REFERENCE.md`. Diagrams use ink, hairlines and the object's own form colour (gold for Ericsson), sharp frames, and drawn marks, never text glyphs. Photographs stay photographs.
 
 ## Accessibility commitments
 
