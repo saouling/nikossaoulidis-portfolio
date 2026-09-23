@@ -1,130 +1,96 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-
+import KForm from '../components/KForm.astro';
+import { mainObjects, minorObjects, allObjects } from '../data/collection';
 const description =
 	"Product and UX designer working in the in-between of design, technology, and human connection. Enterprise software at Ericsson, a permanent museum installation, and a platform used by 2,700+ institutions.";
 ---
-
 <Layout title="Nikos Saoulidis — Product & UX Designer, Gothenburg" description={description} currentPage="work">
-	<section class="hero hero-home">
-		<div class="wrap">
-			<div class="hero-shapes" aria-hidden="true">
-				<span class="shape-drift d1"><span class="shape s1" data-depth="16"></span></span>
-				<span class="shape-drift d2"><span class="shape s2" data-depth="26"></span></span>
-				<span class="shape-drift d3"><span class="shape s3 ring" data-depth="10"></span></span>
-				<span class="shape-drift d4"><span class="shape s4 square" data-depth="34"></span></span>
-				<span class="shape-drift d5"><span class="shape s5 ring" data-depth="20"></span></span>
+	<div class="cat-page">
+		<section class="cat-intro">
+			<div class="wrap cat-intro-grid">
+				<div>
+					<h1 class="cat-name">Nikos Saoulidis</h1>
+					<p class="cat-role">Product and UX designer, Gothenburg.</p>
+					<p class="cat-line">I came into design sideways, from engineering, and stayed for the human part of it.</p>
+				</div>
+				<div class="cat-forms" aria-hidden="true">
+					<KForm form="circle" class="cf-circle" />
+					<KForm form="square" class="cf-square" />
+					<KForm form="triangle" class="cf-triangle" />
+				</div>
 			</div>
-			<h1>Nikos Saoulidis<br />Product &amp; UX designer, <span class="accent-cycle">Gothenburg.</span></h1>
-			<p class="standfirst">I came into design sideways, from engineering, and stayed for the human part of it. I've shipped dense enterprise software at Ericsson, redesigned a platform now used across 2,700+ institutions, and built a museum installation that's been running for over a year.</p>
-			<p class="standfirst">I like living in the in-between of design, technology, and human connection.</p>
-			<div class="hero-links">
-				<a class="btn" href="#work">See my work &#8595;</a>
-				<a class="btn btn-outline" href="/assets/Nikos-Saoulidis-CV.pdf">CV</a>
-				<a class="btn btn-outline" href="https://www.linkedin.com/in/nikolaos-saoulidis-a90434186/" target="_blank" rel="noopener">LinkedIn</a>
+		</section>
+
+		<section class="catalogue" id="work" aria-labelledby="collection-title">
+			<div class="wrap cat-grid">
+				<div class="cat-list">
+					<h2 id="collection-title" class="visually-hidden">The collection</h2>
+					<div class="cat-head" aria-hidden="true">
+						<span>No.</span><span>Object</span><span>Status</span>
+					</div>
+					<ol class="cat-index cat-main">
+						{mainObjects.map((o) => (
+							<li>
+								<a class="cat-row" href={o.href} data-no={o.no} data-form={o.form}>
+									<picture class="cat-plate">
+										{o.image.webp && <source srcset={o.image.webp} type="image/webp" />}
+										<img src={o.image.src} width={o.image.width} height={o.image.height} alt="" loading="lazy" style={o.image.position ? `object-position: ${o.image.position}` : undefined} />
+									</picture>
+									<span class="cat-no">{o.no}{o.form && <KForm form={o.form} class="cat-mark" />}</span>
+									<span class="cat-body">
+										<span class="cat-object">{o.title}</span>
+										<span class="cat-meta">{o.year} · {o.medium}</span>
+										<span class="cat-summary">{o.summary}</span>
+									</span>
+									<span class="cat-status">{o.status}</span>
+								</a>
+							</li>
+						))}
+					</ol>
+
+					<h3 class="cat-subtitle">Also in the collection</h3>
+					<ol class="cat-index cat-minor">
+						{minorObjects.map((o) => (
+							<li>
+								<a class="cat-row" href={o.href} data-no={o.no} target="_blank" rel="noopener">
+									<picture class="cat-thumb">
+										{o.image.webp && <source srcset={o.image.webp} type="image/webp" />}
+										<img src={o.image.src} width={o.image.width} height={o.image.height} alt="" loading="lazy" style={o.image.position ? `object-position: ${o.image.position}` : undefined} />
+									</picture>
+									<span class="cat-no">{o.no}</span>
+									<span class="cat-body">
+										<span class="cat-object">{o.title}</span>
+										<span class="cat-meta">{o.year} · {o.medium} · <span class="cat-ext">{o.linkLabel}<span class="visually-hidden"> (opens in a new tab)</span></span></span>
+									</span>
+									<span class="cat-status">{o.status}</span>
+								</a>
+							</li>
+						))}
+					</ol>
+
+					<p class="fs-small cat-deck">
+						There's also a <a href="https://www.figma.com/deck/pygH7CpZVJ0LSkNgFMkvkw" target="_blank" rel="noopener">full case deck</a> if you want more depth on a couple of these.
+					</p>
+				</div>
+
+				<div class="cat-case" aria-hidden="true">
+					<div class="cat-case-frame">
+						{allObjects.map((o, i) => (
+							<figure class:list={['cat-case-item', o.image.contain && 'is-contain']} data-no={o.no}>
+								<picture>
+									{o.image.webp && <source srcset={o.image.webp} type="image/webp" />}
+									<img src={o.image.src} width={o.image.width} height={o.image.height} alt="" loading={i === 0 ? 'eager' : 'lazy'} style={o.image.position ? `object-position: ${o.image.position}` : undefined} />
+								</picture>
+								<figcaption class="cat-case-label">
+									<span class="cat-no">No. {o.no}</span>
+									<span>{o.title}</span>
+								</figcaption>
+							</figure>
+						))}
+					</div>
+				</div>
 			</div>
-		</div>
-	</section>
-
-	<section class="section" id="work">
-		<div class="wrap">
-			<p class="eyebrow">Selected work</p>
-			<h2 class="mt-0">Work</h2>
-
-			<div class="project-rows">
-
-				<a class="project-row reveal" href="/ericsson/">
-					<div class="row-media">
-						<picture>
-							<source srcset="/images/ericsson/collage.webp" type="image/webp" />
-							<img src="/images/ericsson/collage.jpg" width="1900" height="1031" alt="A black-and-white collage: Nikos presenting at the Ericsson Developer Conference, the Ericsson logo, and a slide on the history of enabling communication." loading="lazy" />
-						</picture>
-					</div>
-					<div class="row-text">
-						<span class="row-eyebrow">Industry</span>
-						<h3>Ericsson</h3>
-						<div class="tags"><span class="tag-word">UI/UX Design · Scrum Master · AI-assisted design · Workshop facilitation</span></div>
-						<p class="desc">UX Designer on dense private-5G software, where my job was making complex, technical tools clear for expert users. Proudest of a skill that turns messy Figma files into AI-readable deliveries, and a set of co-creation methods I built with a colleague and presented at the Ericsson Developer Conference.</p>
-						<p class="outcome">Adopted as a team-wide AI-readiness standard.</p>
-					</div>
-				</a>
-
-				<a class="project-row flip reveal" href="/dont-be-a-stranger/">
-					<div class="row-media">
-						<picture>
-							<source srcset="/images/dbas/01-hero-installation-room.webp" type="image/webp" />
-							<img src="/images/dbas/01-hero-installation-room.jpg" width="1011" height="1800" alt="The Don't Be a Stranger installation, a rotary phone on a table between two windows." loading="lazy" />
-						</picture>
-					</div>
-					<div class="row-text">
-						<span class="row-eyebrow">School</span>
-						<h3>Don't Be a Stranger</h3>
-						<div class="tags"><span class="tag-word">Research through Design · Physical Installation · Solo Project</span></div>
-						<p class="desc">A permanent museum installation where two strangers pick up old rotary phones and talk to each other, live, across two Gothenburg museums. No screens, no profiles, just a voice and the small act of dialling.</p>
-						<p class="outcome">Running in both museums since May 2025.</p>
-					</div>
-				</a>
-
-				<a class="project-row reveal" href="/ewp-dashboard/">
-					<div class="row-media">
-						<picture>
-							<source srcset="/images/ewp/hero.webp" type="image/webp" />
-							<img src="/images/ewp/hero.jpg" width="1833" height="952" alt="The EWP Dashboard logo and a screenshot of its document-settings table." loading="lazy" />
-						</picture>
-					</div>
-					<div class="row-text">
-						<span class="row-eyebrow">School / Industry</span>
-						<h3>EWP Dashboard</h3>
-						<div class="tags"><span class="tag-word">UI/UX Design · User Research · Design Systems · Team Lead</span></div>
-						<p class="desc">Redesigned the tool European universities use to manage Erasmus+ mobility students, my first large-scale project: research and surveys, a full design system, Figma prototyping, and leading four developers through the build.</p>
-						<p class="outcome">Now the gold standard across 2,700+ institutions.</p>
-					</div>
-				</a>
-
-			</div>
-
-			<p class="fs-small" style="margin-top: var(--space-6)">
-				There's also a <a href="https://www.figma.com/deck/pygH7CpZVJ0LSkNgFMkvkw" target="_blank" rel="noopener">full case deck</a> if you want more depth on a couple of these.
-			</p>
-
-			<p class="eyebrow" style="margin-top: var(--space-7)">More work</p>
-			<h2 class="mt-0">Smaller projects</h2>
-			<div class="project-grid">
-				<ProjectCard
-					id="interactive-table"
-					href="https://dl.acm.org/doi/10.1145/3656156.3665424"
-					image="/images/table/diagram.jpg"
-					imageWidth={1500}
-					imageHeight={1468}
-					imageAlt="Diagram of the interactive table: touch closes a circuit, an Arduino sends MIDI to a synthesizer, speakers play a melody and an LED strip lights up."
-					title="Interactive Sound-Mediating Table"
-					description="Co-designed a table that invites playful, ambiguous bare-skin touch between two people, turning it into musical and light responses. Accepted to the ACM DIS 2024 demo track in Copenhagen."
-					outcome="Exhibited at ACM DIS 2024, Copenhagen. Read the paper ↗"
-				/>
-				<ProjectCard
-					id="synodia"
-					href="https://www.figma.com/proto/YerdDKO4Un9AvaYCk8PxS2/Individual-Project?page-id=0%3A1&node-id=502-16762&node-type=canvas&viewport=1345%2C40%2C0.03&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=502%3A16754"
-					image="/images/synodia/device.jpg"
-					imageWidth={1000}
-					imageHeight={1866}
-					imageAlt="Synodia, a round white portable music device with a speaker grille and a single record button."
-					title="Synodia"
-					description="A slow, portable music player that plays one song a day, a quiet argument against algorithm-driven streaming, and for the personal connection in sharing music with people you're synced to."
-					outcome="An exploration of what listening together could feel like. View the prototype ↗"
-				/>
-				<ProjectCard
-					id="lighthouse"
-					href="https://www.figma.com/proto/1fmZ5tjfIh1WemV0oGJ6nq/LightRig-GUI-Individual-Project?page-id=2680%3A19242&node-id=2680-19247&viewport=430%2C592%2C0.02&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2680%3A19247"
-					image="/images/lighthouse/hero.jpg"
-					imageWidth={1472}
-					imageHeight={952}
-					imageAlt="The LightHouse app: a dark-mode interface for grouping stage lights, building scenes and sequences, with a 3D stage preview."
-					title="LightHouse"
-					description="A beginner-friendly app for managing stage light rigs, balancing advanced functionality with an intuitive interface, a timeline mode, live control, and a 3D stage preview."
-					outcome="Craft and clarity inside a genuinely complex tool. View the prototype ↗"
-				/>
-			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 </Layout>

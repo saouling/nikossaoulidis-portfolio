@@ -61,9 +61,7 @@ const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
 									<source src={heroVideo} type="video/mp4" />
 									<img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} loading="eager" />
 								</video>
-								<button type="button" aria-pressed="false">
-									Sound off
-								</button>
+								<button type="button">Turn sound on</button>
 							</div>
 						</figure>
 						{heroVideoCaption && <p class="fs-small media-caption">{heroVideoCaption}</p>}

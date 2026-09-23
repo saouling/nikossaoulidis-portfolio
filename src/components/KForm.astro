@@ -1,0 +1,19 @@
+---
+// One of Kandinsky's three Bauhaus forms, in its questionnaire colour:
+// circle blue, square red, triangle gold. Always decorative (the object's
+// title and number carry the meaning), so it is hidden from assistive tech.
+import type { Form } from '../data/collection';
+
+interface Props {
+	form: Form;
+	class?: string;
+}
+
+const { form, class: className } = Astro.props;
+---
+
+<svg class:list={['kform', `kform-${form}`, className]} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+	{form === 'circle' && <circle cx="50" cy="50" r="50" />}
+	{form === 'square' && <rect x="4" y="4" width="92" height="92" />}
+	{form === 'triangle' && <polygon points="50,4 98,94 2,94" />}
+</svg>

@@ -159,7 +159,7 @@ p a:hover, li a:hover, blockquote a:hover, dd a:hover {
 /* ---------- Focus ---------- */
 :focus { outline: none; }
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--blue-ink);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -269,6 +269,7 @@ section, .section {
   transform: scaleX(1);
 }
 .nav-links a:hover { color: var(--ink); }
+.nav-note { color: var(--muted); }
 
 .menu-toggle {
   display: none;
@@ -330,100 +331,10 @@ section, .section {
 .hero {
   padding-block: var(--space-7) var(--space-6);
 }
-/* Homepage hero only -- poster-scale type, full-height flex centring, and
-   the shape/cursor layer below. Scoped separately from the shared .hero so
-   case-study pages (whose .breakout hero figures need .hero to stay a plain
-   block, not a flex container -- a flex item can't use the 100vw/negative-
-   margin breakout technique the same way) are unaffected. */
-.hero.hero-home {
-  padding-block: clamp(var(--space-7), 14vh, 8rem) var(--space-6);
-  min-height: 88vh;
-  display: flex;
-  align-items: center;
-}
-.hero .wrap { position: relative; }
-.hero.hero-home .wrap { width: 100%; }
-
-/* Custom cursor: a simple ring that tracks the pointer 1:1 while over the
-   hero, filling solid red over a link. Desktop/hover/motion-enabled only --
-   guarded the same way as the shapes below, and the real system cursor
-   never truly disappears (cursor:auto fallback) if JS never attaches it. */
-.hero.custom-cursor { cursor: none; }
-.hero.custom-cursor a { cursor: none; }
-.cursor-dot {
-  position: fixed; top: 0; left: 0; width: 32px; height: 32px; margin: -16px 0 0 -16px;
-  border-radius: 50%; border: 2px solid var(--ink); pointer-events: none; z-index: 1000;
-  transform: translate(-100px, -100px); transition: background-color .15s ease, border-color .15s ease, transform .05s linear, scale .15s ease;
-}
-.cursor-dot.is-link { background: var(--red); border-color: var(--red); scale: 1.4; }
-
-/* Bauhaus-influenced accent shapes: decorative, hidden below 900px where
-   there's no spare width beside the headline. Sit behind the text flow
-   (negative z-index) so any edge overlap never touches legibility.
-   Two independent motions compose on nested elements so they don't fight
-   over the same CSS property: .shape-drift plays a slow ambient float
-   (always on, whether or not JS runs), and the inner .shape gets an
-   additional cursor-parallax offset from js/menu.js. Both are inert
-   without JS/hover/motion. */
-.hero-shapes {
-  position: absolute; inset: 0; z-index: -1; pointer-events: none; display: none;
-}
-/* Needs the text measure (720px) plus a real gutter beside it to avoid any
-   overlap with the standfirst paragraphs, hence a taller breakpoint than
-   the sitewide 900px one. */
-@media (min-width: 1050px) {
-  .hero-shapes { display: block; }
-}
-.hero-shapes .shape-drift { position: absolute; animation: heroDrift 10s ease-in-out infinite; }
-.hero-shapes .shape {
-  position: absolute; inset: 0; border-radius: 50%; transition: transform .3s cubic-bezier(.2, .7, .2, 1);
-}
-.hero-shapes .ring { background: none; border: 3px solid; }
-.hero-shapes .square { border-radius: 4px; }
-/* All positioned from the right edge and sized to stay inside the gutter
-   right of the 720px text column -- never a left-based offset, which is
-   what let a shape drift over running text before. */
-.hero-shapes .d1 { width: clamp(120px, 15vw, 220px); aspect-ratio: 1; right: 0; top: -6%; animation-duration: 12s; }
-.hero-shapes .d2 { width: clamp(48px, 5vw, 72px); aspect-ratio: 1; right: 4%; top: 48%; animation-duration: 8s; animation-direction: reverse; }
-.hero-shapes .d3 { width: clamp(40px, 4.5vw, 64px); aspect-ratio: 1; right: 22%; bottom: 4%; animation-duration: 9s; }
-.hero-shapes .d4 { width: 26px; height: 26px; left: -4px; top: 6%; animation-duration: 7s; animation-direction: reverse; }
-.hero-shapes .d5 { width: clamp(70px, 8vw, 120px); aspect-ratio: 1; right: -2%; bottom: 10%; animation-duration: 14s; }
-.hero-shapes .s1 { background: var(--blue); opacity: .92; }
-.hero-shapes .s2 { background: var(--red); opacity: .92; }
-.hero-shapes .s3 { border-color: var(--gold); }
-.hero-shapes .s4 { background: var(--gold); }
-.hero-shapes .s5 { border-color: var(--blue); }
-@keyframes heroDrift {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(10px, -14px); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-shapes .shape-drift { animation: none; }
-}
 
 .hero h1 {
   font-size: var(--fs-hero);
   max-width: 16ch;
-}
-.hero.hero-home h1 {
-  font-size: clamp(3.552rem, 2.4rem + 5vw, 7.2rem);
-  line-height: 1.02;
-  max-width: 18ch;
-}
-/* A quiet bit of kinetic type: the closing line slowly cycles through the
-   three brand colours rather than sitting static -- the "some of it can
-   be dynamic" ask. Frozen to blue under reduced motion. */
-.accent-cycle {
-  display: inline-block;
-  animation: accentCycle 9s ease-in-out infinite;
-}
-@keyframes accentCycle {
-  0%, 100% { color: var(--blue); }
-  33% { color: var(--red); }
-  66% { color: var(--gold-ink); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .accent-cycle { animation: none; color: var(--blue); }
 }
 .hero .standfirst {
   font-size: var(--fs-h3);
@@ -460,6 +371,203 @@ section, .section {
   cursor: pointer;
 }
 .hero-video button:hover { background: var(--accent-ink); }
+
+/* ---------- The catalogue (homepage) ----------
+   The homepage is page one of a collection catalogue: a short intro with
+   Kandinsky's three forms, then a numbered object index beside a display
+   case. Colour has one job each: red marks catalogue numbers and status,
+   blue marks what you can click, and the forms carry the only large
+   colour. Hovering or focusing an object brings its image into the case
+   and its form forward, in pure CSS (:has), so it works without JS. */
+.kform { display: block; width: 100%; height: auto; overflow: visible; }
+.kform-circle { fill: var(--blue); }
+.kform-square { fill: var(--red); }
+.kform-triangle { fill: var(--gold); }
+
+.cat-intro { padding-block: var(--space-5) var(--space-4); }
+.cat-intro-grid { display: grid; gap: var(--space-5); align-items: end; }
+@media (min-width: 900px) {
+  .cat-intro-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+}
+.cat-name {
+  font-size: clamp(3rem, 2.2rem + 3.2vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+.cat-role {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  color: var(--ink);
+  margin-top: var(--space-3);
+}
+.cat-line { margin-top: var(--space-2); max-width: 48ch; text-wrap: pretty; }
+
+/* The composition: three forms overlapping like a Bauhaus print, the
+   overlaps multiplied the way two inks would be. */
+.cat-forms {
+  position: relative;
+  width: min(100%, 320px);
+  aspect-ratio: 3 / 2;
+  justify-self: end;
+}
+.cat-forms .kform {
+  position: absolute;
+  mix-blend-mode: multiply;
+  transition: transform .6s cubic-bezier(.16, 1, .3, 1), opacity .4s ease;
+}
+.cf-circle { width: 58%; left: 0; bottom: 0; }
+.cf-square { width: 38%; left: 44%; top: 0; }
+.cf-triangle { width: 34%; right: 0; bottom: 0; }
+@media (max-width: 899px) {
+  .cat-forms { justify-self: start; width: 150px; }
+}
+
+/* An object in the index pulls its form forward and fades the others. */
+.cat-page:has(.cat-row[data-form]:is(:hover, :focus-visible)) .cat-forms .kform { opacity: .14; }
+.cat-page:has(.cat-row[data-form="circle"]:is(:hover, :focus-visible)) .cat-forms .cf-circle,
+.cat-page:has(.cat-row[data-form="square"]:is(:hover, :focus-visible)) .cat-forms .cf-square,
+.cat-page:has(.cat-row[data-form="triangle"]:is(:hover, :focus-visible)) .cat-forms .cf-triangle {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+.catalogue { padding-block: var(--space-3) var(--space-7); }
+.cat-grid { display: grid; gap: var(--space-6); align-items: start; }
+@media (min-width: 1000px) {
+  .cat-grid { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); }
+}
+.cat-subtitle { font-size: var(--fs-body); margin: var(--space-6) 0 var(--space-2); }
+
+.cat-head,
+.cat-row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) minmax(8rem, auto);
+  column-gap: var(--space-4);
+}
+.cat-head {
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--ink);
+}
+.cat-head span:last-child, .cat-status { text-align: right; }
+
+.cat-index { list-style: none; padding: 0; margin: 0; }
+.cat-row {
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--hairline);
+  color: var(--body);
+  text-decoration: none;
+  transition: background-color .25s ease;
+}
+.cat-row:hover { background: var(--bg-alt); }
+.cat-row:hover .cat-object,
+.cat-row:focus-visible .cat-object { color: var(--blue-ink); }
+.cat-row:focus-visible { outline-offset: -2px; }
+
+.cat-no {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-body);
+  color: var(--red-ink);
+  padding-top: .35em;
+}
+.cat-mark { width: 14px; margin-top: var(--space-2); }
+.cat-body { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.cat-object {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  color: var(--ink);
+  transition: color .2s ease;
+}
+.cat-meta { font-family: var(--font-display); font-size: var(--fs-small); color: var(--muted); }
+.cat-summary { font-size: var(--fs-small); line-height: 1.5; max-width: 60ch; margin-top: var(--space-1); }
+.cat-status {
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  color: var(--red-ink);
+  padding-top: .5em;
+}
+.cat-minor .cat-row { padding-block: var(--space-2); }
+.cat-minor .cat-object { font-size: var(--fs-body); }
+.cat-minor .cat-no { font-size: var(--fs-small); padding-top: .2em; }
+.cat-minor .cat-status { padding-top: .15em; }
+.cat-ext { color: var(--blue-ink); }
+.cat-deck { margin-top: var(--space-5); }
+
+/* Phones and tablets: no hover, so the display case unfolds into the
+   index. Each main object gets its image as a full-width plate above its
+   row; the smaller ones get a square thumbnail. */
+.cat-plate, .cat-thumb { display: none; }
+@media (max-width: 999px) {
+  .cat-plate {
+    display: block;
+    grid-column: 1 / -1;
+    margin-bottom: var(--space-3);
+  }
+  .cat-plate img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }
+  .cat-minor .cat-row { grid-template-columns: 4rem 2.5rem minmax(0, 1fr); }
+  .cat-thumb { display: block; grid-row: span 2; }
+  .cat-thumb img { width: 4rem; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 2px; background: var(--bg-alt); }
+  .cat-minor .cat-status { grid-column: 3; text-align: left; padding-top: var(--space-1); }
+}
+@media (max-width: 599px) {
+  .cat-head { display: none; }
+  .cat-main .cat-row { grid-template-columns: 2.5rem minmax(0, 1fr); }
+  .cat-main .cat-status { grid-column: 2; text-align: left; padding-top: var(--space-2); }
+  .cat-object { font-size: var(--fs-h3); }
+}
+
+/* The display case: desktop only, sticky beside the index. */
+.cat-case { display: none; }
+@media (min-width: 1000px) {
+  .cat-case { display: block; position: sticky; top: calc(72px + var(--space-4)); }
+}
+.cat-case-frame {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px solid var(--ink);
+  background: var(--bg-alt);
+}
+.cat-case-item {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  opacity: 0;
+  transition: opacity .45s cubic-bezier(.16, 1, .3, 1);
+}
+.cat-case-item picture { display: block; min-height: 0; }
+.cat-case-item img { width: 100%; height: 100%; object-fit: cover; }
+.cat-case-item.is-contain img { object-fit: contain; padding: var(--space-4); }
+.cat-case-label {
+  display: flex;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid var(--ink);
+  background: var(--bg);
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  color: var(--ink);
+}
+.cat-case-label .cat-no { font-size: inherit; padding: 0; }
+
+.cat-case-item[data-no="01"] { opacity: 1; }
+.catalogue:has(.cat-row:is(:hover, :focus-visible)) .cat-case-item[data-no="01"] { opacity: 0; }
+.catalogue:has(.cat-row[data-no="01"]:is(:hover, :focus-visible)) .cat-case-item[data-no="01"],
+.catalogue:has(.cat-row[data-no="02"]:is(:hover, :focus-visible)) .cat-case-item[data-no="02"],
+.catalogue:has(.cat-row[data-no="03"]:is(:hover, :focus-visible)) .cat-case-item[data-no="03"],
+.catalogue:has(.cat-row[data-no="04"]:is(:hover, :focus-visible)) .cat-case-item[data-no="04"],
+.catalogue:has(.cat-row[data-no="05"]:is(:hover, :focus-visible)) .cat-case-item[data-no="05"],
+.catalogue:has(.cat-row[data-no="06"]:is(:hover, :focus-visible)) .cat-case-item[data-no="06"] { opacity: 1; }
 
 /* ---------- At-a-glance ---------- */
 .at-a-glance {
@@ -1117,116 +1225,6 @@ blockquote.pull.boxed {
 }
 
 
-/* ---------- Project cards (homepage) ---------- */
-.project-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  margin-top: var(--space-6);
-}
-@media (min-width: 768px) {
-  .project-grid { grid-template-columns: 1fr 1fr; }
-}
-.project-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-.project-card .thumb {
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--bg-alt);
-}
-.project-card .thumb img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform .3s ease;
-}
-.project-card:hover .thumb img { transform: scale(1.03); }
-.project-card h3 { margin-top: var(--space-3); }
-.project-card .desc { color: var(--body); margin-top: var(--space-1); }
-.project-card .outcome {
-  font-size: var(--fs-small);
-  color: var(--accent-ink);
-  margin-top: var(--space-2);
-}
-
-/* ---------- Project rows (homepage, matches the live site's list layout) ---------- */
-.project-rows {
-  display: flex;
-  flex-direction: column;
-}
-.project-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
-  align-items: center;
-  padding-block: var(--space-6);
-  text-decoration: none;
-  color: inherit;
-}
-@media (min-width: 800px) {
-  .project-row { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
-  .project-row.flip .row-media { order: 2; }
-  .project-row.flip .row-text { order: 1; }
-}
-.project-row h3 {
-  position: relative;
-  display: inline-block;
-  font-size: var(--fs-h1);
-  color: var(--blue);
-  margin-top: 0;
-}
-.project-row h3::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: -4px;
-  border-bottom: 3px dotted var(--blue);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .25s ease;
-}
-.project-row:hover h3::after,
-.project-row:focus-visible h3::after {
-  transform: scaleX(1);
-}
-.project-row .tags { margin-top: var(--space-2); }
-.project-row .tag-word {
-  font-family: var(--font-display);
-  color: var(--red-ink);
-  font-size: var(--fs-body);
-}
-.project-row .row-eyebrow {
-  display: block;
-  font-family: var(--font-display);
-  color: var(--gold-ink);
-  font-size: var(--fs-small);
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  margin-bottom: var(--space-1);
-}
-.project-row .desc { margin-top: var(--space-3); color: var(--body); }
-.project-row .outcome { margin-top: var(--space-3); color: var(--red-ink); font-size: var(--fs-body); }
-.project-row .row-media {
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border-radius: var(--radius);
-}
-.project-row .row-media img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform .3s ease;
-}
-@media (min-width: 800px) {
-  /* A fixed height, not a percentage: a percentage height inside a CSS
-     Grid row that's sized "auto" resolves to auto too, so a tall source
-     photo would still drive its own height from its intrinsic aspect
-     ratio instead of matching the text column. A fixed cap sidesteps
-     that circularity entirely and keeps every row a similar height,
-     matching the live site's own images-are-cropped-to-fit behaviour. */
-  .project-row .row-media { aspect-ratio: auto; height: 380px; align-self: center; }
-}
-.project-row:hover .row-media img { transform: scale(1.02); }
-
 /* ---------- Challenge / decision columns ---------- */
 .col-grid {
   display: grid;
@@ -1300,28 +1298,9 @@ blockquote.pull.boxed {
 }
 .form-hint { font-size: var(--fs-small); color: var(--muted); margin-top: var(--space-1); }
 
-/* ---------- Scroll reveal ----------
-   Progressive enhancement: JS adds .is-visible as each .reveal block
-   enters the viewport. Content is fully visible without JS or if the
-   IntersectionObserver never fires — see js/menu.js. */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity .5s ease, transform .5s ease;
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-.no-js .reveal {
-  opacity: 1;
-  transform: none;
-}
-
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
-  .reveal { opacity: 1; transform: none; }
 }
 
 /* ---------- Fact grid ----------
