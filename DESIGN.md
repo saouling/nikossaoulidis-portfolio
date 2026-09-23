@@ -113,7 +113,7 @@ Structure is Bauhaus; the reading itself is editorial.
 - Mostly white space, one color accent per composition — never every cell filled.
 - Flat color fields; no gradients, no glassmorphism, no soft ambient shadows.
 - Shadows appear only where they represent a real physical object (post-its, cutout photos), never as generic elevation.
-- Sharp corners on the "ledger" family (fact-grid, ink-grid, museum-block, lens, label-plate captions); a small 6px softening only on photographic/color containers (images, embeds, colored statement blocks).
+- Sharp corners on the "ledger" family (fact-grid, ink-grid, museum-block, lens, label-plate captions); a small 6px softening only on photographic/color containers (images, video, the post-it board's notes).
 - Fully round (pill) shapes are reserved for interactive affordances only (buttons, tags) — never for content containers.
 
 ## Colors
@@ -219,7 +219,7 @@ and flat color fields exclusively — no shadow, no blur, ever.
 Three deliberately distinct corner languages, each tied to a role rather than applied uniformly:
 
 - **Pill** (`border-radius: 999px`): interactive affordances only — buttons, tags. Signals "you can act on this."
-- **Soft** (`border-radius: 6px`): photographic and colored-block containers — images, embeds, museum cards, the ink `question-band`/`statement-block` posters, the fact-grid's outer edge. A small enough radius to feel considered without softening the flat-color language.
+- **Soft** (`border-radius: 6px`): photographic and colored-block containers — images, the hero video, project cards, the fact-grid's outer edge. A small enough radius to feel considered without softening the flat-color language.
 - **Sharp** (no radius): the ledger family itself — ink-grid cells, museum-block, lens disclosures, label-plate captions, the card-stack frame. These are meant to read as a grid or a record, and a rounded corner would undercut that.
 
 ## Components
@@ -251,6 +251,36 @@ Three deliberately distinct corner languages, each tied to a role rather than ap
 ### Pull-quote
 - **Default (`blockquote.pull`):** Jost at `--fs-h2`, ink, 720px measure, with a short 3px signal-red rule (64px wide) sitting *above* the quote. That's the same colored-top-edge language as museum-block, never a full-height left border.
 - **Boxed (`variant="boxed"`):** a 1px ink border with no fill and no red rule, at `--fs-h3`, for a standout statement or question. It borrows the bordered-title language from Nikos's own thesis diagrams.
+
+## Pattern inventory (frozen)
+
+This is the complete set of visual patterns the site ships, checked against real usage on
+2026-09-23. 46 unused classes were deleted in that pass: the old site's poster blocks,
+stepper, term strip, guideline cards, embeds, image clusters, portrait caps and
+sticky-media. **The set is closed. A new pattern ships only after it is added here first,
+with the page that needs it and why no existing pattern fits.**
+
+| Pattern | Class / component | Where it's used |
+|---|---|---|
+| At-a-glance facts | `AtAGlance` / `.at-a-glance` | every case study |
+| Hero video + sound toggle | `.hero-video` | DBAS |
+| Figure: default, diagram, overlay, plate | `Figure` / `.cap-overlay`, `.cap-plate` | all case studies |
+| Figure grid | `.figure-grid.cols-2/3` | Ericsson, EWP |
+| Full-bleed breakout | `.breakout`, `.full-bleed` | all case studies |
+| Pull-quote | `PullQuote` / `blockquote.pull` | all case studies |
+| Fact-grid (Outcome/Learnings) | `.fact-grid` | every case study |
+| Ink-grid | `.ink-grid` | DBAS |
+| Museum-block | `.museum-block` | DBAS |
+| Lens disclosure | `.lens` | DBAS |
+| Card-stack | `.card-stack` | DBAS |
+| Post-it board | `PostitBoard` | DBAS |
+| Break band | `BreakBand` | DBAS |
+| Column grid | `.col-grid.cols-3` | Ericsson |
+| Project rows and cards | `.project-row`, `ProjectCard` | homepage |
+| Photo cluster | `.photo-cluster` | About |
+
+Seven of the eleven case-study patterns are used only on DBAS. That's the pattern sprawl
+the replan diagnosed, and the DBAS structural fix shouldn't add to it.
 
 ## Accessibility commitments
 
