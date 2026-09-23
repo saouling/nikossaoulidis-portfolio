@@ -42,6 +42,7 @@ import Figure from '../../components/Figure.astro';
 import PullQuote from '../../components/PullQuote.astro';
 import PostitBoard from '../../components/PostitBoard.astro';
 import FactGrid from '../../components/FactGrid.astro';
+import Ratings from '../../components/Ratings.astro';
 
 <h2 id="problem">The problem</h2>
 
@@ -162,6 +163,17 @@ Field next, on campus. Three rounds in the student café and two different build
     />
   </div>
 </div>
+
+<Ratings
+  max={5}
+  items={[
+    { label: 'Easy to use', value: 4.0 },
+    { label: 'Felt different from a smartphone', value: 4.4 },
+    { label: 'The prompts sparked conversation', value: 4.1 },
+    { label: 'Comfortable talking to a stranger', value: 4.3 },
+  ]}
+  caption="Pilot feedback forms, 15 people, mean on a 5-point scale. A small sample, so a direction rather than proof. Answers varied most on the instructions and the prompts, so those were simplified and rephrased before the museums."
+/>
 
 Showroom last, which was the two museums. Finding the second museum took five months of unanswered emails, LinkedIn messages and tailored proposals to museums and companies across Sweden and Denmark. What actually worked was Jessica at Röhsska calling someone she knew at Mölndal.
 

@@ -1,0 +1,61 @@
+---
+// A small ledger of scale ratings (mean out of a maximum), drawn as ink
+// bars with the value set beside them. Used for DBAS's pilot feedback
+// forms. Honest by construction: the sample size and scale travel with the
+// numbers in the caption, never dropped.
+interface Props {
+	items: { label: string; value: number }[];
+	max: number;
+	caption: string;
+}
+
+const { items, max, caption } = Astro.props;
+const top = Math.max(...items.map((i) => i.value));
+---
+
+<figure class="ratings">
+	<table>
+		<caption class="visually-hidden">{caption}</caption>
+		<tbody>
+			{items.map((i) => (
+				<tr>
+					<th scope="row">{i.label}</th>
+					<td class="ratings-bar">
+						<span class:list={['ratings-fill', i.value === top && 'top']} style={`width: ${((i.value / max) * 100).toFixed(1)}%`} />
+					</td>
+					<td class:list={['ratings-value', i.value === top && 'top']}>{i.value.toFixed(1)}<span> / {max}</span></td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+	<figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+	.ratings { margin: var(--space-5) 0; }
+	.ratings table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--ink); }
+	.ratings th, .ratings td { padding: var(--space-2) 0; border-bottom: 1px solid var(--hairline); vertical-align: middle; }
+	.ratings th {
+		width: 38%;
+		text-align: left;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: var(--fs-small);
+		color: var(--ink);
+		padding-right: var(--space-3);
+	}
+	.ratings-bar { background: linear-gradient(to right, var(--hairline) 0 1px, transparent 1px) 0 0 / 20% 100%; }
+	.ratings-fill { display: block; height: 14px; background: var(--ink); }
+	.ratings-fill { opacity: .55; }
+	.ratings-fill.top { opacity: 1; }
+	.ratings-value {
+		width: 5.5rem;
+		text-align: right;
+		font-family: var(--font-display);
+		font-variant-numeric: tabular-nums;
+		color: var(--ink);
+	}
+	.ratings-value.top { font-weight: 600; }
+	.ratings-value span { color: var(--muted); font-size: var(--fs-small); font-style: normal; font-weight: 400; }
+	.ratings figcaption { margin-top: var(--space-2); font-size: var(--fs-small); color: var(--muted); }
+</style>

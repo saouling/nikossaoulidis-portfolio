@@ -380,6 +380,7 @@ This is the complete set of patterns the site ships, checked against the build o
 | Breakout | `.breakout` | every case study |
 | Hero image / video | `.hero-figure`, `.hero-video` | every case study; video on DBAS |
 | Sub-records | `SubRecord` / `.sub-index`, `.sub-plate` | Ericsson |
+| Ratings ledger (mean on a scale, n and scale always in the caption) | `Ratings` / `.ratings` | DBAS (pilot feedback forms) |
 | Case body wide column | `.case-body > .wide` | Ericsson (dense diagrams that are cramped at the reading measure) |
 | Ericsson diagrams (scoped styles, drawn in code, NDA-safe) | `components/ericsson/`: `DeliveryBeforeAfter`, `SpecRule`, `AuditFramework`, `HandoffLoop`, `HandoutSheet`, `CardSystem`, `AssistantCanvas`, `SpecToCode` | Ericsson only |
 | Column grid | `.col-grid.cols-3` | Ericsson |
