@@ -41,6 +41,8 @@ import PullQuote from '../../components/PullQuote.astro';
 import FactGrid from '../../components/FactGrid.astro';
 import SubRecord from '../../components/SubRecord.astro';
 import DeliveryBeforeAfter from '../../components/ericsson/DeliveryBeforeAfter.astro';
+import SpecRule from '../../components/ericsson/SpecRule.astro';
+import AuditFramework from '../../components/ericsson/AuditFramework.astro';
 
 <h2 id="problem">The problem</h2>
 
@@ -79,18 +81,13 @@ First I went and looked. I documented two real developer workflows in our organi
 
 I also needed a way to say how bad our files were, so I put together a small audit framework: five dimensions, scored out of ten. It is my own framework rather than an industry standard, but it meant we could talk about a file being more or less AI-ready instead of just "messy".
 
+<AuditFramework />
+
 Then I built a Kiro skill called **delivery-for-ai**. You point it at a polish page and it produces a clean, AI-readable delivery page in the same file: on the left, clean screens organised into feature-specific sections; on the right, a small number of structured notes on interaction behaviour, style tokens, and a summary of what changed.
 
 <PullQuote>The rule that made it work: the screens show what it looks like, the notes say how it behaves. Never both.</PullQuote>
 
-<div class="breakout">
-  <Figure
-    src="/images/ericsson/case1-the-rule.jpg"
-    width={1400}
-    height={700}
-    alt="Diagram with the word SCREENS in large bold type on the left, captioned 'show what it looks like', beside a wireframe outline; and the word NOTES on the right, captioned 'say how it behaves', beside three solid colour bars in red, blue and gold."
-  />
-</div>
+<SpecRule />
 
 When I let the notes describe the interface as well, the AI started inventing things that weren't there. So I kept them strictly about behaviour. I tested it with a developer over four rounds and fixed what broke each time, then wrote the whole approach up as a shared standard so it wasn't just a thing I did on my own files.
 

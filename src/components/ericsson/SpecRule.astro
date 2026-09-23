@@ -1,0 +1,76 @@
+---
+// Ericsson 01a: the rule that made the delivery skill work, as a two-cell
+// ledger instead of a picture. Screens show what it looks like; specs say
+// how it behaves. The three spec rows are the real [SPEC] frames.
+---
+
+<figure class="rule">
+	<div class="rule-grid">
+		<div class="rule-cell">
+			<p class="rule-word">Screens</p>
+			<p class="rule-says">show what it looks like</p>
+			<div class="rule-screen" aria-hidden="true">
+				<span></span><span></span><span class="block"></span><span class="block short"></span>
+			</div>
+		</div>
+		<div class="rule-cell">
+			<p class="rule-word">Specs</p>
+			<p class="rule-says">say how it behaves</p>
+			<ul class="rule-specs">
+				<li>Interaction behaviour <span>flows, states, conditions</span></li>
+				<li>Style tokens <span>theme, colour, type, components</span></li>
+				<li>Changes summary <span>what is new, what changed</span></li>
+			</ul>
+		</div>
+	</div>
+	<figcaption>The delivery page: clean screens on the left, the three [SPEC] frames on the right.</figcaption>
+</figure>
+
+<style>
+	.rule { margin: var(--space-5) 0; }
+	.rule-grid {
+		display: grid;
+		gap: 3px;
+		background: var(--ink);
+		border: 3px solid var(--ink);
+	}
+	@media (min-width: 700px) {
+		.rule-grid { grid-template-columns: 1fr 1fr; }
+	}
+	.rule-cell { background: var(--bg); padding: var(--space-5) var(--space-4); }
+	.rule-word {
+		margin: 0;
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: var(--fs-h1);
+		line-height: 1;
+		letter-spacing: -0.02em;
+		text-transform: uppercase;
+		color: var(--ink);
+	}
+	.rule-says { margin: var(--space-2) 0 var(--space-4); font-style: italic; color: var(--body); }
+	.rule-screen {
+		width: min(100%, 220px);
+		aspect-ratio: 4 / 3;
+		border: 1px solid var(--ink);
+		padding: var(--space-3);
+		display: grid;
+		gap: 8px;
+		align-content: start;
+	}
+	.rule-screen span { height: 3px; background: var(--hairline); width: 70%; }
+	.rule-screen span:nth-child(2) { width: 45%; }
+	.rule-screen .block { height: 26px; width: 100%; background: var(--bg-alt); }
+	.rule-screen .block.short { width: 60%; }
+	.rule-specs { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+	.rule-specs li {
+		border: 1px solid var(--ink);
+		border-top: 4px solid var(--gold);
+		padding: var(--space-2) var(--space-3);
+		font-family: var(--font-display);
+		font-size: var(--fs-small);
+		color: var(--ink);
+	}
+	.rule-specs li span { display: block; font-family: var(--font-body); color: var(--muted); }
+	.rule figcaption { margin-top: var(--space-2); font-size: var(--fs-small); color: var(--muted); }
+</style>

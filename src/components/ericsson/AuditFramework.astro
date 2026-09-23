@@ -1,0 +1,82 @@
+---
+// Ericsson 01a: Nikos's AI-readiness audit framework as a small ledger.
+// Five dimensions, each scored 0, 1 or 2 (maximum 10). It is his own
+// framework, not an industry standard, and the page says so; the audit's
+// result is deliberately not the headline (Nikos's instruction).
+const dimensions = [
+	{ name: 'Structural separation', asks: 'Are delivery screens on their own page or section, or mixed in with everything else?' },
+	{ name: 'Naming convention', asks: 'Can an AI tool tell annotations apart by name, for example a handoff/ prefix?' },
+	{ name: 'Component semantics', asks: 'Do frames and layers have meaningful names, or "Frame 47"?' },
+	{ name: 'Interaction data', asks: 'Is behaviour machine-readable, or trapped in arrows and tables?' },
+	{ name: 'Noise ratio', asks: 'What share of the nodes are annotations rather than real interface?' },
+];
+---
+
+<figure class="audit">
+	<table>
+		<caption class="visually-hidden">AI-readiness audit framework: five dimensions, each scored 0 to 2.</caption>
+		<thead>
+			<tr><th scope="col">No.</th><th scope="col">Dimension</th><th scope="col">Score</th></tr>
+		</thead>
+		<tbody>
+			{dimensions.map((d, i) => (
+				<tr>
+					<td class="audit-no">{String(i + 1).padStart(2, '0')}</td>
+					<td>
+						<span class="audit-name">{d.name}</span>
+						<span class="audit-asks">{d.asks}</span>
+					</td>
+					<td class="audit-scale" aria-label="scored 0, 1 or 2">
+						<span>0</span><span>1</span><span>2</span>
+					</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+	<figcaption>My own framework, not an industry standard: five dimensions, 0 to 2 each, out of 10.</figcaption>
+</figure>
+
+<style>
+	.audit { margin: var(--space-5) 0; }
+	.audit table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--ink); }
+	.audit th {
+		text-align: left;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: var(--fs-small);
+		text-transform: uppercase;
+		letter-spacing: .06em;
+		color: var(--muted);
+		padding: var(--space-2) var(--space-2) var(--space-2) 0;
+		border-bottom: 1px solid var(--ink);
+	}
+	.audit th:last-child, .audit-scale { text-align: right; }
+	.audit td {
+		vertical-align: top;
+		padding: var(--space-3) var(--space-2) var(--space-3) 0;
+		border-bottom: 1px solid var(--hairline);
+	}
+	.audit-no {
+		width: 3rem;
+		font-family: var(--font-display);
+		font-variant-numeric: tabular-nums;
+		color: var(--red-ink);
+	}
+	.audit-name { display: block; font-family: var(--font-display); color: var(--ink); }
+	.audit-asks { display: block; font-size: var(--fs-small); color: var(--body); line-height: 1.5; margin-top: var(--space-1); }
+	.audit-scale { white-space: nowrap; }
+	.audit-scale span {
+		display: inline-grid;
+		place-items: center;
+		width: 1.6rem;
+		height: 1.6rem;
+		margin-left: 4px;
+		border: 1px solid var(--ink);
+		font-family: var(--font-display);
+		font-size: var(--fs-small);
+		font-variant-numeric: tabular-nums;
+		color: var(--ink);
+	}
+	.audit-scale span:last-child { background: var(--gold); border-color: var(--gold); }
+	.audit figcaption { margin-top: var(--space-2); font-size: var(--fs-small); color: var(--muted); }
+</style>
