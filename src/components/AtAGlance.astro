@@ -13,7 +13,7 @@ const { items } = Astro.props;
 <dl class="at-a-glance" style="max-width: var(--container)">
 	{
 		items.map((item) => (
-			<div>
+			<div class={item.label === 'Outcome' ? 'glance-outcome' : undefined}>
 				<dt>{item.label}</dt>
 				<dd>{item.value}</dd>
 			</div>

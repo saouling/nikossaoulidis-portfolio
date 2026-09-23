@@ -482,6 +482,15 @@ section, .section {
   margin-bottom: var(--space-1);
 }
 .at-a-glance dd { max-width: none; }
+/* The Outcome row spans the full width and sits under its own hairline,
+   so the payoff reads as one line for a skimming reader instead of a
+   fifth narrow column. */
+.at-a-glance .glance-outcome {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--hairline);
+  padding-top: var(--space-4);
+}
+.at-a-glance .glance-outcome dd { color: var(--ink); max-width: var(--measure); }
 
 /* ---------- Figure / captions ---------- */
 figure { margin: var(--space-6) 0; }

@@ -262,7 +262,7 @@ with the page that needs it and why no existing pattern fits.**
 
 | Pattern | Class / component | Where it's used |
 |---|---|---|
-| At-a-glance facts | `AtAGlance` / `.at-a-glance` | every case study |
+| At-a-glance facts, with a full-width Outcome row (`.glance-outcome`, set by the label "Outcome") | `AtAGlance` / `.at-a-glance` | every case study |
 | Hero video + sound toggle | `.hero-video` | DBAS |
 | Figure: default, diagram, overlay, plate | `Figure` / `.cap-overlay`, `.cap-plate` | all case studies |
 | Figure grid | `.figure-grid.cols-2/3` | Ericsson, EWP |
