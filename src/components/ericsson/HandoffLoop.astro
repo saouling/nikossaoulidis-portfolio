@@ -1,0 +1,147 @@
+---
+// Ericsson 01b: the handoff trap from the Build Better Together talk, drawn
+// in code. Eight stages go round the loop (feature idea to iterate), each
+// owned by one discipline reacting to the stage before it. The gold tags
+// are the co-creation methods and habits the talk placed onto the loop, so
+// the same drawing shows both the trap and the way out.
+//
+// Real HTML text placed on a circle with CSS trig (cos/sin); below 640px it
+// becomes a plain ordered list, so nothing depends on reading tiny type.
+const stages = [
+	{ step: 'Feature idea', who: 'Product', methods: [] },
+	{ step: 'Design study', who: 'Designer', methods: ['Brainwriting'] },
+	{ step: 'Lo-fi design', who: 'Designer', methods: ['Mini-demo'] },
+	{ step: 'Hi-fi design', who: 'Designer', methods: ['One-person invite'] },
+	{ step: 'Develop', who: 'Front-end · Back-end', methods: ['UX + front-end pairing', 'Mini-demo'] },
+	{ step: 'Test', who: 'QA · everyone', methods: ['UX bug bash'] },
+	{ step: 'Release', who: 'Team', methods: [] },
+	{ step: 'Iterate', who: 'Everyone', methods: ['UX improvements channel'] },
+];
+const n = stages.length;
+---
+
+<figure class="loop">
+	<div class="loop-stage">
+		<svg class="loop-ring" viewBox="0 0 100 100" aria-hidden="true">
+			<circle cx="50" cy="50" r="36" />
+			{stages.map((_, i) => {
+				const am = ((i + 0.5) / n) * 360 - 90;
+				const rad = (am * Math.PI) / 180;
+				const x = 50 + 36 * Math.cos(rad);
+				const y = 50 + 36 * Math.sin(rad);
+				return <path class="loop-arrow" d="M -1.6 -1.4 L 1.6 0 L -1.6 1.4 z" transform={`translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(${(am + 90).toFixed(1)})`} />;
+			})}
+		</svg>
+		<p class="loop-centre">
+			<span class="loop-centre-title">The handoff trap</span>
+			Each discipline reacts to the stage before it. The way out: one person, one step earlier.
+		</p>
+		<ol class="loop-stages">
+			{stages.map((s, i) => (
+				<li style={`--a: ${(i / n) * 360 - 90}deg`}>
+					<span class="loop-who">{s.who}</span>
+					<span class="loop-step">{s.step}</span>
+					{s.methods.length > 0 && (
+						<span class="loop-methods">
+							{s.methods.map((m) => <span class="loop-method">{m}</span>)}
+						</span>
+					)}
+				</li>
+			))}
+		</ol>
+	</div>
+	<figcaption>The loop from the talk. Gold tags are the co-creation methods and habits, placed where they bring another discipline in early.</figcaption>
+</figure>
+
+<style>
+	.loop { margin: var(--space-5) 0; }
+	.loop-stage {
+		position: relative;
+		width: min(100%, 640px);
+		aspect-ratio: 1;
+		margin-inline: auto;
+	}
+	.loop-ring { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--ink); }
+	.loop-ring circle { fill: none; stroke: currentColor; stroke-width: .5; }
+	.loop-ring .loop-arrow { fill: currentColor; }
+	.loop-centre {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 42%;
+		margin: 0;
+		text-align: center;
+		font-size: var(--fs-small);
+		line-height: 1.45;
+		color: var(--body);
+	}
+	.loop-centre-title {
+		display: block;
+		font-family: var(--font-display);
+		font-size: var(--fs-h3);
+		font-weight: 600;
+		color: var(--ink);
+		margin-bottom: var(--space-2);
+	}
+	.loop-stages { list-style: none; margin: 0; padding: 0; }
+	.loop-stages li {
+		position: absolute;
+		left: calc(50% + 36% * cos(var(--a)));
+		top: calc(50% + 36% * sin(var(--a)));
+		transform: translate(-50%, -50%);
+		width: 9.5rem;
+		padding: var(--space-2);
+		background: var(--bg);
+		border: 1px solid var(--ink);
+		text-align: center;
+	}
+	.loop-who {
+		display: block;
+		font-family: var(--font-display);
+		font-size: .72rem;
+		text-transform: uppercase;
+		letter-spacing: .06em;
+		color: var(--muted);
+	}
+	.loop-step { display: block; font-family: var(--font-display); font-size: var(--fs-small); color: var(--ink); }
+	.loop-methods { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-top: 6px; }
+	.loop-method {
+		background: var(--gold);
+		color: var(--ink);
+		font-family: var(--font-display);
+		font-size: .72rem;
+		line-height: 1.3;
+		padding: 2px 6px;
+	}
+	.loop figcaption { margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); }
+
+	@media (max-width: 639px) {
+		.loop-stage { aspect-ratio: auto; }
+		.loop-ring { display: none; }
+		.loop-centre { position: static; transform: none; width: auto; text-align: left; margin-bottom: var(--space-3); }
+		.loop-stages { border-top: 1px solid var(--ink); counter-reset: stage; }
+		.loop-stages li {
+			position: static;
+			transform: none;
+			width: auto;
+			border: 0;
+			border-bottom: 1px solid var(--hairline);
+			padding: var(--space-2) 0;
+			text-align: left;
+			display: grid;
+			grid-template-columns: 7rem 1fr;
+			column-gap: var(--space-3);
+		}
+		.loop-who { grid-column: 1; }
+		.loop-step { grid-column: 2; grid-row: 1; }
+		.loop-methods { grid-column: 2; justify-content: flex-start; }
+		.loop-stages li:last-child::after {
+			content: "and round again";
+			grid-column: 2;
+			font-size: var(--fs-small);
+			font-style: italic;
+			color: var(--muted);
+		}
+	}
+</style>
