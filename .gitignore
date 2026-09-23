@@ -15,3 +15,6 @@ pnpm-debug.log*
 # Impeccable's downloaded platform engine binary — re-fetched by `npx impeccable
 # install`/first run, not portable across platforms, no reason to version it.
 .claude/skills/impeccable/scripts/bin/
+
+# Personal Claude Code overrides — shared hooks live in .claude/settings.json
+.claude/settings.local.json

@@ -8,8 +8,7 @@ reproduced in §6 below.
 > **Replan, September 2026: read [`REPLAN-2026-09.md`](REPLAN-2026-09.md) next.** It
 > was approved after the DBAS iteration stalled, and it wins wherever it disagrees with
 > this file. In particular: a 90-second skim-first reader, a structural (not decorative)
-> DBAS fix, and `DESIGN.md` replacing `DESIGN-SYSTEM.md` as the design record. B11 below
-> stays unticked until `/dont-be-a-stranger/` renders on a preview URL.
+> DBAS fix, and `DESIGN.md` replacing `DESIGN-SYSTEM.md` as the design record.
 
 Read §1–§4 before doing anything. Then find the first session in §7 that isn't marked
 done, and do that one. One session is roughly one sitting.
@@ -522,8 +521,11 @@ paint is heavy — revisit at B13/B14, not before. `phonebooth-concept-crop` is 
   homepage cards — image, one paragraph, outcome line, anchor id. No dedicated pages.
   **Done when:** all three appear on the homepage with working anchors.
 
-- [ ] **B11 · Build the DBAS page.** Using Track A's approved copy and assets.
+- [x] **B11 · Build the DBAS page.** Using Track A's approved copy and assets.
   **Done when:** `/dont-be-a-stranger/` renders on a preview URL and the schema validates.
+  *Done 2026-09-23: built over rounds 5–7 (commit `3b74961`), build validates the schema,
+  and Nikos confirmed it renders on the Vercel preview. The structural fix for the
+  90-second reader continues under `REPLAN-2026-09.md`, Session 2.*
 
 - [ ] **B12 · Redirects, sitemap, 404, agent-readability.** Map every live Readymag URL
   to its new equivalent. The three demoted projects redirect to their homepage card
