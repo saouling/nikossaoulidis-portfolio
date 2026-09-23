@@ -127,8 +127,10 @@ const summaryRows = summary
 				<a class="obj-next-link" href={next.href}>
 					<span class="obj-next-title">
 						<span class="cat-no">No. {next.no}</span>
-						{next.title}
-						{next.form && <KForm form={next.form} class="obj-next-mark" />}
+						<span class="obj-next-name">
+							{next.title}
+							{next.form && <KForm form={next.form} class="obj-next-mark" />}
+						</span>
 					</span>
 				</a>
 				<p class="obj-next-contact">

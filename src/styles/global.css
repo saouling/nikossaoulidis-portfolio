@@ -768,7 +768,7 @@ section, .section {
   transition: color .2s ease;
 }
 .obj-next-title .cat-no { font-size: var(--fs-body); padding: 0; white-space: nowrap; }
-.obj-next-mark { width: .45em; }
+.obj-next-name .obj-next-mark { display: inline-block; width: .45em; margin-left: .25em; vertical-align: .1em; }
 .obj-next-link:hover .obj-next-title,
 .obj-next-link:focus-visible .obj-next-title { color: var(--blue-ink); }
 .obj-next-contact { margin-top: var(--space-4); }
