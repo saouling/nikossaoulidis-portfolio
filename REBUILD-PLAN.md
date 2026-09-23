@@ -5,6 +5,12 @@ truth for the Astro rebuild. It supersedes `NOTES-handoff.md` for anything about
 planning or decisions; that file is kept only for the source-material paths, which are
 reproduced in §6 below.
 
+> **Replan, September 2026: read [`REPLAN-2026-09.md`](REPLAN-2026-09.md) next.** It
+> was approved after the DBAS iteration stalled, and it wins wherever it disagrees with
+> this file. In particular: a 90-second skim-first reader, a structural (not decorative)
+> DBAS fix, and `DESIGN.md` replacing `DESIGN-SYSTEM.md` as the design record. B11 below
+> stays unticked until `/dont-be-a-stranger/` renders on a preview URL.
+
 Read §1–§4 before doing anything. Then find the first session in §7 that isn't marked
 done, and do that one. One session is roughly one sitting.
 
