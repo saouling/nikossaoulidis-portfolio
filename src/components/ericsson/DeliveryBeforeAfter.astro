@@ -1,0 +1,177 @@
+---
+// Ericsson 01a: the same Figma file before and after the delivery-for-ai
+// skill, drawn in code rather than as a picture. Numbers are the real ones
+// from Nikos's deck: 27 screens under 148 annotations on one flat canvas,
+// then 17 clean screens in feature sections plus 3 [SPEC] frames. Abstract
+// on purpose (NDA): no real screens, no product text beyond the section
+// names the deck itself shows.
+//
+// The "before" is generated deterministically (a seeded generator), so the
+// clutter is honest (148 marks really are drawn) and stable between builds.
+function rng(seed: number) {
+	let s = seed;
+	return () => ((s = (s * 1664525 + 1013904223) % 4294967296) / 4294967296);
+}
+const r = rng(27148);
+
+const W = 600;
+const H = 380;
+const screens = Array.from({ length: 27 }, (_, i) => ({
+	x: 18 + (i % 9) * 64,
+	y: 22 + Math.floor(i / 9) * 118,
+}));
+const notes = Array.from({ length: 148 }, () => ({
+	x: 6 + r() * (W - 30),
+	y: 6 + r() * (H - 26),
+	w: 12 + r() * 16,
+	h: 9 + r() * 10,
+	rot: (r() - 0.5) * 36,
+	tone: r() < 0.55 ? 'gold' : r() < 0.8 ? 'paper' : 'ink',
+}));
+const arrows = Array.from({ length: 9 }, () => {
+	const x1 = 20 + r() * 520;
+	const y1 = 20 + r() * 330;
+	const x2 = x1 + (r() - 0.5) * 220;
+	const y2 = y1 + (r() - 0.5) * 160;
+	return { d: `M${x1.toFixed(1)} ${y1.toFixed(1)} Q ${(x1 + x2) / 2 + 30} ${(y1 + y2) / 2 - 40} ${x2.toFixed(1)} ${y2.toFixed(1)}` };
+});
+
+const sections = [
+	{ name: 'Radio details', count: 6 },
+	{ name: 'Edit form', count: 6 },
+	{ name: 'Cell view', count: 5 },
+];
+const specs = [
+	{ name: 'Interaction behaviour', note: 'how things behave' },
+	{ name: 'Style tokens', note: 'theme, type, components' },
+	{ name: 'Changes summary', note: 'what is new or modified' },
+];
+---
+
+<figure class="dba">
+	<div class="dba-panels">
+		<div class="dba-panel">
+			<p class="dba-tag"><span>Before</span> 27 screens · 148 annotations · one flat canvas</p>
+			<svg class="dba-before" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Before: 27 screens scattered across one canvas, buried under 148 sticky notes, arrows and overlays.">
+				<defs>
+					<marker id="dba-head" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto">
+						<path d="M0 0 L6 3 L0 6 z" fill="currentColor" />
+					</marker>
+				</defs>
+				{screens.map((s) => (
+					<g class="dba-screen">
+						<rect x={s.x} y={s.y} width="50" height="84" />
+						<line x1={s.x + 6} y1={s.y + 10} x2={s.x + 44} y2={s.y + 10} />
+						<line x1={s.x + 6} y1={s.y + 18} x2={s.x + 32} y2={s.y + 18} />
+						<rect class="dba-block" x={s.x + 6} y={s.y + 26} width="38" height="22" />
+					</g>
+				))}
+				<rect class="dba-overlay" x="90" y="130" width="170" height="96" />
+				<rect class="dba-overlay" x="380" y="20" width="120" height="70" />
+				{arrows.map((a) => <path class="dba-arrow" d={a.d} marker-end="url(#dba-head)" />)}
+				{notes.map((n) => (
+					<rect class={`dba-note ${n.tone}`} x={n.x.toFixed(1)} y={n.y.toFixed(1)} width={n.w.toFixed(1)} height={n.h.toFixed(1)} transform={`rotate(${n.rot.toFixed(1)} ${(n.x + n.w / 2).toFixed(1)} ${(n.y + n.h / 2).toFixed(1)})`} />
+				))}
+			</svg>
+		</div>
+
+		<div class="dba-panel">
+			<p class="dba-tag"><span>After</span> 17 screens in sections · 3 specs</p>
+			<div class="dba-after" role="img" aria-label="After: 17 clean screens grouped into three feature sections, and three structured spec frames on the right for interaction behaviour, style tokens and a changes summary.">
+				<div class="dba-sections">
+					{sections.map((sec) => (
+						<div class="dba-section">
+							<span class="dba-section-name">{sec.name}</span>
+							<div class="dba-screens">
+								{Array.from({ length: sec.count }, () => <span class="dba-mini" />)}
+							</div>
+						</div>
+					))}
+				</div>
+				<div class="dba-specs">
+					{specs.map((s) => (
+						<div class="dba-spec">
+							<span class="dba-spec-name">[SPEC] {s.name}</span>
+							<span class="dba-spec-note">{s.note}</span>
+							<span class="dba-lines" />
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</div>
+	<figcaption>The same file, drawn abstractly to stay NDA-safe: every mark in the left panel is one of the 148 annotations.</figcaption>
+</figure>
+
+<style>
+	.dba { margin: 0; }
+	.dba-panels { display: grid; gap: var(--space-4); }
+	@media (min-width: 900px) {
+		.dba-panels { grid-template-columns: 1fr 1fr; }
+	}
+	.dba-panel { border: 1px solid var(--ink); display: flex; flex-direction: column; }
+	.dba-tag {
+		margin: 0;
+		max-width: none;
+		padding: var(--space-2) var(--space-3);
+		border-bottom: 1px solid var(--ink);
+		font-family: var(--font-display);
+		font-size: var(--fs-small);
+		color: var(--body);
+	}
+	.dba-tag span {
+		text-transform: uppercase;
+		letter-spacing: .06em;
+		color: var(--red-ink);
+		margin-right: var(--space-2);
+	}
+	.dba-before { display: block; width: 100%; height: auto; background: var(--bg-alt); color: var(--ink); }
+	.dba-screen rect { fill: var(--bg); stroke: var(--hairline); stroke-width: 1; }
+	.dba-screen .dba-block { fill: var(--hairline); stroke: none; }
+	.dba-screen line { stroke: var(--hairline); stroke-width: 2; }
+	.dba-overlay { fill: var(--gold); opacity: .18; }
+	.dba-arrow { fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .55; }
+	.dba-note.gold { fill: var(--gold); opacity: .92; }
+	.dba-note.paper { fill: var(--paper); stroke: var(--gold-ink); stroke-width: .5; }
+	.dba-note.ink { fill: var(--ink); opacity: .75; }
+
+	.dba-after {
+		flex: 1;
+		display: grid;
+		grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+		gap: var(--space-3);
+		padding: var(--space-3);
+	}
+	@media (max-width: 599px) {
+		.dba-after { grid-template-columns: 1fr; }
+	}
+	.dba-sections { display: grid; gap: var(--space-2); align-content: start; }
+	.dba-section { border: 1px solid var(--hairline); padding: var(--space-2); }
+	.dba-section-name, .dba-spec-name {
+		display: block;
+		font-family: var(--font-display);
+		font-size: var(--fs-small);
+		color: var(--ink);
+		margin-bottom: var(--space-1);
+	}
+	.dba-screens { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; }
+	.dba-mini {
+		aspect-ratio: 5 / 7;
+		border: 1px solid var(--ink);
+		background:
+			linear-gradient(var(--hairline), var(--hairline)) 15% 14% / 70% 2px no-repeat,
+			linear-gradient(var(--hairline), var(--hairline)) 15% 24% / 45% 2px no-repeat,
+			linear-gradient(var(--bg-alt), var(--bg-alt)) 15% 55% / 70% 28% no-repeat,
+			var(--bg);
+	}
+	.dba-specs { display: grid; gap: var(--space-2); align-content: start; }
+	.dba-spec { border: 1px solid var(--ink); border-top: 4px solid var(--gold); padding: var(--space-2); }
+	.dba-spec-note { display: block; font-size: var(--fs-small); color: var(--muted); line-height: 1.35; }
+	.dba-lines {
+		display: block;
+		height: 18px;
+		margin-top: var(--space-2);
+		background: repeating-linear-gradient(to bottom, var(--hairline) 0 2px, transparent 2px 6px);
+	}
+	.dba figcaption { margin-top: var(--space-2); font-size: var(--fs-small); color: var(--muted); }
+</style>

@@ -40,6 +40,7 @@ import Figure from '../../components/Figure.astro';
 import PullQuote from '../../components/PullQuote.astro';
 import FactGrid from '../../components/FactGrid.astro';
 import SubRecord from '../../components/SubRecord.astro';
+import DeliveryBeforeAfter from '../../components/ericsson/DeliveryBeforeAfter.astro';
 
 <h2 id="problem">The problem</h2>
 
@@ -71,13 +72,7 @@ Three cases, each its own record in this object.
 Developers in our organisation were using AI agents to generate UI code straight from the UX team's Figma files. The files were built for humans: screens buried under sticky notes, arrows, colour overlays, design rationale sitting right on top of the interface. The AI could not tell the difference. It tried to build the sticky notes too. As one of our developers put it, "Annotations confuse the AI."
 
 <div class="breakout">
-  <Figure
-    src="/images/ericsson/case1-before-after.jpg"
-    width={1400}
-    height={750}
-    alt="Diagram comparing a cluttered canvas of eight white screens buried under overlapping red, blue and gold note blocks at odd angles, to an organised canvas of clean screens grouped into two labelled sections, with a separate column of three solid colour bars."
-    caption="Redrawn abstractly to stay NDA-safe: no real screens or product text."
-  />
+  <DeliveryBeforeAfter />
 </div>
 
 First I went and looked. I documented two real developer workflows in our organisation to understand where it actually broke, and set up a Slack channel so the feedback could keep coming rather than arriving once at the end. Then I read around: about twenty case studies, industry write-ups from teams like Atlassian, Spotify, Miro and Figma, plus academic papers. The pattern was the same everywhere: structured input produces better output.

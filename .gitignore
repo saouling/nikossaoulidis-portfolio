@@ -27,3 +27,7 @@ pnpm-debug.log*
 # public and some sources are marked Ericsson Internal or contain personal data.
 # The committed, publishable summary is reference/PROJECT-REFERENCE.md.
 reference/sources/
+
+# Temporary capture helpers used during review; never ship
+public/_viz*.html
+public/_review*.html
