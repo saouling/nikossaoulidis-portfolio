@@ -1,6 +1,6 @@
 ---
 name: Nikos Saoulidis — Portfolio
-description: A UX/product designer's portfolio, built on a fact-checked, Mondrian-flat visual system.
+description: A UX/product designer's portfolio set as a museum catalogue, with a numbered collection index, label plates and three Kandinsky forms.
 colors:
   ink: "#16161A"
   body-text: "#33333A"
@@ -14,36 +14,59 @@ colors:
   ultramarine: "#21409A"
   ultramarine-ink: "#1A3380"
   ochre-gold: "#C9A227"
-  ochre-gold-ink: "#7A5E13"
   on-dark: "#FDFCFA"
 typography:
   display:
     fontFamily: "Jost, Century Gothic, system-ui, sans-serif"
-    fontSize: "clamp(3.552rem, 3.4147rem + 0.6864vw, 3.9467rem)"
+    fontSize: "clamp(3rem, 2.2rem + 3.2vw, 4.5rem)"
     fontWeight: 500
-    lineHeight: 1.12
+    lineHeight: 1.02
+    letterSpacing: "-0.02em"
   headline:
     fontFamily: "Jost, Century Gothic, system-ui, sans-serif"
-    fontSize: "clamp(2.6647rem, 2.5617rem + 0.5149vw, 2.9607rem)"
+    fontSize: "clamp(3.552rem, 3.4147rem + 0.6864vw, 3.9467rem)"
     fontWeight: 500
-    lineHeight: 1.12
+    lineHeight: 1.02
+    letterSpacing: "-0.02em"
   title:
     fontFamily: "Jost, Century Gothic, system-ui, sans-serif"
     fontSize: "clamp(1.999rem, 1.9217rem + 0.3863vw, 2.2211rem)"
     fontWeight: 500
     lineHeight: 1.12
-  body:
-    fontFamily: "Source Serif 4, Georgia, serif"
+  subtitle:
+    fontFamily: "Jost, Century Gothic, system-ui, sans-serif"
+    fontSize: "clamp(1.4996rem, 1.4417rem + 0.2898vw, 1.6663rem)"
+    fontWeight: 600
+    lineHeight: 1.12
+  catalogue-number:
+    fontFamily: "Jost, Century Gothic, system-ui, sans-serif"
     fontSize: "clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem)"
     fontWeight: 400
     lineHeight: 1.6
   label:
     fontFamily: "Jost, Century Gothic, system-ui, sans-serif"
     fontSize: "clamp(0.844rem, 0.8113rem + 0.1631vw, 0.9377rem)"
-    fontWeight: 500
+    fontWeight: 400
+    lineHeight: 1.45
     letterSpacing: "0.06em"
+  standfirst:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "clamp(1.4996rem, 1.4417rem + 0.2898vw, 1.6663rem)"
+    fontWeight: 400
+    lineHeight: 1.4
+  body:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem)"
+    fontWeight: 400
+    lineHeight: 1.6
+  quote:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "clamp(1.4996rem, 1.4417rem + 0.2898vw, 1.6663rem)"
+    fontWeight: 400
+    lineHeight: 1.35
 rounded:
   sharp: "0px"
+  hairline: "2px"
   default: "6px"
   pill: "999px"
 spacing:
@@ -56,13 +79,42 @@ spacing:
   7: "96px"
   8: "128px"
 components:
+  catalogue-row:
+    backgroundColor: "{colors.bg}"
+    textColor: "{colors.body-text}"
+    typography: "{typography.title}"
+    rounded: "{rounded.sharp}"
+    padding: "16px 0"
+  catalogue-row-hover:
+    backgroundColor: "{colors.bg-alt}"
+    textColor: "{colors.ultramarine-ink}"
+  label-plate:
+    backgroundColor: "{colors.bg}"
+    textColor: "{colors.ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.sharp}"
+    padding: "8px 16px"
+  fact-grid-outcome:
+    backgroundColor: "{colors.signal-red}"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.sharp}"
+    padding: "24px"
+  fact-grid-learnings:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.sharp}"
+    padding: "24px"
+  pull-quote:
+    textColor: "{colors.ink}"
+    typography: "{typography.quote}"
+    padding: "24px 0 0"
   button-primary:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.on-dark}"
     rounded: "{rounded.pill}"
     padding: "8px 24px"
   button-primary-hover:
-    backgroundColor: "{colors.signal-red-ink}"
+    backgroundColor: "{colors.ultramarine-ink}"
     textColor: "{colors.on-dark}"
   button-outline:
     backgroundColor: "transparent"
@@ -72,240 +124,305 @@ components:
   button-outline-hover:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.on-dark}"
-  tag:
-    backgroundColor: "{colors.bg-alt}"
+  input-field:
+    backgroundColor: "{colors.bg}"
     textColor: "{colors.body-text}"
-    rounded: "{rounded.pill}"
-    padding: "4px 16px"
+    typography: "{typography.body}"
+    rounded: "{rounded.default}"
+    padding: "16px"
 ---
 
 # Design System: Nikos Saoulidis — Portfolio
 
 ## Overview
 
-**Creative North Star: "The Ink Ledger"**
+**Creative North Star: "The Collection Catalogue"**
 
-The system reads like a ledger, not a brochure: flat ink-gapped grids, sharp
-corners, and a restraint borrowed from real Mondrian compositions, which are
-mostly white space with one or two color accents, never a filled block per
-cell. The first attempt at the Outcome/Learnings fact-grid filled every cell
-and read as messy for exactly that reason — the fix (mostly white, one
-accent cell) is now the rule for every grid on the site, not just that one.
+Every project is an object in a collection, and each one is shown the way a
+museum catalogue shows it: a number, a label and a status first, then the
+story. The homepage is page one of that catalogue. It has a name, one
+positioning line, three Kandinsky forms as a still composition, and a
+numbered index ruled in ink with a display case beside it. Each case study is
+a catalogue entry. It opens with a title and the object's form, a standfirst,
+and a label plate beside a four-line summary. Then come four fixed sections,
+and the page closes on the next object in the collection.
 
-That restraint isn't decorative minimalism; it's an extension of the site's
-actual editorial discipline. Every factual claim on this site traces to a
-primary source (a thesis, a published paper, an internal deck), and two real
-errors have already been caught this way. The visual system is built to look
-like it's keeping the same kind of honest record: flat color fields instead
-of gradients, hairline borders instead of drop shadows, a numeral or a label
-plate instead of an unlabeled photo. Shadows are reserved for the handful of
-things that are actually physical objects in life — a post-it note, a
-cutout photograph — never applied as generic "lift."
+The material is paper and ink. The ground is pure white. Type is ink, and the
+page is divided by hairline rules rather than by tinted bands or boxes. The
+three Kandinsky forms (a blue circle, a red square, a gold triangle) are the
+only large areas of colour. Elsewhere colour is a small, functional mark.
+Red is the catalogue's own mark, used for numbers, status and rules. Blue marks what
+you can act on. Structure is set in Jost, a geometric sans with tabular
+catalogue numerals. Reading prose is set in Source Serif 4, and its real
+italic carries the pull-quotes.
 
-The type pairing carries the same duality: **Jost**, a free Futura-homage
-geometric sans, for anything structural (headings, labels, buttons, nav) —
-functional, poster-like, closer to a diagram title than a display font — set
-against **Source Serif 4**, a serif built for on-screen text rather than a
-print revival, for the actual reading experience of the case-study prose.
-Structure is Bauhaus; the reading itself is editorial.
+Depth comes from rules, not shadows. The ledger (index rows, label plates,
+fact-grids, the display case) has sharp corners and ink edges. Soft corners
+belong only to photographs and a few form controls. Shadows appear only on
+things that are physical objects in life: the post-it notes and the About
+page's cut-out photographs.
 
-**Key characteristics:**
-- Mostly white space, one color accent per composition — never every cell filled.
-- Flat color fields; no gradients, no glassmorphism, no soft ambient shadows.
-- Shadows appear only where they represent a real physical object (post-its, cutout photos), never as generic elevation.
-- Sharp corners on the "ledger" family (fact-grid, ink-grid, museum-block, lens, label-plate captions); a small 6px softening only on photographic/color containers (images, video, the post-it board's notes).
-- Fully round (pill) shapes are reserved for interactive affordances only (buttons, tags) — never for content containers.
+**Key Characteristics:**
+- White ground, ink type, hairline rules. Sections are divided by rules, never by background banding.
+- Three Kandinsky forms carry the only large colour: circle = Don't Be a Stranger (blue), square = EWP (red), triangle = Ericsson (gold).
+- Red is the catalogue mark, blue is the interactive colour, and gold appears only in the forms and in diagrams.
+- Jost for structure with tabular numerals; Source Serif 4 for prose and its italic for quotes.
+- Sharp corners and ink edges on the ledger; a soft 6px only on photographs and form fields.
+- Every mark is a drawn SVG shape. Text glyphs are never used as icons.
 
 ## Colors
 
-Three brand colors, restrained to one accent per composition, plus a
-functional neutral scale built for a pure-white page.
+A white page with ink type. Three Bauhaus colours each have one job, so each colour's meaning stays readable.
 
 ### Primary
-- **Signal Red** (`#BE1E2D`): tags, eyebrow labels, the short rule above a pull-quote, the fact-grid's default accent cell, focus outlines. The most-used accent; carries urgency without being alarmist.
+- **Signal Red** (catalogue mark): the Outcome cell of every fact-grid, the 3px rule above a pull-quote, the square form (EWP), and Röhsska's museum coding on Don't Be a Stranger (a 4px top edge on a museum block, and the top tab on a caption plate).
+- **Signal Red Ink** (red as text): catalogue numbers (01, 02, 01a…), status lines on index rows and label plates, and the Result row of a sub-record. Any red that is text uses this value.
 
 ### Secondary
-- **Ultramarine** (`#21409A`): project titles, inline prose links, the alternate (blue) fact-grid/museum accent. Used wherever the red accent is already spoken for on the same composition (e.g. the two-museum color coding: red = Röhsska, blue = Mölndal).
+- **Ultramarine** (interactive): inline prose links (with a 35% tint underline), the dotted nav underline, the ::selection tint (18% mixed into white), the circle form (Don't Be a Stranger), and Mölndal's museum coding on DBAS.
+- **Ultramarine Ink** (interactive state): the focus ring, the text caret, the hover and focus colour of index titles, summary labels, sub-index links and the next-object title, the primary button's hover fill, and the lens disclosure's +/− mark.
 
 ### Tertiary
-- **Ochre Gold** (`#C9A227`): decorative only — pill fills, borders, large numerals, the `[BREAK]` band tint (`--paper`). Never used as text at its bright value; too light to pass WCAG AA.
+- **Ochre Gold** (form only): the triangle form (Ericsson) and nothing else in CSS. Gold also appears in Nikos's own diagrams, which are raster images. It never carries text or UI.
 
 ### Neutral
-- **Ink** (`#16161A`): headings, primary text, default button fill.
-- **Body** (`#33333A`): paragraph text.
-- **Muted** (`#6A6A73`): captions, meta labels, form borders (chosen over the lighter hairline specifically for WCAG 1.4.11's 3:1 UI-boundary requirement).
-- **Bg** (`#FFFFFF`): page background, kept pure white so white-background source images (screenshots, product renders) don't show a seam.
-- **Bg Alt** (`#F4F1EC`): section banding, alternating with Bg.
-- **Paper** (`#F3E9D6`): the warm gold-tinted background reserved for Don't Be a Stranger's "refusal" break-bands and the post-it board.
-- **Hairline** (`#E6E2DB`): borders, dividers.
+- **Ink**: headings, the name, index titles, label-plate values, the 1px ink rules (index head, summary top, section-heading rules, plate borders, display-case frame), the fact-grid's 3px frame and gaps, and the Learnings cell.
+- **Body**: paragraph text and row summaries.
+- **Muted**: plate field names, index column heads, meta lines, captions, footer links, and form-field borders (it clears the 3:1 contrast WCAG 1.4.11 requires for UI boundaries, and hairline does not).
+- **Bg**: the only page ground, kept pure white so white-background screenshots and renders don't show a seam.
+- **Bg Alt**: a warm tint used only for small surfaces. It is the index-row hover, the matte behind contained images in the display case, and the placeholder behind thumbnails. It is never a section background.
+- **Paper**: the post-it notes on DBAS, sometimes mixed with 10% red or blue.
+- **Hairline**: the dividing rule between rows, plate fields, summary lines and the header/footer edges.
+- **On-dark**: text on red, ink or blue fills.
 
 ### Named Rules
-**The Ink-Text Rule.** Gold never carries text at its bright value — always substitute `ochre-gold-ink` (`#7A5E13`) the moment gold needs to be legible as a label or eyebrow, since bright gold fails WCAG AA (2.42:1) as text.
+**The One-Job Rule.** Red marks the catalogue (numbers, status, rules, the Outcome cell). Blue marks what you can act on (links, focus, hover, the lens mark). Gold appears only as the triangle. If you cannot say which job a colour is doing, it should not be there.
 
-**The One-Accent Rule.** Every Mondrian-style grid (fact-grid, ink-grid) gets exactly one colored accent cell — red by default, blue as the sole alternate for museum color-coding — never more, never a filled-every-cell treatment.
+**The Forms-Carry-Colour Rule.** The three Kandinsky forms are the only large areas of colour on the site. Every other use of colour is a mark: a number, a rule, a tab, one accent cell. The forms follow the collection: circle = Don't Be a Stranger, square = EWP Dashboard, triangle = Ericsson. They appear in the homepage composition, beside each index number, in the label plate's No. row, after the case-study title, and after the next-object title.
+
+**The Museum-Coding Exception.** Don't Be a Stranger keeps its two-museum colour coding: red = Röhsska, blue = Mölndal. It is used only as a museum block's 4px top edge and a caption plate's 4px top tab. It is local to that study and does not change the global colour jobs.
 
 ## Typography
 
-**Display/Structural Font:** Jost (with Century Gothic, system-ui fallback)
-**Body/Reading Font:** Source Serif 4 (with Georgia, serif fallback)
+**Structural Font:** Jost (with Century Gothic, system-ui fallback)
+**Reading Font:** Source Serif 4 (with Georgia fallback), with a real italic file
+**Numerals:** Jost with `font-variant-numeric: tabular-nums`
 
-**Character:** a functional geometric sans paired with a serif built for
-screen reading — structure reads as engineered and labeled, prose reads as
-considered but sturdy. This pairing went through two iterations this
-session: the original Jost+Inter pairing (both sans, one workhorse) was
-first replaced with Jost+EB Garamond, but EB Garamond's thin, high-contrast
-strokes read as too light at body size even pushed to 600 weight (which
-then looked semi-bold, wrong for continuous reading). Source Serif 4's
-lower stroke contrast reads substantial at its normal weight, so the body
-font landed there instead — Jost's structural role is unchanged throughout.
-
-Source Serif 4 is self-hosted the same way as Jost
-(`/fonts/source-serif-4-var.woff2` plus a matching
-`source-serif-4-italic-var.woff2`, latin-subset variable woff2s from Google
-Fonts with the optical-size and weight axes, weight range 400–600; the
-italic file is real, so italics are never browser-synthesized); EB Garamond and Inter's `@font-face`
-declarations and font files have both been removed.
+**Character:** Jost is a Futura-like geometric sans. It sets the catalogue apparatus (names, titles, numbers, labels, plates, nav) and reads like a museum wall label. Source Serif 4 is built for screen reading and sets everything you read continuously. Both are self-hosted variable woff2 files (Jost 400–700, Source Serif 4 400–600 roman and italic), so italics are never synthesized by the browser.
 
 ### Hierarchy
-- **Display** (500, hero clamp 56.8–63.1px, 1.12 line-height): the homepage hero `<h1>` only.
-- **Headline** (500, `--fs-h1` clamp 42.6–47.4px, 1.12): case-study page titles.
-- **Title** (500, `--fs-h2`/`--fs-h3` clamp 24–35.5px, 1.12): section headings within a case study.
-- **Body** (400, `--fs-body` clamp 18–20px, 1.6): all paragraph text; capped at a 720px measure for readability, never full-width.
-- **Label** (500, `--fs-small` clamp 13.5–15px, uppercase, 0.06em tracking): eyebrows, nav links, tags, at-a-glance labels, buttons.
+- **Display** (500, 48–72px fluid, 1.02, −0.02em): the homepage name only.
+- **Headline** (500, 56.8–63.1px, 1.02, −0.02em): the case-study title, followed by its inline form at 0.5em.
+- **Title** (500, 32–35.5px, 1.12): section headings in a case body, and object titles in the homepage index. On phones under 600px the index titles drop to the subtitle size.
+- **Subtitle** (600, 24–26.7px, 1.12): h3 sub-headings and sub-record titles, which carry their catalogue number.
+- **Standfirst** (Source Serif 4, 400, 24–26.7px, 1.4, max 44ch): the one-sentence standfirst under a case-study title. The homepage positioning line uses the same size in Jost.
+- **Body** (Source Serif 4, 400, 18–20px, 1.6, 720px measure): all prose.
+- **Quote** (Source Serif 4 italic, 400, 24–26.7px, 1.35): pull-quotes. The citation is set upright in the small size, in muted.
+- **Catalogue number** (Jost, 400, 18–20px, tabular numerals, signal-red-ink): No. 01–06 in the index, the label plate and the next-object footer, and 01a–01c on the Ericsson sub-records. Minor objects use the small size.
+- **Label** (Jost, 400, 13.5–15px): plate values, meta lines, captions and nav. Set in uppercase with 0.06em tracking only for field names in a record: the index column heads, label-plate and sub-plate field names, and the four summary-row labels.
 
-**Scale method:** the Utopia (utopia.fyi) fluid type-scale approach, Perfect Fourth ratio (1.333), interpolated between a 320px and 1240px viewport via `clamp()` rather than jumping at breakpoints — a deliberately bold step between sizes so headings carry real presence against body text.
+**Scale method:** Utopia fluid scale, Perfect Fourth (1.333), interpolated between 320px and 1240px. The homepage name is the one step outside the scale.
 
 ### Named Rules
-**The Structural-Sans Rule.** Jost is never used for reading prose, only for anything the reader scans rather than reads: headings, labels, nav, buttons, captions-as-labels. Source Serif 4 owns continuous prose exclusively.
+**The Structural-Sans Rule.** Jost sets whatever the reader scans: names, numbers, labels, plates, nav, buttons. Source Serif 4 sets whatever the reader reads. Short display statements inside a composition (ink-grid text cells, post-its) use Jost because they are exhibits, not running text.
+
+**The Tabular-Numeral Rule.** Every catalogue number uses tabular figures in red ink, so 01, 02 and 03 line up in a column the way a printed index does.
+
+**The Two-Quote Rule.** A case study has at most two pull-quotes. A third quote belongs in the prose.
+
+**The Field-Name Rule.** Uppercase tracked labels appear only as field names inside a record (a column head, a plate field, a summary row). They are never a free-floating label above a heading.
 
 ## Layout
 
-A single content container (1120px) with a narrower 720px measure for
-running text — text and images share the same container but text never
-uses the full width. Vertical rhythm between sections runs on the 4px
-spacing scale's largest steps (64px mobile, 96px desktop). A `.breakout`/
-`.full-bleed` escape (100vw, negative-margin centering) exists specifically
-for images and image grids that benefit from more room than 1120px gives
-them — never for body text, at-a-glance facts, or pull-quotes, which stay
-narrow on purpose.
+One 1120px container with 24px side padding, and a 720px reading measure.
+Section rhythm uses the spacing scale's large steps: 64px vertical padding on
+mobile and 96px from 768px up. The sticky header is 72px tall and uses a
+hairline bottom rule.
 
-**Case studies are single-column only.** A two-column "sticky media" layout
-(text scrolling beside a pinned image) was built, then explicitly retired —
-it read as "still there, just not easy to read" even after several repair
-attempts. Every case study now uses the same skeleton: full-width text in
-the 720px measure, images breaking out to full width when they need room,
-never side-by-side with running text.
+**Homepage.** The intro is a 7:5 grid from 900px: the name and positioning
+lines on the left, the three-form composition on the right (320px wide, 3:2,
+multiply-blended where the forms overlap). Below it, the catalogue is an 8:4
+grid from 1000px. The index runs on the left and a sticky display case
+(1:1, ink-framed, 96px below the top) sits on the right. Index rows are a
+three-column ledger: number, object (title, year · medium, one-line summary)
+and a right-aligned status. The rows sit under an ink-ruled column head and
+are divided by hairlines. Three main objects are followed by "Also in the collection" (04–06) at a smaller size.
+Hovering or focusing a row swaps its image into the display case and brings
+its form forward in the composition (the other forms fade to 14%). This is done with
+CSS `:has()` only and works without JavaScript. Under 1000px there is no
+display case. Each main row gets its own 3:2 photo plate above it, and each minor
+row gets a 64px square thumbnail. Under 600px the column head is hidden and
+the status moves under the title.
+
+**Case study.** The head sits in the container. It has the title, the standfirst, then a
+5:7 grid from 900px with the label plate on the left and the four-line summary on the
+right, then the hero image or video. The body is a grid with named lines:
+a `full` track and a `content` track. The content track's left edge is the
+container's left edge, so prose and headings share the site's one left edge.
+Breakout figures span `full` from the same grid, capped at 1600px. The
+four sections always carry the same ids: `problem`, `what-i-did`,
+`how-it-went`, `what-i-learned`. Each opens with a 1px ink rule above its
+heading. The page closes with an ink-ruled next-object footer.
 
 ### Named Rules
-**The Single-Column Rule.** No case-study section pairs running text with a
-sticky or side-by-side image column. If an image needs to sit beside
-something, it sits beside another image (`.figure-grid`), not beside prose.
+**The One-Left-Edge Rule.** Everything that is text shares the container's left edge: prose, headings, plates, quotes. Only images break out, and they break out to the full track of the same grid. They never break out by translating off the viewport.
+
+**The Single-Column Rule.** Running text is never paired with a sticky or side-by-side image column. An image sits beside another image (figure grid), never beside prose. The homepage display case is an index device, not a reading layout.
+
+**The Rules-Not-Bands Rule.** Sections are separated by a hairline or ink rule on white. Tinted full-width section bands are not part of this world.
 
 ## Elevation & Depth
 
-Flat by default. The ledger family (fact-grid, ink-grid, museum-block, lens
-disclosures, label-plate captions, card-stack frame) uses hairline borders
-and flat color fields exclusively — no shadow, no blur, ever.
+Flat by default. Depth comes from rule weight: a hairline between items, a 1px
+ink edge around a record, and a 3px ink frame around a fact-grid. The one
+translucent surface is the sticky header (white at 92% with a 6px backdrop
+blur), so content scrolling underneath softens rather than showing a hard
+seam.
 
 ### Shadow Vocabulary
-- **Post-it lift** (`box-shadow: 0 6px 16px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08)`, deepening on hover): the one place shadows are real, because a post-it board's post-its are literally paper notes that cast a real shadow off the page.
-- **Cutout-photo drop** (`filter: drop-shadow(0 12px 20px rgba(22,22,26,.18))`): the About page's leaning, die-cut photo cluster — the shadow reads as the photo itself lifted off the page, not as a UI elevation cue.
+- **Post-it lift** (`0 6px 16px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08)`, deepening to `0 12px 26px rgba(0,0,0,.2)` on hover): DBAS's visitor post-its, which were real paper notes.
+- **Cut-out drop** (`drop-shadow(0 12px 20px rgba(22,22,26,.18))`): the About page's die-cut photo cluster.
 
 ### Named Rules
-**The Physical-Object Exception.** A shadow is only ever added because the thing it's attached to is a real physical object in life (a note, a cut photograph) — never as a generic "this element floats above the page" affordance. If nothing in the real world would cast that shadow, the element stays flat.
+**The Physical-Object Exception.** A shadow exists only because the thing it belongs to is a physical object in life (a note, a cut photograph). Nothing in the ledger casts one.
 
 ## Shapes
 
-Three deliberately distinct corner languages, each tied to a role rather than applied uniformly:
+- **Sharp** (0): the ledger. Index rows, the display case and its images, label plates, sub-plates, the four-line summary, fact-grids, ink-grids, museum blocks, lens disclosures, caption plates and the boxed rules. Sharp corners are what make it read as a record.
+- **Soft** (6px): photographs outside the ledger (figures, the hero image and video, phone plates), form fields and the skip link.
+- **Hairline** (2px): the square phone thumbnails and the focus ring's corners.
+- **Pill** (999px): action buttons only (contact actions, the hero-video sound toggle).
 
-- **Pill** (`border-radius: 999px`): interactive affordances only — buttons, tags. Signals "you can act on this."
-- **Soft** (`border-radius: 6px`): photographic and colored-block containers — images, the hero video, project cards, the fact-grid's outer edge. A small enough radius to feel considered without softening the flat-color language.
-- **Sharp** (no radius): the ledger family itself — ink-grid cells, museum-block, lens disclosures, label-plate captions, the card-stack frame. These are meant to read as a grid or a record, and a rounded corner would undercut that.
+**The Kandinsky forms** are the site's one geometric motif. They are drawn as SVG: a circle, an inset square and an upward triangle, each in its own colour, always `aria-hidden`.
+
+**Drawn marks only.** Every mark is drawn: the forms, the lens +/− (an SVG mask in ultramarine-ink), the summary row's down arrow (an SVG mask that appears on hover or focus), and the hamburger bars. No text character is ever used as an icon.
 
 ## Components
 
-### Buttons
-- **Shape:** pill (999px), two variants.
-- **Primary (`.btn`):** ink background, white text. Hover fills signal-red-ink, white text set explicitly (not inherited) — see the Named Rule below, born from a real bug.
-- **Outline (`.btn-outline`):** transparent background, ink text, hairline border. Hover fills solid ink with white text (shadcn's "outline fills on hover" convention).
+### Catalogue index row
+- **Character:** one ledger line per object. It is a single link covering the number with its form, the title, year · medium, a one-line summary and a right-aligned red status.
+- **States:** hover tints the row bg-alt and turns the title ultramarine-ink. Keyboard focus draws the focus ring inside the row (−2px offset) and triggers the same display-case swap as hover.
+- **Minor rows (04–06):** smaller title and number, no form. They link out in a new tab, with the link label in ultramarine-ink and "(opens in a new tab)" for screen readers.
 
-### Named Rules
-**Every State Sets Both.** Every button state (default, hover, focus) sets background-color and text-color together, never one without the other. This exists because an earlier version set only a hover background on `.btn`, and `.btn-outline` (which inherits `.btn`) picked up that dark-red background without ever getting its own hover text color — producing invisible near-black-on-dark-red text.
+### Display case
+- **Character:** a sticky, ink-framed 1:1 case holding one image at a time. It has an ink-ruled caption strip ("No. 01 — Ericsson").
+- **Behaviour:** object 01 shows by default. Any row's hover or focus crossfades in its own image (0.45s). Contained images (diagrams, screenshots) sit on a bg-alt matte with 24px padding. The case is desktop-only and `aria-hidden`, because the index already carries the content.
 
-### Tags / Pills
-- **Style:** pill, bg-alt background, hairline border, body-color text. Used for case-study skill tags; a colored-text variant (`.tag-word`, `.row-eyebrow`) appears only on homepage project rows.
+### Label plate
+- **Character:** the catalogue record. A 1px ink-bordered, sharp definition list whose rows are divided by hairlines.
+- **Rows:** No. (red tabular number and the form), Year, Medium, then Role / Where / Worked with from the study's frontmatter, then Status. Status sits under a 1px ink rule and is set in red ink at weight 500.
+- **Field names:** uppercase muted labels in a fixed 7.5rem column. Values are Jost small in ink.
 
-### Cards / Containers — the Ledger family
-- **Fact-grid** (Outcome/Learnings): asymmetric two-column grid, 3px ink gaps between cells (not borders — the background itself is ink, cells are white insets), one accent cell spanning two rows in signal-red or ultramarine, everything else plain white. Soft 6px radius on the outer edge only.
-- **Ink-grid** (case-study "moments"/lens-adjacent grids): the same ink-gap mechanism generalized to two-or-more text or photo cells, sharp corners throughout, no outer radius.
-- **Museum-block:** a hairline-bordered block with a 4px colored top edge (red = Röhsska, blue = Mölndal) — a paragraph and its own photo merged into one bordered unit rather than separate elements.
-- **Label-plate caption (`.cap-plate`):** an ink-bordered caption sitting directly under an image, with a colored tab on its left edge (same red/blue museum coding) — used where a caption needs visual weight of its own, not just muted figcaption text.
+### Four-line summary
+- **Character:** the entry's skim layer. Four linked rows (The problem, What I did, How it went, What I learned) under an ink rule, divided by hairlines. Each row jumps to its section id.
+- **States:** hover or focus turns the label ultramarine-ink and shows a drawn down arrow.
 
-### Disclosures
-- **Lens (`.lens`, a native `<details>`):** a full-width hairline-bordered card; the closed question is the clickable summary, the answer is hidden until opened. A `+`/`−` glyph in signal-red marks state. Zero-JS.
-- **Card-stack:** radio-input-driven "rolodex" gallery — one card visible at a time in normal flow (never CSS Grid stretch, which caused a real dead-space bug), with a permanent offset ink-and-hairline frame behind it suggesting the rest of the stack. Zero-JS, animated via `@starting-style` where supported, an instant swap everywhere else.
+### Fact-grid (Outcome / Learnings)
+- **Character:** a Mondrian ledger that is mostly white. A 1.4:1 two-column grid with a 3px ink frame and 3px ink gaps. It has sharp corners.
+- **Placement:** it opens "How it went" (Outcome) and "What I learned" (Learnings), so the payoff leads its section.
+- **Accent:** exactly one accent cell, which spans two rows. It is signal red for Outcome and ink for Learnings. The stat is Jost 700 at subtitle size in on-dark. The other cells are white, with the text in ink.
+- **Mobile:** one column under 640px.
 
-### Navigation
-- **Style:** Jost label type, dotted blue underline animating in on hover/focus (`transform: scaleX()`), solid instead of dotted for the current page (`aria-current="page"`). Mobile collapses to a full-screen stacked menu; a no-JS fallback renders the links as a plain static row.
+### Sub-record (Ericsson 01a–01c)
+- A sub-index of the three cases under an ink rule. Each case then gets a numbered subtitle, a standfirst-size lead line in ink, and a two-row ink-bordered sub-plate (My part / Result, with Result in red ink). It renders only the heading and plate, so breakout figures stay direct children of the body grid.
 
 ### Pull-quote
-- **Default (`blockquote.pull`):** Jost at `--fs-h2`, ink, 720px measure, with a short 3px signal-red rule (64px wide) sitting *above* the quote. That's the same colored-top-edge language as museum-block, never a full-height left border.
-- **Boxed (`variant="boxed"`):** a 1px ink border with no fill and no red rule, at `--fs-h3`, for a standout statement or question. It borrows the bordered-title language from Nikos's own thesis diagrams.
+- **Default:** Source Serif 4 italic at subtitle size, in ink, within the 720px measure, under a short 3px signal-red rule (64px wide) that sits above the quote. The citation is upright small muted text, and the component adds the em dash itself.
+- **Frequency:** at most two per study (Ericsson 2, DBAS 2, EWP 1).
+
+### Figures
+- **Default:** a 6px-radius image with a muted small caption. **Diagram:** a centred italic caption. **Plate:** a hairline-bordered Jost caption plate under a supporting image. On DBAS it carries a 4px red or blue top tab for museum coding.
+- **Figure grid:** 2 or 3 columns from 640px, cropped to 4:3. The `natural` modifier keeps the source ratios where cropping would cut a label.
+
+### DBAS-only exhibits
+- **Museum pair / block:** a hairline-bordered block with a 4px red (Röhsska) or blue (Mölndal) top edge. It merges a paragraph and its annotated photo.
+- **Ink-grid:** the fact-grid's ink-gap mechanism applied to text and photo cells. Photos crop to 3:4 unless `natural`.
+- **Lens disclosure:** a native `<details>` in a hairline-bordered sharp card with a Jost 700 question and a drawn ultramarine-ink +/− mark. It uses no JavaScript.
+- **Post-it board:** five paper notes with fixed rotations that straighten and lift on hover (see Elevation).
+- **Hero video:** an autoplaying muted loop with an ink pill "Turn sound on" toggle that goes ultramarine-ink on hover.
+
+### Next-object footer
+- Under a 1px ink rule: "No. 0X", the next object's title at headline-1 size (42.6–47.4px), and its form. It turns ultramarine-ink on hover or focus. Below it sit an email line and a link back to the collection.
+
+### Navigation
+- **Style:** Jost small in body colour, with a 72px sticky header. On hover or focus a 3px dotted ultramarine underline scales in from the left. The current page gets a solid underline. CV is marked "(PDF)" in muted.
+- **Mobile (≤640px):** a three-bar toggle that crosses into an X and opens a full-screen stacked menu at subtitle size. Without JavaScript the links render as a plain static list.
+
+### Buttons and fields (contact page)
+- **Primary:** an ink pill with on-dark text. Hover goes to ultramarine-ink. **Outline:** a transparent pill with a muted border and ink text. Hover fills with ink and on-dark text. Every state sets background and text colour together.
+- **Fields:** 1px muted border, 6px radius, white fill, body-size text. Focus moves the border to ultramarine-ink and adds the focus ring. Labels are Jost small in ink, and hints are muted small.
+
+### Browser surfaces and motion
+- **Selection:** ultramarine mixed 18% into white, with ink text. **Caret:** ultramarine-ink.
+- **Title view transition:** each main object's index title and its case-study title share a `view-transition-name` (obj-01…03). The title glides between the two views on navigation (0.45s, `cubic-bezier(.16,1,.3,1)`), and other same-origin navigations crossfade. This is disabled under reduced motion.
+- **Easing:** the same expo-out curve drives the display-case crossfade and the forms coming forward (0.6s). Colour changes run 0.15–0.25s.
 
 ## Pattern inventory (frozen)
 
-This is the complete set of visual patterns the site ships, checked against real usage on
-2026-09-23. 46 unused classes were deleted in that pass: the old site's poster blocks,
-stepper, term strip, guideline cards, embeds, image clusters, portrait caps and
-sticky-media. **The set is closed. A new pattern ships only after it is added here first,
-with the page that needs it and why no existing pattern fits.**
+This is the complete set of patterns the site ships, checked against the build on 2026-09-23. **The set is closed. A new pattern ships only after it is added here first, with the page that needs it and a reason no existing pattern fits.**
 
 | Pattern | Class / component | Where it's used |
 |---|---|---|
-| At-a-glance facts, with a full-width Outcome row (`.glance-outcome`, set by the label "Outcome") | `AtAGlance` / `.at-a-glance` | every case study |
-| Hero video + sound toggle | `.hero-video` | DBAS |
-| Figure: default, diagram, overlay, plate | `Figure` / `.cap-overlay`, `.cap-plate` | all case studies |
-| Figure grid | `.figure-grid.cols-2/3` | Ericsson, EWP |
-| Full-bleed breakout | `.breakout`, `.full-bleed` | all case studies |
-| Pull-quote | `PullQuote` / `blockquote.pull` | all case studies |
-| Fact-grid (Outcome/Learnings) | `.fact-grid` | every case study |
-| Ink-grid | `.ink-grid` | DBAS |
-| Museum-block | `.museum-block` | DBAS |
-| Lens disclosure | `.lens` | DBAS |
-| Card-stack | `.card-stack` | DBAS |
-| Post-it board | `PostitBoard` | DBAS |
-| Break band | `BreakBand` | DBAS |
+| Kandinsky forms | `KForm` / `.kform-circle/-square/-triangle` | homepage composition and index, label plate, case title, next-object footer |
+| Catalogue intro | `.cat-intro`, `.cat-forms` | homepage |
+| Catalogue index (main + minor rows) | `.cat-index`, `.cat-row`, `.cat-head` | homepage |
+| Display case | `.cat-case`, `.cat-case-item` | homepage (≥1000px) |
+| Phone plates and thumbnails | `.cat-plate`, `.cat-thumb` | homepage (<1000px) |
+| Catalogue entry head | `.obj-head`, `.obj-title`, `.obj-standfirst`, `.obj-record` | every case study |
+| Label plate | `LabelPlate` / `.label-plate` | every case study |
+| Four-line summary | `.obj-summary` | every case study |
+| Case body (named-lines grid) | `.case-body` | every case study |
+| Fact-grid (Outcome/Learnings) | `FactGrid` / `.fact-grid` | every case study; DBAS also uses it inline for its research question |
+| Pull-quote | `PullQuote` / `blockquote.pull` | every case study |
+| Figure: default, diagram, plate | `Figure` / `.cap-plate` | every case study |
+| Figure grid (+ `natural`) | `.figure-grid.cols-2/3` | Ericsson, EWP, DBAS |
+| Supporting figure | `.figure-support` | DBAS |
+| Breakout | `.breakout` | every case study |
+| Hero image / video | `.hero-figure`, `.hero-video` | every case study; video on DBAS |
+| Sub-records | `SubRecord` / `.sub-index`, `.sub-plate` | Ericsson |
 | Column grid | `.col-grid.cols-3` | Ericsson |
-| Project rows and cards | `.project-row`, `ProjectCard` | homepage |
+| Museum pair / block | `.museum-pair`, `.museum-block` | DBAS |
+| Ink-grid | `.ink-grid` | DBAS |
+| Lens disclosure | `.lens` | DBAS |
+| Post-it board | `PostitBoard` | DBAS |
+| Next-object footer | `.obj-next` | every case study |
 | Photo cluster | `.photo-cluster` | About |
-
-Seven of the eleven case-study patterns are used only on DBAS. That's the pattern sprawl
-the replan diagnosed, and the DBAS structural fix shouldn't add to it.
+| CV entries | `.about-grid`, `.entry`, `.col-heading` | About |
+| Buttons | `.btn`, `.btn-outline` | Contact |
+| Form fields | `.form-field` | Contact |
 
 ## Accessibility commitments
 
-Carried over from the retired `DESIGN-SYSTEM.md`. These are the checks run before any cutover:
+These are the checks run before any cutover:
 
-- One accent per semantic role (never more than the three), and always the `-ink` variant for text, verified against WCAG AA.
-- `lang="en"`, a skip link, one `<h1>` per page, no skipped heading levels.
-- Every meaningful image has real `alt` text; decorative images get `alt=""`.
-- Visible `:focus-visible` states on every interactive element, including the dotted/solid nav underline (keyboard focus triggers it, not just mouse hover).
-- `prefers-reduced-motion` disables all transitions and animations.
-- Works fully with JavaScript disabled (progressive enhancement only).
+- Any colour that carries text uses its `-ink` value (signal-red-ink for numbers and status, ultramarine-ink for interactive states). Bright gold never carries text.
+- `lang="en"`, a skip link, one `<h1>` per page, no skipped heading levels. The index has a visually hidden "The collection" heading.
+- Every meaningful image has real `alt` text. Images that repeat what a row already says (phone plates, thumbnails, display-case images) use `alt=""`. The forms and the display case are `aria-hidden`.
+- A visible `:focus-visible` ring (2px ultramarine-ink, 3px offset) on every interactive element. Keyboard focus triggers every hover behaviour: display-case swap, form forward, nav underline, summary arrow.
+- Form-field edges use muted for 3:1 UI contrast.
+- `prefers-reduced-motion` disables all transitions, animations and view transitions.
+- Works fully without JavaScript. The display case, disclosures and nav fallback are HTML and CSS only.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep exactly one colored accent per Mondrian-style grid composition — mostly white space, never a filled-every-cell treatment.
-- **Do** set background-color and text-color together on every interactive state.
-- **Do** use `ochre-gold-ink`, never bright `ochre-gold`, whenever gold needs to carry legible text.
-- **Do** reserve shadows for things that are physical objects in real life (post-its, cutout photos).
-- **Do** keep every case-study section single-column; pair an image with another image, never with running text beside it.
+- **Do** give every object a number, a form and a status, and open every case study with the title, standfirst, label plate and four-line summary.
+- **Do** keep the four section ids fixed (`problem`, `what-i-did`, `how-it-went`, `what-i-learned`) and open the last two with a fact-grid.
+- **Do** set catalogue numbers in Jost with tabular numerals in signal-red-ink.
+- **Do** keep colour to its job: red for catalogue marks, blue for interaction, gold only in the triangle and diagrams.
+- **Do** separate sections with a hairline or ink rule on white.
+- **Do** keep one accent cell per fact-grid (red for Outcome, ink for Learnings) and leave the other cells white.
+- **Do** draw marks as SVG shapes, and give every hover behaviour a matching `:focus-visible` trigger.
+- **Do** set background and text colour together on every interactive state.
 
 ### Don't:
-- **Don't** add drop shadows, blur, or soft ambient elevation to the ledger family (fact-grid, ink-grid, museum-block, lens, label-plate captions) — they stay flat and hairline-bordered.
-- **Don't** reintroduce a two-column sticky-media case-study layout — tried, retired, and the reason ("still there, just not easy to read") is on record.
-- **Don't** use Inter or EB Garamond for body copy — both tried and retired this session in favor of Source Serif 4; Jost remains structural-only and was never body copy.
-- **Don't** add a persistent floating in-page navigation rail (rotated-text rail, fanned cards) — tried twice, both read as "awkward." The plain inline "jump to a case" text link already works and needs no component.
-- **Don't** mark a card or quote with a thick colored left border (the generic "side-tab" accent). Pull-quotes use a short rule on top instead; two earlier left-bordered cards (decision, email) were removed as unused.
-- **Don't** apply a rounded corner to anything in the ledger family — sharp corners are what signal "this is a record," not decoration to soften.
+- **Don't** band sections with a tinted background. Bg-alt is for a row hover or an image matte, never a section.
+- **Don't** put a kicker, eyebrow or pill tag above a heading or on an index row. Uppercase tracked text is only a field name inside a record.
+- **Don't** round the ledger. Index rows, plates, fact-grids and the display case keep sharp corners.
+- **Don't** add shadows or blur to anything that is not a physical object.
+- **Don't** use a text glyph (+, →, ↓, •) as an icon. Draw it.
+- **Don't** use gold for text, links or UI, or a Kandinsky form for anything other than its object.
+- **Don't** mark a card or quote with a thick coloured left border. The pull-quote's rule sits on top.
+- **Don't** add more than two pull-quotes to a study.
+- **Don't** reintroduce a two-column sticky-media reading layout or a floating in-page nav rail. Both were tried and retired.
+- **Don't** set body copy in Inter or EB Garamond. Both were tried and retired for Source Serif 4.

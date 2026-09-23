@@ -1,136 +1,575 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-21T00:00:00Z",
+  "generatedAt": "2026-09-23T00:00:00Z",
   "title": "Design System: Nikos Saoulidis — Portfolio",
   "extensions": {
     "colorMeta": {
-      "signal-red": {
-        "role": "primary",
-        "displayName": "Signal Red",
-        "canonical": "#BE1E2D",
-        "tonalRamp": ["#3D0A0F", "#5C1017", "#7B171F", "#9A1D27", "#BE1E2D", "#D14A55", "#E28289", "#F3C3C7"]
-      },
-      "ultramarine": {
-        "role": "secondary",
-        "displayName": "Ultramarine",
-        "canonical": "#21409A",
-        "tonalRamp": ["#0A1533", "#101F4D", "#162A67", "#1B3580", "#21409A", "#4C68B3", "#8AA0D2", "#C7D2EA"]
-      },
-      "ochre-gold": {
-        "role": "tertiary",
-        "displayName": "Ochre Gold",
-        "canonical": "#C9A227",
-        "tonalRamp": ["#3F3209", "#5E4B0D", "#7D6512", "#A57F1D", "#C9A227", "#D6B858", "#E4CE8E", "#F2E4C3"]
-      },
       "ink": {
         "role": "neutral",
         "displayName": "Ink",
-        "canonical": "#16161A",
-        "tonalRamp": ["#000000", "#0B0B0D", "#16161A", "#3A3A40", "#5E5E66", "#83838C", "#B4B4BA", "#E6E6E9"]
+        "canonical": "oklch(20.2% 0.008 285.7)",
+        "purpose": "Headings, index titles, ink rules and frames, Learnings cell.",
+        "tonalRamp": [
+          "#0B0B0E",
+          "#232428",
+          "#3F3F44",
+          "#5D5D62",
+          "#7F8085",
+          "#A4A4A9",
+          "#CACAD0",
+          "#EEEEF4"
+        ]
+      },
+      "body-text": {
+        "role": "neutral",
+        "displayName": "Body",
+        "canonical": "oklch(32.4% 0.012 285.7)",
+        "purpose": "Paragraph text and row summaries.",
+        "tonalRamp": [
+          "#0B0A10",
+          "#23232A",
+          "#3F3F46",
+          "#5D5D64",
+          "#7F7F87",
+          "#A4A4AC",
+          "#C9C9D2",
+          "#EDEDF7"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "oklch(52.7% 0.014 285.9)",
+        "purpose": "Field names, column heads, meta, captions, form borders (3:1).",
+        "tonalRamp": [
+          "#0B0A11",
+          "#23232B",
+          "#3F3F47",
+          "#5D5D65",
+          "#7F7F88",
+          "#A3A3AD",
+          "#C9C9D3",
+          "#EDEDF8"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Bg",
+        "canonical": "oklch(100.0% 0.000 89.9)",
+        "purpose": "The only page ground: pure white.",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#808080",
+          "#A4A4A4",
+          "#CACACA",
+          "#EEEEEE"
+        ]
       },
       "bg-alt": {
         "role": "neutral",
         "displayName": "Bg Alt",
-        "canonical": "#F4F1EC",
-        "tonalRamp": ["#B5A98F", "#CFC5B0", "#E3DCCE", "#EEE9DF", "#F4F1EC", "#F8F6F2", "#FBFAF8", "#FFFFFF"]
+        "canonical": "oklch(95.9% 0.007 80.7)",
+        "purpose": "Row hover tint, contained-image matte, thumbnail placeholder. Never a section band.",
+        "tonalRamp": [
+          "#0D0B08",
+          "#262420",
+          "#423F3B",
+          "#605D59",
+          "#82807B",
+          "#A7A49F",
+          "#CDCAC5",
+          "#F1EEE9"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(93.7% 0.027 83.5)",
+        "purpose": "DBAS post-it notes only.",
+        "tonalRamp": [
+          "#0E0B05",
+          "#28231B",
+          "#443F35",
+          "#635D51",
+          "#877F72",
+          "#ACA494",
+          "#D3C9B8",
+          "#F7EDDA"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(91.4% 0.010 81.8)",
+        "purpose": "Dividing rules between rows, fields and summary lines; header and footer edges.",
+        "tonalRamp": [
+          "#0D0B07",
+          "#27241E",
+          "#423F3A",
+          "#615D57",
+          "#838079",
+          "#A8A49D",
+          "#CECAC3",
+          "#F2EEE7"
+        ]
+      },
+      "signal-red": {
+        "role": "primary",
+        "displayName": "Signal Red",
+        "canonical": "oklch(51.8% 0.192 23.4)",
+        "purpose": "Catalogue mark: Outcome cell, pull-quote rule, square form, Röhsska coding.",
+        "tonalRamp": [
+          "#210000",
+          "#4B0007",
+          "#7C0214",
+          "#AF0D24",
+          "#D84548",
+          "#FD7370",
+          "#FEB5B0",
+          "#FFE8E7"
+        ]
+      },
+      "signal-red-ink": {
+        "role": "primary",
+        "displayName": "Signal Red Ink",
+        "canonical": "oklch(41.9% 0.154 23.5)",
+        "purpose": "Red as text: catalogue numbers, status, sub-record Result.",
+        "tonalRamp": [
+          "#220000",
+          "#4C0007",
+          "#7C0114",
+          "#A03033",
+          "#C55A58",
+          "#E9837E",
+          "#FCB6B1",
+          "#FEE9E7"
+        ]
+      },
+      "ultramarine": {
+        "role": "secondary",
+        "displayName": "Ultramarine",
+        "canonical": "oklch(40.7% 0.152 265.5)",
+        "purpose": "Interactive: prose links, nav underline, selection tint, circle form, Mölndal coding.",
+        "tonalRamp": [
+          "#010038",
+          "#051665",
+          "#19368C",
+          "#3557AE",
+          "#597CD0",
+          "#7FA2F2",
+          "#B4CAFC",
+          "#E7EFFE"
+        ]
+      },
+      "ultramarine-ink": {
+        "role": "secondary",
+        "displayName": "Ultramarine Ink",
+        "canonical": "oklch(35.4% 0.134 266.0)",
+        "purpose": "Interactive state: focus ring, caret, hover titles, button hover, lens mark.",
+        "tonalRamp": [
+          "#010037",
+          "#081960",
+          "#1E3884",
+          "#3C59A3",
+          "#607DC4",
+          "#86A3E7",
+          "#B4CAFC",
+          "#E7EFFE"
+        ]
+      },
+      "ochre-gold": {
+        "role": "tertiary",
+        "displayName": "Ochre Gold",
+        "canonical": "oklch(72.8% 0.138 89.7)",
+        "purpose": "The triangle form only; never text or UI.",
+        "tonalRamp": [
+          "#130900",
+          "#2E2200",
+          "#503D00",
+          "#725B11",
+          "#9C7C14",
+          "#C6A024",
+          "#EBC65F",
+          "#FFEDC0"
+        ]
+      },
+      "on-dark": {
+        "role": "neutral",
+        "displayName": "On Dark",
+        "canonical": "oklch(99.1% 0.003 84.6)",
+        "purpose": "Text on red, ink and blue fills.",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#252422",
+          "#40403E",
+          "#5E5D5C",
+          "#81807E",
+          "#A5A4A2",
+          "#CBCAC8",
+          "#EFEEEC"
+        ]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Homepage hero headline only." },
-      "headline": { "displayName": "Headline", "purpose": "Case-study page titles." },
-      "title": { "displayName": "Title", "purpose": "Section headings within a case study." },
-      "body": { "displayName": "Body", "purpose": "All continuous reading prose, capped at a 720px measure." },
-      "label": { "displayName": "Label", "purpose": "Eyebrows, nav links, tags, at-a-glance labels, buttons — never continuous prose." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "The homepage name only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Case-study title, followed by its Kandinsky form at 0.5em."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Case-body section headings and homepage index object titles."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "h3 sub-headings and numbered sub-record titles."
+      },
+      "catalogue-number": {
+        "displayName": "Catalogue Number",
+        "purpose": "No. 01–06 and 01a–01c; tabular-nums, signal-red-ink.",
+        "fontFeature": "tnum"
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Plate values, meta, captions, nav. Uppercase + 0.06em only for field names inside a record."
+      },
+      "standfirst": {
+        "displayName": "Standfirst",
+        "purpose": "One-sentence standfirst under a case-study title (max 44ch)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All continuous prose, 720px measure."
+      },
+      "quote": {
+        "displayName": "Quote",
+        "purpose": "Pull-quotes, set in Source Serif 4's real italic; max two per study.",
+        "fontStyle": "italic"
+      }
     },
     "shadows": [
-      { "name": "postit-lift", "value": "0 6px 16px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08)", "purpose": "The Don't Be a Stranger post-it board — real paper notes, the one place a shadow represents an actual object." },
-      { "name": "cutout-photo-drop", "value": "drop-shadow(0 12px 20px rgba(22,22,26,.18))", "purpose": "The About page's die-cut photo cluster; reads as a lifted photograph, not a UI elevation cue." }
+      {
+        "name": "postit-lift",
+        "value": "0 6px 16px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08)",
+        "purpose": "DBAS post-it notes at rest; real paper notes."
+      },
+      {
+        "name": "postit-lift-hover",
+        "value": "0 12px 26px rgba(0,0,0,.2)",
+        "purpose": "Post-it straightened and lifted on hover."
+      },
+      {
+        "name": "cutout-photo-drop",
+        "value": "drop-shadow(0 12px 20px rgba(22,22,26,.18))",
+        "purpose": "About page die-cut photo cluster (filter, not box-shadow)."
+      }
     ],
+    "rules": [
+      {
+        "name": "hairline-rule",
+        "value": "1px solid #E6E2DB",
+        "purpose": "Between index rows, plate fields, summary lines; header/footer edges."
+      },
+      {
+        "name": "ink-rule",
+        "value": "1px solid #16161A",
+        "purpose": "Index column head, summary top, section-heading rules, plate and display-case borders, next-object footer."
+      },
+      {
+        "name": "ink-frame",
+        "value": "3px solid #16161A",
+        "purpose": "Fact-grid frame and 3px gaps (also ink-grid gaps)."
+      },
+      {
+        "name": "catalogue-tab",
+        "value": "4px solid (signal-red | ultramarine)",
+        "purpose": "DBAS museum-block top edge and caption-plate top tab (Röhsska red, Mölndal blue)."
+      },
+      {
+        "name": "pull-quote-rule",
+        "value": "64px × 3px signal-red",
+        "purpose": "Sits above every default pull-quote."
+      }
+    ],
+    "focus": {
+      "outline": "2px solid #1A3380",
+      "outlineOffset": "3px",
+      "radius": "2px",
+      "selection": "color-mix(in srgb, #21409A 18%, #FFFFFF) with ink text",
+      "caret": "#1A3380"
+    },
+    "headerSurface": {
+      "background": "color-mix(in srgb, #FFFFFF 92%, transparent)",
+      "backdropFilter": "blur(6px)",
+      "height": "72px",
+      "purpose": "The one translucent surface: the sticky header."
+    },
     "motion": [
-      { "name": "ease-standard", "value": "ease", "purpose": "Default transition easing (color/background/transform state changes)." },
-      { "name": "duration-fast", "value": "0.15s", "purpose": "Button and link color/background transitions." },
-      { "name": "duration-reveal", "value": "0.5s", "purpose": "Scroll-reveal fade/lift (.reveal), both directions." }
+      {
+        "name": "ease-catalogue",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Expo-out: title view transition, display-case crossfade, forms coming forward."
+      },
+      {
+        "name": "view-transition-title",
+        "value": ".45s ease-catalogue",
+        "purpose": "Index title glides into the case-study title via view-transition-name obj-01…03; disabled under reduced motion."
+      },
+      {
+        "name": "display-case-swap",
+        "value": "opacity .45s ease-catalogue",
+        "purpose": "Case image crossfade on row hover/focus (CSS :has)."
+      },
+      {
+        "name": "form-forward",
+        "value": "transform .6s ease-catalogue, opacity .4s ease",
+        "purpose": "Hovered object's form scales to 1.06, others fade to .14."
+      },
+      {
+        "name": "row-tint",
+        "value": "background-color .25s ease",
+        "purpose": "Index-row hover tint."
+      },
+      {
+        "name": "color-state",
+        "value": ".15s–.2s ease",
+        "purpose": "Buttons, link/title colour changes, nav underline scaleX (.2s)."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition/animation-duration 0.001ms",
+        "purpose": "prefers-reduced-motion kills every transition and animation."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "900px" },
-      { "name": "container", "value": "1120px" }
+      {
+        "name": "phone",
+        "value": "599px",
+        "purpose": "Index column head hidden; status moves under title."
+      },
+      {
+        "name": "sm",
+        "value": "640px",
+        "purpose": "Mobile nav; figure-grid and ink-grid go multi-column above; fact-grid single column below."
+      },
+      {
+        "name": "museum-pair",
+        "value": "700px"
+      },
+      {
+        "name": "md",
+        "value": "768px",
+        "purpose": "Section padding 64 → 96px; about and column grids."
+      },
+      {
+        "name": "lg",
+        "value": "900px",
+        "purpose": "Intro 7:5 and label-plate/summary 5:7 grids."
+      },
+      {
+        "name": "catalogue",
+        "value": "1000px",
+        "purpose": "Index 8:4 with sticky display case; below it, phone plates and thumbnails."
+      },
+      {
+        "name": "container",
+        "value": "1120px"
+      },
+      {
+        "name": "measure",
+        "value": "720px"
+      },
+      {
+        "name": "breakout-max",
+        "value": "1600px"
+      }
     ]
   },
   "components": [
     {
+      "name": "Kandinsky Forms",
+      "kind": "custom",
+      "refersTo": "kform",
+      "description": "The three forms, the only large colour: circle = Don't Be a Stranger, square = EWP, triangle = Ericsson. Drawn SVG, always aria-hidden.",
+      "html": "<div class=\"ds-forms\"><div class=\"ds-f ds-f-c\"><svg class=\"ds-kform\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#21409A\"/></svg></div><div class=\"ds-f ds-f-s\"><svg class=\"ds-kform\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" fill=\"#BE1E2D\"/></svg></div><div class=\"ds-f ds-f-t\"><svg class=\"ds-kform\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><polygon points=\"50,4 98,94 2,94\" fill=\"#C9A227\"/></svg></div></div>",
+      "css": ".ds-forms { position: relative; width: 240px; aspect-ratio: 3 / 2; } .ds-f { position: absolute; mix-blend-mode: multiply; transition: transform .6s cubic-bezier(.16,1,.3,1), opacity .4s ease; } .ds-kform { display: block; width: 100%; height: auto; } .ds-f-c { width: 58%; left: 0; bottom: 0; } .ds-f-s { width: 38%; left: 44%; top: 0; } .ds-f-t { width: 34%; right: 0; bottom: 0; } .ds-forms:hover .ds-f { opacity: .14; } .ds-forms:hover .ds-f-c { opacity: 1; transform: scale(1.06); }"
+    },
+    {
+      "name": "Catalogue Index Row",
+      "kind": "custom",
+      "refersTo": "catalogue-row",
+      "description": "One ledger line per object: red tabular number + form, title, year · medium, summary, red status. Hover tints bg-alt, title goes ultramarine-ink.",
+      "html": "<div class=\"ds-cat\"><div class=\"ds-cat-head\"><span>No.</span><span>Object</span><span>Status</span></div><a class=\"ds-cat-row\" href=\"#\"><span class=\"ds-cat-no\">01<span class=\"ds-cat-mark\"><svg class=\"ds-kform\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><polygon points=\"50,4 98,94 2,94\" fill=\"#C9A227\"/></svg></span></span><span class=\"ds-cat-body\"><span class=\"ds-cat-object\">Ericsson</span><span class=\"ds-cat-meta\">2025–26 · Enterprise software, private 5G</span></span><span class=\"ds-cat-status\">Adopted team-wide</span></a><a class=\"ds-cat-row\" href=\"#\"><span class=\"ds-cat-no\">02<span class=\"ds-cat-mark\"><svg class=\"ds-kform\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#21409A\"/></svg></span></span><span class=\"ds-cat-body\"><span class=\"ds-cat-object\">Don't Be a Stranger</span><span class=\"ds-cat-meta\">2025 · Museum installation, MSc thesis</span></span><span class=\"ds-cat-status\">Still running, two museums</span></a></div>",
+      "css": ".ds-cat { max-width: 640px; } .ds-cat-head, .ds-cat-row { display: grid; grid-template-columns: 3.5rem minmax(0,1fr) minmax(8rem,auto); column-gap: 24px; } .ds-cat-head { font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: #6A6A73; padding-bottom: 8px; border-bottom: 1px solid #16161A; } .ds-cat-head span:last-child, .ds-cat-status { text-align: right; } .ds-cat-row { padding-block: 16px; border-bottom: 1px solid #E6E2DB; color: #33333A; text-decoration: none; transition: background-color .25s ease; } .ds-cat-row:hover { background: #F4F1EC; } .ds-cat-row:hover .ds-cat-object, .ds-cat-row:focus-visible .ds-cat-object { color: #1A3380; } .ds-cat-row:focus-visible { outline: 2px solid #1A3380; outline-offset: -2px; } .ds-cat-no { font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-variant-numeric: tabular-nums; font-size: 19px; color: #8E1620; padding-top: .35em; } .ds-cat-mark { display: block; width: 14px; margin-top: 8px; } .ds-cat-mark svg { display: block; width: 100%; height: auto; } .ds-cat-body { display: flex; flex-direction: column; gap: 4px; } .ds-cat-object { font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-weight: 500; font-size: 34px; line-height: 1.12; color: #16161A; transition: color .2s ease; } .ds-cat-meta { font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; color: #6A6A73; } .ds-cat-status { font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; color: #8E1620; padding-top: .5em; }"
+    },
+    {
+      "name": "Label Plate",
+      "kind": "card",
+      "refersTo": "label-plate",
+      "description": "The catalogue record: ink-bordered, sharp, hairline-divided fields; No. in red with its form, Status under an ink rule in red ink.",
+      "html": "<dl class=\"ds-plate\"><div class=\"ds-lp-no\"><dt>No.</dt><dd>03<span class=\"ds-lp-mark\"><svg class=\"ds-kform\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" fill=\"#BE1E2D\"/></svg></span></dd></div><div><dt>Year</dt><dd>2022–23</dd></div><div><dt>Medium</dt><dd>Web platform and design system</dd></div><div><dt>Role</dt><dd>UX/UI Designer</dd></div><div class=\"ds-lp-status\"><dt>Status</dt><dd>Live at 2,700+ institutions</dd></div></dl>",
+      "css": ".ds-plate { border: 1px solid #16161A; margin: 0; max-width: 420px; } .ds-plate > div { display: grid; grid-template-columns: 7.5rem minmax(0,1fr); gap: 16px; padding: 8px 16px; border-bottom: 1px solid #E6E2DB; } .ds-plate > div:last-child { border-bottom: 0; } .ds-plate dt { font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: #6A6A73; padding-top: .15em; } .ds-plate dd { margin: 0; font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; color: #16161A; line-height: 1.45; } .ds-lp-no dd { display: flex; align-items: center; gap: 8px; font-size: 19px; font-variant-numeric: tabular-nums; color: #8E1620; } .ds-lp-mark { width: 14px; } .ds-lp-mark svg { display: block; width: 100%; height: auto; } .ds-plate .ds-lp-status { border-top: 1px solid #16161A; } .ds-lp-status dd { color: #8E1620; font-weight: 500; }"
+    },
+    {
+      "name": "Four-line Summary",
+      "kind": "nav",
+      "refersTo": "obj-summary",
+      "description": "The entry's skim layer: four linked rows under an ink rule that jump to the four fixed sections; label goes ultramarine-ink with a drawn arrow on hover/focus.",
+      "html": "<nav class=\"ds-sum\"><ol><li><a href=\"#\"><span class=\"ds-sum-label\">The problem</span><span class=\"ds-sum-text\">Universities managed Erasmus+ mobility in a tool nobody could navigate.</span></a></li><li><a href=\"#\"><span class=\"ds-sum-label\">What I did</span><span class=\"ds-sum-text\">Redesigned the dashboard and built its design system.</span></a></li></ol></nav>",
+      "css": ".ds-sum ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid #16161A; max-width: 560px; } .ds-sum li { border-bottom: 1px solid #E6E2DB; } .ds-sum a { display: grid; gap: 4px; padding: 16px 0; color: #33333A; text-decoration: none; } .ds-sum-label { font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: #16161A; } .ds-sum-label::after { content: ''; display: inline-block; width: .8em; height: .8em; margin-left: .4em; vertical-align: -.05em; background: currentColor; mask: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1v13M2 8.5l6 6 6-6' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E\") center / contain no-repeat; opacity: 0; transition: opacity .2s ease; } .ds-sum a:hover .ds-sum-label, .ds-sum a:focus-visible .ds-sum-label { color: #1A3380; } .ds-sum a:hover .ds-sum-label::after, .ds-sum a:focus-visible .ds-sum-label::after { opacity: 1; } .ds-sum a:focus-visible { outline: 2px solid #1A3380; outline-offset: 3px; } .ds-sum-text { font-family: 'Source Serif 4', Georgia, serif; font-size: 19px; line-height: 1.5; }"
+    },
+    {
+      "name": "Fact Grid",
+      "kind": "card",
+      "refersTo": "fact-grid-outcome",
+      "description": "Outcome/Learnings: 3px ink frame and gaps, sharp corners, one accent cell (red for Outcome, ink for Learnings), the rest white.",
+      "html": "<div class=\"ds-fact\"><div class=\"ds-fact-accent\"><span class=\"ds-fact-stat\">2,700+</span><span class=\"ds-fact-label\">institutions use it</span></div><div><p>Led four developers through the build.</p></div><div><p>A full design system shipped with the redesign.</p></div></div>",
+      "css": ".ds-fact { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3px; background: #16161A; border: 3px solid #16161A; max-width: 640px; } .ds-fact > div { background: #FFFFFF; padding: 24px; } .ds-fact p { margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 19px; color: #16161A; } .ds-fact > .ds-fact-accent { grid-row: span 2; background: #BE1E2D; color: #FDFCFA; display: flex; flex-direction: column; justify-content: center; } .ds-fact-stat { font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-weight: 700; font-size: 25px; line-height: 1.15; } .ds-fact-label { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; opacity: .9; margin-top: 8px; }"
+    },
+    {
+      "name": "Pull-quote",
+      "kind": "custom",
+      "refersTo": "pull-quote",
+      "description": "Source Serif 4 italic under a short 3px signal-red rule; upright muted citation with the component-owned em dash. Max two per study.",
+      "html": "<blockquote class=\"ds-pull\">“It felt like someone was actually listening.”<cite>— Visitor, Röhsska</cite></blockquote>",
+      "css": ".ds-pull { position: relative; margin: 0; padding-top: 24px; max-width: 720px; font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-size: 25px; line-height: 1.35; color: #16161A; } .ds-pull::before { content: ''; position: absolute; top: 0; left: 0; width: 64px; height: 3px; background: #BE1E2D; } .ds-pull cite { display: block; margin-top: 8px; font-style: normal; font-size: 14px; color: #6A6A73; }"
+    },
+    {
+      "name": "Next-object Footer",
+      "kind": "nav",
+      "refersTo": "obj-next",
+      "description": "Closes every entry under an ink rule: red No., the next title, its form; ultramarine-ink on hover/focus.",
+      "html": "<nav class=\"ds-next\"><a href=\"#\"><span class=\"ds-next-no\">No. 03</span>EWP Dashboard<span class=\"ds-next-mark\"><svg class=\"ds-kform\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" fill=\"#BE1E2D\"/></svg></span></a></nav>",
+      "css": ".ds-next { border-top: 1px solid #16161A; padding-block: 40px; } .ds-next a { display: inline-flex; align-items: center; gap: 16px; font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 45px; line-height: 1.05; color: #16161A; text-decoration: none; transition: color .2s ease; } .ds-next a:hover, .ds-next a:focus-visible { color: #1A3380; } .ds-next a:focus-visible { outline: 2px solid #1A3380; outline-offset: 3px; } .ds-next-no { font-size: 19px; font-variant-numeric: tabular-nums; color: #8E1620; white-space: nowrap; } .ds-next-mark { width: .45em; } .ds-next-mark svg { display: block; width: 100%; height: auto; }"
+    },
+    {
+      "name": "Primary Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Jost small links; a 3px dotted ultramarine underline scales in on hover/focus, solid for the current page.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Work</a><a href=\"#\">About</a><a href=\"#\">Contact</a><a href=\"#\">CV <span>(PDF)</span></a></nav>",
+      "css": ".ds-nav { display: flex; gap: 40px; } .ds-nav a { position: relative; font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; color: #33333A; text-decoration: none; padding-bottom: 4px; } .ds-nav a span { color: #6A6A73; } .ds-nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; border-bottom: 3px dotted #21409A; transform: scaleX(0); transform-origin: left; transition: transform .2s ease; } .ds-nav a:hover, .ds-nav a:focus-visible { color: #16161A; } .ds-nav a:hover::after, .ds-nav a:focus-visible::after { transform: scaleX(1); } .ds-nav a[aria-current='page']::after { border-bottom-style: solid; transform: scaleX(1); } .ds-nav a:focus-visible { outline: 2px solid #1A3380; outline-offset: 3px; }"
+    },
+    {
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The default CTA button — ink fill, pill shape, hover fills signal-red.",
-      "html": "<button class=\"ds-btn-primary\">See my work</button>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; font-family: Jost, sans-serif; font-size: 14px; text-decoration: none; color: #FDFCFA; background: #16161A; padding: 8px 24px; border-radius: 999px; border: 1px solid #16161A; transition: background-color .15s ease, color .15s ease, border-color .15s ease; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { background: #8E1620; border-color: #8E1620; color: #FDFCFA; }"
+      "description": "Contact-page action: ink pill, ultramarine-ink on hover; both colours set on every state.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Email me</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 8px; font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; text-decoration: none; color: #FDFCFA; background: #16161A; padding: 8px 24px; border-radius: 999px; border: 1px solid #16161A; transition: background-color .15s ease, color .15s ease, border-color .15s ease; } .ds-btn:hover { background: #1A3380; border-color: #1A3380; color: #FDFCFA; } .ds-btn:focus-visible { outline: 2px solid #1A3380; outline-offset: 3px; }"
     },
     {
       "name": "Outline Button",
       "kind": "button",
       "refersTo": "button-outline",
-      "description": "Secondary button — transparent fill, hairline border, fills solid ink on hover.",
-      "html": "<button class=\"ds-btn-outline\">CV</button>",
-      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 8px; font-family: Jost, sans-serif; font-size: 14px; color: #16161A; background: transparent; padding: 8px 24px; border-radius: 999px; border: 1px solid #E6E2DB; transition: background-color .15s ease, color .15s ease, border-color .15s ease; } .ds-btn-outline:hover, .ds-btn-outline:focus-visible { background: #16161A; border-color: #16161A; color: #FDFCFA; }"
+      "description": "Secondary action: transparent pill with a muted edge; fills ink on hover.",
+      "html": "<a class=\"ds-btn-o\" href=\"#\">LinkedIn</a>",
+      "css": ".ds-btn-o { display: inline-flex; align-items: center; font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; text-decoration: none; color: #16161A; background: transparent; padding: 8px 24px; border-radius: 999px; border: 1px solid #6A6A73; transition: background-color .15s ease, color .15s ease, border-color .15s ease; } .ds-btn-o:hover { background: #16161A; border-color: #16161A; color: #FDFCFA; } .ds-btn-o:focus-visible { outline: 2px solid #1A3380; outline-offset: 3px; }"
     },
     {
-      "name": "Tag",
-      "kind": "chip",
-      "refersTo": "tag",
-      "description": "Case-study skill tag — flat pill, muted, never an accent color.",
-      "html": "<span class=\"ds-tag\">UI/UX Design</span>",
-      "css": ".ds-tag { display: inline-block; font-family: Jost, sans-serif; font-size: 14px; color: #33333A; background: #F4F1EC; border: 1px solid #E6E2DB; border-radius: 999px; padding: 4px 16px; }"
-    },
-    {
-      "name": "Fact Grid",
-      "kind": "card",
-      "refersTo": "fact-grid",
-      "description": "Signature Outcome/Learnings component — one accent cell, rest plain white, thin ink gaps standing in for borders. Never fill every cell.",
-      "html": "<div class=\"ds-fact-grid\"><div class=\"ds-fact-accent\"><span class=\"ds-fact-stat\">2,700+</span><span class=\"ds-fact-stat-label\">institutions now use it</span></div><div class=\"ds-fact-cell\">Led four developers through the build.</div><div class=\"ds-fact-cell\">Full design system shipped alongside the redesign.</div></div>",
-      "css": ".ds-fact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3px; background: #16161A; border-radius: 6px; overflow: hidden; } .ds-fact-grid > div { background: #FFFFFF; padding: 24px; } .ds-fact-accent { grid-row: span 2; background: #BE1E2D; color: #FDFCFA; display: flex; flex-direction: column; justify-content: center; } .ds-fact-stat { font-family: Jost, sans-serif; font-weight: 700; font-size: 26px; line-height: 1.15; } .ds-fact-stat-label { font-size: 15px; opacity: .9; margin-top: 8px; } .ds-fact-cell { font-family: Jost, sans-serif; font-size: 20px; color: #16161A; }"
-    },
-    {
-      "name": "Ink Grid",
-      "kind": "custom",
-      "refersTo": "ink-grid",
-      "description": "Generalized ledger grid for text/photo cells (case-study 'moments'), sharp corners, no outer radius, same ink-gap mechanism as Fact Grid.",
-      "html": "<ul class=\"ds-ink-grid\"><li class=\"ds-ink-cell\"><p>The first time someone picked up during the pilot and we had a real conversation.</p></li><li class=\"ds-ink-cell\"><p>Reading the post-its for the first time.</p></li></ul>",
-      "css": ".ds-ink-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #16161A; } .ds-ink-cell { background: #FFFFFF; margin: 0; display: flex; align-items: center; padding: 24px; min-height: 120px; } .ds-ink-cell p { font-family: Jost, sans-serif; font-size: 20px; color: #16161A; margin: 0; }"
+      "name": "Contact Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Muted 1px edge (3:1), 6px radius, ultramarine-ink focus border and ring, blue caret.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-n\">Name</label><input id=\"ds-n\" type=\"text\"><p class=\"ds-hint\">So I know who to reply to.</p></div>",
+      "css": ".ds-field { max-width: 420px; } .ds-field label { display: block; font-family: Jost, 'Century Gothic', system-ui, sans-serif; font-size: 14px; color: #16161A; margin-bottom: 4px; } .ds-field input { width: 100%; box-sizing: border-box; padding: 16px; border: 1px solid #6A6A73; border-radius: 6px; background: #FFFFFF; font-family: 'Source Serif 4', Georgia, serif; font-size: 19px; caret-color: #1A3380; } .ds-field input:focus-visible { outline: 2px solid #1A3380; outline-offset: 3px; border-color: #1A3380; } .ds-hint { margin: 4px 0 0; font-size: 14px; color: #6A6A73; }"
     }
   ],
   "narrative": {
-    "northStar": "The Ink Ledger",
-    "overview": "The system reads like a ledger, not a brochure: flat ink-gapped grids, sharp corners, and a restraint borrowed from real Mondrian compositions, which are mostly white space with one or two color accents, never a filled block per cell. That restraint isn't decorative minimalism; it's an extension of the site's actual editorial discipline — every factual claim traces to a primary source, and the visual system is built to look like it's keeping the same kind of honest record. The type pairing carries the same duality: Jost for anything structural, Source Serif 4 for the actual reading experience of the case-study prose. Structure is Bauhaus; the reading itself is editorial.",
+    "northStar": "The Collection Catalogue",
+    "overview": "Every project is an object in a collection, and each one is shown the way a museum catalogue shows it: a number, a label and a status first, then the story. The homepage is page one of that catalogue. It has a name, one positioning line, three Kandinsky forms as a still composition, and a numbered index ruled in ink with a display case beside it. Each case study is a catalogue entry. It opens with a title and the object's form, a standfirst, and a label plate beside a four-line summary. Then come four fixed sections, and the page closes on the next object in the collection.\n\nThe material is paper and ink. The ground is pure white. Type is ink, and the page is divided by hairline rules rather than by tinted bands or boxes. The three Kandinsky forms (a blue circle, a red square, a gold triangle) are the only large areas of colour. Elsewhere colour is a small, functional mark. Red is the catalogue's own mark, used for numbers, status and rules. Blue marks what you can act on. Structure is set in Jost, a geometric sans with tabular catalogue numerals. Reading prose is set in Source Serif 4, and its real italic carries the pull-quotes.\n\nDepth comes from rules, not shadows. The ledger (index rows, label plates, fact-grids, the display case) has sharp corners and ink edges. Soft corners belong only to photographs and a few form controls. Shadows appear only on things that are physical objects in life: the post-it notes and the About page's cut-out photographs.",
     "keyCharacteristics": [
-      "Mostly white space, one color accent per composition — never every cell filled.",
-      "Flat color fields; no gradients, no glassmorphism, no soft ambient shadows.",
-      "Shadows appear only where they represent a real physical object, never as generic elevation.",
-      "Sharp corners on the ledger family; a small 6px softening only on photographic/color containers.",
-      "Fully round (pill) shapes reserved for interactive affordances only."
+      "White ground, ink type, hairline rules. Sections are divided by rules, never by background banding.",
+      "Three Kandinsky forms carry the only large colour: circle = Don't Be a Stranger (blue), square = EWP (red), triangle = Ericsson (gold).",
+      "Red is the catalogue mark, blue is the interactive colour, and gold appears only in the forms and in diagrams.",
+      "Jost for structure with tabular numerals; Source Serif 4 for prose and its italic for quotes.",
+      "Sharp corners and ink edges on the ledger; a soft 6px only on photographs and form fields.",
+      "Every mark is a drawn SVG shape. Text glyphs are never used as icons."
     ],
     "rules": [
-      { "name": "The Ink-Text Rule", "body": "Gold never carries text at its bright value — always substitute ochre-gold-ink the moment gold needs to be legible.", "section": "colors" },
-      { "name": "The One-Accent Rule", "body": "Every Mondrian-style grid gets exactly one colored accent cell, never a filled-every-cell treatment.", "section": "colors" },
-      { "name": "The Structural-Sans Rule", "body": "Jost is never used for reading prose, only for anything the reader scans rather than reads. Source Serif 4 owns continuous prose exclusively.", "section": "typography" },
-      { "name": "The Single-Column Rule", "body": "No case-study section pairs running text with a sticky or side-by-side image column.", "section": "layout" },
-      { "name": "The Physical-Object Exception", "body": "A shadow is only added because the thing it's attached to is a real physical object in life — never as a generic elevation affordance.", "section": "elevation" },
-      { "name": "Every State Sets Both", "body": "Every button state sets background-color and text-color together, never one without the other.", "section": "components" }
+      {
+        "name": "The One-Job Rule",
+        "body": "Red marks the catalogue (numbers, status, rules, the Outcome cell). Blue marks what you can act on (links, focus, hover, the lens mark). Gold appears only as the triangle. If you cannot say which job a colour is doing, it should not be there.",
+        "section": "colors"
+      },
+      {
+        "name": "The Forms-Carry-Colour Rule",
+        "body": "The three Kandinsky forms are the only large areas of colour on the site. Every other use of colour is a mark: a number, a rule, a tab, one accent cell. The forms follow the collection: circle = Don't Be a Stranger, square = EWP Dashboard, triangle = Ericsson. They appear in the homepage composition, beside each index number, in the label plate's No. row, after the case-study title, and after the next-object title.",
+        "section": "colors"
+      },
+      {
+        "name": "The Museum-Coding Exception",
+        "body": "Don't Be a Stranger keeps its two-museum colour coding: red = Röhsska, blue = Mölndal. It is used only as a museum block's 4px top edge and a caption plate's 4px top tab. It is local to that study and does not change the global colour jobs.",
+        "section": "colors"
+      },
+      {
+        "name": "The Structural-Sans Rule",
+        "body": "Jost sets whatever the reader scans: names, numbers, labels, plates, nav, buttons. Source Serif 4 sets whatever the reader reads. Short display statements inside a composition (ink-grid text cells, post-its) use Jost because they are exhibits, not running text.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular-Numeral Rule",
+        "body": "Every catalogue number uses tabular figures in red ink, so 01, 02 and 03 line up in a column the way a printed index does.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two-Quote Rule",
+        "body": "A case study has at most two pull-quotes. A third quote belongs in the prose.",
+        "section": "typography"
+      },
+      {
+        "name": "The Field-Name Rule",
+        "body": "Uppercase tracked labels appear only as field names inside a record (a column head, a plate field, a summary row). They are never a free-floating label above a heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The One-Left-Edge Rule",
+        "body": "Everything that is text shares the container's left edge: prose, headings, plates, quotes. Only images break out, and they break out to the full track of the same grid. They never break out by translating off the viewport.",
+        "section": "layout"
+      },
+      {
+        "name": "The Single-Column Rule",
+        "body": "Running text is never paired with a sticky or side-by-side image column. An image sits beside another image (figure grid), never beside prose. The homepage display case is an index device, not a reading layout.",
+        "section": "layout"
+      },
+      {
+        "name": "The Rules-Not-Bands Rule",
+        "body": "Sections are separated by a hairline or ink rule on white. Tinted full-width section bands are not part of this world.",
+        "section": "layout"
+      },
+      {
+        "name": "The Physical-Object Exception",
+        "body": "A shadow exists only because the thing it belongs to is a physical object in life (a note, a cut photograph). Nothing in the ledger casts one.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do keep exactly one colored accent per Mondrian-style grid composition.",
-      "Do set background-color and text-color together on every interactive state.",
-      "Do use ochre-gold-ink, never bright ochre-gold, whenever gold needs to carry legible text.",
-      "Do reserve shadows for things that are physical objects in real life.",
-      "Do keep every case-study section single-column."
+      "**Do** give every object a number, a form and a status, and open every case study with the title, standfirst, label plate and four-line summary.",
+      "**Do** keep the four section ids fixed (`problem`, `what-i-did`, `how-it-went`, `what-i-learned`) and open the last two with a fact-grid.",
+      "**Do** set catalogue numbers in Jost with tabular numerals in signal-red-ink.",
+      "**Do** keep colour to its job: red for catalogue marks, blue for interaction, gold only in the triangle and diagrams.",
+      "**Do** separate sections with a hairline or ink rule on white.",
+      "**Do** keep one accent cell per fact-grid (red for Outcome, ink for Learnings) and leave the other cells white.",
+      "**Do** draw marks as SVG shapes, and give every hover behaviour a matching `:focus-visible` trigger.",
+      "**Do** set background and text colour together on every interactive state."
     ],
     "donts": [
-      "Don't add drop shadows, blur, or soft ambient elevation to the ledger family.",
-      "Don't reintroduce a two-column sticky-media case-study layout.",
-      "Don't use Inter for body copy.",
-      "Don't add a persistent floating in-page navigation rail.",
-      "Don't apply a rounded corner to anything in the ledger family."
+      "**Don't** band sections with a tinted background. Bg-alt is for a row hover or an image matte, never a section.",
+      "**Don't** put a kicker, eyebrow or pill tag above a heading or on an index row. Uppercase tracked text is only a field name inside a record.",
+      "**Don't** round the ledger. Index rows, plates, fact-grids and the display case keep sharp corners.",
+      "**Don't** add shadows or blur to anything that is not a physical object.",
+      "**Don't** use a text glyph (+, →, ↓, •) as an icon. Draw it.",
+      "**Don't** use gold for text, links or UI, or a Kandinsky form for anything other than its object.",
+      "**Don't** mark a card or quote with a thick coloured left border. The pull-quote's rule sits on top.",
+      "**Don't** add more than two pull-quotes to a study.",
+      "**Don't** reintroduce a two-column sticky-media reading layout or a floating in-page nav rail. Both were tried and retired.",
+      "**Don't** set body copy in Inter or EB Garamond. Both were tried and retired for Source Serif 4."
     ]
   }
 }
