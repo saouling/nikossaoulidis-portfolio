@@ -130,7 +130,7 @@ h1, h2, h3 {
 }
 h1 { font-size: var(--fs-h1); }
 h2 { font-size: var(--fs-h2); margin-top: var(--space-6); }
-h3 { font-size: var(--fs-h3); margin-top: var(--space-5); }
+h3 { font-size: var(--fs-h3); margin-top: var(--space-5); font-weight: 600; }
 h1, h2, h3 { scroll-margin-top: calc(72px + var(--space-4)); }
 
 p { max-width: var(--measure); text-align: left; }
@@ -193,14 +193,6 @@ section, .section {
   section, .section { padding-block: var(--space-7); }
 }
 .section-alt { background: var(--bg-alt); }
-/* [slug].astro (Ericsson/EWP/DBAS) renders the tags+at-a-glance block and
-   the MDX body as two adjacent plain <section class="wrap col"> elements
-   — each getting its own padding-block above doubles the gap between them
-   against every other section boundary on the page (confirmed live, DBAS
-   round 7 audit). Scoped to this exact adjacency only, not a blanket
-   section+section rule, so the hero->at-a-glance and body->outcome
-   boundaries (untested, may be intentionally more spaced) are untouched. */
-.wrap.col + .wrap.col { padding-top: 0; }
 
 .eyebrow {
   display: block;
@@ -569,36 +561,148 @@ section, .section {
 .catalogue:has(.cat-row[data-no="05"]:is(:hover, :focus-visible)) .cat-case-item[data-no="05"],
 .catalogue:has(.cat-row[data-no="06"]:is(:hover, :focus-visible)) .cat-case-item[data-no="06"] { opacity: 1; }
 
-/* ---------- At-a-glance ---------- */
-.at-a-glance {
+/* ---------- Catalogue entry (case-study template) ----------
+   Every case study opens like a catalogue entry: title with the object's
+   form, a standfirst, then the label plate beside a four-line summary
+   whose rows jump to the four fixed sections. The body is a grid with
+   named lines so prose shares the site's one left edge while breakout
+   images still span the full width from the same grid. */
+.obj-head { padding-block: var(--space-6) var(--space-5); }
+.obj-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--fs-hero);
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+.obj-mark { width: .5em; flex: none; }
+.obj-standfirst {
+  font-size: var(--fs-h3);
+  line-height: 1.4;
+  color: var(--body);
+  max-width: 44ch;
+  margin-top: var(--space-4);
+  text-wrap: pretty;
+}
+.obj-record {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
-  border-top: 1px solid var(--hairline);
+  gap: var(--space-5);
+  margin-block: var(--space-6) var(--space-5);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .obj-record { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+}
+
+/* The label plate: an ink-ruled catalogue record, sharp corners. */
+.label-plate {
+  border: 1px solid var(--ink);
+  margin: 0;
+}
+.label-plate > div {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
   border-bottom: 1px solid var(--hairline);
-  padding-block: var(--space-4);
 }
-@media (min-width: 768px) {
-  .at-a-glance { grid-template-columns: repeat(4, 1fr); }
-}
-.at-a-glance dt {
+.label-plate > div:last-child { border-bottom: 0; }
+.label-plate dt {
   font-family: var(--font-display);
   font-size: var(--fs-small);
-  color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: .04em;
-  margin-bottom: var(--space-1);
+  letter-spacing: .06em;
+  color: var(--muted);
+  padding-top: .15em;
 }
-.at-a-glance dd { max-width: none; }
-/* The Outcome row spans the full width and sits under its own hairline,
-   so the payoff reads as one line for a skimming reader instead of a
-   fifth narrow column. */
-.at-a-glance .glance-outcome {
-  grid-column: 1 / -1;
-  border-top: 1px solid var(--hairline);
-  padding-top: var(--space-4);
+.label-plate dd {
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  color: var(--ink);
+  line-height: 1.45;
 }
-.at-a-glance .glance-outcome dd { color: var(--ink); max-width: var(--measure); }
+.label-plate .lp-no dd {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--red-ink);
+}
+.lp-mark { width: 14px; }
+.label-plate .lp-status { border-top: 1px solid var(--ink); }
+.label-plate .lp-status dd { color: var(--red-ink); font-weight: 500; }
+
+/* The four-line summary: each row is a link to its section. */
+.obj-summary ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.obj-summary li { border-bottom: 1px solid var(--hairline); }
+.obj-summary a {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
+  color: var(--body);
+  text-decoration: none;
+}
+.obj-summary-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--ink);
+}
+.obj-summary-text { font-size: var(--fs-body); line-height: 1.5; max-width: 60ch; }
+.obj-summary a:hover .obj-summary-label,
+.obj-summary a:focus-visible .obj-summary-label { color: var(--blue-ink); }
+.obj-summary a:hover .obj-summary-label::after,
+.obj-summary a:focus-visible .obj-summary-label::after { content: " \2193"; }
+
+.case-body {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--space-4), 1fr)
+    [content-start] min(var(--measure), 100% - 2 * var(--space-4)) [content-end]
+    minmax(0, calc(var(--container) - var(--measure) - 2 * var(--space-4)))
+    minmax(var(--space-4), 1fr) [full-end];
+  padding-block: var(--space-4) var(--space-7);
+}
+.case-body > * { grid-column: content; }
+.case-body > .breakout,
+.case-body > .full-bleed {
+  grid-column: full;
+  width: 100%;
+  margin-left: 0;
+  transform: none;
+  justify-self: center;
+}
+.case-body > h2:first-child { margin-top: 0; }
+.case-body > h2 { padding-top: var(--space-4); border-top: 1px solid var(--ink); }
+.case-close { padding-top: 0; }
+
+/* The close: the next object in the collection, and a way to talk. */
+.obj-next { border-top: 1px solid var(--ink); padding-block: var(--space-6); }
+.obj-next-link { display: inline-grid; gap: var(--space-2); text-decoration: none; color: var(--ink); }
+.obj-next-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+}
+.obj-next-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: 1.05;
+  transition: color .2s ease;
+}
+.obj-next-title .cat-no { font-size: var(--fs-body); padding: 0; }
+.obj-next-mark { width: .45em; }
+.obj-next-link:hover .obj-next-title,
+.obj-next-link:focus-visible .obj-next-title { color: var(--blue-ink); }
+.obj-next-contact { margin-top: var(--space-4); }
 
 /* ---------- Figure / captions ---------- */
 figure { margin: var(--space-6) 0; }
@@ -988,10 +1092,11 @@ figcaption {
 
 /* ---------- Pull-quote ---------- */
 blockquote.pull {
-  font-family: var(--font-display);
-  font-size: var(--fs-h2);
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--fs-h3);
   color: var(--ink);
-  line-height: var(--lh-tight);
+  line-height: 1.35;
   max-width: var(--measure);
   margin-block: var(--space-5);
   padding-top: var(--space-4);
@@ -1160,22 +1265,6 @@ blockquote.pull.boxed {
 .breakout { max-width: 1600px; }
 .full-bleed { max-width: 1800px; }
 
-/* ---------- Break band (Don't Be a Stranger refusals) ---------- */
-.break-band {
-  background: var(--paper);
-  min-height: 40vh;
-  display: flex;
-  align-items: center;
-  padding-block: var(--space-6);
-}
-.break-band blockquote {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3.6vw, 2.5rem);
-  line-height: var(--lh-tight);
-  color: var(--ink);
-  max-width: 22ch;
-}
-
 /* ---------- Tags / pills ---------- */
 .tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
 .tag {
@@ -1327,7 +1416,7 @@ blockquote.pull.boxed {
   flex-direction: column;
   justify-content: center;
 }
-.fact-grid .accent.blue { background: var(--blue); }
+.fact-grid .accent.ink { background: var(--ink); }
 .fact-grid .accent .stat {
   font-family: var(--font-display);
   font-weight: 700;
@@ -1335,7 +1424,7 @@ blockquote.pull.boxed {
   line-height: 1.15;
 }
 .fact-grid .accent .stat-label { font-size: var(--fs-small); opacity: .9; margin-top: var(--space-2); }
-.fact-grid p { font-family: var(--font-display); font-size: var(--fs-body); color: var(--ink); max-width: none; }
+.fact-grid p { font-size: var(--fs-body); color: var(--ink); max-width: none; }
 @media (max-width: 640px) {
   .fact-grid { grid-template-columns: 1fr; }
   .fact-grid .accent { grid-row: auto; }

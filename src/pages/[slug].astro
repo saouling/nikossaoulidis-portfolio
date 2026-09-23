@@ -1,12 +1,19 @@
 ---
-// One template for every tier-1 case study, at /ericsson/, /ewp-dashboard/,
-// /dont-be-a-stranger/ — decision 09. The structural pieces every case study
-// shares (hero, tags, at-a-glance, outcome, learnings) live here, driven by
-// the content schema; everything case-specific (the actual narrative,
-// pull-quotes, figures, jump-nav) is free-form MDX body content.
+// One template for every case study, at /ericsson/, /ewp-dashboard/ and
+// /dont-be-a-stranger/, built as a catalogue entry. Every study opens the
+// same way: title, standfirst, then the label plate beside a four-line
+// summary that links to the four fixed sections (The problem, What I did,
+// How it went, What I learned). The MDX body carries those four sections
+// and places <FactGrid data={frontmatter.outcome} /> (and learnings) at the
+// top of the last two. Until a study has a `summary`, the old closing
+// Outcome/Learnings block renders instead. It
+// closes with the next object in the collection and a way to get in touch.
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import AtAGlance from '../components/AtAGlance.astro';
+import LabelPlate from '../components/LabelPlate.astro';
+import FactGrid from '../components/FactGrid.astro';
+import KForm from '../components/KForm.astro';
+import { mainObjects, nextMainObject } from '../data/collection';
 
 export async function getStaticPaths() {
 	const caseStudies = await getCollection('case-studies');
@@ -18,102 +25,113 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const {
-	title,
-	heading,
-	standfirst,
-	description,
-	eyebrow,
-	tags,
-	heroImage,
-	heroVideo,
-	heroVideoCaption,
-	atAGlance,
-	outcome,
-	learnings,
-} = entry.data;
+const { title, heading, standfirst, description, heroImage, heroVideo, heroVideoCaption, atAGlance, outcome, learnings, summary } =
+	entry.data;
 const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
+
+const href = `/${entry.id}/`;
+const object = mainObjects.find((o) => o.href === href);
+if (!object) throw new Error(`${href} is not in src/data/collection.ts`);
+const next = nextMainObject(href);
+
+// Year, medium and status come from the collection; the label plate keeps
+// only the people-and-place rows from the at-a-glance frontmatter.
+const plateFields = atAGlance.filter((f) => ['Role', 'Where', 'Worked with'].includes(f.label));
+
+const summaryRows = summary
+	? [
+			{ id: 'problem', label: 'The problem', text: summary.problem },
+			{ id: 'what-i-did', label: 'What I did', text: summary.did },
+			{ id: 'how-it-went', label: 'How it went', text: summary.went },
+			{ id: 'what-i-learned', label: 'What I learned', text: summary.learned },
+		]
+	: [];
+
 ---
 
 <Layout title={title} description={description} ogImage={heroImage.src}>
-	<section class="hero">
-		<div class="wrap col">
-			<p class="eyebrow">{eyebrow}</p>
-			<h1>{heading}</h1>
-			<p class="standfirst">{standfirst}</p>
-		</div>
-		<div class="breakout">
-			{
-				heroVideo ? (
-					<>
-						<figure class="hero-figure">
-							<div class="hero-video">
-								<video
-									id="hero-video"
-									width={heroImage.width}
-									height={heroImage.height}
-									poster={heroImage.src}
-									muted
-									autoplay
-									loop
-									playsinline
-								>
-									<source src={heroVideo} type="video/mp4" />
-									<img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} loading="eager" />
-								</video>
-								<button type="button">Turn sound on</button>
-							</div>
-						</figure>
-						{heroVideoCaption && <p class="fs-small media-caption">{heroVideoCaption}</p>}
-					</>
-				) : (
-					<figure class="hero-figure">
-						<picture>
-							<source srcset={heroWebp} type="image/webp" />
-							<img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} loading="eager" />
-						</picture>
-					</figure>
-				)
-			}
-		</div>
-	</section>
-
-	<section class="wrap col">
-		{
-			tags.length > 0 && (
-				<div class="tags">
-					{tags.map((tag) => (
-						<span class="tag">{tag}</span>
-					))}
+	<article class="obj" data-form={object.form}>
+		<header class="obj-head">
+			<div class="wrap">
+				<h1 class="obj-title">
+					{heading}
+					{object.form && <KForm form={object.form} class="obj-mark" />}
+				</h1>
+				<p class="obj-standfirst">{standfirst}</p>
+				<div class="obj-record">
+					<LabelPlate object={object} fields={plateFields} />
+					{summaryRows.length > 0 && (
+						<nav class="obj-summary" aria-label="Summary">
+							<ol>
+								{summaryRows.map((row) => (
+									<li>
+										<a href={`#${row.id}`}>
+											<span class="obj-summary-label">{row.label}</span>
+											<span class="obj-summary-text">{row.text}</span>
+										</a>
+									</li>
+								))}
+							</ol>
+						</nav>
+					)}
 				</div>
+			</div>
+			<div class="wrap">
+				{
+					heroVideo ? (
+						<>
+							<figure class="hero-figure">
+								<div class="hero-video">
+									<video id="hero-video" width={heroImage.width} height={heroImage.height} poster={heroImage.src} muted autoplay loop playsinline>
+										<source src={heroVideo} type="video/mp4" />
+										<img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} loading="eager" />
+									</video>
+									<button type="button">Turn sound on</button>
+								</div>
+							</figure>
+							{heroVideoCaption && <p class="fs-small media-caption">{heroVideoCaption}</p>}
+						</>
+					) : (
+						<figure class="hero-figure">
+							<picture>
+								<source srcset={heroWebp} type="image/webp" />
+								<img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt={heroImage.alt} loading="eager" />
+							</picture>
+						</figure>
+					)
+				}
+			</div>
+		</header>
+
+		<div class="case-body">
+			<Content />
+		</div>
+
+		{
+			!summary && (
+				<section class="case-body case-close">
+					<h2>Outcome</h2>
+					<FactGrid data={outcome} />
+					<h2>Learnings</h2>
+					<FactGrid data={learnings} tone="ink" />
+				</section>
 			)
 		}
-		<AtAGlance items={atAGlance} />
-	</section>
 
-	<section class="wrap col">
-		<Content />
-	</section>
-
-	<section class="section section-alt">
-		<div class="wrap col">
-			<h2 class="mt-0">Outcome</h2>
-			<div class="fact-grid">
-				<div class="accent">
-					<span class="stat">{outcome.stat}</span>
-					<span class="stat-label">{outcome.statLabel}</span>
-				</div>
-				{outcome.facts.map((fact) => <div><p>{fact}</p></div>)}
+		<nav class="obj-next" aria-label="Next in the collection">
+			<div class="wrap">
+				<a class="obj-next-link" href={next.href}>
+					<span class="obj-next-label">Next in the collection</span>
+					<span class="obj-next-title">
+						<span class="cat-no">No. {next.no}</span>
+						{next.title}
+						{next.form && <KForm form={next.form} class="obj-next-mark" />}
+					</span>
+				</a>
+				<p class="obj-next-contact">
+					Want to talk about this work? <a href="mailto:niksaoul@gmail.com">niksaoul@gmail.com</a>, or <a href="/#work">back to the collection</a>.
+				</p>
 			</div>
-
-			<h2>Learnings</h2>
-			<div class="fact-grid">
-				<div class="accent blue">
-					<span class="stat">{learnings.stat}</span>
-					<span class="stat-label">{learnings.statLabel}</span>
-				</div>
-				{learnings.facts.map((fact) => <div><p>{fact}</p></div>)}
-			</div>
-		</div>
-	</section>
+		</nav>
+	</article>
 </Layout>

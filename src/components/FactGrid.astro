@@ -1,0 +1,19 @@
+---
+// Outcome / Learnings as the ink-gap fact-grid. Placed by the case study's
+// MDX at the top of "How it went" and "What I learned", so the payoff
+// opens its section instead of waiting at the bottom of the page.
+interface Props {
+	data: { stat: string; statLabel: string; facts: string[] };
+	tone?: 'mark' | 'ink';
+}
+
+const { data, tone = 'mark' } = Astro.props;
+---
+
+<div class="fact-grid">
+	<div class:list={['accent', tone === 'ink' && 'ink']}>
+		<span class="stat">{data.stat}</span>
+		<span class="stat-label">{data.statLabel}</span>
+	</div>
+	{data.facts.map((fact) => <div><p>{fact}</p></div>)}
+</div>

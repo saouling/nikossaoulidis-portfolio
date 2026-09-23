@@ -1,0 +1,40 @@
+---
+// The catalogue label: the skim layer every case study opens with, built
+// the same way on every page. Catalogue fields (number, year, medium,
+// status, form) come from src/data/collection.ts; the people fields come
+// from the case study's own at-a-glance frontmatter.
+import KForm from './KForm.astro';
+import type { CollectionObject } from '../data/collection';
+
+interface Props {
+	object: CollectionObject;
+	fields: { label: string; value: string }[];
+}
+
+const { object, fields } = Astro.props;
+---
+
+<dl class="label-plate">
+	<div class="lp-no">
+		<dt>No.</dt>
+		<dd>{object.no}{object.form && <KForm form={object.form} class="lp-mark" />}</dd>
+	</div>
+	<div>
+		<dt>Year</dt>
+		<dd>{object.year}</dd>
+	</div>
+	<div>
+		<dt>Medium</dt>
+		<dd>{object.medium}</dd>
+	</div>
+	{fields.map((f) => (
+		<div>
+			<dt>{f.label}</dt>
+			<dd>{f.value}</dd>
+		</div>
+	))}
+	<div class="lp-status">
+		<dt>Status</dt>
+		<dd>{object.status}</dd>
+	</div>
+</dl>

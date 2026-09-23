@@ -34,8 +34,21 @@ const caseStudies = defineCollection({
 		description: z.string().min(1),
 		// "Industry" / "School" / "School / Industry" — matches the homepage
 		// row-eyebrow label for this project.
-		eyebrow: z.string().min(1),
-		tags: z.array(z.string()).min(1),
+		// Retired in the catalogue rebuild (the label plate carries year and
+		// medium instead); optional until every study drops them.
+		eyebrow: z.string().min(1).optional(),
+		tags: z.array(z.string()).optional(),
+		// The catalogue summary: one sentence per fixed section, shown beside
+		// the label plate and linking to #problem, #what-i-did, #how-it-went
+		// and #what-i-learned. Present once a study is restructured.
+		summary: z
+			.object({
+				problem: z.string().min(1),
+				did: z.string().min(1),
+				went: z.string().min(1),
+				learned: z.string().min(1),
+			})
+			.optional(),
 		heroImage: z.object({
 			src: z.string().min(1),
 			width: z.number(),
