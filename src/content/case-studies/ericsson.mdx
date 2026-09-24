@@ -80,107 +80,92 @@ import SpecToCode from '../../components/ericsson/SpecToCode.astro';
 
 <h2 id="problem">The problem</h2>
 
-Private 5G software is dense. A lot of state, a lot of configuration, a lot of things that go wrong in ways only an expert would recognise. The interesting part of the job was rarely the screen itself. It was working out what a network engineer actually needs to see at the moment they look.
-
-Most of what I'm proudest of ended up being about the space between design and engineering, rather than the design on its own.
-
-<p class="fs-small">A note: the work is under NDA, so what you're seeing here is the method and abstracted diagrams, not the real screens.</p>
-
-<h2 id="what-i-did">What I did</h2>
-
-Three cases, each its own record in this object.
+Private 5G software is dense: a lot of state, a lot of configuration, and a lot of things that go wrong in ways only an expert would recognise. The screens were rarely the hard part. The hard part was the space between design and engineering, and that is where all three of these cases live. Each one stands on its own.
 
 <ol class="sub-index">
-  <li><a href="#case-1"><CaseMark mark="a" /><span class="cat-no">01a</span> Making our Figma deliveries AI-readable</a></li>
+  <li><a href="#case-1"><CaseMark mark="a" /><span class="cat-no">01a</span> AI-ready Figma deliveries</a></li>
   <li><a href="#case-2"><CaseMark mark="b" /><span class="cat-no">01b</span> Build better together</a></li>
   <li><a href="#case-3"><CaseMark mark="c" /><span class="cat-no">01c</span> Generative UI for data-dense dashboards</a></li>
 </ol>
+
+<p class="fs-small">The work is under NDA, so what you see here is the method and abstracted diagrams, not the real screens.</p>
+
+<h2 id="what-i-did">What I did</h2>
 
 <SubRecord
   id="case-1"
   no="01a"
   mark="a"
-  title="Making our Figma deliveries AI-readable"
-  lead="Our developers used AI to turn Figma into code, but it kept building the annotations instead of the interface, so I built a way to fix that."
+  title="Screens show how it looks. Specs say how it behaves."
+  lead="Our developers used AI to turn Figma into code, and it kept building the annotations instead of the interface."
+  project="AI-ready Figma deliveries"
   part="Research, an audit framework, and the delivery-for-ai skill"
   result="Adopted as the team-wide standard"
 />
 
-Developers in our organisation were using AI agents to generate UI code straight from the UX team's Figma files. The files were built for humans: screens buried under sticky notes, arrows, colour overlays, design rationale sitting right on top of the interface. The AI could not tell the difference. It tried to build the sticky notes too. As one of our developers put it, "Annotations confuse the AI."
+Our design files were built for humans: screens buried under sticky notes, arrows, colour overlays and rationale sitting on top of the interface. The AI could not tell the difference, so it tried to build the sticky notes too. As one developer put it, "Annotations confuse the AI."
 
 <div class="wide">
   <DeliveryBeforeAfter />
 </div>
 
-First I went and looked. I documented two real developer workflows in our organisation to understand where it actually broke, and set up a Slack channel so the feedback could keep coming rather than arriving once at the end. Then I read around: about twenty case studies, industry write-ups from teams like Atlassian, Spotify, Miro and Figma, plus academic papers. The pattern was the same everywhere: structured input produces better output.
-
-I also needed a way to say how bad our files were, so I put together a small audit framework: five dimensions, scored out of ten. It is my own framework rather than an industry standard, but it meant we could talk about a file being more or less AI-ready instead of just "messy".
+I documented two real developer workflows to see where it broke, opened a Slack channel so feedback kept coming, and read about twenty case studies from teams like Atlassian, Spotify, Miro and Figma. The pattern was the same everywhere: structured input produces better output. To say how bad our files were, I wrote a small audit framework. It is my own, not an industry standard, but it let us talk about a file being more or less AI-ready instead of just "messy".
 
 <AuditFramework />
 
-Then I built a Kiro skill called **delivery-for-ai**. You point it at a polish page and it produces a clean, AI-readable delivery page in the same file: on the left, clean screens organised into feature-specific sections; on the right, a small number of structured notes on interaction behaviour, style tokens, and a summary of what changed.
-
-<PullQuote>The rule that made it work: the screens show what it looks like, the notes say how it behaves. Never both.</PullQuote>
+Then I built a Kiro skill, **delivery-for-ai**. Point it at a polish page and it produces a clean delivery page in the same file: screens on the left, organised by feature; a few structured notes on the right about behaviour, style tokens and what changed. The rule that made it work was keeping those notes strictly about behaviour. When they described the interface too, the AI started inventing things.
 
 <SpecRule />
 
-When I let the notes describe the interface as well, the AI started inventing things that weren't there. So I kept them strictly about behaviour. I tested it with a developer over four rounds and fixed what broke each time, then wrote the whole approach up as a shared standard so it wasn't just a thing I did on my own files.
+I tested it with a developer over four rounds, fixing what broke each time. It went from the AI inventing a toolbar that didn't exist to the developer saying "this is pretty good, the issues are on my side now." Then I wrote it up as a shared standard, so it wasn't just something I did on my own files.
 
 <SubRecord
   id="case-2"
   no="01b"
   mark="b"
-  title="Build better together"
-  lead="Design and development kept working in sequence instead of together, so Frida Edstam and I put together a set of methods people could start using the next morning."
+  title="Invite one person one step earlier."
+  lead="Design and development worked in sequence instead of together, so Frida Edstam and I built methods people could start using the next morning."
+  project="Build better together"
   part="Co-creating the methods with Frida Edstam, and the talk"
   result="A talk at the Ericsson Developer Conference, and a one-page handout"
 />
 
-PM to design, design to front-end, front-end to back-end. Everyone reacting to what the person before them already decided, and nobody in the room when the decision actually got made. What we ended up asking for is smaller than it sounds: invite one person from another discipline one step earlier than you normally would. You are giving them context, not extra work.
+PM to design, design to front-end, front-end to back-end. Everyone reacted to what the person before them had already decided, and nobody else was in the room when the decision got made. What we asked for is smaller than it sounds: invite one person from another discipline one step earlier than usual. You are giving them context, not extra work.
 
 <HandoffLoop />
 
-We did not want to hand out principles. Principles are easy to nod along to and impossible to act on. So every method came with a time box, a group size and a source, because "collaborate more" is not something anyone can put in a calendar.
+Principles are easy to nod along to and impossible to act on, so every method came with a time box, a group size and a source. "Collaborate more" is not something anyone can put in a calendar.
 
 <HandoutSheet />
 
-Workshops are the easy part. None of it sticks unless the ordinary days change too, which is why half the handout is daily habits rather than methods.
-
-I also helped run an AI design-review forum with Jakob Kitzing and Mats Kullerstrand, which came out of the same instinct: fewer handovers, more looking at things together.
+Workshops are the easy part. None of it sticks unless ordinary days change too, which is why half the handout is daily habits. We gave it out at the conference so people could start without us in the room, and that mattered more to me than the talk: a talk is forty minutes, the handout is still on people's desks. The same instinct led to an AI design-review forum I helped run with Jakob Kitzing and Mats Kullerstrand.
 
 <SubRecord
   id="case-3"
   no="01c"
   mark="c"
-  title="Generative UI for data-dense dashboards"
-  lead="A hackathon project on dashboards that assemble themselves from context, and what building it taught me about where UX is going."
+  title="Design the rules, not the screen."
+  lead="Our dashboards hold far more telecom data than any static layout can show, so in a hackathon we designed one that assembles itself."
+  project="Generative UI for data-dense dashboards"
   part="The card component, the specs, the prototype and the proposal, in a Tweak Week team with three other designers and a front-end developer"
   result="A US back-end team used the component to display live data"
 />
 
-Our dashboards hold an enormous amount of telecom data. What any one person needs to see depends on their role and on what the network is doing right now. A static dashboard can't keep up with that, and building a new one for every case is slow.
-
-Before anything clever, the card had to work. It was a fixed-size box that broke the moment a layout became dynamic, so we rebuilt it as a content-driven component that responds to whatever width the grid gives it. One component instead of a set of special cases.
+What someone needs to see depends on their role and on what the network is doing right now, and building a new dashboard for every case is slow. Before anything clever, the card had to work. It was a fixed-size box that broke the moment a layout became dynamic, so we rebuilt it as one content-driven component that responds to whatever width the grid gives it.
 
 <div class="wide">
   <CardSystem />
 </div>
 
-Generative UI is easy to get excited about, so I went looking for what had actually been shown.
+Generative UI is easy to get excited about, so I checked what had actually been shown. People prefer dynamic card interfaces to chat by roughly 72% (Stanford and Georgia Tech, 2025). Generated interfaces match expert designs about half the time, and constrained component catalogs beat free-form generation (Google Research, 2025). Dashboards should adapt to how expert the user is (IEEE Drillboards, 2025).
 
-<ul style="list-style: disc; padding-left: 1.25em; max-width: var(--measure)">
-  <li>Stanford and Georgia Tech, 2025: people prefer dynamic card interfaces over chat, by roughly 72%.</li>
-  <li>Google Research, 2025: LLM-generated interfaces match expert designs about half the time, and constrained component catalogs beat free-form generation.</li>
-  <li>IEEE Drillboards, 2025: dashboards should adapt to how expert the user is.</li>
-</ul>
-
-The proposal was an assistant and a canvas, roughly 30% steering panel, 70% canvas. The assistant assembles a whole layout from context rather than one card at a time. Cards arrive pre-filled and you can edit, pin or dismiss them, and you steer it two ways: talk to it, or just move the cards yourself. The deliverable wasn't a screen. It was a system.
+So the proposal was a canvas and an assistant. The assistant assembles a whole layout from context, cards arrive pre-filled, and you steer it two ways: ask in the chat, or act on the cards yourself.
 
 <div class="wide">
   <AssistantCanvas />
 </div>
 
-Then we built it end to end, from the Figma component to live data, so the specs had to hold up at every step.
+Then we built it end to end, from the Figma component to live data, so the specs had to hold up at every step. A front-end developer adapted the real component, and a back-end team in the US used it to show live data and graphs.
 
 <div class="wide">
   <SpecToCode />
@@ -190,14 +175,12 @@ Then we built it end to end, from the Figma component to live data, so the specs
 
 <FactGrid data={frontmatter.outcome} />
 
-The delivery skill went from the AI inventing a toolbar that didn't exist to a developer saying "this is pretty good, the issues are on my side now." We handed out a one-page version of the methods at the conference so people could start the next day without needing us in the room. That mattered more to me than the talk did. A talk is forty minutes and then it is over. The handout is still on people's desks. And from the dashboard specs, a front-end developer adapted the real component, and a back-end team in the US used it to display live data and graphs.
+A delivery standard the team uses, methods people can start the next morning, and a component running on live data. Three different results, and in each one the developers were in it from the start.
 
 <h2 id="what-i-learned">What I learned</h2>
 
 <FactGrid data={frontmatter.learnings} tone="ink" />
 
-Clean, organised input produces better code with fewer mistakes. That sounds obvious written down, but it changes what a design deliverable is for. And the first case only worked because I built it with the developers rather than for them. The second was Frida and me trying to make that normal instead of lucky.
+Clean, organised input produces better code with fewer mistakes. That sounds obvious written down, but it changes what a design deliverable is for. You end up writing for two audiences at once, humans and AI agents. Version control and specs are quietly becoming design tools, and the valuable part of the job shifts towards defining the constraints, then judging what comes back.
 
 <PullQuote>UX is moving from designing screens to designing systems of rules.</PullQuote>
-
-You end up writing for two audiences at once, humans and AI agents, and they want different things from the same document. Version control and specs are quietly becoming design tools. And the valuable part of the job shifts towards defining the constraints, then evaluating and curating what comes back.

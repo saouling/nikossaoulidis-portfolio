@@ -12,12 +12,14 @@ interface Props {
 	part: string;
 	result: string;
 	mark: 'a' | 'b' | 'c';
+	/** The project's plain name, when the title is a takeaway instead. */
+	project?: string;
 }
 
-const { id, no, title, lead, part, result, mark } = Astro.props;
+const { id, no, title, lead, part, result, mark, project } = Astro.props;
 ---
 
-<h3 class="sub-title" id={id}><CaseMark mark={mark} class="sub-mark" /><span class="cat-no">{no}</span> {title}</h3>
+<h3 class="sub-title" id={id}><CaseMark mark={mark} class="sub-mark" /><span class="cat-no">{project ? `${no} · ${project}` : no}</span><span>{title}</span></h3>
 <p class="sub-lead">{lead}</p>
 <dl class="sub-plate">
 	<div>
