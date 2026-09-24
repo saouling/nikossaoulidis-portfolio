@@ -82,7 +82,7 @@ real screens.
 
 ### 01b · Build Better Together (Ericsson Developer Conference 2026, with Frida Edstam)
 - **Date:** the deck is dated 2026-04-15/16 (R&D site Kista), which matches the About
-  page ("Apr 2026"). The CV says "Mar 2026". **This conflict is still open.**
+  page ("Apr 2026"). **Confirmed by Nikos: April 2026.** The CV's "Mar 2026" is wrong.
 - **Thesis of the talk:** the best features shipped last year had one thing in common:
   someone early enough invited someone else to shape it together.
 - **The handoff trap:** a loop of Product Mgmt (feature idea) → Design study → Lo-fi
@@ -307,9 +307,9 @@ language, every team solving the same problem differently.
 - bring developers in earlier (learned at Ericsson)
 
 **Talk:** "Erasmus Goes Digital", a European University Foundation webinar,
-co-presented with Ghent University and DG EAC. **Date conflict:** the About page says
-Dec 2022, the CV says Aug 2022. **Also:** the About page says Aug 2022 to **Jun** 2023,
-the CV says to **Jul** 2023.
+co-presented with Ghent University and DG EAC. **Date:** December 2022 (confirmed by Nikos; the CV's
+Aug 2022 is wrong). **Still open:** the About page says Aug 2022 to **Jun** 2023, the CV
+says to **Jul** 2023.
 
 ---
 
@@ -414,13 +414,211 @@ The source folder has no deck for it, so ask Nikos if more material exists.
 
 ---
 
-## Open questions for Nikos
+## Decisions and answers from Nikos (2026-09-24)
 
-- The EDC talk date: April 2026 (deck, About) or March 2026 (CV)?
-- The Erasmus Goes Digital date: December 2022 (About) or August 2022 (CV)? The EWP role
-  end: June 2023 (About) or July 2023 (CV)?
-- The "cell list story" from the EDC talk: what happened? It is a strong concrete
-  example for 01b.
-- LightHouse: any more material (screens, research) beyond the Figma prototype?
-- The portfolio deck's "5 concrete, transferable design guidelines" contradicts the
-  thesis. Fix the deck before sending it anywhere.
+- **The Ericsson Developer Conference talk was in April 2026.** The CV's "Mar 2026" is
+  wrong. The About page is right; fix the CV PDF when it is next edited.
+- **Erasmus Goes Digital was in December 2022.** The CV's "Aug 2022" is wrong; the About
+  page is right.
+- **LightHouse:** there is no more material than the Figma prototype and one image.
+  Kept as object 06 on Claude's recommendation (the only pure interface piece; it costs
+  nothing at the end of the index).
+- **The deck's "5 concrete, transferable design guidelines":** Nikos does not want to
+  pursue it. Four lenses stays correct on the site.
+- **Still open:** the EWP role's end month (June 2023 on the About page, July 2023 on
+  the CV), and the "cell list story" from the Ericsson talk.
+
+---
+
+## Deep notes: Don't Be a Stranger (from the full thesis read, 2026-09-24)
+
+### Timeline
+- **November 2024:** Röhsska approached, months before the thesis officially started. It
+  was the first museum to say yes.
+- **November 2024 to mid-April 2025:** searching for a second partner. Museum of World
+  Culture, Universeum, Gothenburg Art Museum, design companies and cultural centres across
+  Sweden and Denmark. Mostly no reply: the thesis's "wall of ghosting" figure. Plan B was
+  both phones in two rooms of Röhsska.
+- **Mid-April 2025:** Mölndals stadsmuseum agreed, through Jessica Andersson Sjögerén's
+  personal relationship with its staff ("much more immediate and effective than endless
+  emails").
+- **May 2025:** opening in both museums.
+
+### Phases (the thesis uses Discover, Define, Ideate, then three iterations)
+- **Discover:**
+  - background research
+  - museum visits documenting "do not touch" (Maritime Museum motion alarms,
+    Röhsska's hand icons and queue-ticket sign, Museum of World Culture, Mölndal's
+    touchable Open Storage)
+  - a video essay of film scenes with rotary phones and live voice, edited in CapCut
+    (references include *Paris, Texas* and *In the Mood for Love*)
+- **Define:** conceptual brainstorming with the supervisor, stakeholder engagement, and
+  technical feasibility. Internet calling was rejected because it loses the tactile and
+  aural authenticity. The final setup is Bluetooth adapter + smartphone + SIM, because
+  Sweden has no landline network.
+- **Why rotary phones:** deliberate physical engagement per digit, McLuhan's "cool
+  media" (participation) and Baudrillard's hypercommunication. The Ericofon (1950s,
+  one-piece) is the principal artifact. Rotary phones bridge generations: nostalgia for
+  older visitors, novelty for younger ones.
+- **Ideate:**
+  - the pivot from urban phone booths, which were over-romanticised (safety, cost,
+    ethics), to museums (slower rhythm, curated narrative, groups, controlled sound)
+  - Crazy 8s alone, sketching, peer co-design, and mapping modalities with the
+    supervisor (tactile, sonic, interpretive)
+  - AI, scripted media and asynchronous voice messages rejected on purpose ("Voice here
+    is not just sound, but also vulnerability")
+- **Iteration I, pre-pilot (IxD studio, Kuggen):**
+  - two phones calling each other, printed instructions, and 6 unstructured interviews
+    with IxD students (10 to 20 minutes), who hand-annotated the instructions
+  - problems found: misdials when the dial wasn't let fully return; some needed more
+    guidance; hesitation about being allowed to touch
+  - fixes: instructions explain letting the dial return, and signage says the phones
+    are for use; the focus moved from technical feasibility to real conversations
+    between strangers
+  - phones sourced from Tradera, Facebook Marketplace, Myrorna (Hisingen and Järntorget),
+    Björk & Frihet and Lundby Second Hand, plus friends; nine devices tested; faults in
+    ringers, dials and speakers
+- **Iteration II, pilot (Lindholmen campus), three mini-iterations:**
+  - v1: Ericofon in the Patricia building's ground-floor corridor, Dialog in the
+    Kokboken café
+  - v2: a new logo poster, a redesigned prompt booklet, a simplified feedback form,
+    clearer instructions
+  - v3: Ericofon moved to Kokboken, Dialog to the Jupiter building corridor (more
+    traffic)
+  - laser-cut wooden casings, colour-matched, hide the electronics
+  - placement criteria: close to the studio, observable from a hidden spot, high
+    traffic, noise, light
+  - data: 15 feedback forms (four Likert items, results under Process and numbers
+    above; three open questions), 4 semi-structured interviews, observations
+  - automated sentiment and topic modelling in Python played only a supporting role;
+    reflexive thematic analysis led
+- **Iteration III, museums:** situated co-creation, not ideate/prototype/test. Details
+  below.
+
+### Themes at every level (reflexive thematic analysis)
+- **Pre-pilot interviews (6):** The Ritual of Voice Telecommunication; Embodied Memory &
+  Nostalgia; Desired Friction in Telecommunication; Museum Social Codes & Permissions to
+  Interact; Emotions Through Voice (Between Voice & Text).
+- **Pilot interviews (4):** Voice Telecommunication & Intimate Anonymity; Playfulness &
+  Connection; Vulnerability, Excitement and the Unexpected; Technical Issues & Undesired
+  Friction; Emotional Connection through Voice.
+- **Pilot feedback forms (15):** Curiosity and Surprise (Disrupting the Everyday); The
+  Liberation of Telecommunicating with Strangers; The Positive & Emotional Friction of
+  Analog Telecommunication; Undesired Friction (Sensory & Spatial); Material Memories and
+  Nostalgia.
+- **Cross-phase synthesis (these carried into the museum phase):**
+  1. Emotional Presence through Analog Voice
+  2. Friction & Vulnerability as Invitations
+  3. Defamiliarization & Playfulness
+  4. Social Norms & Spatial Hesitation
+  5. Material Memory & Nostalgia
+
+### The museum phase: co-design decisions
+- **At Röhsska:** co-designed with Jessica Andersson Sjögerén (curator), Louise
+  Brännström (curator of pedagogy / communicator) and Emma Kristensson (graphic
+  designer).
+  - **Expectation management:** "talk to a stranger" became "You might connect. You
+    might not. But the moment is yours." The framing moved from the call to the phone
+    itself.
+  - **Spatial framing:** the Innovation room of *Design Stories*, near the exhibited
+    Kobra phones, so it became part of the guided tours.
+  - **Visual integration:** the museum's templates, with tactile imperatives ("Pick up
+    the phone", "Try its dial").
+- **At Mölndal (Öppna magasinet):** co-designed with Malin Broby (museum educator and
+  coordinator).
+  - The Dialog was chosen over the Kobra: a common home phone fits a city museum, while
+    the Kobra is a design object.
+  - A wooden table with a shelf and an armchair make a domestic setting.
+  - A vintage box from the collection hides the electronics; no casing, no big signage;
+    "discovery over direction".
+- **Kept unoptimised on purpose:** long phone numbers were not shortened to one digit.
+- **The Rolodex:**
+  - chosen with the curators: browsable one-handed while holding the phone, slow like
+    dialling, holds Swedish and English on one sleeve, fits both rooms
+  - observed as a visitor favourite
+  - prompts co-authored in four categories: voice and the phone; touch and senses;
+    innovation (Röhsska) or memory and everyday life (Mölndal); poetic or reflective
+    provocations
+- **Feedback as reflection, not data:** structured forms were dropped at the museums.
+  Röhsska staff said the form "felt like it was trying to steer the replies in certain
+  directions". The replacements were a post-it surface at Röhsska and a guestbook at
+  Mölndal.
+- **Observations at Röhsska:**
+  - visitors came in groups, watched first, then a snowball effect: once one post-it
+    went up, others followed
+  - teens and young adults dialled; older visitors recognised the Kobra
+  - many calls to Mölndal went unanswered, but dialling, listening and the Rolodex
+    mattered anyway
+  - individual moments: an older man tried it, then called his partner over; British
+    tourists; school boys "decoding" the dial
+
+### The four lenses and their considerations (thesis section 6.2, verbatim in spirit)
+1. **Voice-based communication and emotional presence:**
+   - no screens, LEDs or caller info
+   - a semi-private spot with the voice towards a wall (full exposure gives stage
+     fright, full privacy invites misuse)
+   - invitation text co-written with communicators; don't over-promise
+   - clear but minimal supporting material
+2. **Tactility, materiality and embodied interaction:**
+   - keep the weight, dial friction and ring ("useful"/"desired" friction)
+   - choose the artifacts with curators to fit the institution
+   - analog supporting material (leaflet, Rolodex)
+   - encourage mechanical gestures
+3. **Invitation and participation in public space:** permission through the room and
+   the signage; seed post-its before opening.
+4. **Defamiliarisation as reflective strategy:** the object inside the exhibition's
+   story; no screens or apps; prompts that open a conversation.
+
+## Deep notes: EWP Dashboard (live Readymag page and portfolio deck)
+
+- **The status colour system:**
+  - General statuses:
+    - gold = action must be taken by the user
+    - blue = action taken / waiting for response
+    - green = completed / successful
+    - red = rejected / unsuccessful
+    - light blue = waiting list (nominations only)
+    - grey = draft (IIAs only)
+  - The OLA (Online Learning Agreement) legend for outgoing and incoming students runs
+    unsigned → signed by student → signed by student/sending → signed by
+    student/sending/receiving, plus the "changes" versions of each state.
+- **Identity:** the old "E+ Dashboard β" (a blue circle, a pill-button set) became the
+  "EWP Dashboard" logo with a teal ring and a six-colour status palette (blue, magenta,
+  green, red, gold, teal-grey), with buttons such as waiting list, reject and delete.
+- **Components on the live page:**
+  - an icon-states matrix: accept, reject, delete, edit, add new, download files, each
+    active / on hover / on click / disabled
+  - the button system (a 4678×6200 original)
+  - the type scale in Raleway (body 16px up to h1)
+  - form fields, dropdowns, the sidebar before and after
+  - a mobile frame and a laptop frame
+  - app screens (application record with documents, the settings page)
+- **Modules named in the deck:** My University, OLA, Short Term, Applications (Outgoing
+  Students, Incoming Students, Requirements), IIA, Erasmus+ App.
+
+---
+
+## Asset index (everything extracted, kept outside the public repo)
+
+All extracted assets live in
+`~/Documents/portfolio-content-assets/_extracted/` (beside the sources, not in git).
+Regenerate slides with `pdftoppm -scale-to-x 1920 -png`, embedded images with
+`pdfimages -png`.
+
+| Folder | What |
+|---|---|
+| `general/portfolio-presentation/slides/` | All 57 slides of the Portfolio Presentation at 1920px |
+| `general/portfolio-presentation/images/` | Every embedded image from that deck (≥200px), original resolution |
+| `ericsson/edc-talk/slides/`, `images/` | The Build Better Together talk (30 slides) and its images. **Ericsson Internal: never publish these** |
+| `ericsson/edc-handout/handout-page1.png` | The one-page handout rendered |
+| `dbas/defence-deck/slides/`, `images/` | The thesis defence deck (169 slides at 1600px) and its embedded images |
+| `dbas/thesis-pdf-images/` | Every embedded image in the thesis PDF (≥200px) |
+| `dbas/figma-thesis-designs/<frame>/` | From Figma file `rwHjzUt84EH8azgN2oqYHb` (page "Process", node 143:14). Each folder holds `frame-export.png` (the composed figure) and `photo-NN.png`, the **original photos without any labels or captions**. Frames downloaded: Museum-Röhsska-Final-Installation, Museum-Mölndal-Final-Installation, Museum-rolodex, Museum-reflection-mechanisms, Museum-Prototyping-casing-design, Museum-choosing-a-space-and-building, Pilot-1/2/3-exhibition, Pilot-Prototyping_Cases (20 of more), Pre-pilot-Finding_the_phones, Pre-pilot-Repairing_the_phones, the-phones, Discover-Röhsska_dont_touch, Ideation-Original_concept_Phonebooths, wall-of-ghosting (20 of more). `_figma-metadata-Process-page.json` lists every frame and node id on the page, for later downloads (the Figma Starter plan rate-limits the MCP) |
+| `dbas/…` thesis LaTeX | `dont-be-a-stranger/report-thesis-latex-and-assets/03 Don't be a Stranger Report/figure/` holds all 96 thesis figures as separate files, no captions (LaTeX adds those) |
+| `dont-be-a-stranger/some-assets/` | Logos, the Ericsson banner, the Röhsska video, presenting photos (source folder) |
+| `synodia/slides/`, `images/` | All 114 Synodia slides at 1600px and its embedded images |
+| `sound-mediating-table/pages/`, `images/` | The paper's 5 pages at 200dpi and its figures |
+| `readymag-live-site/ewp-dashboard/` | 19 full-resolution originals from the live EWP page (status legends, OLA legend, identity before/after, button system, icon states, type scale, forms, sidebar, device frames) |
+| `readymag-live-site/ericsson/` | 4 originals from the live Ericsson page |
+
+The site's own images live in `public/images/<project>/` (web-sized jpg + webp).
