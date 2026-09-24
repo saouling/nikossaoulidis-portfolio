@@ -383,13 +383,16 @@ This is the complete set of patterns the site ships, checked against the build o
 | Ratings ledger (mean on a scale, n and scale always in the caption) | `Ratings` / `.ratings` | DBAS (pilot feedback forms) |
 | Case body wide column | `.case-body > .wide` | Ericsson, DBAS, EWP (dense diagrams that are cramped at the reading measure) |
 | Ericsson diagrams (scoped styles, drawn in code, NDA-safe) | `components/ericsson/`: `DeliveryBeforeAfter`, `SpecRule`, `AuditFramework`, `HandoffLoop`, `HandoutSheet`, `CardSystem`, `AssistantCanvas`, `SpecToCode` | Ericsson only |
-| DBAS diagrams (scoped styles, drawn in code; museum red/blue kept for Röhsska/Mölndal) | `components/dbas/`: `DbasProcess`, `PilotRounds`, `ThemesLedger`, `LeafletEvolution`, `LensGrid`, `MuseumCompare` | DBAS only |
-| EWP diagrams (scoped styles, drawn in code; status swatches are the product's own colours, shown as a specimen) | `components/ewp/`: `ModuleMatrix`, `StatusSystem` | EWP only |
+| DBAS diagrams (scoped styles, drawn in code; museum red/blue kept for Röhsska/Mölndal) | `components/dbas/`: `DbasProcess`, `PilotRounds`, `ThemesLedger`, `LeafletEvolution`, `LensGrid`, `MuseumCompare`, `GhostWall`, `RotaryDial` (interactive: a working dial with the Swedish ringback tone, reduced-motion safe) | DBAS only |
+| EWP diagrams (scoped styles, drawn in code; status swatches are the product's own colours, shown as a specimen) | `components/ewp/`: `ModuleMatrix`, `StatusSystem`, `OldNew` (real old-UI fragments at near-true size) | EWP only |
 | Desktop + phone screen pair | `.figure-grid.ewp-screens` | EWP |
+| Case marks (one per sub-record, derived from the object's form) | `CaseMark`, `.obj-summary-key`, `.obj-summary-cases`, `.sub-mark` | Ericsson (per-case summary, case index, case headings) |
+| Interactive demo (plays once in view, hands over on first click, off under reduced motion) | `AssistantCanvas` | Ericsson 01c |
+| Named section heading with its plain name | `.h-sub` | DBAS (Pick up / Dial / Wait / Talk / Hang up) |
 | Column grid | `.col-grid.cols-3` | Ericsson |
 | Museum pair / block | `.museum-pair`, `.museum-block` | DBAS |
 | Ink-grid | `.ink-grid` | DBAS |
-| Post-it board | `PostitBoard` | DBAS |
+| Post-it board (five notes) / wall (more than five: smaller, `.wide`, left-aligned) | `PostitBoard` | DBAS |
 | Next-object footer | `.obj-next` | every object page, in catalogue order 01 → 06 → 01 |
 | Entry links | `.obj-links` | compact entries 04–06 (where a case study has its summary) |
 | Embed (Figma prototype / YouTube) | `Embed` / `.embed`, `.embed-frame`, `.embed-label` | compact entries 04–06 |

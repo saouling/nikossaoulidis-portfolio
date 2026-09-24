@@ -49,12 +49,16 @@ import ThemesLedger from '../../components/dbas/ThemesLedger.astro';
 import LeafletEvolution from '../../components/dbas/LeafletEvolution.astro';
 import LensGrid from '../../components/dbas/LensGrid.astro';
 import MuseumCompare from '../../components/dbas/MuseumCompare.astro';
+import RotaryDial from '../../components/dbas/RotaryDial.astro';
+import GhostWall from '../../components/dbas/GhostWall.astro';
 
-<h2 id="problem">The problem</h2>
+<p class="case-ritual">The page follows the call: pick up, dial, wait, talk, hang up.</p>
+
+<h2 id="problem">Pick up <span class="h-sub">The problem</span></h2>
 
 Pick up the phone in one museum and you are talking, right now, with a stranger standing in the other one. No screens, no profiles, no matching. Just a voice, and the small act of dialling and waiting to see whether anyone answers.
 
-That was not the first version. I started with public phone booths between cities, because I grew up in a small village in Greece where the booth was how I called home, and I still have the prepaid cards I saved. I wrote to telecom companies across Sweden and Denmark, Ericsson first because the phones I wanted were theirs. Everyone said no, and the reasons were reasonable. Then I found the Ericofon already sitting in a case at Röhsska, the exact phone I had been planning to put in a booth, behind glass, where nobody could touch it. I kept the concept and changed the setting.
+I grew up in a small village in Greece where the phone booth was how I called home, and I still have the prepaid cards I saved. The first version of this project was booths between cities. I wrote to telecom companies in Sweden and Denmark, Ericsson first. They said no, or never answered. Then I found the Ericofon, the exact phone I had in mind, already in a case at Röhsska: behind glass, where nobody could touch it.
 
 <Figure
   class="figure-support"
@@ -64,10 +68,10 @@ That was not the first version. I started with public phone booths between citie
   width={2500}
   height={1668}
   alt="Ericofons in several colours displayed on shelves behind glass at Röhsska, with a visitor looking in."
-  caption="Ericofons already behind glass at Röhsska, the exact model I'd been planning to put in a booth."
+  caption="Ericofons behind glass at Röhsska, the exact model I'd planned to put in a booth."
 />
 
-We message people on the other side of the world without thinking about it, and somewhere in there the act of reaching out lost its weight. Museums have the opposite problem. They spend a lot of effort telling you to look and not touch. I did not want to just assert that, so before designing anything I went around Gothenburg and photographed it: motion alarms at the Maritime Museum, and do-not-touch icons in four different visual styles across four institutions.
+That was the problem in one picture. We message people on the other side of the world without thinking, and reaching out has lost its weight. Museums have the opposite habit: they spend a lot of effort telling you to look and not touch. I photographed it across Gothenburg before designing anything.
 
 <Figure
   class="figure-support"
@@ -76,7 +80,7 @@ We message people on the other side of the world without thinking about it, and 
   width={1239}
   height={332}
   alt="Four different 'do not touch' hand icons, in four different visual styles, photographed at four Gothenburg museums."
-  caption="Four museums, four different icons, one instinct: look, don't touch."
+  caption="Four museums, four icons, one instinct: look, don't touch."
 />
 
 The question I ended up with:
@@ -89,17 +93,62 @@ The question I ended up with:
   <div><p>exploring themes of meaningful telecommunication technologies?</p></div>
 </div>
 
-<h2 id="what-i-did">What I did</h2>
+<h2 id="what-i-did">Dial <span class="h-sub">What I did</span></h2>
 
-<h3>Two museums, two installations</h3>
+The question can't be answered on paper, so this was research through design: build the thing, put it in front of people, watch what they do. It took three stages.
 
-One concept, two museums, and two installations that do not look much alike.
+<DbasProcess />
+
+Sweden has no working landline network any more, so in the lab I paired each dial with a Bluetooth adapter and a smartphone with a SIM card. You turn a dial designed in the 1950s and it places an ordinary mobile call. I tested nine second-hand phones. Most had something broken, and I did not know how to repair any of it when I started.
+
+Then three rounds on campus, in a café and two corridors, watching who picked up and who walked past. Twenty-five people took part across the pilots.
+
+<PilotRounds />
+
+<Ratings
+  max={5}
+  items={[
+    { label: 'Easy to use', value: 4.0 },
+    { label: 'Felt different from a smartphone', value: 4.4 },
+    { label: 'The prompts sparked conversation', value: 4.1 },
+    { label: 'Comfortable talking to a stranger', value: 4.3 },
+  ]}
+  caption="Pilot feedback forms, 15 people, mean on a 5-point scale. A small sample, so a direction rather than proof."
+/>
+
+I coded the interviews and forms with reflexive thematic analysis. Five themes came out of it, and each one changed something before the museums. I can tell you which design change came from which finding.
+
+<ThemesLedger />
+
+Even the instructions were tested. Interaction design students annotated my leaflet by hand, and the version that went into the museums had a step mine had missed.
+
+<LeafletEvolution />
+
+<h2 id="wait">Wait <span class="h-sub">Designing for nobody answering</span></h2>
+
+*And wait.* The students were right, and it turned out to be the whole project.
+
+I waited on the museums first. Röhsska said yes in November 2024, months before the thesis officially started. Finding the second museum took five months of emails, LinkedIn messages and tailored proposals, and most of them were never answered. My plan B was both phones in two rooms of the same museum. What finally worked was Jessica at Röhsska calling someone she knew at Mölndal.
+
+<GhostWall />
+
+Then the visitors would wait. I had been writing signage that said *talk to a stranger*, and Röhsska's team pushed back: if the phone rings out, the visitor has failed at something. The poster became *You might connect. You might not. But the moment is yours.* From there I designed for the call not happening. Voice only, with no screen and no caller ID. No AI and no recorded voices: an answering machine would have made the silence safe, and the silence is part of it. And there are prompt cards on a Rolodex, so you can read them on your own or with whoever you came in with.
+
+<RotaryDial />
+
+And sometimes the system itself would make people wait. A lapsed payment on the phone's cellular subscription cut the service for nearly two hours during the exhibition, and the museum staff were the ones standing in front of visitors while it was down. So I wrote setup and troubleshooting instructions for receptionists and guides, not for designers. Something that keeps working in a room you are not in is a different problem from something that demos well.
+
+<h2 id="how-it-went">Talk <span class="h-sub">How it went</span></h2>
+
+<FactGrid data={frontmatter.outcome} />
+
+One concept, two museums, and two installations that do not look much alike. I co-designed both with five named people, none of whom worked for me: a curator, a graphic designer, a communicator, a museum educator and a curator of pedagogy. At Röhsska I worked inside their visual identity and their graphic designer's templates, so the posters look like Röhsska rather than like me.
 
 <div class="breakout">
   <div class="museum-pair">
     <div class="museum-block">
 
-Röhsska is a design museum. The piece went into the Innovation room of Design Stories, a few metres from a case holding Ericofons in every colour, so the phone visitors could pick up was the same model as the ones they could not. I had proposed the Belonging room, and the curators moved it. They were right. The feedback surface there was a wall of post-its, because the room was already conceptual and already a bit loud.
+**Röhsska** is a design museum. The curators moved it from the room I had proposed into Innovation, a few metres from a case of Ericofons, so the phone you could pick up was the model you couldn't. They were right.
 
       <Figure
         src="/images/dbas/clean-rohsska-room.jpg"
@@ -110,7 +159,7 @@ Röhsska is a design museum. The piece went into the Innovation room of Design S
     </div>
     <div class="museum-block blue">
 
-Mölndals stadsmuseum is a city museum about everyday life, where the Open Storage exhibition already lets people handle more than 10,000 objects with no glass at all. The Kobra is a design object and that is a room about ordinary things, so I used the Ericsson Dialog instead, the plain desk phone that sat in normal Swedish homes, with the electronics hidden inside a vintage box from the museum's own collection. Feedback there was a guestbook, because a wall of yellow notes would have broken the quiet of a room pretending to be a living room.
+**Mölndals stadsmuseum** is about everyday life, so it got the Ericsson Dialog, the plain phone that sat in ordinary Swedish homes, beside a vintage armchair, with the electronics hidden in a box from the museum's own collection.
 
       <Figure
         src="/images/dbas/clean-molndal-room.jpg"
@@ -124,136 +173,7 @@ Mölndals stadsmuseum is a city museum about everyday life, where the Open Stora
 
 <MuseumCompare />
 
-<h3>Lab, field, showroom</h3>
-
-Research through design, because the question cannot be answered on paper. You build the thing, put it in front of people, and watch what they do with it.
-
-<DbasProcess />
-
-Lab first, in the IxD studio at Chalmers. Sweden has no working landline infrastructure any more, so I paired the original dial mechanism with a Bluetooth adapter and a smartphone with a SIM card in it. The phone places an ordinary mobile call while the person holding it is still rotating a dial designed in the 1950s. I tested nine second-hand phones, most had something broken, and I did not know how to repair any of it when I started.
-
-<div class="figure-grid cols-2 natural">
-  <Figure
-    src="/images/dbas/clean-thrift-shop.jpg"
-    width={936}
-    height={1400}
-    alt="A second-hand shop floor in Gothenburg, shelves of household objects, where the search for working rotary phones started."
-    caption="Hunting for phones second-hand."
-  />
-  <Figure
-    src="/images/dbas/clean-repairing.jpg"
-    width={936}
-    height={1400}
-    alt="A light-blue Ericofon opened up on a wooden table, its base, wiring and handset laid out for repair."
-    caption="Opening one up to find what was broken."
-  />
-</div>
-
-Field next, on campus. Three rounds in the student café and two different buildings, watching who picked up and who walked past: fifteen feedback forms, four interviews, and six earlier conversations with interaction design students who annotated my instruction sheet by hand. The setup changed each round.
-
-<PilotRounds />
-
-<Ratings
-  max={5}
-  items={[
-    { label: 'Easy to use', value: 4.0 },
-    { label: 'Felt different from a smartphone', value: 4.4 },
-    { label: 'The prompts sparked conversation', value: 4.1 },
-    { label: 'Comfortable talking to a stranger', value: 4.3 },
-  ]}
-  caption="Pilot feedback forms, 15 people, mean on a 5-point scale. A small sample, so a direction rather than proof. Answers varied most on the instructions and the prompts, so those were simplified and rephrased before the museums."
-/>
-
-I coded the interviews and forms with reflexive thematic analysis. Five themes came out of it, and each one changed something before the museums.
-
-<ThemesLedger />
-
-Showroom last, which was the two museums. Finding the second museum took five months of unanswered emails, LinkedIn messages and tailored proposals to museums and companies across Sweden and Denmark. What actually worked was Jessica at Röhsska calling someone she knew at Mölndal.
-
-<PullQuote>I changed the design because the pilots told me to, not because I guessed.</PullQuote>
-
-<h3>What I decided</h3>
-
-**Voice only.** No screens, no caller ID, nothing that tells you who is on the other end before you hear them.
-
-**No AI and no recorded voices.** If nobody picks up, nobody picks up. An answering machine would have made the silence safe, and the silence is part of it.
-
-**Keep the friction, fix the breakage.** The dial stays slow, because the slowness is the experience. But the sound quality in the pilot was genuinely bad and people told me so, and that got fixed before the museums.
-
-**Do not promise a call.** This one came from the curators. I had been writing signage that said talk to a stranger, and Röhsska's team pushed back: if the phone rings out, the visitor has failed at something. The poster became *You might connect. You might not. But the moment is yours.* Everything after that was designed for the call not happening, which is why there are prompt cards you can read on your own or with whoever you came in with.
-
-<Figure
-  class="figure-support"
-  variant="plate"
-  accent="blue"
-  src="/images/dbas/15-poster-text-layout.jpg"
-  width={636}
-  height={900}
-  alt="An early text layout for the poster copy: 'Don't be a Stranger. This phone invites you to pause, to touch, to dial, and maybe connect. You might reach a stranger at Mölndals City Museum. You might not. But the experience is yours.'"
-  caption="An early draft: 'the experience is yours,' not yet the curators' 'the moment is yours.'"
-/>
-
-**Feedback as reflection.** My structured form, in Röhsska's words, felt like it was trying to steer the replies. It became post-its.
-
-<div class="figure-grid cols-2 natural wide">
-  <Figure
-    variant="plate"
-    accent="red"
-    src="/images/dbas/clean-postits.jpg"
-    width={1600}
-    height={1200}
-    alt="Handwritten post-its in Swedish and English stuck across the wooden table at Röhsska, beside the pencil holder and the question card."
-    caption="Röhsska: a surface that fills up."
-  />
-  <Figure
-    variant="plate"
-    accent="blue"
-    src="/images/dbas/clean-guestbook.jpg"
-    width={1600}
-    height={1200}
-    alt="A hand holding the Mölndal guestbook, its cover asking in English and Swedish: what did this make you think or feel?"
-    caption="Mölndal: a guestbook, quiet like the room."
-  />
-</div>
-
-Somebody still has to explain a dial phone to a generation that has never used one, without a screen doing the explaining. That meant real graphic design: laminated prompt cards, printed leaflets, instructions written and laid out in two languages, all physical enough to belong on the same table as the phone.
-
-<div class="breakout">
-  <div class="figure-grid cols-3 natural">
-    <Figure
-      variant="plate"
-      src="/images/dbas/40-making-the-rolodex-cards.jpg"
-      width={2000}
-      height={1498}
-      alt="Laminated prompt cards being cut and hole-punched for the rolodex, in English and Swedish, on a workbench with scissors and a card holder."
-      caption="Cutting and laminating the prompt cards."
-    />
-    <Figure
-      variant="plate"
-      accent="red"
-      src="/images/dbas/35-rohsska-instruction-leaflet.jpg"
-      width={2000}
-      height={1573}
-      alt="The Röhsska instruction leaflet, in Swedish and English, explaining how to answer or place a call."
-      caption="Röhsska's instructions."
-    />
-    <Figure
-      variant="plate"
-      accent="blue"
-      src="/images/dbas/36-molndal-instruction-leaflet.jpg"
-      width={2000}
-      height={1573}
-      alt="The Mölndal instruction leaflet, in Swedish and English, with numbered steps and a note that no calls are recorded."
-      caption="Mölndal's instructions."
-    />
-  </div>
-</div>
-
-<h2 id="how-it-went">How it went</h2>
-
-<FactGrid data={frontmatter.outcome} />
-
-It opened in May 2025 and it is still running. Visitors arrived in groups and started by watching. Once one person wrote on a post-it, others followed. Teenagers and young adults were the most likely to actually pick up and dial. Plenty of calls went unanswered, especially the ones to Mölndal, and people stayed anyway, dialling, listening to the tone, turning the Rolodex.
+It opened in May 2025 and it is still running. Visitors arrived in groups and started by watching. Once one person wrote on a post-it, others followed. Teenagers and young adults were the most likely to pick up and dial. An older man tried it alone, then called his partner over. A group of schoolboys tried to decode how the dial worked. Plenty of calls went unanswered, especially the ones to Mölndal, and people stayed anyway, dialling, listening to the tone, turning the Rolodex.
 
 <ul class="ink-grid natural">
   <li class="ink-grid-photo">
@@ -272,36 +192,38 @@ It opened in May 2025 and it is still running. Visitors arrived in groups and st
       height={1500}
       alt="An overhead view of dozens of yellow post-its covering the wooden table at Röhsska, handwritten in Swedish and English."
     />
-    <p>The post-it wall, a few weeks in.</p>
+    <p>The post-its, a few weeks in.</p>
   </li>
 </ul>
 
-Some of what they left behind:
+What they left behind, on post-its at Röhsska and in the guestbook at Mölndal:
 
 <PostitBoard
   quotes={[
     "Satisfying to dial. The dial tone is eerie.",
+    "I remember all the three landline telephone numbers I've had.",
     "I felt scared to talk on the phone. Maybe it reminded me of talking on the house phone when I was a kid.",
+    "It felt like I was calling someone in the past.",
     "Social media is the death of sincerity.",
+    "I had forgotten how the phone signal sounded before putting in the number!",
+    "ABBA would have used this type of phone, or maybe David Bowie.",
+    "I love the tactile act of dialing but I also noticed my impatience at how long it took.",
+    "I became happy :)",
     "I don't want my mobile phone, I rarely get any pleasure from it. Give me a horse and a Kobra phone and I'll be happy.",
   ]}
 />
 
-It is a museum installation, and the work was product work. It was co-designed with five named people across two museums, none of whom worked for me: a curator, a graphic designer, a communicator, a museum educator and a curator of pedagogy, plus the technicians and front-of-house staff who operate it every day. At Röhsska I worked inside their visual identity using their graphic designer's templates, and the posters look like Röhsska rather than like me.
-
-And it has to run without me. Two institutions operate it daily, so I wrote setup and troubleshooting instructions for receptionists and guides rather than for designers. It still broke. A lapsed payment on the phone's cellular subscription cut the service for nearly two hours during the exhibition, and the staff were the ones standing in front of visitors while it was down. Something that keeps working in a room you are not in is a different problem from something that demos well.
-
-<h2 id="what-i-learned">What I learned</h2>
+<h2 id="what-i-learned">Hang up <span class="h-sub">What I learned</span></h2>
 
 <FactGrid data={frontmatter.learnings} tone="ink" />
 
-I designed the failure state before the success state. *You might connect. You might not.* is empty-state copy, and it exists because a curator told me my first version would make visitors feel they had failed at something. I ran three rounds of testing with twenty-five people and I can tell you which design change came from which finding. The instruction leaflet went through hand annotation by students and three revisions before it worked.
-
-<LeafletEvolution />
+I designed the failure state before the success state. *You might connect. You might not.* is empty-state copy, and it exists because a curator told me my first version would make visitors feel they had failed. In a shared space the room, the permission and the silence do as much work as the object.
 
 <LensGrid />
 
 <PullQuote>In a shared space you design the situation, not just the object.</PullQuote>
+
+The first thing I would fix is accessibility. It leans hard on sound and on touch, and that leaves people out. I wrote that in the thesis and it is still true.
 
 The moments I keep:
 
@@ -327,7 +249,5 @@ The moments I keep:
     <p>Getting the Ericofon tattooed on my arm.</p>
   </li>
 </ul>
-
-The first thing I would fix is accessibility. It leans hard on sound and on touch, and that leaves people out. I wrote that in the thesis and it is still true.
 
 <p class="fs-small">Everyone who used it was told, in writing and in both Swedish and English, that no call is recorded. The photographs of visitors on this page are published with their permission.</p>

@@ -697,6 +697,11 @@ section, .section {
 .case-body > ul:not([class]), .case-body > ol:not([class]) { margin-block: var(--space-3); }
 .case-body > h2:first-child { margin-top: 0; }
 .case-body > h2 { padding-top: var(--space-4); border-top: 1px solid var(--ink); }
+/* A section heading's plain-language name after a named one (DBAS names
+   its sections after the call: "Dial", then "What I did"). Same line, not
+   a kicker above it. */
+.h-sub { font-family: var(--font-display); font-weight: 400; font-size: .5em; color: var(--muted); margin-left: .5em; white-space: nowrap; }
+.case-ritual { font-family: var(--font-body); font-style: italic; color: var(--muted); margin-bottom: var(--space-5); }
 
 /* Sub-records inside one object (Ericsson 01a to 01c): a heading with its
    catalogue number, a lead line, and a two-row label in the plate style. */
@@ -1135,17 +1140,23 @@ blockquote.pull.boxed {
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .postit:hover { transform: rotate(0deg) translateY(-5px); box-shadow: 0 12px 26px rgba(0,0,0,.2); z-index: 2; }
-.postit:nth-child(1) { transform: rotate(-3deg); }
-.postit:nth-child(2) { transform: rotate(2deg); background: color-mix(in srgb, var(--red) 10%, var(--paper)); }
-.postit:nth-child(3) { transform: rotate(-1.5deg); background: color-mix(in srgb, var(--blue) 10%, var(--paper)); }
-.postit:nth-child(4) { transform: rotate(2.5deg); }
-.postit:nth-child(5) { transform: rotate(-2.5deg); background: color-mix(in srgb, var(--red) 10%, var(--paper)); }
-.postit:nth-child(1):hover, .postit:nth-child(2):hover, .postit:nth-child(3):hover,
-.postit:nth-child(4):hover, .postit:nth-child(5):hover { transform: rotate(0deg) translateY(-5px); }
+.postit:nth-child(5n+1) { transform: rotate(-3deg); }
+.postit:nth-child(5n+2) { transform: rotate(2deg); background: color-mix(in srgb, var(--red) 10%, var(--paper)); }
+.postit:nth-child(5n+3) { transform: rotate(-1.5deg); background: color-mix(in srgb, var(--blue) 10%, var(--paper)); }
+.postit:nth-child(5n+4) { transform: rotate(2.5deg); }
+.postit:nth-child(5n+5) { transform: rotate(-2.5deg); background: color-mix(in srgb, var(--red) 10%, var(--paper)); }
+.postit-board .postit:hover { transform: rotate(0deg) translateY(-5px); }
+/* A full wall (more than five notes): smaller notes, packed tighter. */
+.postit-board.is-wall { gap: var(--space-4) var(--space-3); justify-content: flex-start; }
+.postit-board.is-wall .postit { width: 200px; min-height: 160px; padding: var(--space-3); font-size: var(--fs-small); }
+@media (max-width: 599px) {
+  .postit-board.is-wall { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+  .postit-board.is-wall .postit { width: auto; min-height: 0; padding: var(--space-3) var(--space-2); font-size: .8rem; }
+}
+.postit-note { display: block; margin-top: var(--space-2); font-size: .72rem; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .postit { transition: none; } }
 .quote-attribution {
   margin-top: var(--space-4);
-  text-align: center;
   color: var(--muted);
 }
 

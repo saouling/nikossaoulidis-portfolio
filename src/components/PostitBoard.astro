@@ -13,7 +13,7 @@ interface Props {
 const { quotes, attribution } = Astro.props;
 ---
 
-<div class="postit-board">
+<div class:list={['postit-board', quotes.length > 5 && 'is-wall wide']}>
 	{quotes.map((quote) => <p class="postit">“{quote}”</p>)}
 </div>
 {attribution && <p class="quote-attribution fs-small">{attribution}</p>}
