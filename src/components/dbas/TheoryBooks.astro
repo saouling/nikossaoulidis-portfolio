@@ -1,0 +1,166 @@
+---
+// DBAS: the two ideas behind the installation as two books you can open.
+// Closed, each is a cover drawn for this page (not the real covers): a
+// Bauhaus composition, the title and the author. Open it and the cover
+// swings back on its spine (CSS 3D), its inside showing the author's
+// photograph, the right-hand page the idea and the design move it became.
+// Pure CSS, driven by a visually hidden checkbox, so it works without JS
+// and from the keyboard. Reduced motion or narrow screens: no hinge, the
+// pages simply appear.
+// Photos: McLuhan by Bernard Gotfryd, 1967, Library of Congress, public
+// domain. Baudrillard by the European Graduate School, 2004, CC BY-SA 2.5,
+// converted to black and white and cropped (credited in the caption).
+const books = [
+	{
+		id: 'mcluhan',
+		title: ['Understanding', 'Media'],
+		author: 'Marshall McLuhan',
+		year: '1964',
+		shot: 'photographed 1967',
+		tone: 'red',
+		photo: { src: 'mcluhan-tv-1967', w: 872, h: 1024, alt: 'Marshall McLuhan in 1967, arms folded, leaning on a television set that shows his own face.' },
+		quote: 'The medium is the message.',
+		idea: 'We notice what a medium carries and forget the medium itself. McLuhan asks us to make it perceptible again.',
+		move: 'the weight of the handset and the resistance of the dial stay. They are how you feel the medium.',
+	},
+	{
+		id: 'baudrillard',
+		title: ['The Ecstasy of', 'Communication'],
+		author: 'Jean Baudrillard',
+		year: '1987',
+		shot: 'photographed 2004',
+		tone: 'blue',
+		photo: { src: 'baudrillard-2004', w: 520, h: 460, alt: 'Jean Baudrillard in 2004, seated at a table with his hands clasped, speaking.' },
+		quote: 'We become switching centres.',
+		idea: 'Everything is immediate and exposed. Distance, delay and absence collapse, and so does meaning.',
+		move: 'the delay comes back: a slow dial, one call at a time, and the chance nobody answers.',
+	},
+];
+---
+
+<figure class="books wide">
+	<div class="books-shelf">
+		{books.map((b) => (
+			<div class:list={['book', `tone-${b.tone}`]}>
+				<input class="book-toggle visually-hidden" type="checkbox" id={`book-${b.id}`} />
+				<label class="book-hit" for={`book-${b.id}`}>
+					<span class="visually-hidden">Open {b.title.join(' ')} by {b.author}</span>
+				</label>
+				<div class="book-body">
+					<div class="book-page book-right">
+						<p class="book-quote">{b.quote}</p>
+						<p class="book-idea">{b.idea}</p>
+						<p class="book-move"><span>So</span> {b.move}</p>
+					</div>
+					<div class="book-cover" aria-hidden="true">
+						<div class="book-front">
+							{b.id === 'mcluhan' ? (
+								<svg class="book-art" viewBox="0 0 100 100"><rect x="14" y="18" width="62" height="46" class="a-line" /><circle cx="45" cy="41" r="15" class="a-fill" /><rect x="40" y="64" width="10" height="10" class="a-ink" /><rect x="26" y="74" width="38" height="4" class="a-ink" /></svg>
+							) : (
+								<svg class="book-art" viewBox="0 0 100 100">
+									{[[12, 20, 70, 60], [20, 70, 84, 26], [30, 14, 60, 84], [8, 46, 90, 50], [44, 10, 88, 76], [16, 84, 66, 18]].map(([x1, y1, x2, y2]) => <line x1={x1} y1={y1} x2={x2} y2={y2} class="a-thin" />)}
+									<line x1="14" y1="80" x2="86" y2="20" class="a-thick" /><circle cx="14" cy="80" r="6" class="a-fill" /><circle cx="86" cy="20" r="6" class="a-fill" />
+								</svg>
+							)}
+							<span class="book-title">{b.title.map((t) => <span>{t}</span>)}</span>
+							<span class="book-author">{b.author}</span>
+							<span class="book-open">Open</span>
+						</div>
+						<div class="book-back">
+							<picture>
+								<source srcset={`/images/dbas/theory/${b.photo.src}.webp`} type="image/webp" />
+								<img src={`/images/dbas/theory/${b.photo.src}.jpg`} width={b.photo.w} height={b.photo.h} alt={b.photo.alt} loading="lazy" decoding="async" />
+							</picture>
+							<span class="book-credit">{b.author}, {b.shot}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		))}
+	</div>
+	<figcaption>Open either book. Covers drawn for this page. McLuhan photographed by Bernard Gotfryd, 1967 (Library of Congress, public domain). Baudrillard photographed at the European Graduate School, 2004, CC BY-SA 2.5, converted to black and white.</figcaption>
+</figure>
+
+<style>
+	.books-shelf { display: grid; gap: var(--space-5); }
+	@media (min-width: 900px) { .books-shelf { grid-template-columns: 1fr 1fr; gap: var(--space-5); } }
+
+	/* A spread of two pages; closed, the cover lies on the right page and
+	   the whole book slides left so the cover sits centred in its cell. */
+	.book { position: relative; perspective: 1600px; }
+	.book-hit { position: absolute; inset: 0; z-index: 3; cursor: pointer; }
+	.book-body {
+		position: relative;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		aspect-ratio: 3 / 2;
+		transform: translateX(-25%);
+		transition: transform .7s cubic-bezier(.3,.1,.2,1);
+	}
+	.book-toggle:checked ~ .book-body { transform: none; }
+	.book-toggle:focus-visible ~ .book-body .book-front { outline: 2px solid var(--blue-ink); outline-offset: 3px; }
+
+	.book-page { background: var(--bg); border: 1px solid var(--ink); padding: var(--space-4); display: grid; align-content: start; gap: var(--space-2); }
+	.book-right { grid-column: 2; grid-row: 1; border-left-width: 0; }
+	.book-quote { margin: 0; font-family: var(--font-body); font-style: italic; font-size: var(--fs-h3); line-height: 1.25; color: var(--ink); }
+	.book-idea { margin: 0; font-size: var(--fs-small); line-height: 1.5; color: var(--body); }
+	.book-move { margin: var(--space-2) 0 0; padding-top: var(--space-2); border-top: 1px solid var(--ink); font-size: var(--fs-small); line-height: 1.5; color: var(--ink); }
+	.book-move span { font-family: var(--font-display); font-weight: 600; }
+
+	.book-cover {
+		grid-column: 2;
+		grid-row: 1;
+		position: relative;
+		z-index: 2;
+		transform-origin: left center;
+		transform-style: preserve-3d;
+		transition: transform .8s cubic-bezier(.3,.1,.2,1);
+	}
+	.book-toggle:checked ~ .book-body .book-cover { transform: rotateY(-180deg); }
+	.book-front, .book-back { position: absolute; inset: 0; backface-visibility: hidden; }
+	.book-front {
+		display: grid;
+		grid-template-rows: 1fr auto auto auto;
+		gap: var(--space-1);
+		padding: var(--space-4);
+		background: var(--bg);
+		border: 3px solid var(--ink);
+		box-shadow: 6px 6px 0 var(--ink);
+	}
+	.tone-red .book-front { box-shadow: 6px 6px 0 var(--red); }
+	.tone-blue .book-front { box-shadow: 6px 6px 0 var(--blue); }
+	.book-back { transform: rotateY(180deg); background: var(--ink); border: 1px solid var(--ink); display: grid; grid-template-rows: 1fr auto; }
+	.book-back img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0; filter: grayscale(1); }
+	.book-credit { padding: 6px 10px; font-family: var(--font-display); font-size: .72rem; color: var(--on-dark); }
+
+	.book-art { width: 100%; height: 100%; min-height: 0; }
+	.a-line { fill: none; stroke: var(--ink); stroke-width: 3; }
+	.a-ink { fill: var(--ink); }
+	.a-thin { stroke: var(--ink); stroke-width: .7; opacity: .5; }
+	.a-thick { stroke-width: 5; }
+	.tone-red .a-fill { fill: var(--red); } .tone-red .a-thick { stroke: var(--red); }
+	.tone-blue .a-fill { fill: var(--blue); } .tone-blue .a-thick { stroke: var(--blue); }
+	.book-title { display: grid; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; line-height: 1.05; text-transform: uppercase; letter-spacing: .01em; color: var(--ink); }
+	.book-author { font-family: var(--font-display); font-size: var(--fs-small); color: var(--ink); }
+	.book-open { justify-self: start; margin-top: var(--space-1); font-family: var(--font-display); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-bottom: 1px solid currentColor; }
+	.book:hover .book-open { color: var(--blue-ink); }
+	.book-toggle:checked ~ .book-body .book-open { visibility: hidden; }
+
+	/* Phones and reduced motion: no hinge; the cover gives way to the pages. */
+	@media (max-width: 599px), (prefers-reduced-motion: reduce) {
+		.book-body, .book-cover { transition: none; }
+		.book-body { transform: none; grid-template-columns: 1fr; aspect-ratio: auto; }
+		.book-cover { grid-column: 1; aspect-ratio: 3 / 4; max-width: 18rem; }
+		.book-right { display: none; grid-column: 1; grid-row: 2; border-left-width: 1px; }
+		.book-toggle:checked ~ .book-body .book-cover { aspect-ratio: auto; }
+		.book-toggle:checked ~ .book-body .book-cover { transform: none; }
+		.book-toggle:checked ~ .book-body .book-front { display: none; }
+		.book-toggle:checked ~ .book-body .book-back { transform: none; position: relative; }
+		.book-toggle:checked ~ .book-body .book-right { display: grid; }
+	}
+	@media (min-width: 600px) and (prefers-reduced-motion: reduce) {
+		.book-body { grid-template-columns: 1fr 1fr; aspect-ratio: 3 / 2; }
+		.book-cover { grid-column: 2; max-width: none; aspect-ratio: auto; }
+		.book-right { grid-column: 2; grid-row: 1; }
+	}
+</style>
