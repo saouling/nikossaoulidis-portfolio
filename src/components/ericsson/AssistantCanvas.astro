@@ -1,38 +1,53 @@
 ---
 // Ericsson 01c: the proposal, a canvas plus an assistant, as a small
-// working demo rather than a picture. Canvas about 70% on the left, the
-// assistant about 30% on the right. The point it has to make: you steer it
-// two ways, by asking in the chat or by acting on a card (pin, dismiss,
-// keep a suggestion), and the assistant answers either way.
-// Abstract content (NDA): card names are generic, not product data.
-// Without JS it is a static layout; with JS it plays a short scripted
-// sequence once when scrolled into view (never under reduced motion) and
-// hands over to the visitor on their first click.
-const cards = [
-	{ id: 'trend', kind: 'Trend', span: 'w2' },
-	{ id: 'kpi1', kind: 'KPI' },
-	{ id: 'list', kind: 'List', span: 'h2' },
-	{ id: 'kpi2', kind: 'KPI' },
-	{ id: 'status', kind: 'Status' },
-	{ id: 'trend2', kind: 'Trend', span: 'w2' },
+// working demo. Canvas about 70% on the left, assistant about 30% on the
+// right. What it has to show:
+//   · the canvas is live: numbers tick, trends move, a "Live" mark pulses
+//   · the layout is fluid: when something is up, the card that matters
+//     grows and the rest make room (FLIP-animated reflow)
+//   · you steer it two ways, by asking in the chat or by acting on a card
+//     (pin, keep, dismiss), and the assistant answers either way.
+// Abstract content (NDA): generic card kinds and made-up values.
+// Without JS: a static layout. With JS: plays a short scripted sequence
+// once when scrolled into view, then hands over on the first click. Under
+// reduced motion: no autoplay, no ticking, no animated reflow.
+// Styles are global (prefixed .ac-) because the script creates cards.
+type Size = 's' | 'w' | 't' | 'l';
+const cards: { id: string; kind: string; size: Size }[] = [
+	{ id: 'trend', kind: 'Trend', size: 'w' },
+	{ id: 'kpi1', kind: 'KPI', size: 's' },
+	{ id: 'list', kind: 'List', size: 't' },
+	{ id: 'kpi2', kind: 'KPI', size: 's' },
+	{ id: 'status', kind: 'Status', size: 's' },
+	{ id: 'trend2', kind: 'Trend', size: 'w' },
 ];
 const chips = [
 	{ id: 'failing', text: 'Show me what’s failing' },
 	{ id: 'simpler', text: 'Simpler, please' },
 ];
+const spark = (seed: number) =>
+	Array.from({ length: 24 }, (_, i) => `${((i / 23) * 100).toFixed(1)},${(15 + 9 * Math.sin(i / 2.6 + seed) + 3 * Math.sin(i * 1.7 + seed)).toFixed(1)}`).join(' ');
 ---
 
 <figure class="ac" data-ac>
 	<div class="ac-frame">
 		<div class="ac-canvas">
-			<span class="ac-label">Canvas · ~70%</span>
+			<div class="ac-bar">
+				<span class="ac-label">Canvas · ~70%</span>
+				<span class="ac-live" data-live><i></i>Live</span>
+			</div>
 			<div class="ac-grid" data-grid>
-				{cards.map((c) => (
-					<div class:list={['ac-card', c.span]} data-card={c.id}>
-						<span class="ac-kind">{c.kind}<em class="ac-tag"></em></span>
-						<span class="ac-body"></span>
+				{cards.map((c, n) => (
+					<div class={`ac-card size-${c.size}`} data-card={c.id} data-kind={c.kind}>
+						<span class="ac-kind"><span class="ac-name">{c.kind}</span><em class="ac-tag"></em></span>
+						<span class="ac-body">
+							{c.kind === 'Trend' && <svg class="ac-spark" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><polyline points={spark(n)} /></svg>}
+							{c.kind === 'KPI' && <span class="ac-num"><b>{n === 1 ? '98.2' : '41'}</b><small>{n === 1 ? '%' : 'ms'}</small></span>}
+							{c.kind === 'List' && <span class="ac-rows" aria-hidden="true">{[80, 62, 45, 30, 22].map((w) => <i style={`width:${w}%`}></i>)}</span>}
+							{c.kind === 'Status' && <span class="ac-dots" aria-hidden="true">{Array.from({ length: 8 }, () => <i></i>)}</span>}
+						</span>
 						<span class="ac-foot">
-							<span class="ac-source">source · updated</span>
+							<span class="ac-source">source · live</span>
 							<span class="ac-acts">
 								<button type="button" class="ac-act" data-act="pin" aria-label={`Pin the ${c.kind} card`} aria-pressed="false">
 									<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 2h6l-1 5 3 3H3l3-3zM8 10v5" /></svg>
@@ -49,7 +64,7 @@ const chips = [
 		<div class="ac-assistant">
 			<span class="ac-label">Assistant · ~30%</span>
 			<ol class="ac-log" data-log aria-live="polite">
-				<li class="it">I’ve laid out a dashboard for your role. Ask for a change, or edit the cards directly.</li>
+				<li class="it">I’ve laid out a dashboard for your role, and I’m watching it live. Ask for a change, or edit the cards directly.</li>
 			</ol>
 			<div class="ac-chips">
 				{chips.map((c) => (
@@ -60,7 +75,7 @@ const chips = [
 		</div>
 	</div>
 	<figcaption>
-		Illustrative. Try it: ask in the chat, or pin and dismiss cards on the canvas. The assistant responds to both.
+		Illustrative. Try it: ask in the chat, or pin and dismiss cards. When something changes, the card that matters grows and the rest make room.
 		<button type="button" class="ac-reset" data-reset hidden>Start over</button>
 	</figcaption>
 	<ul class="ac-principles">
@@ -73,15 +88,22 @@ const chips = [
 
 <script>
 	type Step = () => void;
+	type Size = 's' | 'w' | 't' | 'l';
+	const SIZES = ['size-s', 'size-w', 'size-t', 'size-l'];
 	for (const root of document.querySelectorAll<HTMLElement>('[data-ac]')) {
 		const grid = root.querySelector<HTMLElement>('[data-grid]')!;
 		const log = root.querySelector<HTMLOListElement>('[data-log]')!;
 		const reset = root.querySelector<HTMLButtonElement>('[data-reset]')!;
+		const live = root.querySelector<HTMLElement>('[data-live]')!;
+		const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const initialGrid = grid.innerHTML;
 		const initialLog = log.innerHTML;
 		let timers: number[] = [];
-		let autoplay = true;
+		let autoplay = !still;
+		let visible = false;
+		let spikeTimer = 0;
 
+		const later = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms));
 		const say = (who: 'you' | 'it', text: string) => {
 			const li = document.createElement('li');
 			li.className = who;
@@ -90,73 +112,144 @@ const chips = [
 			while (log.children.length > 6) log.firstElementChild?.remove();
 		};
 		const card = (id: string) => grid.querySelector<HTMLElement>(`[data-card="${id}"]`);
-		const flash = (el: Element | null) => {
-			if (!el) return;
-			el.classList.remove('flash');
-			void (el as HTMLElement).offsetWidth;
-			el.classList.add('flash');
+		const cards = () => [...grid.querySelectorAll<HTMLElement>('.ac-card')];
+		const nameOf = (el: HTMLElement) => el.querySelector('.ac-name')!.textContent;
+		const tag = (el: HTMLElement, text: string) => { el.querySelector('.ac-tag')!.textContent = text; };
+		const size = (el: HTMLElement, s: Size) => { el.classList.remove(...SIZES); el.classList.add(`size-${s}`); };
+		const sizeOf = (el: HTMLElement) => (SIZES.find((c) => el.classList.contains(c)) ?? 'size-s').slice(5) as Size;
+
+		// FLIP: measure, change, then animate every card from where it was.
+		const flip = (mutate: () => void) => {
+			const first = new Map(cards().map((c) => [c, c.getBoundingClientRect()]));
+			mutate();
+			if (still) return;
+			for (const c of cards()) {
+				const f = first.get(c);
+				const l = c.getBoundingClientRect();
+				if (!f) {
+					c.animate([{ opacity: 0, transform: 'scale(.92)' }, { opacity: 1, transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.2,.7,.2,1)' });
+					continue;
+				}
+				const dx = f.left - l.left, dy = f.top - l.top, sx = f.width / l.width, sy = f.height / l.height;
+				if (Math.abs(dx) + Math.abs(dy) > 0.5 || Math.abs(sx - 1) > 0.01 || Math.abs(sy - 1) > 0.01) {
+					c.animate(
+						[{ transformOrigin: 'top left', transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` }, { transformOrigin: 'top left', transform: 'none' }],
+						{ duration: 480, easing: 'cubic-bezier(.2,.7,.2,1)' },
+					);
+				}
+			}
 		};
-		const tag = (el: HTMLElement, text: string) => {
-			const t = el.querySelector('.ac-tag');
-			if (t) t.textContent = text;
+		const remove = (el: HTMLElement) => {
+			if (still) { flip(() => el.remove()); return; }
+			el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'scale(.9)' }], { duration: 200, easing: 'ease-in' })
+				.finished.then(() => flip(() => el.remove()));
 		};
 
-		const suggest = (id: string, kind: string, span = '') => {
+		// Live data: trends move, numbers tick, a status dot sometimes turns.
+		const tick = () => {
+			if (!visible || still) return;
+			for (const pl of grid.querySelectorAll<SVGPolylineElement>('.ac-spark polyline')) {
+				const ys = pl.getAttribute('points')!.split(' ').map((p) => Number(p.split(',')[1]));
+				const last = ys[ys.length - 1];
+				const next = pl.closest('.spike')
+					? Math.max(2, last - 5 - Math.random() * 4)
+					: Math.min(27, Math.max(4, last + (Math.random() - 0.5) * 7));
+				ys.shift();
+				ys.push(next);
+				pl.setAttribute('points', ys.map((y, i) => `${((i / (ys.length - 1)) * 100).toFixed(1)},${y.toFixed(1)}`).join(' '));
+			}
+			for (const b of grid.querySelectorAll<HTMLElement>('.ac-num b')) {
+				const v = Number(b.textContent);
+				const pct = b.nextElementSibling?.textContent === '%';
+				b.textContent = pct
+					? Math.min(99.9, Math.max(96, v + (Math.random() - 0.5) * 0.4)).toFixed(1)
+					: String(Math.max(20, Math.round(v + (Math.random() - 0.5) * 6)));
+			}
+			const dots = [...grid.querySelectorAll<HTMLElement>('.ac-dots i')];
+			dots.forEach((d) => d.classList.remove('on'));
+			if (dots.length && Math.random() < 0.5) dots[Math.floor(Math.random() * dots.length)].classList.add('on');
+			live.classList.remove('beat');
+			void live.offsetWidth;
+			live.classList.add('beat');
+		};
+		window.setInterval(tick, 1400);
+
+		// Something is up: a trend spikes, its card grows, the rest make room.
+		const spike = (id: string) => {
+			const el = card(id);
+			if (!el || el.classList.contains('spike')) return;
+			el.dataset.was = sizeOf(el);
+			flip(() => { el.classList.add('spike'); size(el, 'l'); grid.prepend(el); tag(el, 'spike'); });
+			say('it', `A spike on the ${nameOf(el)} card. I made it bigger and moved it up.`);
+			clearTimeout(spikeTimer);
+			spikeTimer = window.setTimeout(() => {
+				if (!el.isConnected || !el.classList.contains('spike')) return;
+				const pinned = el.classList.contains('pinned');
+				flip(() => { el.classList.remove('spike'); if (!pinned) size(el, (el.dataset.was as Size) || 'w'); tag(el, pinned ? 'pinned' : ''); });
+				say('it', 'Back to normal. I’ve shrunk it again.');
+			}, 9000);
+		};
+
+		const suggest = (id: string, kind: string) => {
 			if (card(id)) return card(id)!;
-			const el = grid.firstElementChild!.cloneNode(true) as HTMLElement;
+			const src = grid.querySelector<HTMLElement>('[data-kind="List"]') ?? cards()[0];
+			const el = src.cloneNode(true) as HTMLElement;
 			el.dataset.card = id;
-			el.className = `ac-card suggested ${span}`.trim();
-			el.querySelector('.ac-kind')!.firstChild!.textContent = kind;
+			el.dataset.kind = kind;
+			el.className = 'ac-card suggested alarms';
+			el.querySelector('.ac-name')!.textContent = kind;
 			tag(el, 'suggested');
 			el.querySelectorAll<HTMLButtonElement>('.ac-act').forEach((b) => {
 				b.setAttribute('aria-pressed', 'false');
 				b.setAttribute('aria-label', `${b.dataset.act === 'pin' ? 'Keep' : 'Dismiss'} the suggested ${kind} card`);
 			});
-			grid.prepend(el);
-			flash(el);
+			flip(() => { size(el, 'l'); grid.prepend(el); });
 			return el;
 		};
 
 		const chip = (id: string) => {
 			if (id === 'failing') {
 				say('you', 'Show me what’s failing');
-				suggest('alarms', 'Alarms', 'w2');
-				say('it', 'Added an alarms card at the top, from the live feed. Keep it or dismiss it.');
+				suggest('alarms', 'Alarms');
+				say('it', 'Added a large alarms card at the top, from the live feed. Keep it or dismiss it.');
 			} else {
 				say('you', 'Simpler, please');
-				const drop = [...grid.querySelectorAll<HTMLElement>('.ac-card:not(.pinned):not(.suggested)')].slice(-2);
-				drop.forEach((d) => d.remove());
-				say('it', drop.length ? `Took out ${drop.length} cards you haven’t used. Pinned cards stay.` : 'That’s as simple as it gets without touching your pinned cards.');
+				const drop = cards().filter((c) => !c.classList.contains('pinned') && !c.classList.contains('suggested') && !c.classList.contains('spike')).slice(-2);
+				flip(() => {
+					drop.forEach((d) => d.remove());
+					cards().forEach((c) => { if (sizeOf(c) === 's') size(c, 'w'); });
+				});
+				say('it', drop.length ? `Took out ${drop.length} cards you haven’t used and gave the rest more room. Pinned cards stay.` : 'That’s as simple as it gets without touching your pinned cards.');
 			}
 		};
 
 		const act = (el: HTMLElement, what: string) => {
-			const kind = el.querySelector('.ac-kind')!.firstChild!.textContent;
+			const kind = nameOf(el);
 			if (what === 'dismiss') {
-				el.remove();
-				say('it', el.classList.contains('suggested') ? `Dismissed. I won’t suggest ${kind} again today.` : `Removed the ${kind} card. I’ll fill the gap.`);
+				const wasSuggested = el.classList.contains('suggested');
+				remove(el);
+				say('it', wasSuggested ? `Dismissed. I won’t suggest ${kind} again today.` : `Removed the ${kind} card. The others take the space.`);
 				return;
 			}
 			if (el.classList.contains('suggested')) {
-				el.classList.remove('suggested');
-				tag(el, '');
+				flip(() => { el.classList.remove('suggested'); size(el, 'w'); tag(el, ''); });
 				say('it', `Kept. ${kind} is part of your layout now.`);
-			} else {
-				const on = !el.classList.contains('pinned');
-				el.classList.toggle('pinned', on);
-				tag(el, on ? 'pinned' : '');
-				el.querySelector('[data-act="pin"]')?.setAttribute('aria-pressed', String(on));
-				say('it', on ? `Pinned ${kind}. It stays put when I change the layout.` : `Unpinned ${kind}.`);
+				return;
 			}
-			flash(el);
+			const on = !el.classList.contains('pinned');
+			flip(() => {
+				el.classList.toggle('pinned', on);
+				if (on && sizeOf(el) === 's') size(el, 'w');
+				tag(el, on ? 'pinned' : '');
+			});
+			el.querySelector('[data-act="pin"]')?.setAttribute('aria-pressed', String(on));
+			say('it', on ? `Pinned ${kind}. It stays put when I change the layout.` : `Unpinned ${kind}.`);
 		};
 
 		const stop = () => {
-			if (!autoplay) return;
 			autoplay = false;
 			timers.forEach(clearTimeout);
 			timers = [];
-			root.classList.remove('playing');
 		};
 
 		root.querySelectorAll<HTMLButtonElement>('[data-chip]').forEach((b) => {
@@ -171,48 +264,47 @@ const chips = [
 			reset.hidden = false;
 		});
 		reset.addEventListener('click', () => {
+			clearTimeout(spikeTimer);
 			grid.innerHTML = initialGrid;
 			log.innerHTML = initialLog;
 			reset.hidden = true;
 		});
 
-		// The demo shows the control being pressed first, so it reads as a
+		// The demo shows each control being pressed first, so it reads as a
 		// person steering rather than the page changing by itself.
 		const press = (btn: Element | null | undefined, then: Step) => {
 			if (!btn) return;
 			btn.classList.add('demo-press');
-			timers.push(window.setTimeout(() => { btn.classList.remove('demo-press'); if (autoplay) then(); }, 700));
+			later(700, () => { btn.classList.remove('demo-press'); if (autoplay) then(); });
 		};
 		const chipBtn = (id: string) => root.querySelector(`[data-chip="${id}"]`);
 		const cardBtn = (id: string, a: string) => card(id)?.querySelector(`[data-act="${a}"]`);
 		const script: [number, Step][] = [
-			[1000, () => press(chipBtn('failing'), () => chip('failing'))],
-			[2800, () => press(cardBtn('alarms', 'pin'), () => act(card('alarms')!, 'pin'))],
-			[2800, () => press(cardBtn('trend', 'pin'), () => act(card('trend')!, 'pin'))],
-			[2800, () => press(cardBtn('kpi2', 'dismiss'), () => act(card('kpi2')!, 'dismiss'))],
+			[1600, () => spike('trend2')],
+			[3200, () => press(chipBtn('failing'), () => chip('failing'))],
+			[3000, () => press(cardBtn('alarms', 'pin'), () => act(card('alarms')!, 'pin'))],
+			[3000, () => press(cardBtn('trend', 'pin'), () => act(card('trend')!, 'pin'))],
+			[3000, () => press(cardBtn('kpi2', 'dismiss'), () => act(card('kpi2')!, 'dismiss'))],
 		];
 		const play = () => {
-			root.classList.add('playing');
 			let t = 0;
 			for (const [delay, step] of script) {
 				t += delay;
-				timers.push(window.setTimeout(() => { if (autoplay) step(); }, t));
+				later(t, () => { if (autoplay) step(); });
 			}
-			timers.push(window.setTimeout(() => { root.classList.remove('playing'); autoplay = false; reset.hidden = false; }, t + 1200));
+			later(t + 1200, () => { autoplay = false; reset.hidden = false; });
 		};
 
-		if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
-			const io = new IntersectionObserver((entries) => {
-				if (entries.some((en) => en.isIntersecting)) { io.disconnect(); if (autoplay) play(); }
-			}, { threshold: 0.3 });
-			io.observe(root);
-		} else {
-			autoplay = false;
+		if ('IntersectionObserver' in window) {
+			new IntersectionObserver((entries) => {
+				visible = entries.some((en) => en.isIntersecting);
+				if (visible && autoplay && !root.dataset.played) { root.dataset.played = '1'; play(); }
+			}, { threshold: 0.3 }).observe(root);
 		}
 	}
 </script>
 
-<style>
+<style is:global>
 	.ac { margin: 0; }
 	.ac-frame {
 		display: grid;
@@ -225,88 +317,56 @@ const chips = [
 		.ac-frame { grid-template-columns: 1fr; }
 	}
 	.ac-assistant, .ac-canvas { background: var(--bg); padding: var(--space-3); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+	.ac-bar { display: flex; justify-content: space-between; align-items: baseline; }
 	.ac-label { font-family: var(--font-display); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
+	.ac-live { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-display); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink); }
+	.ac-live i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+	.ac-live.beat i { animation: ac-beat 1.4s ease-out; }
 
-	/* Fixed height, newest at the bottom: the frame never grows as the
-	   conversation does. Messages are added by the script, so :global. */
-	.ac-log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; flex: 1; height: 13rem; overflow: hidden; justify-content: flex-end; mask-image: linear-gradient(to bottom, transparent, var(--ink) 2.5rem); }
-	.ac-log :global(li) {
-		flex: none;
-		font-family: var(--font-display);
-		font-size: .78rem;
-		line-height: 1.35;
-		padding: 6px 8px;
-		border: 1px solid var(--ink);
-		max-width: 92%;
-		animation: ac-in .25s ease-out;
-	}
-	.ac-log :global(li.it) { align-self: flex-start; background: var(--bg); color: var(--ink); }
-	.ac-log :global(li.you) { align-self: flex-end; background: var(--ink); color: var(--on-dark); }
+	.ac-log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; flex: 1; height: 14rem; overflow: hidden; justify-content: flex-end; mask-image: linear-gradient(to bottom, transparent, var(--ink) 2.5rem); }
+	.ac-log li { flex: none; font-family: var(--font-display); font-size: .78rem; line-height: 1.35; padding: 6px 8px; border: 1px solid var(--ink); max-width: 92%; animation: ac-in .25s ease-out; }
+	.ac-log li.it { align-self: flex-start; background: var(--bg); color: var(--ink); }
+	.ac-log li.you { align-self: flex-end; background: var(--ink); color: var(--on-dark); }
 	.ac-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-	.ac-chip {
-		font: inherit;
-		font-family: var(--font-display);
-		font-size: .74rem;
-		padding: 4px 10px;
-		border: 1px solid var(--ink);
-		border-radius: 999px;
-		background: var(--bg);
-		color: var(--ink);
-		cursor: pointer;
-	}
+	.ac-chip { font: inherit; font-family: var(--font-display); font-size: .74rem; padding: 4px 10px; border: 1px solid var(--ink); border-radius: 999px; background: var(--bg); color: var(--ink); cursor: pointer; }
 	.ac-chip:hover:not(:disabled) { border-color: var(--blue-ink); color: var(--blue-ink); }
 	.ac-chip:disabled { cursor: default; opacity: .6; }
 	.ac-chip.demo-press, .ac-act.demo-press { outline: 2px solid var(--blue-ink); outline-offset: 2px; color: var(--blue-ink); border-color: var(--blue-ink); }
 	.ac-input { height: 30px; border: 1px solid var(--ink); border-top-width: 2px; font-family: var(--font-display); font-size: .74rem; color: var(--muted); padding: 5px 8px; }
 
-	.ac-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
-		grid-auto-rows: 104px;
-		grid-auto-flow: dense;
-		gap: 8px;
-		align-content: start;
-	}
-	.ac-card { border: 1px solid var(--ink); padding: 6px 8px; display: flex; flex-direction: column; gap: 4px; min-width: 0; background: var(--bg); }
-	.ac-card.w2 { grid-column: span 2; }
-	.ac-card.h2 { grid-row: span 2; }
-	.ac-card.suggested { outline: 2px solid var(--gold); outline-offset: -2px; }
+	.ac-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); grid-auto-rows: 92px; grid-auto-flow: dense; gap: 8px; align-content: start; min-height: 300px; }
+	.ac-card { border: 1px solid var(--ink); padding: 6px 8px; display: flex; flex-direction: column; gap: 4px; min-width: 0; min-height: 0; background: var(--bg); overflow: hidden; }
+	.ac-card.size-w { grid-column: span 2; }
+	.ac-card.size-t { grid-row: span 2; }
+	.ac-card.size-l { grid-column: span 2; grid-row: span 2; }
+	.ac-card.suggested, .ac-card.spike { outline: 2px solid var(--gold); outline-offset: -2px; }
 	.ac-card.pinned { box-shadow: inset 0 4px 0 var(--ink); padding-top: 9px; }
-	.ac-card.flash { animation: ac-flash .6s ease-out; }
 	.ac-kind { font-family: var(--font-display); font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink); display: flex; justify-content: space-between; gap: 4px; }
 	.ac-tag { font-style: normal; color: var(--gold-ink); text-transform: none; letter-spacing: 0; }
 	.ac-card.pinned .ac-tag { color: var(--ink); }
-	.ac-body { flex: 1; background: repeating-linear-gradient(to bottom, var(--hairline) 0 2px, transparent 2px 9px); }
+	.ac-body { flex: 1; min-height: 0; display: flex; overflow: hidden; }
+	.ac-spark { width: 100%; height: 100%; }
+	.ac-spark polyline { fill: none; stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+	.ac-card.spike .ac-spark polyline { stroke: var(--gold-ink); stroke-width: 2.5; }
+	.ac-num { align-self: center; font-family: var(--font-display); color: var(--ink); }
+	.ac-num b { font-size: 1.6rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+	.ac-num small { margin-left: 2px; font-size: .75rem; color: var(--muted); }
+	.ac-rows { display: grid; align-content: start; gap: 5px; width: 100%; padding-top: 4px; }
+	.ac-rows i { display: block; height: 5px; background: var(--hairline); }
+	.ac-card.alarms .ac-rows i { background: color-mix(in srgb, var(--gold) 55%, var(--bg)); }
+	.ac-dots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; align-content: center; width: 100%; }
+	.ac-dots i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--ink); justify-self: center; transition: background .3s; }
+	.ac-dots i.on { background: var(--gold); border-color: var(--gold); }
 	.ac-foot { display: flex; justify-content: space-between; align-items: center; gap: 4px; border-top: 1px solid var(--hairline); padding-top: 2px; }
 	.ac-source { font-family: var(--font-display); font-size: .62rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 	.ac-acts { display: flex; gap: 2px; flex: none; }
-	.ac-act {
-		display: grid;
-		place-items: center;
-		width: 22px;
-		height: 22px;
-		padding: 0;
-		border: 1px solid transparent;
-		background: none;
-		color: var(--ink);
-		cursor: pointer;
-	}
+	.ac-act { display: grid; place-items: center; width: 22px; height: 22px; padding: 0; border: 1px solid transparent; background: none; color: var(--ink); cursor: pointer; }
 	.ac-act svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 	.ac-act:hover { border-color: var(--blue-ink); color: var(--blue-ink); }
 	.ac-act[aria-pressed="true"] svg { fill: currentColor; }
-	.ac-card.suggested .ac-act[data-act="pin"] svg path { d: path("M3 8.5l3.5 3.5L13 4.5"); }
 
 	.ac figcaption { margin-top: var(--space-2); font-size: var(--fs-small); color: var(--muted); }
-	.ac-reset {
-		font: inherit;
-		color: var(--blue-ink);
-		background: none;
-		border: 0;
-		padding: 0;
-		margin-left: var(--space-2);
-		text-decoration: underline;
-		cursor: pointer;
-	}
+	.ac-reset { font: inherit; color: var(--blue-ink); background: none; border: 0; padding: 0; margin-left: var(--space-2); text-decoration: underline; cursor: pointer; }
 	.ac-principles { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; gap: var(--space-2); font-size: var(--fs-small); color: var(--body); }
 	@media (min-width: 700px) {
 		.ac-principles { grid-template-columns: 1fr 1fr; column-gap: var(--space-4); }
@@ -314,8 +374,8 @@ const chips = [
 	.ac-principles strong { font-family: var(--font-display); font-weight: 600; color: var(--ink); }
 
 	@keyframes ac-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-	@keyframes ac-flash { from { outline: 3px solid var(--gold); outline-offset: 2px; } to { outline: 3px solid transparent; outline-offset: 6px; } }
+	@keyframes ac-beat { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--gold) 70%, transparent); } 100% { box-shadow: 0 0 0 8px transparent; } }
 	@media (prefers-reduced-motion: reduce) {
-		.ac-log :global(li), .ac-card.flash { animation: none; }
+		.ac-log li, .ac-live.beat i { animation: none; }
 	}
 </style>

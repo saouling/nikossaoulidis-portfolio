@@ -1,10 +1,12 @@
 ---
-// One mark per sub-record inside an object, derived from the object's own
-// form so the family still reads as one. Ericsson (the triangle) has three:
-//   a · delivery: a triangle split down the middle, screen | spec
-//   b · together: two triangles side by side, one filled, one drawn
-//   c · generative: a triangle assembled from smaller ones, like cards
-// Decorative: the case number and title always carry the meaning.
+// One mark per sub-record inside an object. Ericsson's three cases are
+// poster letters in the manner of Herbert Bayer's universal alphabet, each
+// set on a different gold block so the silhouette alone tells them apart:
+//   a · a full square block              (AI-ready deliveries)
+//   b · an outlined square, half filled  (Build better together)
+//   c · a triangle, Ericsson's own form  (Generative UI)
+// Letters are drawn strokes, never text glyphs. Decorative: the case number
+// and title always carry the meaning.
 interface Props {
 	mark: 'a' | 'b' | 'c';
 	class?: string;
@@ -12,25 +14,26 @@ interface Props {
 const { mark, class: className } = Astro.props;
 ---
 
-<svg class:list={['case-mark', `case-mark-${mark}`, className]} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+<svg class:list={['case-mark', `case-mark-${mark}`, className]} viewBox="0 0 64 64" aria-hidden="true" focusable="false">
 	{mark === 'a' && (
 		<>
-			<polygon points="50,6 50,94 2,94" class="fill" />
-			<polygon points="50,6 98,94 50,94" class="line" />
+			<rect class="fill" width="64" height="64" />
+			<circle class="ink" cx="29" cy="38" r="13" />
+			<line class="ink" x1="42" y1="22" x2="42" y2="52" />
 		</>
 	)}
 	{mark === 'b' && (
 		<>
-			<polygon points="27,30 52,94 2,94" class="fill" />
-			<polygon points="73,30 98,94 48,94" class="line" />
+			<rect class="frame" x="1.5" y="1.5" width="61" height="61" />
+			<rect class="fill" width="22" height="64" />
+			<line class="ink" x1="19" y1="8" x2="19" y2="52" />
+			<circle class="ink" cx="33" cy="38" r="13" />
 		</>
 	)}
 	{mark === 'c' && (
 		<>
-			<polygon points="50,6 74,50 26,50" class="fill" />
-			<polygon points="26,50 50,94 2,94" class="fill" />
-			<polygon points="74,50 98,94 50,94" class="fill" />
-			<polygon points="26,50 74,50 50,94" class="line" />
+			<polygon class="fill" points="32,0 64,64 0,64" />
+			<path class="ink" d="M41 37 a11 11 0 1 0 0 15" />
 		</>
 	)}
 </svg>
@@ -38,5 +41,6 @@ const { mark, class: className } = Astro.props;
 <style>
 	.case-mark { display: inline-block; width: 1em; height: 1em; flex: none; overflow: visible; }
 	.case-mark .fill { fill: var(--gold); }
-	.case-mark .line { fill: none; stroke: var(--ink); stroke-width: 1.5px; stroke-linejoin: miter; vector-effect: non-scaling-stroke; }
+	.case-mark .frame { fill: none; stroke: var(--gold); stroke-width: 3; }
+	.case-mark .ink { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: butt; }
 </style>

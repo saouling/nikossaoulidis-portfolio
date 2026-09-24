@@ -389,6 +389,7 @@ This is the complete set of patterns the site ships, checked against the build o
 | Case marks (one per sub-record, derived from the object's form) | `CaseMark`, `.obj-summary-key`, `.obj-summary-cases`, `.sub-mark` | Ericsson (per-case summary, case index, case headings) |
 | Interactive demo (plays once in view, hands over on first click, off under reduced motion) | `AssistantCanvas` | Ericsson 01c |
 | Named section heading with its plain name | `.h-sub` | DBAS (Pick up / Dial / Wait / Talk / Hang up) |
+| Section rail ("where am I": fixed in the spare column, folds to a strip under the header when a wide figure passes or below 1100px) | `SectionRail`, `rail` frontmatter: `cases` (Ericsson letters), `call` (DBAS: pick up → hang up, with a live state), `status` (EWP: `--ewp-done` / `--ewp-turn`, the product's own colours as specimen) | every case study |
 | Column grid | `.col-grid.cols-3` | Ericsson |
 | Museum pair / block | `.museum-pair`, `.museum-block` | DBAS |
 | Ink-grid | `.ink-grid` | DBAS |

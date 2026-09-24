@@ -70,6 +70,10 @@ ul, ol { list-style: none; padding: 0; }
   --blue-ink:   #1A3380;  /* blue at small text size, extra margin on AA */
   --gold:       #C9A227;  /* decorative only: pill fills, borders, large numerals — too light for AA text */
   --gold-ink:   #7A5E13;  /* gold at text size, passes AA on --bg and --bg-alt */
+  /* EWP's own status colours, used only as a specimen of that product
+     (StatusSystem, and the EWP section rail): done green, your-turn gold. */
+  --ewp-done:  #7abb70;
+  --ewp-turn:  #ddb145;
 
   /* back-compat aliases used by existing components */
   --accent:     var(--red);

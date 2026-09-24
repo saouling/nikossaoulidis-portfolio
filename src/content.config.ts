@@ -55,6 +55,18 @@ const caseStudies = defineCollection({
 			learned: summaryLine,
 		}),
 		// Names for the case marks, shown as a key above a per-case summary.
+		// The "where am I" rail (SectionRail): which sections to track and in
+		// which object's language.
+		rail: z.object({
+			style: z.enum(['cases', 'call', 'status']),
+			items: z.array(z.object({
+				id: z.string(),
+				label: z.string(),
+				mark: z.enum(['a', 'b', 'c']).optional(),
+				no: z.string().optional(),
+				state: z.string().optional(),
+			})),
+		}).optional(),
 		cases: z.array(z.object({ case: z.enum(['a', 'b', 'c']), no: z.string(), name: z.string() })).optional(),
 		heroImage: z.object({
 			src: z.string().min(1),

@@ -12,6 +12,7 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import LabelPlate from '../components/LabelPlate.astro';
 import CaseMark from '../components/CaseMark.astro';
+import SectionRail from '../components/SectionRail.astro';
 import KForm from '../components/KForm.astro';
 import { allObjects, nextObject } from '../data/collection';
 
@@ -153,6 +154,7 @@ const summaryRows = summary
 		<div class="case-body">
 			<Content />
 		</div>
+		{isCaseStudy && entry.data.rail && <SectionRail style={entry.data.rail.style} items={entry.data.rail.items} title={heading} />}
 
 		<nav class="obj-next" aria-label="Next in the collection">
 			<div class="wrap">
