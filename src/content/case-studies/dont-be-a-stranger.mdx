@@ -48,7 +48,7 @@ learnings:
 
 import Figure from '../../components/Figure.astro';
 import PullQuote from '../../components/PullQuote.astro';
-import PostitBoard from '../../components/PostitBoard.astro';
+import PostitTable from '../../components/dbas/PostitTable.astro';
 import FactGrid from '../../components/FactGrid.astro';
 import Ratings from '../../components/Ratings.astro';
 import DbasProcess from '../../components/dbas/DbasProcess.astro';
@@ -193,43 +193,17 @@ At Röhsska I worked inside the museum's visual identity and its graphic designe
 
 It opened in May 2025 and it is still running. Visitors arrived in groups and started by watching. Once one person wrote on a post-it, others followed. Teenagers and young adults were the most likely to pick up and dial. An older man tried it alone, then called his partner over. A group of schoolboys tried to decode how the dial worked. Plenty of calls went unanswered, especially the ones to Mölndal, and people stayed anyway, dialling, listening to the tone, turning the Rolodex.
 
-<ul class="ink-grid natural">
-  <li class="ink-grid-photo">
-    <Figure
-      src="/images/dbas/25-cover-photo.jpg"
-      width={2000}
-      height={1094}
-      alt="A visitor holding the Ericofon handset to his ear, mid-call, while two others look on at the Röhsska table."
-    />
-    <p>A visitor at Röhsska, phone in hand, mid-call.</p>
-  </li>
-  <li class="ink-grid-photo">
-    <Figure
-      src="/images/dbas/44-postit-wall-full.jpg"
-      width={2000}
-      height={1500}
-      alt="An overhead view of dozens of yellow post-its covering the wooden table at Röhsska, handwritten in Swedish and English."
-    />
-    <p>The post-its, a few weeks in.</p>
-  </li>
-</ul>
-
-<p class="lead-in">What they left behind, on post-its at Röhsska and in the guestbook at Mölndal:</p>
-
-<PostitBoard
-  quotes={[
-    "Satisfying to dial. The dial tone is eerie.",
-    "I remember all the three landline telephone numbers I've had.",
-    "I felt scared to talk on the phone. Maybe it reminded me of talking on the house phone when I was a kid.",
-    "It felt like I was calling someone in the past.",
-    "Social media is the death of sincerity.",
-    "I had forgotten how the phone signal sounded before putting in the number!",
-    "ABBA would have used this type of phone, or maybe David Bowie.",
-    "I love the tactile act of dialing but I also noticed my impatience at how long it took.",
-    "I became happy :)",
-    "I don't want my mobile phone, I rarely get any pleasure from it. Give me a horse and a Kobra phone and I'll be happy.",
-  ]}
+<Figure
+  src="/images/dbas/25-cover-photo.jpg"
+  width={2000}
+  height={1094}
+  alt="A visitor holding the Ericofon handset to his ear, mid-call, while two others look on at the Röhsska table."
+  caption="A visitor at Röhsska, phone in hand, mid-call."
 />
+
+<p class="lead-in">What they left behind on the table at Röhsska:</p>
+
+<PostitTable />
 
 <h2 id="what-i-learned">Hang up <span class="h-sub">What I learned</span></h2>
 

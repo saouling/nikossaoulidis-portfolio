@@ -1,0 +1,120 @@
+---
+// DBAS: the post-it table at Röhsska, the real overhead photograph, with
+// every note that can be read honestly marked and transcribed. Hover,
+// focus or tap a marker and the note is shown large beside the photo (in
+// the margin column on wide screens), in the visitor's own words and, for
+// Swedish notes, with a translation. Notes too blurred to transcribe with
+// confidence, and one that names a person, are left unmarked.
+// Positions are percentages of the photo, checked against the original.
+// Markers sit at each note's top-right corner so they never cover the writing.
+const P = (x: number, y: number) => ({ x: ((x + 26) / 700) * 100, y: ((y - 24) / 525) * 100 });
+const notes = [
+	{ id: 'N', ...P(380, 322), text: 'Social media is the death of sincerity.' },
+	{ id: 'J', ...P(370, 245), text: 'I would paint it dark green. It felt like I was part of history or I was calling someone in the past. Nervous to dial. Satisfying to dial. The dial tone is eeeeerie.' },
+	{ id: 'I', ...P(292, 268), text: 'I felt scared to talk on the phone, maybe reminded me of talking on house phone when I was a kid.' },
+	{ id: 'C', ...P(368, 158), text: 'Jag minns alla tre fasta telefonnr. jag haft.', en: 'I remember all three landline numbers I’ve had.' },
+	{ id: 'B', ...P(305, 128), text: 'I love the tactile act of dialing but I also noticed my impatience at how long it took. This made me a bit sad and frustrated at myself.' },
+	{ id: 'D', ...P(293, 183), text: 'Jag blev glad :)', en: 'I became happy :) (written upside down)' },
+	{ id: 'G', ...P(140, 222), text: 'Jag hade glömt bort hur telefonsignalen lät innan man slog numret! :)', en: 'I had forgotten how the dial tone sounded before you dial the number!' },
+	{ id: 'F', ...P(60, 245), text: 'Fun to use the big phone in your hand again! And dialing the numbers. So much fun & nostalgic!' },
+	{ id: 'H', ...P(120, 290), text: 'Som mölndalsbo blev jag väldigt glad! ♡', en: 'As someone from Mölndal, it made me very happy!' },
+	{ id: 'K', ...P(452, 258), text: 'Min första egna telefon var en röd kobratelefon.', en: 'My very first phone of my own was a red Kobra phone.' },
+	{ id: 'L', ...P(545, 258), text: 'Calm & ease', drawn: 'with a drawing of the dial' },
+	{ id: 'M', ...P(208, 298), text: 'ABBA would have used this type of phone, or maybe David Bowie.' },
+	{ id: 'R', ...P(125, 445), text: 'Joy Division would use the phone.' },
+	{ id: 'E', ...P(468, 172), text: 'We do not know which band uses this because they have not booked any concerts :(' },
+	{ id: 'S', ...P(205, 405), text: 'Panik! Jag hade inte läst hela frågan innan jag ringde numret.', en: 'Panic! I hadn’t read the whole question before I dialled the number.' },
+	{ id: 'Q', ...P(612, 392), text: 'It was so unexpected and fun! Very surprising to find this phone here.' },
+	{ id: 'P', ...P(430, 420), text: '', drawn: 'A drawing: a scribble and a small picture of the phone' },
+];
+---
+
+<figure class="ptable wide" data-ptable>
+	<div class="pt-grid">
+		<div class="pt-photo">
+			<picture>
+				<source srcset="/images/dbas/postit-table.webp" type="image/webp" />
+				<img src="/images/dbas/postit-table.jpg" width="2000" height="1500" alt="Overhead view of the table at Röhsska covered in yellow post-its, handwritten in Swedish and English, with the pencil box and the prompt card." loading="lazy" decoding="async" />
+			</picture>
+			{notes.map((n, i) => (
+				<button
+					type="button"
+					class="pt-mark"
+					style={`left:${n.x.toFixed(1)}%; top:${n.y.toFixed(1)}%`}
+					data-note={i}
+					aria-label={`Read note ${i + 1}`}
+					aria-pressed={i === 0 ? 'true' : 'false'}
+				>{i + 1}</button>
+			))}
+		</div>
+		<div class="pt-read" aria-live="polite">
+			{notes.map((n, i) => (
+				<div class="pt-note" data-show={i} hidden={i !== 0}>
+					<span class="pt-no">Note {i + 1} of {notes.length}</span>
+					{n.text && <p class="pt-text" lang={n.en ? 'sv' : 'en'}>{n.text}</p>}
+					{n.en && <p class="pt-en">{n.en}</p>}
+					{n.drawn && <p class="pt-drawn">{n.drawn}</p>}
+				</div>
+			))}
+			<p class="pt-hint">Hover or tap a number to read that note.</p>
+		</div>
+	</div>
+	<figcaption>The post-its at Röhsska, a few weeks in. Every note I could read with confidence is transcribed; Swedish ones are translated.</figcaption>
+</figure>
+
+<script>
+	for (const root of document.querySelectorAll<HTMLElement>('[data-ptable]')) {
+		const marks = [...root.querySelectorAll<HTMLButtonElement>('.pt-mark')];
+		const shown = [...root.querySelectorAll<HTMLElement>('[data-show]')];
+		const show = (i: number) => {
+			shown.forEach((n) => (n.hidden = Number(n.dataset.show) !== i));
+			marks.forEach((m) => m.setAttribute('aria-pressed', String(Number(m.dataset.note) === i)));
+		};
+		for (const m of marks) {
+			const i = Number(m.dataset.note);
+			m.addEventListener('mouseenter', () => show(i));
+			m.addEventListener('focus', () => show(i));
+			m.addEventListener('click', () => show(i));
+		}
+	}
+</script>
+
+<style>
+	.pt-grid { display: grid; gap: var(--space-4); }
+	@media (min-width: 1000px) {
+		.pt-grid { grid-template-columns: min(var(--measure), 100%) minmax(0, 1fr); column-gap: var(--space-5); align-items: start; }
+	}
+	.pt-photo { position: relative; }
+	.pt-photo img { display: block; width: 100%; height: auto; border-radius: 0; }
+	.pt-mark {
+		position: absolute;
+		transform: translate(-50%, -50%);
+		width: 1.6rem;
+		height: 1.6rem;
+		padding: 0;
+		border-radius: 50%;
+		border: 2px solid var(--bg);
+		background: var(--ink);
+		color: var(--on-dark);
+		font-family: var(--font-display);
+		font-size: .7rem;
+		font-variant-numeric: tabular-nums;
+		cursor: pointer;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+	}
+	.pt-mark:hover, .pt-mark:focus-visible, .pt-mark[aria-pressed="true"] { background: var(--blue); outline: none; }
+	.pt-mark:focus-visible { box-shadow: 0 0 0 3px var(--blue-ink); }
+	.pt-read { position: sticky; top: calc(72px + var(--space-4)); }
+	.pt-note {
+		background: var(--paper);
+		padding: var(--space-4);
+		box-shadow: 0 6px 16px rgba(0, 0, 0, .14), 0 1px 3px rgba(0, 0, 0, .08);
+		transform: rotate(-1.5deg);
+		min-height: 12rem;
+	}
+	.pt-no { display: block; margin-bottom: var(--space-2); font-family: var(--font-display); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+	.pt-text { margin: 0; font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.3; color: var(--ink); }
+	.pt-en { margin: var(--space-2) 0 0; font-family: var(--font-body); font-style: italic; font-size: var(--fs-small); color: var(--body); }
+	.pt-drawn { margin: var(--space-2) 0 0; font-family: var(--font-body); font-style: italic; color: var(--body); }
+	.pt-hint { margin: var(--space-3) 0 0; font-size: var(--fs-small); color: var(--muted); }
+</style>
