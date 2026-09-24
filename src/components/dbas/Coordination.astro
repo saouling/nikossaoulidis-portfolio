@@ -94,8 +94,10 @@ const ran = [
 	.coord-me small { margin-top: var(--space-1); font-size: .8rem; max-width: 8rem; line-height: 1.3; }
 	@media (max-width: 799px) { .coord-me { width: 9rem; } }
 	.coord-group { position: relative; z-index: 1; background: var(--bg); border: 1px solid var(--ink); padding: var(--space-3) var(--space-4); }
-	.coord-group.tone-red { box-shadow: inset 0 5px 0 var(--red); padding-top: calc(var(--space-3) + 5px); }
-	.coord-group.tone-blue { box-shadow: inset 0 5px 0 var(--blue); padding-top: calc(var(--space-3) + 5px); }
+	/* museum coding as a small drawn mark before the name, not a stripe */
+	.coord-group.tone-red h4::before, .coord-group.tone-blue h4::before { content: ""; display: inline-block; width: .7em; height: .7em; margin-right: .5em; vertical-align: .02em; }
+	.coord-group.tone-red h4::before { background: var(--red); }
+	.coord-group.tone-blue h4::before { background: var(--blue); border-radius: 50%; }
 	.coord-group h4 { margin: 0 0 var(--space-2); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-body); color: var(--ink); }
 	.coord-group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-family: var(--font-display); font-size: var(--fs-small); color: var(--body); }
 	.coord-ran { list-style: none; margin: var(--space-5) 0 0; padding: 0; display: grid; gap: 0; border-top: 3px solid var(--ink); }
