@@ -1,0 +1,42 @@
+---
+// One mark per sub-record inside an object, derived from the object's own
+// form so the family still reads as one. Ericsson (the triangle) has three:
+//   a · delivery: a triangle split down the middle, screen | spec
+//   b · together: two triangles side by side, one filled, one drawn
+//   c · generative: a triangle assembled from smaller ones, like cards
+// Decorative: the case number and title always carry the meaning.
+interface Props {
+	mark: 'a' | 'b' | 'c';
+	class?: string;
+}
+const { mark, class: className } = Astro.props;
+---
+
+<svg class:list={['case-mark', `case-mark-${mark}`, className]} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+	{mark === 'a' && (
+		<>
+			<polygon points="50,6 50,94 2,94" class="fill" />
+			<polygon points="50,6 98,94 50,94" class="line" />
+		</>
+	)}
+	{mark === 'b' && (
+		<>
+			<polygon points="27,30 52,94 2,94" class="fill" />
+			<polygon points="73,30 98,94 48,94" class="line" />
+		</>
+	)}
+	{mark === 'c' && (
+		<>
+			<polygon points="50,6 74,50 26,50" class="fill" />
+			<polygon points="26,50 50,94 2,94" class="fill" />
+			<polygon points="74,50 98,94 50,94" class="fill" />
+			<polygon points="26,50 74,50 50,94" class="line" />
+		</>
+	)}
+</svg>
+
+<style>
+	.case-mark { display: inline-block; width: 1em; height: 1em; flex: none; overflow: visible; }
+	.case-mark .fill { fill: var(--gold); }
+	.case-mark .line { fill: none; stroke: var(--ink); stroke-width: 1.5px; stroke-linejoin: miter; vector-effect: non-scaling-stroke; }
+</style>

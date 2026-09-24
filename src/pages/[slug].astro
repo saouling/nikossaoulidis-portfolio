@@ -11,6 +11,7 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import LabelPlate from '../components/LabelPlate.astro';
+import CaseMark from '../components/CaseMark.astro';
 import KForm from '../components/KForm.astro';
 import { allObjects, nextObject } from '../data/collection';
 
@@ -30,6 +31,7 @@ const isCaseStudy = entry.collection === 'case-studies';
 const heroVideo = isCaseStudy ? entry.data.heroVideo : undefined;
 const heroVideoCaption = isCaseStudy ? entry.data.heroVideoCaption : undefined;
 const summary = isCaseStudy ? entry.data.summary : undefined;
+const cases = isCaseStudy ? (entry.data.cases ?? []) : [];
 const links = isCaseStudy ? [] : (entry.data.links ?? []);
 const record = isCaseStudy ? [] : (entry.data.record ?? []);
 const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
@@ -66,12 +68,27 @@ const summaryRows = summary
 					<LabelPlate object={object} fields={plateFields} />
 					{summaryRows.length > 0 && (
 						<nav class="obj-summary" aria-label="Summary">
+							{cases.length > 0 && (
+								<ul class="obj-summary-key">
+									{cases.map((c) => (
+										<li><CaseMark mark={c.case} /><span class="cat-no">{c.no}</span>{c.name}</li>
+									))}
+								</ul>
+							)}
 							<ol>
 								{summaryRows.map((row) => (
 									<li>
 										<a href={`#${row.id}`}>
 											<span class="obj-summary-label">{row.label}</span>
-											<span class="obj-summary-text">{row.text}</span>
+											{typeof row.text === 'string'
+												? <span class="obj-summary-text">{row.text}</span>
+												: (
+													<ul class="obj-summary-cases">
+														{row.text.map((c) => (
+															<li><CaseMark mark={c.case} /><span class="visually-hidden">Case {c.case}: </span>{c.text}</li>
+														))}
+													</ul>
+												)}
 										</a>
 									</li>
 								))}

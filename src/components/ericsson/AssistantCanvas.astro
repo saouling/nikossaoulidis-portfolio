@@ -1,93 +1,321 @@
 ---
-// Ericsson 01c: the proposal, an assistant plus a canvas, as a layout
-// rather than a picture. About 30% steering panel, 70% canvas. Cards arrive
-// pre-filled, and each one shows its source and freshness; the user can pin
-// or dismiss. Abstract content (NDA): the annotations name the principles
-// from the research, not product data.
+// Ericsson 01c: the proposal, a canvas plus an assistant, as a small
+// working demo rather than a picture. Canvas about 70% on the left, the
+// assistant about 30% on the right. The point it has to make: you steer it
+// two ways, by asking in the chat or by acting on a card (pin, dismiss,
+// keep a suggestion), and the assistant answers either way.
+// Abstract content (NDA): card names are generic, not product data.
+// Without JS it is a static layout; with JS it plays a short scripted
+// sequence once when scrolled into view (never under reduced motion) and
+// hands over to the visitor on their first click.
 const cards = [
-	{ span: 'w2', kind: 'Trend', state: 'new' },
-	{ span: '', kind: 'KPI', state: '' },
-	{ span: 'h2', kind: 'List', state: 'pinned' },
-	{ span: '', kind: 'KPI', state: '' },
-	{ span: 'w2', kind: 'Trend', state: '' },
-	{ span: '', kind: 'Status', state: '' },
+	{ id: 'trend', kind: 'Trend', span: 'w2' },
+	{ id: 'kpi1', kind: 'KPI' },
+	{ id: 'list', kind: 'List', span: 'h2' },
+	{ id: 'kpi2', kind: 'KPI' },
+	{ id: 'status', kind: 'Status' },
+	{ id: 'trend2', kind: 'Trend', span: 'w2' },
+];
+const chips = [
+	{ id: 'failing', text: 'Show me what’s failing' },
+	{ id: 'simpler', text: 'Simpler, please' },
 ];
 ---
 
-<figure class="ac">
-	<div class="ac-frame" role="img" aria-label="An assistant panel taking about 30 percent of the width, beside a canvas of cards taking about 70 percent. One card is newly suggested, one is pinned, and every card shows its data source and how fresh it is.">
-		<div class="ac-assistant">
-			<span class="ac-label">Assistant · ~30%</span>
-			<span class="ac-bubble you"></span>
-			<span class="ac-bubble it"></span>
-			<span class="ac-bubble you short"></span>
-			<span class="ac-bubble it"></span>
-			<span class="ac-input"></span>
-		</div>
+<figure class="ac" data-ac>
+	<div class="ac-frame">
 		<div class="ac-canvas">
-			<span class="ac-label">Canvas of cards · ~70%</span>
-			<div class="ac-grid">
+			<span class="ac-label">Canvas · ~70%</span>
+			<div class="ac-grid" data-grid>
 				{cards.map((c) => (
-					<div class:list={['ac-card', c.span, c.state]}>
-						<span class="ac-kind">
-							{c.kind}
-							{c.state === 'new' && <em>suggested</em>}
-							{c.state === 'pinned' && <em>pinned</em>}
+					<div class:list={['ac-card', c.span]} data-card={c.id}>
+						<span class="ac-kind">{c.kind}<em class="ac-tag"></em></span>
+						<span class="ac-body"></span>
+						<span class="ac-foot">
+							<span class="ac-source">source · updated</span>
+							<span class="ac-acts">
+								<button type="button" class="ac-act" data-act="pin" aria-label={`Pin the ${c.kind} card`} aria-pressed="false">
+									<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 2h6l-1 5 3 3H3l3-3zM8 10v5" /></svg>
+								</button>
+								<button type="button" class="ac-act" data-act="dismiss" aria-label={`Dismiss the ${c.kind} card`}>
+									<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" /></svg>
+								</button>
+							</span>
 						</span>
-						<span class="ac-body" />
-						<span class="ac-source">source · updated</span>
 					</div>
 				))}
 			</div>
 		</div>
+		<div class="ac-assistant">
+			<span class="ac-label">Assistant · ~30%</span>
+			<ol class="ac-log" data-log aria-live="polite">
+				<li class="it">I’ve laid out a dashboard for your role. Ask for a change, or edit the cards directly.</li>
+			</ol>
+			<div class="ac-chips">
+				{chips.map((c) => (
+					<button type="button" class="ac-chip" data-chip={c.id} disabled>{c.text}</button>
+				))}
+			</div>
+			<span class="ac-input" aria-hidden="true">Ask for a change…</span>
+		</div>
 	</div>
+	<figcaption>
+		Illustrative. Try it: ask in the chat, or pin and dismiss cards on the canvas. The assistant responds to both.
+		<button type="button" class="ac-reset" data-reset hidden>Start over</button>
+	</figcaption>
 	<ul class="ac-principles">
 		<li><strong>Whole layouts,</strong> assembled from context, not one card at a time.</li>
-		<li><strong>Consistent containers:</strong> content varies, the card shell doesn't.</li>
-		<li><strong>AI suggests, the person decides:</strong> pin, edit or dismiss any card.</li>
+		<li><strong>Consistent containers:</strong> content varies, the card shell doesn’t.</li>
+		<li><strong>AI suggests, the person decides:</strong> pin, keep or dismiss any card.</li>
 		<li><strong>Transparency:</strong> every card shows its source and freshness.</li>
 	</ul>
 </figure>
+
+<script>
+	type Step = () => void;
+	for (const root of document.querySelectorAll<HTMLElement>('[data-ac]')) {
+		const grid = root.querySelector<HTMLElement>('[data-grid]')!;
+		const log = root.querySelector<HTMLOListElement>('[data-log]')!;
+		const reset = root.querySelector<HTMLButtonElement>('[data-reset]')!;
+		const initialGrid = grid.innerHTML;
+		const initialLog = log.innerHTML;
+		let timers: number[] = [];
+		let autoplay = true;
+
+		const say = (who: 'you' | 'it', text: string) => {
+			const li = document.createElement('li');
+			li.className = who;
+			li.textContent = text;
+			log.append(li);
+			while (log.children.length > 6) log.firstElementChild?.remove();
+		};
+		const card = (id: string) => grid.querySelector<HTMLElement>(`[data-card="${id}"]`);
+		const flash = (el: Element | null) => {
+			if (!el) return;
+			el.classList.remove('flash');
+			void (el as HTMLElement).offsetWidth;
+			el.classList.add('flash');
+		};
+		const tag = (el: HTMLElement, text: string) => {
+			const t = el.querySelector('.ac-tag');
+			if (t) t.textContent = text;
+		};
+
+		const suggest = (id: string, kind: string, span = '') => {
+			if (card(id)) return card(id)!;
+			const el = grid.firstElementChild!.cloneNode(true) as HTMLElement;
+			el.dataset.card = id;
+			el.className = `ac-card suggested ${span}`.trim();
+			el.querySelector('.ac-kind')!.firstChild!.textContent = kind;
+			tag(el, 'suggested');
+			el.querySelectorAll<HTMLButtonElement>('.ac-act').forEach((b) => {
+				b.setAttribute('aria-pressed', 'false');
+				b.setAttribute('aria-label', `${b.dataset.act === 'pin' ? 'Keep' : 'Dismiss'} the suggested ${kind} card`);
+			});
+			grid.prepend(el);
+			flash(el);
+			return el;
+		};
+
+		const chip = (id: string) => {
+			if (id === 'failing') {
+				say('you', 'Show me what’s failing');
+				suggest('alarms', 'Alarms', 'w2');
+				say('it', 'Added an alarms card at the top, from the live feed. Keep it or dismiss it.');
+			} else {
+				say('you', 'Simpler, please');
+				const drop = [...grid.querySelectorAll<HTMLElement>('.ac-card:not(.pinned):not(.suggested)')].slice(-2);
+				drop.forEach((d) => d.remove());
+				say('it', drop.length ? `Took out ${drop.length} cards you haven’t used. Pinned cards stay.` : 'That’s as simple as it gets without touching your pinned cards.');
+			}
+		};
+
+		const act = (el: HTMLElement, what: string) => {
+			const kind = el.querySelector('.ac-kind')!.firstChild!.textContent;
+			if (what === 'dismiss') {
+				el.remove();
+				say('it', el.classList.contains('suggested') ? `Dismissed. I won’t suggest ${kind} again today.` : `Removed the ${kind} card. I’ll fill the gap.`);
+				return;
+			}
+			if (el.classList.contains('suggested')) {
+				el.classList.remove('suggested');
+				tag(el, '');
+				say('it', `Kept. ${kind} is part of your layout now.`);
+			} else {
+				const on = !el.classList.contains('pinned');
+				el.classList.toggle('pinned', on);
+				tag(el, on ? 'pinned' : '');
+				el.querySelector('[data-act="pin"]')?.setAttribute('aria-pressed', String(on));
+				say('it', on ? `Pinned ${kind}. It stays put when I change the layout.` : `Unpinned ${kind}.`);
+			}
+			flash(el);
+		};
+
+		const stop = () => {
+			if (!autoplay) return;
+			autoplay = false;
+			timers.forEach(clearTimeout);
+			timers = [];
+			root.classList.remove('playing');
+		};
+
+		root.querySelectorAll<HTMLButtonElement>('[data-chip]').forEach((b) => {
+			b.disabled = false;
+			b.addEventListener('click', () => { stop(); chip(b.dataset.chip!); reset.hidden = false; });
+		});
+		grid.addEventListener('click', (e) => {
+			const b = (e.target as Element).closest<HTMLButtonElement>('.ac-act');
+			if (!b) return;
+			stop();
+			act(b.closest<HTMLElement>('.ac-card')!, b.dataset.act!);
+			reset.hidden = false;
+		});
+		reset.addEventListener('click', () => {
+			grid.innerHTML = initialGrid;
+			log.innerHTML = initialLog;
+			reset.hidden = true;
+		});
+
+		// The demo shows the control being pressed first, so it reads as a
+		// person steering rather than the page changing by itself.
+		const press = (btn: Element | null | undefined, then: Step) => {
+			if (!btn) return;
+			btn.classList.add('demo-press');
+			timers.push(window.setTimeout(() => { btn.classList.remove('demo-press'); if (autoplay) then(); }, 700));
+		};
+		const chipBtn = (id: string) => root.querySelector(`[data-chip="${id}"]`);
+		const cardBtn = (id: string, a: string) => card(id)?.querySelector(`[data-act="${a}"]`);
+		const script: [number, Step][] = [
+			[1000, () => press(chipBtn('failing'), () => chip('failing'))],
+			[2800, () => press(cardBtn('alarms', 'pin'), () => act(card('alarms')!, 'pin'))],
+			[2800, () => press(cardBtn('trend', 'pin'), () => act(card('trend')!, 'pin'))],
+			[2800, () => press(cardBtn('kpi2', 'dismiss'), () => act(card('kpi2')!, 'dismiss'))],
+		];
+		const play = () => {
+			root.classList.add('playing');
+			let t = 0;
+			for (const [delay, step] of script) {
+				t += delay;
+				timers.push(window.setTimeout(() => { if (autoplay) step(); }, t));
+			}
+			timers.push(window.setTimeout(() => { root.classList.remove('playing'); autoplay = false; reset.hidden = false; }, t + 1200));
+		};
+
+		if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+			const io = new IntersectionObserver((entries) => {
+				if (entries.some((en) => en.isIntersecting)) { io.disconnect(); if (autoplay) play(); }
+			}, { threshold: 0.3 });
+			io.observe(root);
+		} else {
+			autoplay = false;
+		}
+	}
+</script>
 
 <style>
 	.ac { margin: 0; }
 	.ac-frame {
 		display: grid;
-		grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+		grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
 		gap: 3px;
 		background: var(--ink);
 		border: 3px solid var(--ink);
 	}
-	@media (max-width: 599px) {
+	@media (max-width: 699px) {
 		.ac-frame { grid-template-columns: 1fr; }
 	}
-	.ac-assistant, .ac-canvas { background: var(--bg); padding: var(--space-3); display: flex; flex-direction: column; gap: 8px; }
-	.ac-assistant { border-top: 6px solid var(--gold); }
+	.ac-assistant, .ac-canvas { background: var(--bg); padding: var(--space-3); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 	.ac-label { font-family: var(--font-display); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
-	.ac-bubble { height: 28px; width: 80%; border: 1px solid var(--ink); }
-	.ac-bubble.you { align-self: flex-end; background: var(--bg-alt); width: 70%; }
-	.ac-bubble.short { width: 45%; }
-	.ac-bubble.it { background: var(--bg); }
-	.ac-input { margin-top: auto; height: 30px; border: 1px solid var(--ink); border-top-width: 2px; }
+
+	/* Fixed height, newest at the bottom: the frame never grows as the
+	   conversation does. Messages are added by the script, so :global. */
+	.ac-log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; flex: 1; height: 13rem; overflow: hidden; justify-content: flex-end; mask-image: linear-gradient(to bottom, transparent, var(--ink) 2.5rem); }
+	.ac-log :global(li) {
+		flex: none;
+		font-family: var(--font-display);
+		font-size: .78rem;
+		line-height: 1.35;
+		padding: 6px 8px;
+		border: 1px solid var(--ink);
+		max-width: 92%;
+		animation: ac-in .25s ease-out;
+	}
+	.ac-log :global(li.it) { align-self: flex-start; background: var(--bg); color: var(--ink); }
+	.ac-log :global(li.you) { align-self: flex-end; background: var(--ink); color: var(--on-dark); }
+	.ac-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+	.ac-chip {
+		font: inherit;
+		font-family: var(--font-display);
+		font-size: .74rem;
+		padding: 4px 10px;
+		border: 1px solid var(--ink);
+		border-radius: 999px;
+		background: var(--bg);
+		color: var(--ink);
+		cursor: pointer;
+	}
+	.ac-chip:hover:not(:disabled) { border-color: var(--blue-ink); color: var(--blue-ink); }
+	.ac-chip:disabled { cursor: default; opacity: .6; }
+	.ac-chip.demo-press, .ac-act.demo-press { outline: 2px solid var(--blue-ink); outline-offset: 2px; color: var(--blue-ink); border-color: var(--blue-ink); }
+	.ac-input { height: 30px; border: 1px solid var(--ink); border-top-width: 2px; font-family: var(--font-display); font-size: .74rem; color: var(--muted); padding: 5px 8px; }
+
 	.ac-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-		grid-auto-rows: 78px;
+		grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+		grid-auto-rows: 104px;
 		grid-auto-flow: dense;
 		gap: 8px;
+		align-content: start;
 	}
-	.ac-card { border: 1px solid var(--ink); padding: 6px 8px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+	.ac-card { border: 1px solid var(--ink); padding: 6px 8px; display: flex; flex-direction: column; gap: 4px; min-width: 0; background: var(--bg); }
 	.ac-card.w2 { grid-column: span 2; }
 	.ac-card.h2 { grid-row: span 2; }
-	.ac-card.new { border: 2px solid var(--gold); }
-	.ac-card.pinned { border-top: 4px solid var(--ink); }
+	.ac-card.suggested { outline: 2px solid var(--gold); outline-offset: -2px; }
+	.ac-card.pinned { box-shadow: inset 0 4px 0 var(--ink); padding-top: 9px; }
+	.ac-card.flash { animation: ac-flash .6s ease-out; }
 	.ac-kind { font-family: var(--font-display); font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink); display: flex; justify-content: space-between; gap: 4px; }
-	.ac-kind em { font-style: normal; color: var(--gold-ink); text-transform: none; letter-spacing: 0; }
+	.ac-tag { font-style: normal; color: var(--gold-ink); text-transform: none; letter-spacing: 0; }
+	.ac-card.pinned .ac-tag { color: var(--ink); }
 	.ac-body { flex: 1; background: repeating-linear-gradient(to bottom, var(--hairline) 0 2px, transparent 2px 9px); }
-	.ac-source { font-family: var(--font-display); font-size: .62rem; color: var(--muted); border-top: 1px solid var(--hairline); padding-top: 2px; }
+	.ac-foot { display: flex; justify-content: space-between; align-items: center; gap: 4px; border-top: 1px solid var(--hairline); padding-top: 2px; }
+	.ac-source { font-family: var(--font-display); font-size: .62rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.ac-acts { display: flex; gap: 2px; flex: none; }
+	.ac-act {
+		display: grid;
+		place-items: center;
+		width: 22px;
+		height: 22px;
+		padding: 0;
+		border: 1px solid transparent;
+		background: none;
+		color: var(--ink);
+		cursor: pointer;
+	}
+	.ac-act svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+	.ac-act:hover { border-color: var(--blue-ink); color: var(--blue-ink); }
+	.ac-act[aria-pressed="true"] svg { fill: currentColor; }
+	.ac-card.suggested .ac-act[data-act="pin"] svg path { d: path("M3 8.5l3.5 3.5L13 4.5"); }
+
+	.ac figcaption { margin-top: var(--space-2); font-size: var(--fs-small); color: var(--muted); }
+	.ac-reset {
+		font: inherit;
+		color: var(--blue-ink);
+		background: none;
+		border: 0;
+		padding: 0;
+		margin-left: var(--space-2);
+		text-decoration: underline;
+		cursor: pointer;
+	}
 	.ac-principles { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; gap: var(--space-2); font-size: var(--fs-small); color: var(--body); }
 	@media (min-width: 700px) {
 		.ac-principles { grid-template-columns: 1fr 1fr; column-gap: var(--space-4); }
 	}
 	.ac-principles strong { font-family: var(--font-display); font-weight: 600; color: var(--ink); }
+
+	@keyframes ac-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+	@keyframes ac-flash { from { outline: 3px solid var(--gold); outline-offset: 2px; } to { outline: 3px solid transparent; outline-offset: 6px; } }
+	@media (prefers-reduced-motion: reduce) {
+		.ac-log :global(li), .ac-card.flash { animation: none; }
+	}
 </style>

@@ -3,11 +3,39 @@ title: "Ericsson — AI-Ready Design Delivery — Nikos Saoulidis"
 heading: "Ericsson"
 standfirst: "UX Designer on dense private-5G software, where my job was making complex, technical tools clear for expert users."
 description: "UX design on dense private-5G software at Ericsson: making Figma deliveries AI-readable, getting design and development to build together, and a generative UI proposal for data-dense dashboards."
+cases:
+  - { case: a, no: 01a, name: AI-ready deliveries }
+  - { case: b, no: 01b, name: Build better together }
+  - { case: c, no: 01c, name: Generative UI }
 summary:
-  problem: "Developers were generating UI code from design files built for humans, and design and development worked in sequence instead of together."
-  did: "Built an AI-ready delivery skill, co-created team methods with Frida Edstam, and prototyped generative UI for data-dense dashboards."
-  went: "The delivery method became the team-wide standard, the methods became a conference talk, and a US back-end team shipped real code from our specs."
-  learned: "Bring developers in from week one. The job is shifting towards defining constraints and judging what comes back."
+  problem:
+    - case: a
+      text: "Developers generated UI code straight from Figma files built for humans, and the AI built the sticky notes too."
+    - case: b
+      text: "Design and development worked in sequence: each discipline reacting to decisions already made, with nobody else in the room."
+    - case: c
+      text: "Our telecom dashboards hold far more data than one static layout can show, and building a new one for every role is slow."
+  did:
+    - case: a
+      text: "Audited our files, built the delivery-for-ai skill that separates screens from specs, and tested it with a developer over four rounds."
+    - case: b
+      text: "Co-created time-boxed methods and daily habits with Frida Edstam, and put them on a one-page handout."
+    - case: c
+      text: "Rebuilt the card as one content-driven component, and proposed an assistant plus a canvas that assembles whole layouts."
+  went:
+    - case: a
+      text: "Adopted as the team-wide delivery standard."
+    - case: b
+      text: "A talk at the Ericsson Developer Conference in April 2026, and a handout people still use."
+    - case: c
+      text: "A US back-end team used the component to show live data."
+  learned:
+    - case: a
+      text: "Screens say what it looks like, specs say how it behaves. Mix them and the AI invents things."
+    - case: b
+      text: "Workshops are the easy part. The daily habits are what stick."
+    - case: c
+      text: "The deliverable is becoming a system of rules, not a screen."
 heroImage:
   src: "/images/ericsson/collage.jpg"
   width: 1900
@@ -40,6 +68,7 @@ import Figure from '../../components/Figure.astro';
 import PullQuote from '../../components/PullQuote.astro';
 import FactGrid from '../../components/FactGrid.astro';
 import SubRecord from '../../components/SubRecord.astro';
+import CaseMark from '../../components/CaseMark.astro';
 import DeliveryBeforeAfter from '../../components/ericsson/DeliveryBeforeAfter.astro';
 import SpecRule from '../../components/ericsson/SpecRule.astro';
 import AuditFramework from '../../components/ericsson/AuditFramework.astro';
@@ -62,14 +91,15 @@ Most of what I'm proudest of ended up being about the space between design and e
 Three cases, each its own record in this object.
 
 <ol class="sub-index">
-  <li><a href="#case-1"><span class="cat-no">01a</span> Making our Figma deliveries AI-readable</a></li>
-  <li><a href="#case-2"><span class="cat-no">01b</span> Build better together</a></li>
-  <li><a href="#case-3"><span class="cat-no">01c</span> Generative UI for data-dense dashboards</a></li>
+  <li><a href="#case-1"><CaseMark mark="a" /><span class="cat-no">01a</span> Making our Figma deliveries AI-readable</a></li>
+  <li><a href="#case-2"><CaseMark mark="b" /><span class="cat-no">01b</span> Build better together</a></li>
+  <li><a href="#case-3"><CaseMark mark="c" /><span class="cat-no">01c</span> Generative UI for data-dense dashboards</a></li>
 </ol>
 
 <SubRecord
   id="case-1"
   no="01a"
+  mark="a"
   title="Making our Figma deliveries AI-readable"
   lead="Our developers used AI to turn Figma into code, but it kept building the annotations instead of the interface, so I built a way to fix that."
   part="Research, an audit framework, and the delivery-for-ai skill"
@@ -99,6 +129,7 @@ When I let the notes describe the interface as well, the AI started inventing th
 <SubRecord
   id="case-2"
   no="01b"
+  mark="b"
   title="Build better together"
   lead="Design and development kept working in sequence instead of together, so Frida Edstam and I put together a set of methods people could start using the next morning."
   part="Co-creating the methods with Frida Edstam, and the talk"
@@ -120,6 +151,7 @@ I also helped run an AI design-review forum with Jakob Kitzing and Mats Kullerst
 <SubRecord
   id="case-3"
   no="01c"
+  mark="c"
   title="Generative UI for data-dense dashboards"
   lead="A hackathon project on dashboards that assemble themselves from context, and what building it taught me about where UX is going."
   part="The card component, the specs, the prototype and the proposal, in a Tweak Week team with three other designers and a front-end developer"

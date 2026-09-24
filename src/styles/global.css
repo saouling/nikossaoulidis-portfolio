@@ -713,6 +713,17 @@ section, .section {
 .sub-index a:hover, .sub-index a:focus-visible { color: var(--blue-ink); }
 .sub-index .cat-no, .sub-title .cat-no { padding: 0; font-size: var(--fs-body); }
 .sub-title { display: flex; gap: var(--space-3); align-items: baseline; margin-top: var(--space-7); }
+/* Each case's own mark (CaseMark): big at the head of its record, small in
+   the index and the summary, so the three cases stay tellable apart. */
+.sub-mark { font-size: 2.25rem; align-self: center; }
+.sub-index .case-mark { font-size: 1.35rem; align-self: center; }
+.obj-summary-key { list-style: none; margin: 0 0 var(--space-3); padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-family: var(--font-display); font-size: var(--fs-small); color: var(--ink); }
+.obj-summary-key li { display: flex; align-items: center; gap: var(--space-2); }
+.obj-summary-key .case-mark { font-size: 1.15rem; }
+.obj-summary-key .cat-no { padding: 0; }
+.obj-summary-cases { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+.obj-summary-cases li { border: 0; display: grid; grid-template-columns: 1.4rem minmax(0, 1fr); gap: var(--space-2); font-size: var(--fs-small); line-height: 1.5; max-width: 60ch; }
+.obj-summary-cases .case-mark { font-size: 1.15rem; margin-top: .15em; }
 .sub-lead { font-size: var(--fs-h3); line-height: 1.4; color: var(--ink); margin-top: var(--space-3); text-wrap: pretty; }
 .sub-plate { border: 1px solid var(--ink); margin: var(--space-4) 0 var(--space-5); }
 .sub-plate > div {

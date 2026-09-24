@@ -7,6 +7,11 @@ import { glob } from 'astro/loaders';
 // assuming three total cells; a variable count would silently break the
 // layout instead of failing the build, so the schema pins the number the
 // CSS actually depends on.
+const summaryLine = z.union([
+	z.string().min(1),
+	z.array(z.object({ case: z.enum(['a', 'b', 'c']), text: z.string().min(1) })).min(1),
+]);
+
 const factGrid = z.object({
 	stat: z.string().min(1),
 	statLabel: z.string().min(1),
@@ -41,12 +46,16 @@ const caseStudies = defineCollection({
 		// The catalogue summary: one sentence per fixed section, shown beside
 		// the label plate and linking to #problem, #what-i-did, #how-it-went
 		// and #what-i-learned. Required: it is every study's skim layer.
+		// An object with sub-records (Ericsson) may give one line per case
+		// instead, each tagged with its case mark (see CaseMark).
 		summary: z.object({
-			problem: z.string().min(1),
-			did: z.string().min(1),
-			went: z.string().min(1),
-			learned: z.string().min(1),
+			problem: summaryLine,
+			did: summaryLine,
+			went: summaryLine,
+			learned: summaryLine,
 		}),
+		// Names for the case marks, shown as a key above a per-case summary.
+		cases: z.array(z.object({ case: z.enum(['a', 'b', 'c']), no: z.string(), name: z.string() })).optional(),
 		heroImage: z.object({
 			src: z.string().min(1),
 			width: z.number(),
