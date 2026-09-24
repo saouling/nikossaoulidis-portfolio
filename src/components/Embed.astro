@@ -12,11 +12,13 @@ interface Props {
 	/** Where the plain fallback link goes (defaults to the embed itself). */
 	href?: string;
 	ratio?: string;
+	/** YouTube only: start playback at this many seconds. */
+	start?: number;
 }
 
-const { kind, src, title, href, ratio = kind === 'figma' ? '4 / 3' : '16 / 9' } = Astro.props;
-const url = kind === 'youtube' ? `https://www.youtube-nocookie.com/embed/${src}` : src;
-const link = href ?? (kind === 'youtube' ? `https://www.youtube.com/watch?v=${src}` : src);
+const { kind, src, title, href, start, ratio = kind === 'figma' ? '4 / 3' : '16 / 9' } = Astro.props;
+const url = kind === 'youtube' ? `https://www.youtube-nocookie.com/embed/${src}${start ? `?start=${start}` : ''}` : src;
+const link = href ?? (kind === 'youtube' ? `https://www.youtube.com/watch?v=${src}${start ? `&t=${start}s` : ''}` : src);
 const label = kind === 'figma' ? 'Figma prototype' : 'Video';
 ---
 

@@ -41,12 +41,16 @@ import PullQuote from '../../components/PullQuote.astro';
 import FactGrid from '../../components/FactGrid.astro';
 import ModuleMatrix from '../../components/ewp/ModuleMatrix.astro';
 import StatusSystem from '../../components/ewp/StatusSystem.astro';
+import OldNew from '../../components/ewp/OldNew.astro';
+import Embed from '../../components/Embed.astro';
 
 <h2 id="problem">The problem</h2>
 
 The EWP Dashboard is the tool European universities use to manage Erasmus+ student mobility. When I joined Aristotle University's IT Center, there wasn't a UX role on the team at all. Nobody was looking at why the tool was hard to use, so I made that my job.
 
 It had grown into a hub of modules built at different times, Accounts, Learning Agreements, Institutional Agreements, Erasmus+ applications, so it felt like several separate apps stitched together rather than one tool. The interface complaints I kept hearing were only the symptoms. Underneath them: inconsistent components across modules, no shared visual language, and every team that had built a different part solving the same problem its own way. So instead of patching screens one at a time, I treated the whole thing as one system.
+
+<OldNew />
 
 <ModuleMatrix />
 
@@ -112,6 +116,10 @@ I led four developers, keeping constant communication between them and the Europ
 <FactGrid data={frontmatter.outcome} />
 
 I presented the findings to over 1,000 users and stakeholders at a European University Foundation webinar, then ran a later task-based usability survey to measure whether it actually got easier, not just whether people said it did.
+
+<Embed kind="youtube" src="U4R6U_Dt7d8" start={2978} title="Erasmus Goes Digital: my part starts at 49:38" />
+
+<p class="fs-small">A much younger me, attempting to speak at a conference in front of more than a thousand people.</p>
 
 <h2 id="what-i-learned">What I learned</h2>
 
