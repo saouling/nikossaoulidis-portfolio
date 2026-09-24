@@ -239,6 +239,8 @@ Section rhythm uses the spacing scale's large steps: 64px vertical padding on
 mobile and 96px from 768px up. The sticky header is 72px tall and uses a
 hairline bottom rule.
 
+**Margin column.** From 1000px the case body is a text column (720px) plus a margin column. Wide figures span both; everything else keeps to the text column. The margin carries every caption (beside content-width figures, bottom-aligned like a museum label; under wide figures, starting at the margin's edge) and each section's number, at the far end of its rule, in the object's colour. Below 1000px captions sit under their figures.
+
 **Case body rhythm (one place, every case study and entry).** The case body
 is a grid, so child margins add rather than collapse; components set no outer
 margin of their own and the rhythm lives only in the `.case-body` flow rules.
@@ -399,7 +401,7 @@ This is the complete set of patterns the site ships, checked against the build o
 | Ratings ledger (mean on a scale, n and scale always in the caption) | `Ratings` / `.ratings` | DBAS (pilot feedback forms) |
 | Case body wide column | `.case-body > .wide` | Ericsson, DBAS, EWP (dense diagrams that are cramped at the reading measure) |
 | Ericsson diagrams (scoped styles, drawn in code, NDA-safe) | `components/ericsson/`: `DeliveryBeforeAfter`, `SpecRule`, `AuditFramework`, `HandoffLoop`, `HandoutSheet`, `CardSystem`, `AssistantCanvas`, `SpecToCode` | Ericsson only |
-| DBAS diagrams (scoped styles, drawn in code; museum red/blue kept for Röhsska/Mölndal) | `components/dbas/`: `DbasProcess`, `PilotRounds`, `ThemesLedger`, `LeafletEvolution`, `LensGrid`, `MuseumCompare`, `GhostWall` (an overlapping pile of anonymous notes), `CallPoster` (interactive: the installation's instruction poster with a working dial, dial tone, pulse clicks and ringback, reduced-motion safe), `Coordination`, `TheoryPair` (public-domain McLuhan photo + a drawn Baudrillard poster) | DBAS only |
+| DBAS diagrams (scoped styles, drawn in code; museum red/blue kept for Röhsska/Mölndal) | `components/dbas/`: `DbasProcess`, `PilotRounds`, `ThemesLedger`, `LeafletEvolution`, `LensGrid`, `MuseumCompare`, `GhostWall` (an overlapping pile of anonymous notes), `CallPoster` (interactive: the installation's instruction poster with a drag-to-dial rotary dial and a Rolodex phone book: speaking clock, 1876, 1969, McLuhan, Baudrillard; other numbers ring out), `PostitTable` (the real post-it photo with 17 transcribed notes, read in the margin), `Coordination`, `TheoryBooks` (two drawn book covers that open on a CSS 3D hinge to the author's photo and the idea) | DBAS only |
 | EWP diagrams (scoped styles, drawn in code; status swatches are the product's own colours, shown as a specimen) | `components/ewp/`: `ThenNow` (one real before/after at near-true size), `ModuleMatrix`, `StatusSystem`, `IdentitySheet` (mark, palette, buttons and icon states redrawn in code), `EaieBanner` (the 2025 roll-up redrawn, EUF photo linked not copied), `TalkLink` (the recording can't be embedded). These carry EWP's own product hex values as a specimen of that product; they are not site colours | EWP only |
 | Desktop + phone screen pair | `.figure-grid.ewp-screens` | EWP |
 | Case marks (one per sub-record, derived from the object's form) | `CaseMark`, `.obj-summary-key`, `.obj-summary-cases`, `.sub-mark` | Ericsson (per-case summary, case index, case headings) |
@@ -409,7 +411,6 @@ This is the complete set of patterns the site ships, checked against the build o
 | Column grid | `.col-grid.cols-3` | Ericsson |
 | Museum pair / block | `.museum-pair`, `.museum-block` | DBAS |
 | Ink-grid | `.ink-grid` | DBAS |
-| Post-it board (five notes) / wall (more than five: smaller, `.wide`, left-aligned) | `PostitBoard` | DBAS |
 | Next-object footer | `.obj-next` | every object page, in catalogue order 01 → 06 → 01 |
 | Entry links | `.obj-links` | compact entries 04–06 (where a case study has its summary) |
 | Embed (Figma prototype / YouTube) | `Embed` / `.embed`, `.embed-frame`, `.embed-label` | compact entries 04–06 |

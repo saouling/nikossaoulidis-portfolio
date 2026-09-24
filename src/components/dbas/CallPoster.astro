@@ -1,13 +1,19 @@
 ---
-// DBAS: one of the installation's instruction posters, made usable. The
-// poster's steps (pick up, dial, wait, hang up) light up as you do them,
-// beside a working rotary dial. Sound, all synthesised, only after the
-// visitor's own click: the Swedish dial tone when you pick up (425 Hz,
-// continuous), the pulse clicks as the dial runs back (one per unit, ten
-// a second, like the real mechanism), then the ringback (425 Hz, one
-// second on, five off). The poster says plainly that nobody will answer
-// here, because this page is not the other museum. The line and headline
-// come from the real leaflet and poster.
+// DBAS: one of the installation's instruction posters, made usable, with a
+// phone book. You dial by dragging a finger hole round to the metal stop
+// yourself (or, from the keyboard, focus a hole and press Enter, or type
+// digits). Let go early and the dial springs back with nothing dialled.
+// The Rolodex card beside it lists numbers that connect to moments:
+//   90510  Fröken Ur, the Swedish speaking clock, telling the real time
+//   1876   the first words spoken over a telephone (Bell to Watson)
+//   1969   the telephone call from the White House to the Moon
+//   1964   McLuhan;  1987  Baudrillard
+// Any other seven digits ring out, like a call to the other museum:
+// nobody will answer here. Sound only after the visitor's own gesture:
+// dial tone (425 Hz), pulse clicks as the dial runs back, ringback (425 Hz,
+// one second on, five off), then the line: a recording where one exists
+// and is public domain, played through a telephone-band filter, otherwise
+// the browser's own voice reading the words.
 //
 // Geometry: angles are degrees clockwise from twelve o'clock. The finger
 // stop sits at 120°. Digit n (1–9, with 0 as 10) sits 30 + 30n degrees
@@ -26,15 +32,25 @@ const disc = `M ${C - 96} ${C} a 96 96 0 1 0 192 0 a 96 96 0 1 0 -192 0 Z`;
 const hole = (x: number, y: number, r: number) => `M ${x - r} ${y} a ${r} ${r} 0 1 0 ${2 * r} 0 a ${r} ${r} 0 1 0 ${-2 * r} 0 Z`;
 const plate = [disc, ...holes.map((h) => hole(h.x, h.y, 14)), hole(C, C, 38)].join(' ');
 const stopA = (STOP * Math.PI) / 180;
+
+// The phone book. `say` is read aloud; `audio` (optional) is a public-domain
+// recording played instead. `lang` picks the voice.
+const book = [
+	{ no: '90510', label: 'The speaking clock', note: 'Fröken Ur, Sweden’s time service', kind: 'clock' },
+	{ no: '1876', label: 'The first words on a telephone', note: 'Bell to his assistant, 10 March 1876', say: 'Mr. Watson, come here. I want to see you.', lang: 'en-US' },
+	{ no: '1969', label: 'A call to the Moon', note: 'The White House to Apollo 11, 20 July 1969', say: 'Neil and Buzz, I am talking to you by telephone from the Oval Room at the White House. And this certainly has to be the most historic telephone call ever made.', lang: 'en-US' },
+	{ no: '1964', label: 'Marshall McLuhan', note: 'Understanding Media', say: 'The medium is the message.', lang: 'en-GB' },
+	{ no: '1987', label: 'Jean Baudrillard', note: 'The Ecstasy of Communication', say: 'We no longer partake of the drama of alienation, but are in the ecstasy of communication.', lang: 'en-GB' },
+];
 const steps = [
 	{ id: 'pickup', title: 'Pick up the phone', note: 'You’ll hear the dial tone.' },
-	{ id: 'dial', title: 'Dial the other museum', note: 'In the museum the number is on the card. Here, any seven digits will do.' },
-	{ id: 'wait', title: 'And wait', note: 'Nobody will answer here: this is a web page, not Mölndal. But you can listen to it ring.' },
+	{ id: 'dial', title: 'Dial a number from the card', note: 'Put a finger in the hole and turn the dial all the way to the metal stop, then let go.' },
+	{ id: 'wait', title: 'And wait', note: 'Some numbers connect. Any other seven digits ring out, like a call to the other museum: nobody will answer here.' },
 	{ id: 'hangup', title: 'Hang up', note: 'Put the phone down whenever you like.' },
 ];
 ---
 
-<figure class="cp wide" data-call>
+<figure class="cp wide" data-call data-book={JSON.stringify(book)}>
 	<div class="cp-poster">
 		<div class="cp-copy">
 			<p class="cp-name">Don’t be a Stranger</p>
@@ -56,27 +72,38 @@ const steps = [
 				<button type="button" class="cp-btn cp-quiet" data-sound aria-pressed="true">Sound on</button>
 			</div>
 			<p class="cp-status" data-status aria-live="polite">The phone is on the hook.</p>
-			<p class="cp-foot">You might connect. You might not. But the moment is yours.</p>
 		</div>
 		<div class="cp-phone">
-			<svg class="cp-dial" viewBox="0 0 200 200" role="group" aria-label="A rotary dial. Choose a finger hole to dial that digit.">
+			<svg class="cp-dial" viewBox="0 0 200 200" role="group" aria-label="A rotary dial. Drag a finger hole round to the stop, or focus a hole and press Enter." data-svg>
 				<circle class="cp-card" cx={C} cy={C} r="96" />
 				{holes.map((h) => <text class="cp-num" x={h.x} y={h.y} dy="0.35em" aria-hidden="true">{h.d}</text>)}
 				<g class="cp-plate" data-plate><path d={plate} fill-rule="evenodd" /></g>
 				<circle class="cp-centre" cx={C} cy={C} r="36" />
-				<text class="cp-centre-num" x={C} y={C + 5} aria-hidden="true" data-number>– – – – – – –</text>
+				<text class="cp-centre-num" x={C} y={C + 5} aria-hidden="true" data-number>· · · · · · ·</text>
 				<path class="cp-stop" d={`M ${C + 84 * Math.sin(stopA)} ${C - 84 * Math.cos(stopA)} L ${C + 104 * Math.sin(stopA)} ${C - 104 * Math.cos(stopA)}`} />
 				{holes.map((h) => (
 					<circle class="cp-hole" cx={h.x} cy={h.y} r="14" tabindex="0" role="button" aria-label={`Dial ${h.d}`} data-digit={h.d} data-travel={h.travel} data-pulses={h.pulses} />
 				))}
 			</svg>
+			<div class="cp-card-book">
+				<span class="cp-card-holes" aria-hidden="true"><i></i><i></i></span>
+				<p class="cp-card-head">Numbers worth dialling</p>
+				<ul>
+					{book.map((b) => (
+						<li><b>{b.no.replace(/(\d{2,3})(\d{3})$/, '$1 $2')}</b><span>{b.label}<small>{b.note}</small></span></li>
+					))}
+				</ul>
+			</div>
 		</div>
 	</div>
-	<figcaption>The instructions from the installation, working. It’s slow on purpose: the dial always runs back at its own pace, and every call might go unanswered.</figcaption>
+	<figcaption>The instructions from the installation, working, with a phone book. It’s slow on purpose: the dial always runs back at its own pace. Voices are read by your browser; no call is placed.</figcaption>
 </figure>
 
 <script>
+	type Entry = { no: string; label: string; note: string; say?: string; lang?: string; audio?: string; kind?: string };
 	for (const root of document.querySelectorAll<HTMLElement>('[data-call]')) {
+		const book: Entry[] = JSON.parse(root.dataset.book ?? '[]');
+		const svg = root.querySelector<SVGSVGElement>('[data-svg]')!;
 		const plate = root.querySelector<SVGGElement>('[data-plate]')!;
 		const number = root.querySelector<SVGTextElement>('[data-number]')!;
 		const status = root.querySelector<HTMLElement>('[data-status]')!;
@@ -85,23 +112,25 @@ const steps = [
 		const stepEls = Object.fromEntries([...root.querySelectorAll<HTMLElement>('[data-step]')].map((el) => [el.dataset.step!, el]));
 		const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 		let offHook = false;
-		let dialled: number[] = [];
+		let dialled = '';
 		let busy = false;
-		let ringing = false;
+		let inCall = false;
 		let sound = true;
 		let timers: number[] = [];
+		let idle = 0;
 		let ctx: AudioContext | null = null;
 		let toneOsc: OscillatorNode | null = null;
+		let clip: HTMLAudioElement | null = null;
 
 		const later = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms));
 		const step = (id: string | null) => Object.entries(stepEls).forEach(([k, el]) => el.classList.toggle('is-now', k === id));
-		const showNumber = () => { number.textContent = Array.from({ length: 7 }, (_, i) => (i < dialled.length ? dialled[i] : '–')).join(' '); };
+		const showNumber = () => { number.textContent = dialled ? dialled.split('').join(' ') : '· · · · · · ·'; };
 		const audio = () => {
 			if (!sound) return null;
 			try { ctx ??= new AudioContext(); if (ctx.state === 'suspended') ctx.resume(); return ctx; } catch { return null; }
 		};
 		const tone = (on: boolean) => {
-			if (!on) { try { toneOsc?.stop(); } catch { /* already stopped */ } toneOsc = null; return; }
+			if (!on) { try { toneOsc?.stop(); } catch { /* stopped */ } toneOsc = null; return; }
 			const a = audio();
 			if (!a || toneOsc) return;
 			const g = a.createGain();
@@ -111,7 +140,6 @@ const steps = [
 			toneOsc.connect(g).connect(a.destination);
 			toneOsc.start();
 		};
-		// One short click per pulse, ten a second, like the dial's own contacts.
 		const clicks = (n: number, over: number) => {
 			const a = audio();
 			if (!a) return;
@@ -129,15 +157,63 @@ const steps = [
 				o.stop(t + 0.015);
 			}
 		};
-
-		const hangUp = (msg = 'The phone is on the hook.') => {
+		const beep = (at: number) => {
+			const a = audio();
+			if (!a) return;
+			const t = a.currentTime + at;
+			const o = a.createOscillator();
+			const g = a.createGain();
+			o.frequency.value = 1000;
+			g.gain.setValueAtTime(0.05, t);
+			g.gain.setValueAtTime(0, t + 0.12);
+			o.connect(g).connect(a.destination);
+			o.start(t);
+			o.stop(t + 0.15);
+		};
+		const speak = (text: string, lang = 'en-GB', done?: () => void) => {
+			// Some browsers never fire onend (or have no voices): finish anyway.
+			let finished = false;
+			const finish = () => { if (!finished) { finished = true; done?.(); } };
+			later(1500 + text.length * 90, finish);
+			if (!sound || !('speechSynthesis' in window)) { status.textContent += ` “${text}”`; return; }
+			const u = new SpeechSynthesisUtterance(text);
+			const voices = speechSynthesis.getVoices();
+			u.voice = voices.find((v) => v.lang === lang) ?? voices.find((v) => v.lang.startsWith(lang.slice(0, 2))) ?? null;
+			u.lang = lang;
+			u.rate = 0.92;
+			u.onend = finish;
+			speechSynthesis.speak(u);
+		};
+		// A recording, through a telephone band (300–3400 Hz).
+		const playClip = (src: string, done: () => void) => {
+			const a = audio();
+			clip = new Audio(src);
+			clip.crossOrigin = 'anonymous';
+			if (a) {
+				const node = a.createMediaElementSource(clip);
+				const hp = a.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 300;
+				const lp = a.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3400;
+				node.connect(hp).connect(lp).connect(a.destination);
+			}
+			clip.onended = done;
+			clip.play().catch(done);
+		};
+		const stopAll = () => {
 			timers.forEach(clearTimeout);
 			timers = [];
+			clearTimeout(idle);
 			tone(false);
+			if ('speechSynthesis' in window) speechSynthesis.cancel();
+			clip?.pause();
+			clip = null;
+		};
+
+		const hangUp = (msg = 'The phone is on the hook.') => {
+			stopAll();
 			offHook = false;
 			busy = false;
-			ringing = false;
-			dialled = [];
+			inCall = false;
+			dialled = '';
 			plate.style.transition = 'none';
 			plate.style.transform = '';
 			root.classList.remove('is-off', 'is-ringing');
@@ -153,12 +229,31 @@ const steps = [
 			hook.textContent = 'Hang up';
 			hook.setAttribute('aria-pressed', 'true');
 			tone(true);
-			step('pickup');
-			status.textContent = 'Dial tone. Now dial any seven digits.';
-			later(900, () => { if (offHook && !dialled.length) step('dial'); });
+			step('dial');
+			status.textContent = 'Dial tone. Dial a number from the card.';
 		};
-		const ring = () => {
-			ringing = true;
+		const connect = (e: Entry) => {
+			inCall = true;
+			step('wait');
+			status.textContent = `Ringing ${e.label}…`;
+			tone(true);
+			later(1000, () => tone(false));
+			later(1900, () => {
+				status.textContent = `Connected: ${e.label}.`;
+				const end = () => { if (!inCall) return; inCall = false; step('hangup'); status.textContent = `${e.label}: the line goes quiet. Hang up, or dial again.`; dialled = ''; showNumber(); };
+				if (e.kind === 'clock') {
+					const d = new Date(Date.now() + 10000);
+					const sv = `Klockan är ${d.getHours()} och ${d.getMinutes()} och ${Math.floor(d.getSeconds() / 10) * 10} sekunder.`;
+					speak(sv, 'sv-SE', () => { beep(0.4); beep(1.4); beep(2.4); later(3000, end); });
+				} else if (e.audio) {
+					playClip(e.audio, end);
+				} else {
+					speak(e.say ?? '', e.lang, end);
+				}
+			});
+		};
+		const ringOut = () => {
+			inCall = true;
 			root.classList.add('is-ringing');
 			step('wait');
 			status.textContent = 'Ringing…';
@@ -167,50 +262,108 @@ const steps = [
 				later(600 + i * 6000 + 1000, () => tone(false));
 			}
 			later(15600, () => {
-				ringing = false;
+				inCall = false;
 				root.classList.remove('is-ringing');
 				step('hangup');
-				status.textContent = 'No answer this time. You might connect. You might not. Hang up whenever you like.';
+				status.textContent = 'No answer this time. You might connect. You might not. But the moment is yours.';
+				dialled = '';
+				showNumber();
 			});
 		};
-		const dial = (d: number, travel: number, pulses: number) => {
-			if (busy || ringing || dialled.length >= 7) return;
-			if (!offHook) pickUp();
-			tone(false);
-			step('dial');
-			busy = true;
-			const forward = still ? 0 : travel * 3.2;
-			const back = still ? 0 : Math.max(pulses * 100, travel * 5.5);
-			plate.style.transition = `transform ${forward}ms cubic-bezier(.3,.1,.3,1)`;
-			plate.style.transform = `rotate(${travel}deg)`;
-			later(forward + (still ? 0 : 120), () => {
-				plate.style.transition = `transform ${back}ms linear`;
-				plate.style.transform = 'rotate(0deg)';
-				clicks(pulses, Math.max(back, pulses * 60));
-				later(back, () => {
-					busy = false;
-					dialled.push(d);
-					showNumber();
-					if (dialled.length === 7) ring();
-					else status.textContent = `${7 - dialled.length} to go.`;
-				});
-			});
+		const checkNumber = () => {
+			clearTimeout(idle);
+			const hit = book.find((b) => b.no === dialled);
+			if (hit) { connect(hit); return; }
+			if (dialled.length >= 7) { ringOut(); return; }
+			idle = window.setTimeout(() => { if (!inCall && dialled) ringOut(); }, 5000);
 		};
 
+		// The plate runs back on its own, clicking once per unit, then the
+		// digit counts.
+		const release = (d: number, from: number, pulses: number) => {
+			busy = true;
+			const back = still ? 0 : Math.max(pulses * 100, from * 5.5);
+			plate.style.transition = `transform ${back}ms linear`;
+			plate.style.transform = 'rotate(0deg)';
+			clicks(pulses, Math.max(back, pulses * 60));
+			later(back, () => {
+				busy = false;
+				dialled += String(d);
+				showNumber();
+				status.textContent = dialled.length < 7 ? `Dialled ${dialled}.` : status.textContent;
+				checkNumber();
+			});
+		};
+		const springBack = (from: number) => {
+			plate.style.transition = `transform ${still ? 0 : from * 3}ms ease-out`;
+			plate.style.transform = 'rotate(0deg)';
+			status.textContent = 'Turn it all the way to the metal stop.';
+		};
+		const ready = () => {
+			if (busy || inCall) return false;
+			if (!offHook) pickUp();
+			tone(false);
+			clearTimeout(idle);
+			return true;
+		};
+		// Keyboard and assistive tech: the whole turn in one go.
+		const dialAll = (d: number, travel: number, pulses: number) => {
+			if (!ready()) return;
+			busy = true;
+			const forward = still ? 0 : travel * 3.2;
+			plate.style.transition = `transform ${forward}ms cubic-bezier(.3,.1,.3,1)`;
+			plate.style.transform = `rotate(${travel}deg)`;
+			later(forward + (still ? 0 : 120), () => release(d, travel, pulses));
+		};
+
+		// Dragging: the plate follows the finger, up to that hole's stop.
+		const angle = (e: PointerEvent) => {
+			const r = svg.getBoundingClientRect();
+			const dx = e.clientX - (r.left + r.width / 2);
+			const dy = e.clientY - (r.top + r.height / 2);
+			return (Math.atan2(dx, -dy) * 180) / Math.PI;
+		};
 		root.querySelectorAll<SVGCircleElement>('[data-digit]').forEach((h) => {
-			const go = () => dial(Number(h.dataset.digit), Number(h.dataset.travel), Number(h.dataset.pulses));
-			h.addEventListener('click', go);
-			h.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+			const d = Number(h.dataset.digit), travel = Number(h.dataset.travel), pulses = Number(h.dataset.pulses);
+			let rot = 0, last = 0, dragging = false;
+			h.addEventListener('pointerdown', (e) => {
+				if (!ready()) return;
+				dragging = true;
+				rot = 0;
+				last = angle(e);
+				h.setPointerCapture(e.pointerId);
+				plate.style.transition = 'none';
+				status.textContent = 'Keep turning, all the way to the stop.';
+			});
+			h.addEventListener('pointermove', (e) => {
+				if (!dragging) return;
+				const a = angle(e);
+				const delta = ((a - last + 540) % 360) - 180;
+				last = a;
+				rot = Math.min(travel, Math.max(0, rot + delta));
+				plate.style.transform = `rotate(${rot}deg)`;
+			});
+			const up = () => {
+				if (!dragging) return;
+				dragging = false;
+				if (rot >= travel - 6) release(d, travel, pulses);
+				else springBack(rot);
+			};
+			h.addEventListener('pointerup', up);
+			h.addEventListener('pointercancel', up);
+			h.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dialAll(d, travel, pulses); }
+			});
 		});
 		root.addEventListener('keydown', (e) => {
-			if (!/^[0-9]$/.test(e.key)) return;
+			if (!/^[0-9]$/.test(e.key) || (e.target as Element).closest?.('button')) return;
 			const h = root.querySelector<SVGCircleElement>(`[data-digit="${e.key}"]`);
-			if (h) dial(Number(e.key), Number(h.dataset.travel), Number(h.dataset.pulses));
+			if (h) dialAll(Number(e.key), Number(h.dataset.travel), Number(h.dataset.pulses));
 		});
 		hook.addEventListener('click', () => (offHook ? hangUp('You hung up.') : pickUp()));
 		soundBtn.addEventListener('click', () => {
 			sound = !sound;
-			if (!sound) tone(false);
+			if (!sound) { tone(false); if ('speechSynthesis' in window) speechSynthesis.cancel(); clip?.pause(); }
 			soundBtn.setAttribute('aria-pressed', String(sound));
 			soundBtn.textContent = sound ? 'Sound on' : 'Sound off';
 		});
@@ -221,13 +374,13 @@ const steps = [
 	.cp-poster {
 		display: grid;
 		gap: var(--space-5);
-		align-items: center;
+		align-items: start;
 		border: 3px solid var(--ink);
 		padding: var(--space-5);
 		background: var(--bg);
 	}
 	@media (min-width: 760px) {
-		.cp-poster { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-6); }
+		.cp-poster { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-6); }
 	}
 	.cp-name { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); line-height: 1; color: var(--ink); letter-spacing: -0.01em; }
 	.cp-sub { margin: var(--space-2) 0 0; font-family: var(--font-display); font-size: var(--fs-small); color: var(--ink); }
@@ -245,10 +398,9 @@ const steps = [
 	.cp-btn.cp-quiet { background: var(--bg); color: var(--ink); }
 	.cp-btn.cp-quiet:hover { color: var(--blue-ink); border-color: var(--blue-ink); background: var(--bg); }
 	.cp-status { margin: var(--space-3) 0 0; min-height: 3em; font-family: var(--font-body); font-style: italic; color: var(--ink); }
-	.cp-foot { margin: var(--space-3) 0 0; padding-top: var(--space-2); border-top: 1px solid var(--ink); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-small); color: var(--ink); }
 
-	.cp-phone { display: grid; place-items: center; }
-	.cp-dial { width: 100%; max-width: 22rem; height: auto; display: block; overflow: visible; }
+	.cp-phone { display: grid; gap: var(--space-4); justify-items: center; }
+	.cp-dial { width: 100%; max-width: 20rem; height: auto; display: block; overflow: visible; touch-action: none; user-select: none; }
 	.cp-card { fill: var(--bg); stroke: var(--ink); stroke-width: 1.5; }
 	.cp-num { font-family: var(--font-display); font-size: 13px; text-anchor: middle; fill: var(--ink); }
 	.cp-plate { transform-origin: 100px 100px; }
@@ -256,9 +408,20 @@ const steps = [
 	.cp-centre { fill: var(--bg); stroke: var(--ink); stroke-width: 1; }
 	.cp-centre-num { font-family: var(--font-display); font-size: 8.5px; text-anchor: middle; fill: var(--ink); letter-spacing: .5px; }
 	.cp-stop { stroke: var(--ink); stroke-width: 5; }
-	.cp-hole { fill: transparent; cursor: pointer; outline: none; }
+	.cp-hole { fill: transparent; cursor: grab; outline: none; }
+	.cp-hole:active { cursor: grabbing; }
 	.cp-hole:hover, .cp-hole:focus-visible { stroke: var(--blue-ink); stroke-width: 2.5; }
 	.cp.is-ringing .cp-dial { animation: cp-shake 1s steps(8) 1; }
+
+	/* The phone book: a Rolodex card. */
+	.cp-card-book { position: relative; width: 100%; max-width: 22rem; background: var(--bg); border: 1px solid var(--ink); padding: var(--space-4) var(--space-4) var(--space-3); transform: rotate(-1deg); }
+	.cp-card-holes { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); display: flex; gap: 3.5rem; }
+	.cp-card-holes i { width: 14px; height: 18px; border: 1px solid var(--ink); border-radius: 7px; background: var(--bg); }
+	.cp-card-head { margin: 0 0 var(--space-2); font-family: var(--font-display); font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink); }
+	.cp-card-book ul { list-style: none; margin: 0; padding: 0; display: grid; }
+	.cp-card-book li { display: grid; grid-template-columns: 4.2rem minmax(0, 1fr); gap: var(--space-2); padding: 6px 0; border-top: 1px dashed var(--hairline); font-family: var(--font-display); font-size: var(--fs-small); color: var(--ink); }
+	.cp-card-book b { font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+	.cp-card-book small { display: block; font-size: .72rem; color: var(--muted); }
 	@keyframes cp-shake { 0%, 100% { transform: none; } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
 	@media (prefers-reduced-motion: reduce) { .cp.is-ringing .cp-dial { animation: none; } .cp-steps li { transition: none; } }
 </style>
