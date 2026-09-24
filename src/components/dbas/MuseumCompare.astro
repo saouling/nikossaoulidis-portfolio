@@ -1,0 +1,77 @@
+---
+// DBAS: the two installations side by side as a spec ledger, replacing the
+// thesis's annotated photos. Museum colour-coding: red for Röhsska, blue
+// for Mölndal (DESIGN.md). Facts from the thesis's museum-phase chapter.
+const rows = [
+	{ k: 'Museum', r: 'Design museum', m: 'City museum of everyday life' },
+	{ k: 'Room', r: 'Innovation, in Design Stories, near a case of Ericofons', m: 'Open Storage, where visitors handle 10,000+ objects' },
+	{ k: 'Phone', r: 'Ericofon: a design object', m: 'Ericsson Dialog: the ordinary home phone' },
+	{ k: 'Setting', r: 'A small table between two windows', m: 'A side table and a vintage armchair, the electronics in a box from the collection' },
+	{ k: 'Signage', r: 'Four bilingual posters on the museum’s templates', m: 'No big signage: discovery over direction' },
+	{ k: 'Feedback', r: 'A post-it surface', m: 'A guestbook' },
+];
+---
+
+<figure class="mcomp wide">
+	<table>
+		<caption class="visually-hidden">The two installations compared</caption>
+		<thead>
+			<tr>
+				<td></td>
+				<th scope="col" class="mcomp-r">Röhsska</th>
+				<th scope="col" class="mcomp-m">Mölndals stadsmuseum</th>
+			</tr>
+		</thead>
+		<tbody>
+			{rows.map((row) => (
+				<tr>
+					<th scope="row">{row.k}</th>
+					<td>{row.r}</td>
+					<td>{row.m}</td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+</figure>
+
+<style>
+	.mcomp { margin-block: var(--space-5); }
+	.mcomp table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+	.mcomp thead th {
+		text-align: left;
+		font-family: var(--font-display);
+		font-weight: 600;
+		color: var(--ink);
+		padding: 0 var(--space-3) var(--space-2) 0;
+		border-bottom: 6px solid var(--red);
+	}
+	.mcomp thead th.mcomp-m { border-bottom-color: var(--blue); }
+	.mcomp thead td { width: 7rem; border-bottom: 1px solid var(--ink); }
+	.mcomp tbody th {
+		text-align: left;
+		vertical-align: top;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: var(--fs-small);
+		text-transform: uppercase;
+		letter-spacing: .06em;
+		color: var(--muted);
+		padding: var(--space-3) var(--space-2) var(--space-3) 0;
+		border-bottom: 1px solid var(--hairline);
+	}
+	.mcomp tbody td {
+		vertical-align: top;
+		padding: var(--space-3) var(--space-3) var(--space-3) 0;
+		border-bottom: 1px solid var(--hairline);
+		font-size: var(--fs-small);
+		line-height: 1.45;
+		color: var(--body);
+	}
+	@media (max-width: 599px) {
+		.mcomp thead td { width: 0; padding: 0; }
+		.mcomp tbody tr { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--space-3); border-bottom: 1px solid var(--hairline); }
+		.mcomp tbody th { grid-column: 1 / -1; border: 0; padding-bottom: 0; }
+		.mcomp tbody td { border: 0; padding-top: var(--space-1); }
+		.mcomp thead tr { display: grid; grid-template-columns: 0 1fr 1fr; column-gap: var(--space-3); }
+	}
+</style>

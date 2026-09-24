@@ -1,0 +1,103 @@
+---
+// DBAS: the instruction leaflet's three states, cropped clean from the
+// thesis figure, with the labels and the arrows drawn in code instead of
+// baked into the image. The notes list what the students questioned and
+// what changed, read directly off the annotated and final sheets.
+const sheets = [
+	{
+		src: 'leaflet-v02',
+		label: 'v0.2',
+		title: 'My draft',
+		notes: ['Four steps to make a call, one to answer'],
+		alt: 'Version 0.2 of the instruction leaflet: how to make a call in four numbered steps, and how to answer one, with three small illustrations.',
+	},
+	{
+		src: 'leaflet-v02-annotated',
+		label: 'v0.2',
+		title: 'Annotated by IxD students',
+		notes: ['“Handset?”: what is this word?', '“Can you make it shorter?”', '“Wait for it to…?”'],
+		alt: 'The same leaflet covered in handwritten student notes: questions about the word handset, requests to shorten, and a missing instruction to wait.',
+	},
+	{
+		src: 'leaflet-v10',
+		label: 'v1.0',
+		title: 'Revised',
+		notes: ['“Handset” became “phone”', '“And wait” added to dialling', 'Hanging up spelled out as a step'],
+		alt: 'Version 1.0 of the leaflet: pick up the phone, dial the number and wait, talk with a stranger, hang up the phone to end the call.',
+	},
+];
+---
+
+<figure class="leaflets wide">
+	<ol>
+		{sheets.map((s, i) => (
+			<li>
+				<picture>
+					<source srcset={`/images/dbas/${s.src}.webp`} type="image/webp" />
+					<img src={`/images/dbas/${s.src}.jpg`} width="546" height="758" alt={s.alt} loading="lazy" decoding="async" />
+				</picture>
+				<span class="leaflets-label"><span class="leaflets-v">{s.label}</span>{s.title}</span>
+				<ul>{s.notes.map((n) => <li>{n}</li>)}</ul>
+				{i < sheets.length - 1 && (
+					<svg class="leaflets-arrow" viewBox="0 0 40 16" aria-hidden="true">
+						<path d="M0 8h36M29 2l7 6-7 6" fill="none" stroke="currentColor" stroke-width="2" />
+					</svg>
+				)}
+			</li>
+		))}
+	</ol>
+	<figcaption>The instruction leaflet, before and after the pre-pilot interviews.<span class="leaflets-swipe"> Swipe for the next version.</span></figcaption>
+</figure>
+
+<style>
+	.leaflets { margin-block: var(--space-6); }
+	.leaflets > ol {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: var(--space-5);
+	}
+	/* Phones: a swipeable row, so the three versions still read side by side. */
+	@media (max-width: 699px) {
+		.leaflets > ol {
+			grid-auto-flow: column;
+			grid-auto-columns: 72%;
+			gap: var(--space-4);
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			padding-bottom: var(--space-2);
+		}
+		.leaflets > ol > li { scroll-snap-align: start; }
+	}
+	@media (min-width: 700px) {
+		.leaflets > ol { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); }
+	}
+	.leaflets > ol > li { position: relative; }
+	.leaflets img { border-radius: 0; display: block; width: 100%; height: auto; border: 1px solid var(--ink); }
+	.leaflets > ol > li:last-child img { outline: 3px solid var(--blue); outline-offset: -1px; }
+	.leaflets-label {
+		display: flex;
+		gap: var(--space-2);
+		align-items: baseline;
+		margin-top: var(--space-3);
+		font-family: var(--font-display);
+		color: var(--ink);
+	}
+	.leaflets-v { font-variant-numeric: tabular-nums; font-weight: 600; }
+	.leaflets ul { margin: var(--space-2) 0 0; padding: 0; list-style: none; font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+	.leaflets ul li + li { margin-top: 2px; }
+	.leaflets-arrow { display: none; }
+	@media (min-width: 700px) {
+		.leaflets-arrow {
+			display: block;
+			position: absolute;
+			width: 2rem;
+			top: 40%;
+			right: calc(-1 * var(--space-6) / 2 - 1rem);
+			color: var(--ink);
+		}
+	}
+	@media (min-width: 700px) { .leaflets-swipe { display: none; } }
+	.leaflets figcaption { margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); }
+</style>

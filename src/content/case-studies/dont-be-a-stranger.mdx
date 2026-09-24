@@ -43,6 +43,12 @@ import PullQuote from '../../components/PullQuote.astro';
 import PostitBoard from '../../components/PostitBoard.astro';
 import FactGrid from '../../components/FactGrid.astro';
 import Ratings from '../../components/Ratings.astro';
+import DbasProcess from '../../components/dbas/DbasProcess.astro';
+import PilotRounds from '../../components/dbas/PilotRounds.astro';
+import ThemesLedger from '../../components/dbas/ThemesLedger.astro';
+import LeafletEvolution from '../../components/dbas/LeafletEvolution.astro';
+import LensGrid from '../../components/dbas/LensGrid.astro';
+import MuseumCompare from '../../components/dbas/MuseumCompare.astro';
 
 <h2 id="problem">The problem</h2>
 
@@ -96,10 +102,10 @@ One concept, two museums, and two installations that do not look much alike.
 Röhsska is a design museum. The piece went into the Innovation room of Design Stories, a few metres from a case holding Ericofons in every colour, so the phone visitors could pick up was the same model as the ones they could not. I had proposed the Belonging room, and the curators moved it. They were right. The feedback surface there was a wall of post-its, because the room was already conceptual and already a bit loud.
 
       <Figure
-        src="/images/dbas/26-rohsska-annotated.jpg"
-        width={1357}
-        height={2000}
-        alt="The Röhsska installation, annotated: pencils and post-its, the instructions card, the Ericofon, and the post-its area, on a small table between two tall windows in the Innovation room."
+        src="/images/dbas/clean-rohsska-room.jpg"
+        width={1600}
+        height={1226}
+        alt="The Röhsska installation in the Innovation room: a small white table with the Ericofon, post-its and two stools, between two tall windows."
       />
     </div>
     <div class="museum-block blue">
@@ -107,62 +113,45 @@ Röhsska is a design museum. The piece went into the Innovation room of Design S
 Mölndals stadsmuseum is a city museum about everyday life, where the Open Storage exhibition already lets people handle more than 10,000 objects with no glass at all. The Kobra is a design object and that is a room about ordinary things, so I used the Ericsson Dialog instead, the plain desk phone that sat in normal Swedish homes, with the electronics hidden inside a vintage box from the museum's own collection. Feedback there was a guestbook, because a wall of yellow notes would have broken the quiet of a room pretending to be a living room.
 
       <Figure
-        src="/images/dbas/27-molndal-annotated.jpg"
-        width={1357}
-        height={2000}
-        alt="The Mölndal installation, annotated: the posters, the rolodex of prompt cards, the Ericsson Dialog and the guestbook, on a side table beside a red vintage armchair."
+        src="/images/dbas/clean-molndal-room.jpg"
+        width={1600}
+        height={1200}
+        alt="The Mölndal installation in Open Storage: the Ericsson Dialog and a Rolodex on a side table beside a red vintage armchair and a lamp, with bilingual posters on the wall."
       />
     </div>
   </div>
 </div>
 
+<MuseumCompare />
+
 <h3>Lab, field, showroom</h3>
 
 Research through design, because the question cannot be answered on paper. You build the thing, put it in front of people, and watch what they do with it.
 
-<div class="breakout">
-  <Figure
-    variant="diagram"
-    src="/images/dbas/50-lab-field-showroom.jpg"
-    width={2000}
-    height={910}
-    alt="Diagram: Lab work and campus pilot testing at Chalmers University of Technology, leading to the Field of the two museum exhibitions, with the Don't Be a Stranger installation itself as the Showroom."
-    caption="Three phases: Lab and pilots at Chalmers, then the two museum exhibitions."
-  />
-</div>
+<DbasProcess />
 
 Lab first, in the IxD studio at Chalmers. Sweden has no working landline infrastructure any more, so I paired the original dial mechanism with a Bluetooth adapter and a smartphone with a SIM card in it. The phone places an ordinary mobile call while the person holding it is still rotating a dial designed in the 1950s. I tested nine second-hand phones, most had something broken, and I did not know how to repair any of it when I started.
 
+<div class="figure-grid cols-2 natural">
+  <Figure
+    src="/images/dbas/clean-thrift-shop.jpg"
+    width={936}
+    height={1400}
+    alt="A second-hand shop floor in Gothenburg, shelves of household objects, where the search for working rotary phones started."
+    caption="Hunting for phones second-hand."
+  />
+  <Figure
+    src="/images/dbas/clean-repairing.jpg"
+    width={936}
+    height={1400}
+    alt="A light-blue Ericofon opened up on a wooden table, its base, wiring and handset laid out for repair."
+    caption="Opening one up to find what was broken."
+  />
+</div>
+
 Field next, on campus. Three rounds in the student café and two different buildings, watching who picked up and who walked past: fifteen feedback forms, four interviews, and six earlier conversations with interaction design students who annotated my instruction sheet by hand. The setup changed each round.
 
-<div class="breakout">
-  <div class="figure-grid cols-3 natural">
-    <Figure
-      variant="plate"
-      src="/images/dbas/31-pilot-iteration-1.jpg"
-      width={2000}
-      height={898}
-      alt="Iteration one: a red rotary handset on a bench at House Patricia, and a beige rotary phone on a felt-covered table at Kokboken, each with a green instruction sign."
-      caption="Round 1: indoors, at House Patricia and Kokboken."
-    />
-    <Figure
-      variant="plate"
-      src="/images/dbas/32-pilot-iteration-2.jpg"
-      width={2000}
-      height={1230}
-      alt="Iteration two, moved outdoors: the same two phones on felt-covered stands at House Patricia and Kokboken, with a larger 'pick up the phone' poster."
-      caption="Round 2: outdoors, with bigger signage."
-    />
-    <Figure
-      variant="plate"
-      src="/images/dbas/33-pilot-iteration-3.jpg"
-      width={2000}
-      height={1386}
-      alt="Iteration three: the phones set up at House Jupiter and Kokboken, with a question-card holder and a guestbook added alongside the instructions."
-      caption="Round 3: a question bank and guestbook added."
-    />
-  </div>
-</div>
+<PilotRounds />
 
 <Ratings
   max={5}
@@ -174,6 +163,10 @@ Field next, on campus. Three rounds in the student café and two different build
   ]}
   caption="Pilot feedback forms, 15 people, mean on a 5-point scale. A small sample, so a direction rather than proof. Answers varied most on the instructions and the prompts, so those were simplified and rephrased before the museums."
 />
+
+I coded the interviews and forms with reflexive thematic analysis. Five themes came out of it, and each one changed something before the museums.
+
+<ThemesLedger />
 
 Showroom last, which was the two museums. Finding the second museum took five months of unanswered emails, LinkedIn messages and tailored proposals to museums and companies across Sweden and Denmark. What actually worked was Jessica at Röhsska calling someone she knew at Mölndal.
 
@@ -202,13 +195,24 @@ Showroom last, which was the two museums. Finding the second museum took five mo
 
 **Feedback as reflection.** My structured form, in Röhsska's words, felt like it was trying to steer the replies. It became post-its.
 
-<div class="breakout">
+<div class="figure-grid cols-2 natural wide">
   <Figure
-    variant="diagram"
-    src="/images/dbas/28-postit-vs-guestbook.jpg"
-    width={2000}
-    height={1003}
-    alt="Diagram: reflection feedback mechanisms compared, the post-it surface at Röhsska and the notebook at Mölndals stadsmuseum, both asking what this made you think or feel."
+    variant="plate"
+    accent="red"
+    src="/images/dbas/clean-postits.jpg"
+    width={1600}
+    height={1200}
+    alt="Handwritten post-its in Swedish and English stuck across the wooden table at Röhsska, beside the pencil holder and the question card."
+    caption="Röhsska: a surface that fills up."
+  />
+  <Figure
+    variant="plate"
+    accent="blue"
+    src="/images/dbas/clean-guestbook.jpg"
+    width={1600}
+    height={1200}
+    alt="A hand holding the Mölndal guestbook, its cover asking in English and Swedish: what did this make you think or feel?"
+    caption="Mölndal: a guestbook, quiet like the room."
   />
 </div>
 
@@ -293,54 +297,9 @@ And it has to run without me. Two institutions operate it daily, so I wrote setu
 
 I designed the failure state before the success state. *You might connect. You might not.* is empty-state copy, and it exists because a curator told me my first version would make visitors feel they had failed at something. I ran three rounds of testing with twenty-five people and I can tell you which design change came from which finding. The instruction leaflet went through hand annotation by students and three revisions before it worked.
 
-<div class="breakout">
-  <Figure
-    variant="diagram"
-    src="/images/dbas/34-cocreating-with-students.jpg"
-    width={2000}
-    height={1238}
-    alt="Diagram: co-creating with IxD students, three versions of the instruction leaflet side by side, a first draft, a version hand-annotated with questions and corrections, and the revised final."
-    caption="Version 0.2, annotated by students, then version 1.0."
-  />
-</div>
+<LeafletEvolution />
 
-The thesis ended in four lenses, the considerations I would hand to anyone building something similar.
-
-<details class="lens">
-  <summary>What does the voice carry that a text never could?</summary>
-  <div class="lens-body">
-
-**Voice-based communication and emotional presence.** Take the screens out and let the voice do the work. Place the phone so a person can speak without performing, semi-private but still visible. Do not promise a connection you cannot guarantee.
-
-  </div>
-</details>
-
-<details class="lens">
-  <summary>How does it feel to hold a phone that doesn't fit in your pocket?</summary>
-  <div class="lens-body">
-
-**Tactility, materiality and embodied interaction.** Keep the weight, the resistance of the dial, the mechanical ring. Do not improve them. Make the supporting material analog as well, so the printed instructions and the card you turn in your hand belong to the same world as the phone.
-
-  </div>
-</details>
-
-<details class="lens">
-  <summary>Would you pick up a ringing phone in a public space?</summary>
-  <div class="lens-body">
-
-**Invitation and participation in public space.** People need permission, and the room and the signage are how you give it. Seed the participation too: leave a few post-its up before opening, because visitors write far more readily onto a surface that already has writing on it.
-
-  </div>
-</details>
-
-<details class="lens">
-  <summary>What happens when something you know suddenly behaves a little bit strange?</summary>
-  <div class="lens-body">
-
-**Defamiliarisation as reflective strategy.** Put the object inside the exhibition's own story rather than next to it. Avoid screens and apps completely. Write prompts that open a conversation rather than test knowledge.
-
-  </div>
-</details>
+<LensGrid />
 
 <PullQuote>In a shared space you design the situation, not just the object.</PullQuote>
 

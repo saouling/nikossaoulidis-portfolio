@@ -196,8 +196,9 @@ There were five themes each at several levels:
   smartphone with a SIM card. Nine second-hand phones were tested.
 - **Pre-pilot:** 6 interviews with IxD students, who hand-annotated the instruction
   sheet.
-- **Pilots:** three rounds on the Lindholmen campus (House Patricia and Kokboken, then
-  outdoors, then House Jupiter and Kokboken). 25 people in total. The pilot feedback
+- **Pilots:** three rounds on the Lindholmen campus (House Patricia and Kokboken; then
+  revised materials in the same spots; then House Jupiter and Kokboken. Round 2 was
+  NOT outdoors: the thesis and photos show the same indoor spots). 25 people in total. The pilot feedback
   form, n = 15, used four 5-point Likert items:
   - ease of use: 4.0
   - medium distinctiveness: 4.4 (the highest)
@@ -485,6 +486,9 @@ The source folder has no deck for it, so ask Nikos if more material exists.
     clearer instructions
   - v3: Ericofon moved to Kokboken, Dialog to the Jupiter building corridor (more
     traffic)
+  - **Conflict:** the round-3 photos (Figma frames) show the Ericofon at Jupiter and the
+    Dialog at Kokboken, the opposite of the thesis prose. The site names no phone per
+    spot for round 3; ask Nikos if it matters.
   - laser-cut wooden casings, colour-matched, hide the electronics
   - placement criteria: close to the studio, observable from a hidden spot, high
     traffic, noise, light
@@ -622,3 +626,8 @@ Regenerate slides with `pdftoppm -scale-to-x 1920 -png`, embedded images with
 | `readymag-live-site/ericsson/` | 4 originals from the live Ericsson page |
 
 The site's own images live in `public/images/<project>/` (web-sized jpg + webp).
+
+### Web-ready DBAS images parked outside the repo
+Caption-free web crops not used on the site yet (Dialog and Ericofon product shots, the
+phone booth, the Rolodex, the two museum table close-ups):
+`~/Documents/portfolio-content-assets/_extracted/dbas/clean-web-unused/`.

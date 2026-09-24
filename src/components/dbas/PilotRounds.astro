@@ -1,0 +1,80 @@
+---
+// DBAS: the three campus pilot rounds as a ledger, one row per round, with
+// the caption-free photos from the thesis Figma file instead of the
+// thesis's captioned composites. What changed comes from thesis 5.6.3.
+const rounds = [
+	{
+		where: 'Kokboken café and the Patricia corridor',
+		changed: 'The first setup: instructions, a prompt booklet and a feedback form, as first designed.',
+		photos: [
+			{ src: 'clean-pilot1-kokboken', w: 1400, h: 1050, alt: 'A beige Ericsson Dialog on a green felt-covered café table, with the instruction sheet, a feedback form and a drop box.' },
+			{ src: 'clean-pilot1-patricia', w: 1400, h: 1050, alt: 'A red Ericofon on a blue-draped stand at the end of a wooden bench in a long, quiet corridor.' },
+		],
+	},
+	{
+		where: 'Same two spots, after day one',
+		changed: 'A poster with the project logo to draw people in, a clearer prompt booklet and instructions, a shorter form.',
+		photos: [
+			{ src: 'clean-pilot2-kokboken', w: 1050, h: 1400, alt: 'The Dialog on green felt with a large green poster hanging from the table: Pick up the phone and talk with a stranger.' },
+			{ src: 'clean-pilot2-patricia', w: 1050, h: 1400, alt: 'The Ericofon on its blue stand beneath a window, with green posters taped to the glass above it.' },
+		],
+	},
+	{
+		where: 'Patricia swapped for Jupiter, a busier corridor',
+		changed: 'Small fixes, printed in the studio next door and put out the same day.',
+		photos: [
+			{ src: 'clean-pilot3-jupiter', w: 1050, h: 1400, alt: 'The Ericofon on blue felt on a high table against a padded wall, with a poster and prompt booklets beside it.' },
+			{ src: 'clean-pilot3-kokboken', w: 1050, h: 1400, alt: 'The Dialog on green felt by a wooden bench, with yellow posters and a question-mark sign.' },
+		],
+	},
+];
+---
+
+<figure class="pilots wide">
+	<ol>
+		{rounds.map((r, i) => (
+			<li>
+				<div class="pilots-text">
+					<span class="pilots-round">Round {i + 1}</span>
+					<span class="pilots-where">{r.where}</span>
+					<p>{r.changed}</p>
+				</div>
+				{r.photos.map((p) => (
+					<picture>
+						<source srcset={`/images/dbas/${p.src}.webp`} type="image/webp" />
+						<img src={`/images/dbas/${p.src}.jpg`} width={p.w} height={p.h} alt={p.alt} loading="lazy" decoding="async" />
+					</picture>
+				))}
+			</li>
+		))}
+	</ol>
+	<figcaption>Three rounds on the Lindholmen campus. I watched from a hidden spot and changed the material between rounds.</figcaption>
+</figure>
+
+<style>
+	.pilots { margin-block: var(--space-6); }
+	.pilots ol { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--ink); }
+	.pilots li {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-2);
+		padding: var(--space-4) 0;
+		border-bottom: 1px solid var(--hairline);
+	}
+	.pilots-text { grid-column: 1 / -1; }
+	@media (min-width: 800px) {
+		.pilots li { grid-template-columns: minmax(12rem, 1.1fr) 1fr 1fr; gap: var(--space-4); }
+		.pilots-text { grid-column: auto; }
+	}
+	.pilots-round {
+		display: block;
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: var(--fs-h3);
+		color: var(--ink);
+	}
+	.pilots-where { display: block; font-family: var(--font-display); font-size: var(--fs-small); color: var(--blue-ink); margin-top: 2px; }
+	.pilots-text p { margin: var(--space-2) 0 0; font-size: var(--fs-small); line-height: 1.5; color: var(--body); }
+	.pilots img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+	.pilots figcaption { margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); }
+</style>

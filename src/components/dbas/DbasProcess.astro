@@ -1,0 +1,120 @@
+---
+// DBAS: the research-through-design process as a three-stage ledger (Lab,
+// Field, Showroom, the Constructive Design Research framing the thesis
+// uses), with the real numbers from the thesis, and the outreach timeline
+// underneath. Replaces the thesis's box diagram. Blue is DBAS's form colour.
+const stages = [
+	{
+		name: 'Lab',
+		place: 'IxD studio, Chalmers',
+		did: ['Rotary dial + Bluetooth + smartphone with a SIM, since Sweden has no landlines', 'Nine second-hand phones tested'],
+		evidence: '6 interviews with IxD students, who annotated the instructions by hand',
+	},
+	{
+		name: 'Field',
+		place: 'Lindholmen campus',
+		did: ['Three pilot rounds in a café and two corridors', 'Poster, prompts, form and instructions revised between rounds'],
+		evidence: '15 feedback forms, 4 interviews, hidden observation',
+	},
+	{
+		name: 'Showroom',
+		place: 'Röhsska and Mölndals stadsmuseum',
+		did: ['Co-designed with curators, a graphic designer and pedagogues', 'Two installations, one per museum'],
+		evidence: 'Open since May 2025, no end date',
+	},
+];
+const timeline = [
+	{ when: 'Nov 2024', what: 'First museum approached. Röhsska says yes' },
+	{ when: 'Nov 2024 – Apr 2025', what: 'Looking for a second museum: emails, proposals, LinkedIn. Mostly no reply', quiet: true },
+	{ when: 'Mid-Apr 2025', what: 'Mölndal agrees, through the Röhsska curator’s contacts' },
+	{ when: 'May 2025', what: 'Opens in both museums' },
+];
+---
+
+<figure class="dproc wide">
+	<ol class="dproc-stages">
+		{stages.map((s, i) => (
+			<li>
+				<span class="dproc-no">{String(i + 1).padStart(2, '0')}</span>
+				<span class="dproc-name">{s.name}</span>
+				<span class="dproc-place">{s.place}</span>
+				<ul class="dproc-did">{s.did.map((d) => <li>{d}</li>)}</ul>
+				<span class="dproc-evidence">{s.evidence}</span>
+			</li>
+		))}
+	</ol>
+	<ol class="dproc-time" aria-label="Finding the museums">
+		{timeline.map((t) => (
+			<li class:list={[t.quiet && 'quiet']}>
+				<span class="dproc-when">{t.when}</span>
+				<span class="dproc-what">{t.what}</span>
+			</li>
+		))}
+	</ol>
+	<figcaption>Research through design in three stages, each adding realism and stakes. Below: the six months it took to find two museums.</figcaption>
+</figure>
+
+<style>
+	.dproc { margin-block: var(--space-6); }
+	.dproc-stages { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; background: var(--ink); border: 3px solid var(--ink); }
+	@media (min-width: 800px) {
+		.dproc-stages { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	}
+	.dproc-stages > li { background: var(--bg); padding: var(--space-4); display: flex; flex-direction: column; gap: 4px; }
+	.dproc-stages > li:last-child .dproc-no::after { content: ""; display: inline-block; width: .6em; height: .6em; margin-left: .5em; border-radius: 50%; background: var(--blue); }
+	.dproc-no { font-family: var(--font-display); font-variant-numeric: tabular-nums; color: var(--muted); }
+	.dproc-name { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2); line-height: 1; color: var(--ink); text-transform: uppercase; letter-spacing: -0.01em; }
+	.dproc-place { font-family: var(--font-display); font-size: var(--fs-small); color: var(--blue-ink); margin-bottom: var(--space-2); }
+	.dproc-did { list-style: disc; margin: 0; padding-left: 1.1em; font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+	.dproc-did li + li { margin-top: 4px; }
+	.dproc-evidence {
+		margin-top: auto;
+		padding-top: var(--space-3);
+		border-top: 1px solid var(--hairline);
+		font-family: var(--font-display);
+		font-size: var(--fs-small);
+		color: var(--ink);
+	}
+
+	.dproc-time {
+		list-style: none;
+		margin: var(--space-4) 0 0;
+		padding: 0;
+		display: grid;
+		gap: var(--space-2);
+		position: relative;
+	}
+	@media (min-width: 800px) {
+		.dproc-time { grid-template-columns: 1fr 2fr 1fr 1fr; gap: var(--space-3); }
+		.dproc-time::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 5px;
+			height: 2px;
+			background: var(--ink);
+		}
+	}
+	.dproc-time li { position: relative; padding-top: var(--space-4); }
+	.dproc-time li::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background: var(--blue);
+	}
+	.dproc-time li.quiet::before { background: var(--bg); border: 2px solid var(--ink); }
+	.dproc-time li.quiet .dproc-what { color: var(--muted); font-style: italic; }
+	@media (max-width: 799px) {
+		.dproc-time { border-left: 2px solid var(--ink); padding-left: var(--space-3); }
+		.dproc-time li { padding-top: 0; }
+		.dproc-time li::before { left: calc(-1 * var(--space-3) - 7px); top: 4px; }
+	}
+	.dproc-when { display: block; font-family: var(--font-display); font-variant-numeric: tabular-nums; font-size: var(--fs-small); color: var(--ink); }
+	.dproc-what { display: block; font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+	.dproc figcaption { margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); }
+</style>

@@ -1,0 +1,134 @@
+---
+// DBAS: the five cross-phase themes from the reflexive thematic analysis
+// (defence deck, RTA synthesis), each with the participant line behind it
+// and the museum-phase decision it led to. This is the page's evidence
+// that each change came from a finding. Quotes and implications are from
+// reference/PROJECT-REFERENCE.md; the decisions are the ones the thesis
+// records for Röhsska and Mölndal.
+const themes = [
+	{
+		name: 'Emotional presence through analog voice',
+		quote: 'Talking on this phone gives me a different vibe, it lets me be myself without putting too much effort.',
+		who: 'P4, pilot interview',
+		then: 'Voice only. No screen, no caller ID, and printed prompts that support the call rather than compete with it.',
+	},
+	{
+		name: 'Friction and vulnerability as invitations',
+		quote: 'The experience requires a little bit of vulnerability (not knowing what to expect, if someone will answer or not).',
+		who: 'P2, pilot interview',
+		then: 'Fix the bad sound, keep the slow dial. The long phone number stayed long on purpose.',
+	},
+	{
+		name: 'Defamiliarization and playfulness',
+		quote: 'A bit strange but fun; it’s nothing I thought I would do today.',
+		who: 'P1, feedback form',
+		then: 'Explain less. The structured form went; post-its and a guestbook asked one open question instead.',
+	},
+	{
+		name: 'Social norms and spatial hesitation',
+		quote: '[I] would triple check if it’s OK to pick up the phone.',
+		who: 'P6, pre-pilot interview',
+		then: 'Semi-sheltered but visible spots, signage that says the phone is for use, and a few post-its up before opening.',
+	},
+	{
+		name: 'Material memory and nostalgia',
+		quote: 'It feels the same as listening to vinyl; it’s more complex, takes more time, takes away the easiness, the experience becomes a thing of itself.',
+		who: 'P2, pre-pilot interview',
+		then: 'Original phones, a vintage box from Mölndal’s collection, and laminated cards on a Rolodex you turn by hand.',
+	},
+];
+const letters = 'ABCDE';
+---
+
+<figure class="themes wide">
+	<div class="themes-head" aria-hidden="true">
+		<span>Theme</span><span>What people said</span><span>So in the museums</span>
+	</div>
+	<ol>
+		{themes.map((t, i) => (
+			<li>
+				<div class="themes-name"><span class="themes-letter">{letters[i]}</span>{t.name}</div>
+				<blockquote>
+					<p>“{t.quote}”</p>
+					<cite>{t.who}</cite>
+				</blockquote>
+				<p class="themes-then"><span class="themes-then-label">So in the museums</span>{t.then}</p>
+			</li>
+		))}
+	</ol>
+	<figcaption>Five themes from a reflexive thematic analysis of the interviews and forms, and what each one changed.</figcaption>
+</figure>
+
+<style>
+	.themes { margin-block: var(--space-6); }
+	.themes ol { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--ink); }
+	.themes li {
+		display: grid;
+		gap: var(--space-2);
+		padding: var(--space-4) 0;
+		border-bottom: 1px solid var(--hairline);
+	}
+	.themes-head { display: none; }
+	@media (min-width: 800px) {
+		.themes-head, .themes li { grid-template-columns: 1fr 1.5fr 1.2fr; gap: var(--space-5); }
+		.themes-head {
+			display: grid;
+			padding-bottom: var(--space-2);
+			font-family: var(--font-display);
+			font-size: var(--fs-small);
+			text-transform: uppercase;
+			letter-spacing: .06em;
+			color: var(--muted);
+		}
+	}
+	.themes-name {
+		display: flex;
+		gap: var(--space-3);
+		align-items: baseline;
+		font-family: var(--font-display);
+		font-weight: 600;
+		color: var(--ink);
+		line-height: 1.25;
+	}
+	.themes-letter {
+		flex: none;
+		display: inline-grid;
+		place-items: center;
+		width: 1.75rem;
+		height: 1.75rem;
+		border-radius: 50%;
+		background: var(--blue);
+		color: var(--on-dark);
+		font-size: var(--fs-small);
+	}
+	.themes blockquote { margin: 0; }
+	.themes blockquote p {
+		margin: 0;
+		font-family: var(--font-body);
+		font-style: italic;
+		line-height: 1.45;
+		color: var(--ink);
+	}
+	.themes cite {
+		display: block;
+		margin-top: var(--space-1);
+		font-style: normal;
+		font-family: var(--font-display);
+		font-size: var(--fs-small);
+		color: var(--muted);
+	}
+	.themes-then { margin: 0; font-size: var(--fs-small); line-height: 1.5; color: var(--body); }
+	.themes-then-label {
+		display: block;
+		margin-bottom: 2px;
+		font-family: var(--font-display);
+		font-size: var(--fs-small);
+		text-transform: uppercase;
+		letter-spacing: .06em;
+		color: var(--blue-ink);
+	}
+	@media (min-width: 800px) {
+		.themes-then-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+	}
+	.themes figcaption { margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); }
+</style>

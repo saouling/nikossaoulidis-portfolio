@@ -1,0 +1,85 @@
+---
+// DBAS: the thesis's four lenses (results 6.2) as a 2×2, after the defence
+// deck's own four-quadrant slide. Each lens: the question it asks, its
+// name, and the considerations the thesis hands on. Considerations, not
+// guidelines: the thesis's own word.
+const lenses = [
+	{
+		q: 'What does the voice carry that a text never could?',
+		name: 'Voice and emotional presence',
+		do: ['No screens, lights or caller info', 'Semi-private: speak towards a wall, still in view', 'Don’t promise a connection you can’t guarantee'],
+	},
+	{
+		q: 'How does it feel to hold a phone that doesn’t fit in your pocket?',
+		name: 'Tactility and materiality',
+		do: ['Keep the weight, the dial’s resistance, the ring', 'Make the supporting material analog too'],
+	},
+	{
+		q: 'Would you pick up a ringing phone in a public space?',
+		name: 'Invitation in public space',
+		do: ['The room and the signage give permission', 'Seed a few post-its before opening'],
+	},
+	{
+		q: 'What happens when something you know suddenly behaves a little bit strange?',
+		name: 'Defamiliarisation',
+		do: ['Put the object inside the exhibition’s story', 'Prompts that open a conversation, not test knowledge'],
+	},
+];
+---
+
+<figure class="lenses wide">
+	<ol>
+		{lenses.map((l, i) => (
+			<li>
+				<span class="lenses-no">{String(i + 1).padStart(2, '0')}</span>
+				<p class="lenses-q">{l.q}</p>
+				<span class="lenses-name">{l.name}</span>
+				<ul>{l.do.map((d) => <li>{d}</li>)}</ul>
+			</li>
+		))}
+	</ol>
+	<figcaption>The thesis ends in considerations, not rules: four lenses for anyone building something similar.</figcaption>
+</figure>
+
+<style>
+	.lenses { margin-block: var(--space-6); }
+	.lenses > ol {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 3px;
+		background: var(--ink);
+		border: 3px solid var(--ink);
+	}
+	@media (min-width: 700px) {
+		.lenses > ol { grid-template-columns: 1fr 1fr; }
+	}
+	.lenses > ol > li {
+		background: var(--bg);
+		padding: var(--space-5) var(--space-4);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+	.lenses-no { font-family: var(--font-display); font-variant-numeric: tabular-nums; color: var(--blue-ink); }
+	.lenses-q {
+		margin: 0;
+		font-family: var(--font-body);
+		font-style: italic;
+		font-size: var(--fs-h3);
+		line-height: 1.3;
+		color: var(--ink);
+		text-wrap: balance;
+	}
+	.lenses-name {
+		padding-top: var(--space-3);
+		border-top: 1px solid var(--hairline);
+		font-family: var(--font-display);
+		font-weight: 600;
+		color: var(--ink);
+	}
+	.lenses ul { margin: 0; padding: 0; list-style: none; font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+	.lenses ul li + li { margin-top: 4px; }
+	.lenses figcaption { margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); }
+</style>
