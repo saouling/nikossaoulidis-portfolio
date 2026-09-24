@@ -38,7 +38,7 @@ const stopA = (STOP * Math.PI) / 180;
 const book = [
 	{ no: '90510', label: 'The speaking clock', note: 'Fröken Ur, Sweden’s time service', kind: 'clock' },
 	{ no: '1876', label: 'The first words on a telephone', note: 'Bell to his assistant, 10 March 1876', say: 'Mr. Watson, come here. I want to see you.', lang: 'en-US' },
-	{ no: '1969', label: 'A call to the Moon', note: 'The White House to Apollo 11, 20 July 1969', say: 'Neil and Buzz, I am talking to you by telephone from the Oval Room at the White House. And this certainly has to be the most historic telephone call ever made.', lang: 'en-US' },
+	{ no: '1969', label: 'A call to the Moon', note: 'The White House to Apollo 11, 20 July 1969', say: 'Neil and Buzz, I am talking to you by telephone from the Oval Room at the White House. And this certainly has to be the most historic telephone call ever made.', lang: 'en-US', audio: '/audio/1969-call-to-the-moon.m4a' },
 	{ no: '1964', label: 'Marshall McLuhan', note: 'Understanding Media', say: 'The medium is the message.', lang: 'en-GB' },
 	{ no: '1987', label: 'Jean Baudrillard', note: 'The Ecstasy of Communication', say: 'We no longer partake of the drama of alienation, but are in the ecstasy of communication.', lang: 'en-GB' },
 ];
@@ -96,7 +96,7 @@ const steps = [
 			</div>
 		</div>
 	</div>
-	<figcaption>The instructions from the installation, working, with a phone book. It’s slow on purpose: the dial always runs back at its own pace. Voices are read by your browser; no call is placed.</figcaption>
+	<figcaption>The instructions from the installation, working, with a phone book. It’s slow on purpose: the dial always runs back at its own pace. Voices are read by your browser, except 1969: the real recording (NASA, public domain), from the hand-off in Mission Control. No call is placed.</figcaption>
 </figure>
 
 <script>
@@ -245,7 +245,7 @@ const steps = [
 					const d = new Date(Date.now() + 10000);
 					const sv = `Klockan är ${d.getHours()} och ${d.getMinutes()} och ${Math.floor(d.getSeconds() / 10) * 10} sekunder.`;
 					speak(sv, 'sv-SE', () => { beep(0.4); beep(1.4); beep(2.4); later(3000, end); });
-				} else if (e.audio) {
+				} else if (e.audio && sound) {
 					playClip(e.audio, end);
 				} else {
 					speak(e.say ?? '', e.lang, end);
