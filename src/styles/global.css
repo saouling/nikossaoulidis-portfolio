@@ -808,6 +808,16 @@ figcaption {
    DBAS pilot rounds), shown at their own ratios, top-aligned. */
 .figure-grid.natural { align-items: start; }
 .figure-grid.natural img { aspect-ratio: auto; object-fit: initial; }
+/* EWP: one desktop and one phone screen of the same record, sized so both
+   read at their true proportions side by side. */
+.figure-grid.ewp-screens { grid-template-columns: 1fr; align-items: end; }
+@media (max-width: 699px) {
+  .figure-grid.ewp-screens > :last-child { width: 60%; }
+}
+@media (min-width: 700px) {
+  .figure-grid.ewp-screens { grid-template-columns: 4.2fr 1fr; }
+}
+.figure-grid.ewp-screens img { aspect-ratio: auto; object-fit: initial; border: 1px solid var(--hairline); }
 
 /* ---------- Caption overlay (Session B11) ----------
    Numeral chip + a full-width ink strip along the photo's own bottom
@@ -988,6 +998,16 @@ figcaption {
    each image at its own natural ratio. Use when cropping would cut off
    a label the image exists to show. */
 .figure-grid.natural img { aspect-ratio: auto; object-fit: initial; }
+/* EWP: one desktop and one phone screen of the same record, sized so both
+   read at their true proportions side by side. */
+.figure-grid.ewp-screens { grid-template-columns: 1fr; align-items: end; }
+@media (max-width: 699px) {
+  .figure-grid.ewp-screens > :last-child { width: 60%; }
+}
+@media (min-width: 700px) {
+  .figure-grid.ewp-screens { grid-template-columns: 4.2fr 1fr; }
+}
+.figure-grid.ewp-screens img { aspect-ratio: auto; object-fit: initial; border: 1px solid var(--hairline); }
 
 /* ---------- Guideline disclosures (Session B11 round 5) ----------
    Each of the four lenses: the film question is the clickable <summary>,

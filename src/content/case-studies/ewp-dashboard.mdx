@@ -39,6 +39,8 @@ learnings:
 import Figure from '../../components/Figure.astro';
 import PullQuote from '../../components/PullQuote.astro';
 import FactGrid from '../../components/FactGrid.astro';
+import ModuleMatrix from '../../components/ewp/ModuleMatrix.astro';
+import StatusSystem from '../../components/ewp/StatusSystem.astro';
 
 <h2 id="problem">The problem</h2>
 
@@ -46,15 +48,7 @@ The EWP Dashboard is the tool European universities use to manage Erasmus+ stude
 
 It had grown into a hub of modules built at different times, Accounts, Learning Agreements, Institutional Agreements, Erasmus+ applications, so it felt like several separate apps stitched together rather than one tool. The interface complaints I kept hearing were only the symptoms. Underneath them: inconsistent components across modules, no shared visual language, and every team that had built a different part solving the same problem its own way. So instead of patching screens one at a time, I treated the whole thing as one system.
 
-<div class="breakout">
-  <Figure
-    src="/images/ewp/app-screenshot.jpg"
-    width={619}
-    height={363}
-    alt="A real screen from the redesigned dashboard: an Erasmus+ application record with status, academic term, student details and institution nominations."
-    caption="An application record in the redesigned dashboard."
-  />
-</div>
+<ModuleMatrix />
 
 <h2 id="what-i-did">What I did</h2>
 
@@ -64,15 +58,7 @@ I designed and ran a survey, 17 questions, close to 1,000 institutions respondin
 
 I mapped status to colour throughout the interface, accept, reject, pending, so people could scan a long list of applications at a glance instead of reading every row, leaning on Jacob's Law and recognition over recall rather than my own instinct for what would help.
 
-<div class="breakout">
-  <Figure
-    src="/images/ewp/status-legend.jpg"
-    width={402}
-    height={532}
-    alt="The status colour-coding legend: blue, yellow and green mark each stage of an outgoing or incoming student's agreement, from unsigned through to signed by everyone."
-    caption="Status mapped to colour, outgoing and incoming agreements."
-  />
-</div>
+<StatusSystem />
 
 <h3>Design system &amp; visual identity</h3>
 
@@ -85,31 +71,37 @@ I built a design system, based on Bootstrap, as the foundation for the new inter
     height={437}
     alt="Before and after: the old plain 'E+ Dashboard' placeholder logo beside the new EWP Dashboard identity, with its brand colour palette and styled buttons."
   />
-  <div class="figure-grid cols-3">
-    <Figure
-      src="/images/ewp/type-system.jpg"
-      width={492}
-      height={636}
-      alt="The type scale: body, h6 through h1, each specimen set in the chosen typeface at its defined size."
-    />
-    <Figure
-      src="/images/ewp/button-system.jpg"
-      width={476}
-      height={664}
-      alt="The button system: primary, secondary and outlined variants across every colour and state."
-    />
-    <Figure
-      src="/images/ewp/icon-states.jpg"
-      width={553}
-      height={635}
-      alt="Action icons, accept, reject, delete, edit, add and download, each shown active, on hover, on click and disabled."
-    />
-  </div>
 </div>
+
+<Figure
+  class="figure-support"
+  src="/images/ewp/icon-states-hi.jpg"
+  width={647}
+  height={786}
+  alt="Action icons, accept, reject, delete, edit, add new and download files, each shown active, on hover, on click and disabled."
+  caption="One icon set, every state: active, hover, click, disabled."
+/>
 
 <h3>Prototyping &amp; development</h3>
 
-I prototyped the redesign in Figma, handed it to the development team, then stayed close through the build so the shipped product actually matched the spec and stayed as usable as the prototype promised.
+I prototyped the redesign in Figma, handed it to the development team, then stayed close through the build so the shipped product actually matched the spec and stayed as usable as the prototype promised. The survey said most people needed to do at least some of this from a phone, so the redesign was laid out for mobile as well as desktop.
+
+<div class="figure-grid ewp-screens wide">
+  <Figure
+    src="/images/ewp/screen-desktop.jpg"
+    width={1820}
+    height={1088}
+    alt="The redesigned dashboard on desktop: an Erasmus+ application record with the module sidebar, application info, student info and institution nominations, and waiting-list, reject and delete actions."
+    caption="An application record, desktop."
+  />
+  <Figure
+    src="/images/ewp/screen-mobile.jpg"
+    width={433}
+    height={1074}
+    alt="The same application on a phone: application info, then a documents tab listing the CV, portfolio, motivation letter and certificates, with the three actions stacked below."
+    caption="The same record on a phone."
+  />
+</div>
 
 <h3>Collaboration &amp; leadership</h3>
 

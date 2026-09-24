@@ -1,0 +1,115 @@
+---
+// EWP: "symptoms vs system" (portfolio deck) as a matrix. Rows are the
+// dashboard's modules (named in the deck), columns the components the
+// design system unified (menus, buttons, listings, filtering, also from
+// the deck). Before: each module drew each component its own way; after:
+// one component per column. Schematic, not a screen inventory, and the
+// caption says so. Glyph variants are picked by a fixed seed so the
+// "before" is stable between builds.
+const modules = ['My University', 'OLA', 'Short Term', 'Applications', 'IIA', 'Erasmus+ App'];
+const parts = ['Menu', 'Button', 'Listing', 'Filter'];
+let seed = 7;
+const rand = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+const before = modules.map(() => parts.map(() => 1 + Math.floor(rand() * 4)));
+---
+
+<figure class="mm wide">
+	<div class="mm-panels">
+		{[['Before', true], ['After', false]].map(([title, isBefore]) => (
+			<div class:list={['mm-panel', isBefore ? 'is-before' : 'is-after']}>
+				<span class="mm-title">{title}{isBefore ? ': every module its own way' : ': one system'}</span>
+				<table>
+					<thead>
+						<tr><td></td>{parts.map((p) => <th scope="col">{p}</th>)}</tr>
+					</thead>
+					<tbody>
+						{modules.map((m, r) => (
+							<tr>
+								<th scope="row">{m}</th>
+								{parts.map((p, c) => (
+									<td><span class:list={['g', `g-${p.toLowerCase()}`, `v${isBefore ? before[r][c] : 0}`]} aria-hidden="true"><i></i><i></i><i></i></span></td>
+								))}
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		))}
+	</div>
+	<figcaption>Schematic. The complaints were symptoms; the problem underneath was six modules solving the same four problems differently.</figcaption>
+</figure>
+
+<style>
+	.mm { margin-block: var(--space-6); }
+	.mm-panels { display: grid; gap: var(--space-5); }
+	@media (min-width: 900px) {
+		.mm-panels { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+	}
+	.mm-panel { border-top: 3px solid var(--ink); padding-top: var(--space-3); }
+	.mm-panel.is-after { border-top-color: var(--red); }
+	.mm-title { display: block; font-family: var(--font-display); font-weight: 600; color: var(--ink); margin-bottom: var(--space-3); }
+	.mm table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+	.mm thead th {
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: var(--fs-small);
+		text-transform: uppercase;
+		letter-spacing: .06em;
+		color: var(--muted);
+		padding-bottom: var(--space-2);
+		text-align: center;
+	}
+	.mm thead td { width: 34%; }
+	.mm tbody th {
+		text-align: left;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: var(--fs-small);
+		color: var(--ink);
+		padding: var(--space-2) var(--space-2) var(--space-2) 0;
+		border-top: 1px solid var(--hairline);
+		white-space: nowrap;
+	}
+	.mm td { border-top: 1px solid var(--hairline); text-align: center; height: 2.5rem; }
+	@media (max-width: 599px) {
+		.mm thead th { font-size: .6875rem; letter-spacing: 0; }
+		.mm thead td { width: 30%; }
+		.g { width: 2.25rem; }
+		.g-button i { width: 2rem; }
+	}
+
+	/* Glyphs: three <i> strokes per cell, restyled per component and variant. */
+	.g { display: inline-flex; align-items: center; justify-content: center; gap: 3px; width: 3rem; height: 1.25rem; vertical-align: middle; }
+	.g i { display: block; background: var(--ink); }
+
+	.g-menu { flex-direction: column; align-items: flex-start; gap: 3px; }
+	.g-menu i { height: 2px; width: 100%; }
+	.g-menu i:nth-child(2) { width: 70%; }
+	.g-menu i:nth-child(3) { width: 85%; }
+
+	.g-button i:nth-child(n+2) { display: none; }
+	.g-button i { width: 2.6rem; height: 1rem; border-radius: 999px; }
+
+	.g-listing { flex-direction: column; gap: 2px; }
+	.g-listing i { width: 100%; height: 4px; }
+
+	.g-filter i:nth-child(3) { display: none; }
+	.g-filter i:nth-child(1) { width: 1.7rem; height: 1rem; border: 1.5px solid var(--ink); background: none; border-radius: 999px; }
+	.g-filter i:nth-child(2) { width: .7rem; height: .7rem; border-radius: 50%; }
+
+	/* After: one component per column, in the object's form colour. */
+	.is-after .g i { background: var(--red); }
+	.is-after .g-filter i:nth-child(1) { background: none; border-color: var(--red); }
+
+	/* Before: four ways to draw the same thing. */
+	.v1 i { border-radius: 0 !important; }
+	.v2 i { background: none !important; border: 1.5px solid var(--ink); }
+	.g-menu.v2 i, .g-listing.v2 i { border-width: 1px; height: 4px; }
+	.v3 i { background: var(--muted) !important; }
+	.g-button.v3 i { border-radius: 3px; height: 1.25rem; width: 2rem; }
+	.v4 { transform: scale(.72); }
+	.g-menu.v4 { align-items: center; }
+	.g-listing.v4 { gap: 4px; }
+	.g-listing.v4 i { height: 2px; }
+	.g-filter.v4 i:nth-child(2) { border-radius: 0; transform: rotate(45deg); }
+</style>

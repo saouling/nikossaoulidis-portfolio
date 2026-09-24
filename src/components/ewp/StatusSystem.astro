@@ -1,0 +1,120 @@
+---
+// EWP: the dashboard's status colour system, redrawn from the live
+// Readymag originals. The swatches are the product's own colours (sampled
+// from the originals), shown as a specimen; the site's red stays the only
+// diagram accent around them. Part two is the Online Learning Agreement
+// track: the same agreement seen by the sending and the receiving
+// university, where gold always marks whose move it is.
+const status = {
+	act: { hex: '#ddb145', label: 'Action must be taken by you' },
+	wait: { hex: '#456098', label: 'Action taken, waiting for a response' },
+	done: { hex: '#7abb70', label: 'Completed' },
+	no: { hex: '#d33a30', label: 'Rejected' },
+	list: { hex: '#60c3f4', label: 'Waiting list (nominations only)' },
+	draft: { hex: '#7ea4ab', label: 'Draft (inter-institutional agreements only)' },
+} as const;
+type S = keyof typeof status | 'hidden';
+const ola: { step: string; out: S; inc: S }[] = [
+	{ step: 'Unsigned', out: 'wait', inc: 'hidden' },
+	{ step: 'Signed by the student', out: 'act', inc: 'hidden' },
+	{ step: '+ the sending university', out: 'wait', inc: 'act' },
+	{ step: '+ the receiving university', out: 'done', inc: 'done' },
+];
+const says = (s: S) => (s === 'hidden' ? 'not visible yet' : status[s].label.toLowerCase());
+---
+
+<figure class="status wide">
+	<div class="status-grid">
+		<div>
+			<span class="status-title">One meaning per colour, in every module</span>
+			<ul class="status-legend">
+				{Object.values(status).map((s) => (
+					<li><span class="status-dot" style={`--c:${s.hex}`}></span>{s.label}</li>
+				))}
+			</ul>
+		</div>
+		<div>
+			<span class="status-title">One learning agreement, two universities</span>
+			<table class="status-ola">
+				<thead>
+					<tr><th scope="col">Signed so far</th><th scope="col">Sending uni</th><th scope="col">Receiving uni</th></tr>
+				</thead>
+				<tbody>
+					{ola.map((r) => (
+						<tr>
+							<th scope="row">{r.step}</th>
+							{[r.out, r.inc].map((s) => (
+								<td>
+									{s === 'hidden'
+										? <span class="status-dot hidden" role="img" aria-label={says(s)}></span>
+										: <span class="status-dot" class:list={[s === 'act' && 'turn']} style={`--c:${status[s].hex}`} role="img" aria-label={says(s)}></span>}
+								</td>
+							))}
+						</tr>
+					))}
+				</tbody>
+			</table>
+			<p class="status-note">Gold moves across as the agreement moves: it always marks whose turn it is.</p>
+		</div>
+	</div>
+	<figcaption>The status system, redrawn from the product: a long list of applications scans by colour instead of row by row. Today I would pair every colour with a label or shape, never status by colour alone.</figcaption>
+</figure>
+
+<style>
+	.status { margin-block: var(--space-6); }
+	.status-grid {
+		display: grid;
+		gap: var(--space-5);
+		border-top: 3px solid var(--ink);
+		padding-top: var(--space-4);
+	}
+	@media (min-width: 800px) {
+		.status-grid { grid-template-columns: 1fr 1.25fr; gap: var(--space-7); }
+	}
+	.status-title { display: block; font-family: var(--font-display); font-weight: 600; color: var(--ink); margin-bottom: var(--space-3); }
+	.status-legend { list-style: none; margin: 0; padding: 0; }
+	.status-legend li {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+		padding: var(--space-2) 0;
+		border-bottom: 1px solid var(--hairline);
+		font-size: var(--fs-small);
+		color: var(--body);
+	}
+	.status-dot {
+		flex: none;
+		display: inline-block;
+		width: 1.25rem;
+		height: 1.25rem;
+		border-radius: 50%;
+		background: var(--c);
+	}
+	.status-dot.hidden { background: none; border: 1.5px dashed var(--muted); }
+	.status-dot.turn { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--ink); }
+	.status-ola { width: 100%; border-collapse: collapse; }
+	.status-ola thead th {
+		text-align: left;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: var(--fs-small);
+		text-transform: uppercase;
+		letter-spacing: .06em;
+		color: var(--muted);
+		padding: 0 var(--space-2) var(--space-2) 0;
+		border-bottom: 1px solid var(--ink);
+	}
+	.status-ola thead th:not(:first-child), .status-ola td { text-align: center; width: 24%; }
+	.status-ola tbody th {
+		text-align: left;
+		font-weight: 400;
+		font-size: var(--fs-small);
+		color: var(--body);
+		padding: var(--space-3) var(--space-2) var(--space-3) 0;
+		border-bottom: 1px solid var(--hairline);
+	}
+	.status-ola td { border-bottom: 1px solid var(--hairline); vertical-align: middle; }
+	.status-ola td .status-dot { vertical-align: middle; }
+	.status-note { margin: var(--space-3) 0 0; font-size: var(--fs-small); color: var(--body); }
+	.status figcaption { margin-top: var(--space-4); font-size: var(--fs-small); color: var(--muted); }
+</style>
