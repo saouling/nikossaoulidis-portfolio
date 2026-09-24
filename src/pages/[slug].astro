@@ -12,7 +12,7 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import LabelPlate from '../components/LabelPlate.astro';
 import CaseMark from '../components/CaseMark.astro';
-import SectionRail from '../components/SectionRail.astro';
+import SectionTrail from '../components/SectionTrail.astro';
 import KForm from '../components/KForm.astro';
 import { allObjects, nextObject } from '../data/collection';
 
@@ -33,6 +33,7 @@ const heroVideo = isCaseStudy ? entry.data.heroVideo : undefined;
 const heroVideoCaption = isCaseStudy ? entry.data.heroVideoCaption : undefined;
 const summary = isCaseStudy ? entry.data.summary : undefined;
 const cases = isCaseStudy ? (entry.data.cases ?? []) : [];
+const rail = isCaseStudy ? entry.data.rail : undefined;
 const links = isCaseStudy ? [] : (entry.data.links ?? []);
 const record = isCaseStudy ? [] : (entry.data.record ?? []);
 const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
@@ -57,6 +58,8 @@ const summaryRows = summary
 ---
 
 <Layout title={title} description={description} ogImage={heroImage.src}>
+	{rail && <SectionTrail slot="context" part="context" style={rail.style} items={rail.items} object={heading} form={object.form} />}
+	{rail && <SectionTrail slot="progress" part="progress" style={rail.style} items={rail.items} object={heading} form={object.form} />}
 	<article class:list={['obj', !isCaseStudy && 'obj-compact']} data-form={object.form}>
 		<header class="obj-head">
 			<div class="wrap">
@@ -154,7 +157,6 @@ const summaryRows = summary
 		<div class="case-body">
 			<Content />
 		</div>
-		{isCaseStudy && entry.data.rail && <SectionRail style={entry.data.rail.style} items={entry.data.rail.items} title={heading} />}
 
 		<nav class="obj-next" aria-label="Next in the collection">
 			<div class="wrap">
