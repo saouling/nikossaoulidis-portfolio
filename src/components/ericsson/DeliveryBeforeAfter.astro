@@ -125,7 +125,7 @@ const specs = [
 		color: var(--ink);
 		margin-right: var(--space-2);
 	}
-	.dba-before { display: block; width: 100%; height: auto; background: var(--bg-alt); color: var(--ink); }
+	.dba-before { display: block; flex: 1; width: 100%; height: auto; min-height: 0; background: var(--bg-alt); color: var(--ink); }
 	.dba-screen rect { fill: var(--bg); stroke: var(--hairline); stroke-width: 1; }
 	.dba-screen .dba-block { fill: var(--hairline); stroke: none; }
 	.dba-screen line { stroke: var(--hairline); stroke-width: 2; }
@@ -138,7 +138,7 @@ const specs = [
 	.dba-after {
 		flex: 1;
 		display: grid;
-		grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+		grid-template-columns: minmax(0, 6fr) minmax(0, 4fr);
 		gap: var(--space-3);
 		padding: var(--space-3);
 	}
