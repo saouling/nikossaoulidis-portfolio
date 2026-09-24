@@ -676,14 +676,19 @@ section, .section {
   padding-block: var(--space-4) var(--space-7);
 }
 .case-body > * { grid-column: content; }
+/* One left edge: inside a case study every figure, diagram and grid starts
+   on the prose column's left edge. A breakout widens to the right (the
+   same span as .wide) instead of bleeding both ways, so captions always
+   sit flush with the text they belong to. */
 .case-body > .breakout,
 .case-body > .full-bleed {
   margin-block: var(--space-5);
-  grid-column: full;
-  width: 100%;
+  grid-column: content-start / -2;
+  width: auto;
+  max-width: none;
   margin-left: 0;
+  padding-inline: 0;
   transform: none;
-  justify-self: center;
 }
 /* .wide: the prose column plus the spare column beside it, i.e. the full
    1120px container, for dense content (a handout sheet) that is too
@@ -872,10 +877,11 @@ figcaption {
 
 /* A supporting image, not a section's lead photo (Session B11): sits at a
    fraction of the breakout width so it reads as "one more detail," not
-   another full-bleed moment. Centred since it's usually alone. */
+   another full-bleed moment. Left-aligned on the prose edge like
+   everything else in a case study. */
 .figure-support {
   max-width: 480px;
-  margin-inline: auto;
+  margin-inline: 0;
 }
 
 /* ---------- Label-plate caption (Session B11 round 5) ----------
