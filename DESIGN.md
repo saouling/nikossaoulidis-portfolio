@@ -239,7 +239,9 @@ Section rhythm uses the spacing scale's large steps: 64px vertical padding on
 mobile and 96px from 768px up. The sticky header is 72px tall and uses a
 hairline bottom rule.
 
-**Margin column.** From 1000px the case body is a text column (720px) plus a margin column. Wide figures span both; everything else keeps to the text column. The margin carries every caption (beside content-width figures, bottom-aligned like a museum label; under wide figures, starting at the margin's edge) and each section's number, at the far end of its rule, in the object's colour. Below 1000px captions sit under their figures.
+**Margin column.** From 1000px the case body is a text column (720px) plus a margin column. Wide figures span both; everything else keeps to the text column. The margin carries each section's number, at the far end of its rule, in the object's colour.
+
+**Captions: under, numbered.** Every caption sits directly under its figure, flush with the figure's left edge, 16px below it, and starts with `Fig. NN` (Jost, small caps tracking) in the object's colour. One rule at every width. Margin captions were tried and rejected: two placement rules made the eye hunt.
 
 **Case body rhythm (one place, every case study and entry).** The case body
 is a grid, so child margins add rather than collapse; components set no outer

@@ -1473,20 +1473,4 @@ blockquote.pull.boxed {
   color: var(--obj-tone, var(--ink));
 }
 
-/* Alternatives kept for comparison only (html[data-caps]); not used. */
-@media (min-width: 1000px) {
-  :root[data-caps="margin"] .case-body > figure:not(.wide):not(.breakout):has(> figcaption),
-  :root[data-caps="hybrid"] .case-body > figure:not(.wide):not(.breakout):has(> figcaption) {
-    grid-column: content-start / -2;
-    display: grid;
-    grid-template-columns: min(var(--measure), 100%) minmax(0, 1fr);
-    column-gap: var(--space-5);
-    max-width: none;
-    align-items: start;
-  }
-  :root[data-caps] .case-body > figure:not(.wide):not(.breakout):has(> figcaption) > * { grid-column: 1; }
-  :root[data-caps] .case-body > figure:not(.wide):not(.breakout):has(> figcaption) > figcaption { grid-column: 2; grid-row: 1; margin-top: 0; max-width: 22rem; }
-  :root[data-caps] .case-body > figure.figure-support:has(> figcaption) { grid-template-columns: minmax(0, 480px) minmax(0, 22rem); }
-  :root[data-caps="margin"] .case-body > figure.wide:has(> figcaption) { display: flex; flex-direction: column; }
-  :root[data-caps="margin"] .case-body > figure.wide > figcaption { order: -1; margin: 0 0 var(--space-3) calc(min(var(--measure), 100%) + var(--space-5)); max-width: 22rem; }
-}
+
