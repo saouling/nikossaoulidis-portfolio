@@ -1427,14 +1427,11 @@ blockquote.pull.boxed {
 
 /* ---------- Margin column (Swiss editorial grid) ----------
    From 1000px the case body is a text column plus a margin column. Wide
-   figures span both; everything else keeps to the text column, and the
-   margin carries what belongs beside it: every caption, and each section's
-   number. Text plus margin always fill the same width as a wide figure,
-   so the space to the right of the prose is structure, not leftover. */
+   figures span both; everything else keeps to the text column. The margin
+   carries each section's number, at the far end of the section rule. */
 .obj[data-form="triangle"] { --obj-tone: var(--gold-ink); }
 .obj[data-form="circle"]   { --obj-tone: var(--blue); }
 .obj[data-form="square"]   { --obj-tone: var(--red); }
-.case-body { counter-reset: section; }
 @media (min-width: 1000px) {
   .case-body { --margin-gap: var(--space-5); }
   /* Section headings run their rule across text and margin, with the
@@ -1455,31 +1452,41 @@ blockquote.pull.boxed {
     letter-spacing: .06em;
     color: var(--obj-tone, var(--muted));
   }
-  /* A content-width figure: media in the text column, caption in the margin,
-     bottom-aligned like a museum label. */
-  .case-body > figure:not(.wide):not(.breakout):has(> figcaption) {
+}
+
+/* ---------- Captions: under, numbered (default) ----------
+   Every caption sits directly under its figure, flush with the figure's
+   left edge, and starts with the figure's number in the object's colour.
+   One rule at every width: the eye never has to look for a caption. */
+.case-body { counter-reset: section fig; }
+.case-body figure:has(> figcaption) { counter-increment: fig; }
+.case-body figure > figcaption::before {
+  content: "Fig. " counter(fig, decimal-leading-zero);
+  margin-right: .6em;
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--obj-tone, var(--ink));
+}
+
+/* Alternatives kept for comparison only (html[data-caps]); not used. */
+@media (min-width: 1000px) {
+  :root[data-caps="margin"] .case-body > figure:not(.wide):not(.breakout):has(> figcaption),
+  :root[data-caps="hybrid"] .case-body > figure:not(.wide):not(.breakout):has(> figcaption) {
     grid-column: content-start / -2;
     display: grid;
     grid-template-columns: min(var(--measure), 100%) minmax(0, 1fr);
-    column-gap: var(--margin-gap);
+    column-gap: var(--space-5);
     max-width: none;
-    align-items: end;
+    align-items: start;
   }
-  .case-body > figure:not(.wide):not(.breakout):has(> figcaption) > * { grid-column: 1; }
-  .case-body > figure:not(.wide):not(.breakout):has(> figcaption) > figcaption {
-    grid-column: 2;
-    grid-row: 1;
-    margin-top: 0;
-    max-width: 22rem;
-  }
-  /* A supporting image is narrower than the text: its label sits right beside it. */
-  .case-body > figure.figure-support:has(> figcaption) { grid-template-columns: minmax(0, 480px) minmax(0, 22rem); }
-  /* Wide figures: the caption starts at the margin column, under the figure. */
-  .case-body > .wide > figcaption,
-  .case-body > figure.wide > figcaption,
-  .case-body > div.wide:not(.figure-grid) > figure > figcaption,
-  .case-body > .breakout figcaption:last-child {
-    margin-left: calc(min(var(--measure), 100%) + var(--margin-gap));
-    max-width: 22rem;
-  }
+  :root[data-caps] .case-body > figure:not(.wide):not(.breakout):has(> figcaption) > * { grid-column: 1; }
+  :root[data-caps] .case-body > figure:not(.wide):not(.breakout):has(> figcaption) > figcaption { grid-column: 2; grid-row: 1; margin-top: 0; max-width: 22rem; }
+  :root[data-caps] .case-body > figure.figure-support:has(> figcaption) { grid-template-columns: minmax(0, 480px) minmax(0, 22rem); }
+  :root[data-caps="margin"] .case-body > figure.wide:has(> figcaption) { display: flex; flex-direction: column; }
+  :root[data-caps="margin"] .case-body > figure.wide > figcaption { order: -1; margin: 0 0 var(--space-3) calc(min(var(--measure), 100%) + var(--space-5)); max-width: 22rem; }
 }
