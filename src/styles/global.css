@@ -199,11 +199,13 @@ input, textarea { caret-color: var(--blue-ink); }
 }
 .col { max-width: var(--measure); }
 
-section, .section {
+/* Page-level sections only (direct children of main), never sections
+   inside components. */
+main > section, .section {
   padding-block: var(--space-6);
 }
 @media (min-width: 768px) {
-  section, .section { padding-block: var(--space-7); }
+  main > section, .section { padding-block: var(--space-7); }
 }
 .section-alt { background: var(--bg); border-top: 1px solid var(--hairline); }
 
@@ -349,7 +351,7 @@ section, .section {
   font-size: var(--fs-small);
 }
 
-.hero-figure { margin-top: var(--space-6); }
+.hero-figure { margin: var(--space-6) 0 0; }
 .hero-figure img, .hero-figure video { width: 100%; height: auto; border-radius: var(--radius); }
 
 /* hero video + sound toggle (Don't Be a Stranger) */
@@ -573,7 +575,7 @@ section, .section {
    whose rows jump to the four fixed sections. The body is a grid with
    named lines so prose shares the site's one left edge while breakout
    images still span the full width from the same grid. */
-.obj-head { padding-block: var(--space-6) var(--space-5); }
+.obj-head { padding-block: var(--space-6) var(--space-7); }
 .obj-title {
   font-size: var(--fs-hero);
   letter-spacing: -0.02em;
@@ -679,7 +681,7 @@ section, .section {
     [content-start] min(var(--measure), 100% - 2 * var(--space-4)) [content-end]
     minmax(0, calc(var(--container) - var(--measure) - 2 * var(--space-4)))
     minmax(var(--space-4), 1fr) [full-end];
-  padding-block: var(--space-4) var(--space-7);
+  padding-block: 0 var(--space-7);
 }
 .case-body > * { grid-column: content; }
 /* One left edge: inside a case study every figure, diagram and grid starts
@@ -688,7 +690,6 @@ section, .section {
    sit flush with the text they belong to. */
 .case-body > .breakout,
 .case-body > .full-bleed {
-  margin-block: var(--space-5);
   grid-column: content-start / -2;
   width: auto;
   max-width: none;
@@ -699,9 +700,7 @@ section, .section {
 /* .wide: the prose column plus the spare column beside it, i.e. the full
    1120px container, for dense content (a handout sheet) that is too
    cramped at the reading measure but shouldn't bleed full-width. */
-.case-body > .wide { grid-column: content-start / -2; margin-block: var(--space-5); }
-.case-body > ul:not([class]), .case-body > ol:not([class]) { margin-block: var(--space-3); }
-.case-body > h2:first-child { margin-top: 0; }
+.case-body > .wide { grid-column: content-start / -2; }
 .case-body > h2 { padding-top: var(--space-4); border-top: 1px solid var(--ink); }
 /* A section heading's plain-language name after a named one (DBAS names
    its sections after the call: "Dial", then "What I did"). Same line, not
@@ -711,7 +710,7 @@ section, .section {
 
 /* Sub-records inside one object (Ericsson 01a to 01c): a heading with its
    catalogue number, a lead line, and a two-row label in the plate style. */
-.sub-index { list-style: none; padding: 0; margin: var(--space-4) 0 0; border-top: 1px solid var(--ink); }
+.sub-index { list-style: none; padding: 0; border-top: 1px solid var(--ink); }
 .sub-index li { border-bottom: 1px solid var(--hairline); }
 .sub-index a {
   display: flex;
@@ -729,7 +728,6 @@ section, .section {
   grid-template-columns: auto minmax(0, 1fr);
   column-gap: var(--space-4);
   align-items: start;
-  margin-top: var(--space-8);
   padding-top: var(--space-5);
   border-top: 3px solid var(--ink);
   font-size: var(--fs-h2);
@@ -749,8 +747,8 @@ section, .section {
 .obj-summary-cases { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
 .obj-summary-cases li { border: 0; display: grid; grid-template-columns: 1.4rem minmax(0, 1fr); gap: var(--space-2); font-size: var(--fs-small); line-height: 1.5; max-width: 60ch; }
 .obj-summary-cases .case-mark { font-size: 1.15rem; margin-top: .15em; }
-.sub-lead { font-size: var(--fs-h3); line-height: 1.4; color: var(--ink); margin-top: var(--space-3); text-wrap: pretty; }
-.sub-plate { border: 1px solid var(--ink); margin: var(--space-4) 0 var(--space-5); }
+.sub-lead { font-size: var(--fs-h3); line-height: 1.4; color: var(--ink); text-wrap: pretty; }
+.sub-plate { border: 1px solid var(--ink); }
 .sub-plate > div {
   display: grid;
   grid-template-columns: 7.5rem minmax(0, 1fr);
@@ -783,7 +781,7 @@ section, .section {
 
 /* A live prototype or video: sharp ink frame, like the display case,
    with a small label strip and a plain link out. */
-.embed { margin: var(--space-6) 0; }
+.embed { margin: 0; }
 .embed-frame { border: 1px solid var(--ink); background: var(--bg-alt); }
 .embed-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
 .embed-label {
@@ -831,7 +829,6 @@ figcaption {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
-  margin-top: var(--space-5);
 }
 .figure-grid.cols-2 { grid-template-columns: 1fr; }
 .figure-grid.cols-3 { grid-template-columns: 1fr; }
@@ -959,7 +956,6 @@ figcaption {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
-  margin-block: var(--space-5);
 }
 @media (min-width: 700px) {
   .museum-pair { grid-template-columns: 1fr 1fr; align-items: start; }
@@ -989,7 +985,6 @@ figcaption {
 .ink-grid {
   list-style: none;
   padding: 0;
-  margin: var(--space-5) 0;
   display: grid;
   grid-template-columns: 1fr;
   gap: 3px;
@@ -1094,7 +1089,6 @@ blockquote.pull {
   color: var(--ink);
   line-height: 1.35;
   max-width: var(--measure);
-  margin-block: var(--space-5);
   padding-top: var(--space-4);
   position: relative;
 }
@@ -1142,7 +1136,6 @@ blockquote.pull.boxed {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-5) var(--space-4);
-  margin-block: var(--space-6);
   padding-block: var(--space-3);
 }
 .postit {
@@ -1326,7 +1319,7 @@ blockquote.pull.boxed {
 /* Credit/technical caption directly under a video or photo — left-aligned,
    editorial photo-credit convention (distinct from .diagram-caption's
    centered interpretive captions under a diagram). */
-.media-caption { margin-top: var(--space-2); }
+.media-caption { margin-top: var(--space-3); }
 
 .diagram-caption {
   margin-top: var(--space-3);
@@ -1398,7 +1391,6 @@ blockquote.pull.boxed {
   gap: 3px;
   background: var(--ink);
   border: 3px solid var(--ink);
-  margin-block: var(--space-5);
 }
 .fact-grid > div { background: var(--bg); padding: var(--space-4); }
 .fact-grid .accent {
@@ -1432,3 +1424,39 @@ blockquote.pull.boxed {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* ---------- Case body rhythm (one place, every case study and entry) ----------
+   The case body is a grid, so its children's margins add instead of
+   collapsing; components therefore set no outer margins of their own and
+   the rhythm lives only here. Four intervals, tight to generous:
+     --flow-tight   16  a lead-in to its figure, a heading to its first line
+     --flow-prose   24  paragraph to paragraph, a section heading to its content
+     --flow-block   64  prose to any figure, diagram or grid, and between them
+     --flow-section 96  before each section heading (then its rule and padding)
+   Captions sit --space-3 under whatever they caption. */
+.case-body {
+  --flow-tight: var(--space-3);
+  --flow-prose: var(--space-4);
+  --flow-block: var(--space-6);
+  --flow-section: var(--space-7);
+}
+@media (max-width: 699px) {
+  .case-body { --flow-block: var(--space-5); --flow-section: var(--space-6); }
+}
+.case-body > * { margin-block: 0; }
+.case-body > * + * { margin-top: var(--flow-prose); }
+.case-body > * + :where(:not(p, h2, h3, h4, ul:not([class]), ol:not([class]))),
+.case-body > :where(:not(p, h2, h3, h4, ul:not([class]), ol:not([class]))) + * { margin-top: var(--flow-block); }
+.case-body > h2 { margin-top: var(--flow-section); }
+.case-body > h2:first-child { margin-top: 0; }
+.case-body > h2 + * { margin-top: var(--flow-prose); }
+.case-body > h3 { margin-top: var(--flow-block); }
+.case-body > h3 + * { margin-top: var(--flow-tight); }
+.case-body > .sub-title { margin-top: var(--flow-section); }
+.case-body > .sub-plate { margin-top: var(--flow-prose); }
+.case-body > .sub-plate + * { margin-top: var(--space-5); }
+.case-body > .lead-in + * { margin-top: var(--flow-tight); }
+.case-body > .case-ritual + h2 { margin-top: var(--space-5); }
+.case-body figcaption { margin-top: var(--space-3); }
+.case-body .ink-grid p { margin-top: var(--space-2); }
+.case-body > h2 + h3, .case-body > h2 + .sub-title { margin-top: var(--flow-prose); }

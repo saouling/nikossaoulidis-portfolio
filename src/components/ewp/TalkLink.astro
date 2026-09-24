@@ -23,7 +23,6 @@ const href = 'https://www.youtube.com/watch?v=U4R6U_Dt7d8&t=2978s';
 </figure>
 
 <style>
-	.talk { margin-block: var(--space-6); }
 	.talk-card {
 		display: grid;
 		grid-template-columns: auto minmax(0, 1fr);
@@ -44,7 +43,7 @@ const href = 'https://www.youtube.com/watch?v=U4R6U_Dt7d8&t=2978s';
 	.talk-title { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h3); line-height: 1.25; }
 	.talk-event { font-size: var(--fs-small); color: var(--body); }
 	.talk-go { margin-top: var(--space-2); font-family: var(--font-display); font-size: var(--fs-small); text-decoration: underline; text-underline-offset: 3px; }
-	.talk figcaption { margin-top: var(--space-3); font-family: var(--font-body); font-style: italic; color: var(--ink); }
+	.talk figcaption { font-family: var(--font-body); font-style: italic; color: var(--ink); }
 	@media (max-width: 599px) {
 		.talk-card { grid-template-columns: 1fr; gap: var(--space-3); padding: var(--space-4); }
 		.talk-play svg { width: 3.5rem; height: 3.5rem; }

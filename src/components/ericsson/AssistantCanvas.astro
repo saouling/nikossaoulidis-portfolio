@@ -305,7 +305,6 @@ const spark = (seed: number) =>
 </script>
 
 <style is:global>
-	.ac { margin: 0; }
 	.ac-frame {
 		display: grid;
 		grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
@@ -365,7 +364,6 @@ const spark = (seed: number) =>
 	.ac-act:hover { border-color: var(--blue-ink); color: var(--blue-ink); }
 	.ac-act[aria-pressed="true"] svg { fill: currentColor; }
 
-	.ac figcaption { margin-top: var(--space-2); font-size: var(--fs-small); color: var(--muted); }
 	.ac-reset { font: inherit; color: var(--blue-ink); background: none; border: 0; padding: 0; margin-left: var(--space-2); text-decoration: underline; cursor: pointer; }
 	.ac-principles { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; gap: var(--space-2); font-size: var(--fs-small); color: var(--body); }
 	@media (min-width: 700px) {

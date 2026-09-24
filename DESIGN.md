@@ -239,6 +239,22 @@ Section rhythm uses the spacing scale's large steps: 64px vertical padding on
 mobile and 96px from 768px up. The sticky header is 72px tall and uses a
 hairline bottom rule.
 
+**Case body rhythm (one place, every case study and entry).** The case body
+is a grid, so child margins add rather than collapse; components set no outer
+margin of their own and the rhythm lives only in the `.case-body` flow rules.
+Four intervals, tight to generous:
+
+| Interval | Value | Between |
+|---|---|---|
+| tight | 16px | a lead-in line (`p.lead-in`) and its figure; a sub-heading and its first line; any figure and its caption |
+| prose | 24px | paragraph to paragraph; a section heading to its content |
+| block | 64px (40 on phones) | prose and any figure, diagram, grid, fact-grid or quote, and between two of them |
+| section | 96px (64 on phones) | before each section heading and each Ericsson case; also from the hero to the first section |
+
+Captions are always 16px under what they caption, whatever the component.
+`section` padding applies to page-level sections only, never to sections inside
+components.
+
 **Homepage.** The intro is a 7:5 grid from 900px: the name and positioning
 lines on the left, the three-form composition on the right (320px wide, 3:2,
 multiply-blended where the forms overlap). Below it, the catalogue is an 8:4

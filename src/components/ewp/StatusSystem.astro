@@ -61,7 +61,6 @@ const says = (s: S) => (s === 'hidden' ? 'not visible yet' : status[s].label.toL
 </figure>
 
 <style>
-	.status { margin-block: var(--space-6); }
 	.status-grid {
 		display: grid;
 		gap: var(--space-5);
@@ -116,5 +115,4 @@ const says = (s: S) => (s === 'hidden' ? 'not visible yet' : status[s].label.toL
 	.status-ola td { border-bottom: 1px solid var(--hairline); vertical-align: middle; }
 	.status-ola td .status-dot { vertical-align: middle; }
 	.status-note { margin: var(--space-3) 0 0; font-size: var(--fs-small); color: var(--body); }
-	.status figcaption { margin-top: var(--space-4); font-size: var(--fs-small); color: var(--muted); }
 </style>

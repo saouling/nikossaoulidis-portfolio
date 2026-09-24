@@ -218,7 +218,6 @@ const steps = [
 </script>
 
 <style>
-	.cp { margin-block: var(--space-6); }
 	.cp-poster {
 		display: grid;
 		gap: var(--space-5);
@@ -260,7 +259,6 @@ const steps = [
 	.cp-hole { fill: transparent; cursor: pointer; outline: none; }
 	.cp-hole:hover, .cp-hole:focus-visible { stroke: var(--blue-ink); stroke-width: 2.5; }
 	.cp.is-ringing .cp-dial { animation: cp-shake 1s steps(8) 1; }
-	.cp figcaption { margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); }
 	@keyframes cp-shake { 0%, 100% { transform: none; } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
 	@media (prefers-reduced-motion: reduce) { .cp.is-ringing .cp-dial { animation: none; } .cp-steps li { transition: none; } }
 </style>
