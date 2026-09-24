@@ -1,0 +1,79 @@
+---
+// EWP: the identity still in use, three years on. At the EWP Dashboard's
+// first stand, at EAIE 2025 in Gothenburg (9–12 September), the European
+// University Foundation's roll-up carried the logo and colours I designed
+// in 2022. The EUF's photo shows identifiable people and is theirs, so the
+// banner is redrawn here from it, and the photo is linked, not copied.
+// Banner copy as it appears on the roll-up.
+const source = 'https://uni-foundation.eu/2025/09/18/reflections-from-the-eaie-the-ewp-dashboard-community-at-the-heart-of-the-conversation/';
+---
+
+<figure class="eaie wide">
+	<div class="eaie-grid">
+		<div class="eaie-rollup" role="img" aria-label="A drawn roll-up banner: the EWP Dashboard logo at the top, a magenta block reading Built by Universities, Powered by Europe, and a blue panel listing user-friendly, robust and reliable, a community of 2700+ institutions.">
+			<picture>
+				<source srcset="/images/ewp/logo-new.webp" type="image/webp" />
+				<img src="/images/ewp/logo-new.png" width="900" height="232" alt="" loading="lazy" decoding="async" />
+			</picture>
+			<p class="eaie-claim">Built by Universities, Powered by Europe</p>
+			<ul class="eaie-points">
+				<li>User-friendly</li>
+				<li>Robust and Reliable</li>
+				<li>A community of 2700+ institutions</li>
+			</ul>
+			<span class="eaie-foot" aria-hidden="true"></span>
+		</div>
+		<div class="eaie-text">
+			<p class="eaie-where">EAIE 2025 · Gothenburg · 9–12 September</p>
+			<p class="eaie-lead">Three years later, the identity is still the face of the product.</p>
+			<p>At the EWP Dashboard’s first stand at the European Association for International Education conference, the roll-up carried the logo, colours and type I designed in 2022, the identity of a tool that now serves a community of 2,700+ institutions.</p>
+			<p><a href={source} target="_blank" rel="noopener">See the stand in the European University Foundation’s photos<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+		</div>
+	</div>
+	<figcaption>The roll-up redrawn from the European University Foundation’s photo of the stand. The logo is the real file.</figcaption>
+</figure>
+
+<style>
+	.eaie-grid { display: grid; gap: var(--space-5); align-items: center; }
+	@media (min-width: 760px) { .eaie-grid { grid-template-columns: 15rem minmax(0, 1fr); gap: var(--space-6); } }
+	.eaie-rollup {
+		display: grid;
+		grid-template-rows: auto auto 1fr auto;
+		aspect-ratio: 1 / 2.4;
+		max-width: 15rem;
+		background: #fff;
+		border: 1px solid var(--hairline);
+		box-shadow: 0 1px 0 var(--hairline);
+		overflow: hidden;
+	}
+	.eaie-rollup img { width: 72%; height: auto; margin: 10% 0 6% 10%; border-radius: 0; }
+	.eaie-claim {
+		margin: 0 0 0 8%;
+		padding: 8px 10px;
+		width: fit-content;
+		max-width: 82%;
+		background: #c83060;
+		color: #fff;
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1rem;
+		line-height: 1.15;
+	}
+	.eaie-points {
+		list-style: none;
+		margin: 0;
+		padding: 14% 10% 0;
+		background: #2f4f9a;
+		display: grid;
+		align-content: start;
+		gap: 10px;
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: .8rem;
+		color: #fff;
+	}
+	.eaie-foot { height: 6%; background: #2f4f9a; }
+	.eaie-where { margin: 0; font-family: var(--font-display); font-size: var(--fs-small); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+	.eaie-lead { margin: var(--space-2) 0 0; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h3); line-height: 1.25; color: var(--ink); }
+	.eaie-text p + p { margin-top: var(--space-3); }
+</style>

@@ -1,0 +1,34 @@
+---
+// EWP: one small then-and-now, the navigation, at close to its real size.
+// Real fragments from the live Readymag page. The rest of the change is
+// shown as the system (IdentitySheet, StatusSystem), not as more crops.
+---
+
+<figure class="thennow">
+	<div class="tn-grid">
+		<div>
+			<span class="tn-tag">Before</span>
+			<picture>
+				<source srcset="/images/ewp/old-sidebar.webp" type="image/webp" />
+				<img src="/images/ewp/old-sidebar.png" width="169" height="140" alt="The old navigation: a blue bold heading, cloud icons for outgoing and incoming students, and a plus sign for requirements." loading="lazy" decoding="async" />
+			</picture>
+		</div>
+		<svg class="tn-arrow" viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h36M29 2l7 6-7 6" /></svg>
+		<div>
+			<span class="tn-tag tn-now">After</span>
+			<picture>
+				<source srcset="/images/ewp/new-sidebar.webp" type="image/webp" />
+				<img src="/images/ewp/new-sidebar.png" width="258" height="128" alt="The new navigation: the Applications section highlighted in magenta, with consistent icons for outgoing students, incoming students and requirements." loading="lazy" decoding="async" />
+			</picture>
+		</div>
+	</div>
+	<figcaption>The same menu, before and after, near its real size.</figcaption>
+</figure>
+
+<style>
+	.tn-grid { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+	.tn-tag { display: block; margin-bottom: var(--space-2); font-family: var(--font-display); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+	.tn-now { color: var(--ink); }
+	.tn-arrow { width: 2rem; fill: none; stroke: var(--ink); stroke-width: 2; }
+	.thennow img { display: block; height: auto; border: 1px solid var(--hairline); border-radius: 0; }
+</style>

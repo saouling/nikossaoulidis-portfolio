@@ -1,0 +1,150 @@
+---
+// EWP: the identity and design system I made, as one specimen sheet drawn
+// in code instead of two screenshots. Rows: the mark (the old placeholder
+// beside the new logo, both real files from the live Readymag page), the
+// palette (sampled from the original identity board), the buttons (the
+// old outlined text buttons against the new filled ones) and the action
+// icons in every state (redrawn from the original icon-state matrix).
+// The product's colours appear here as a specimen, as in StatusSystem.
+const palette = [
+	{ hex: '#406098', name: 'Blue', job: 'Waiting, primary actions' },
+	{ hex: '#c83060', name: 'Magenta', job: 'Brand accent, current place' },
+	{ hex: '#60b850', name: 'Green', job: 'Completed, accept' },
+	{ hex: '#d03830', name: 'Red', job: 'Rejected, reject' },
+	{ hex: '#d8b040', name: 'Gold', job: 'Your turn, edit' },
+	{ hex: '#76a6ad', name: 'Teal grey', job: 'Draft, add' },
+];
+const icons = [
+	{ name: 'Accept', hex: '#60b850', d: 'M5 12.5l4.5 4.5L19 7.5' },
+	{ name: 'Reject', hex: '#d03830', d: 'M6.5 6.5l11 11M17.5 6.5l-11 11' },
+	{ name: 'Delete', hex: '#4a4a4a', d: 'M7 8h10l-1 11H8zM5.5 8h13M10 8V5.5h4V8' },
+	{ name: 'Edit', hex: '#d8b040', d: 'M6 18l1-4 8.5-8.5 3 3L10 17zM14 7l3 3' },
+	{ name: 'Add new', hex: '#76a6ad', d: 'M12 6v12M6 12h12' },
+	{ name: 'Download', hex: '#c83060', d: 'M8 4.5h6l3.5 3.5v11.5h-9.5zM12.5 10.5v6M9.8 13.8l2.7 2.7 2.7-2.7' },
+];
+const states = ['Active', 'Hover', 'Click', 'Disabled'];
+const buttons = [
+	{ label: 'Waiting list', hex: '#406098', d: 'M8 5h8v14H8zM10 9h4M10 12h4' },
+	{ label: 'Reject', hex: '#d03830', d: 'M7 7l10 10M17 7L7 17' },
+	{ label: 'Delete', hex: '#4a4a4a', d: 'M7 8h10l-1 11H8zM5.5 8h13M10 8V5.5h4V8' },
+];
+---
+
+<figure class="idsheet wide">
+	<div class="ids-row">
+		<span class="ids-k">Mark</span>
+		<div class="ids-pair">
+			<div class="ids-before">
+				<span class="ids-tag">Before</span>
+				<picture>
+					<source srcset="/images/ewp/logo-old.webp" type="image/webp" />
+					<img src="/images/ewp/logo-old.png" width="312" height="70" alt="The old placeholder mark: a blue circle with E+ and the words Dashboard beta." loading="lazy" decoding="async" class="ids-logo-old" />
+				</picture>
+			</div>
+			<svg class="ids-arrow" viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h36M29 2l7 6-7 6" /></svg>
+			<div class="ids-after">
+				<span class="ids-tag">After</span>
+				<picture>
+					<source srcset="/images/ewp/logo-new.webp" type="image/webp" />
+					<img src="/images/ewp/logo-new.png" width="900" height="232" alt="The new EWP Dashboard logo: a teal ring around a D, beside the name in a light geometric typeface." loading="lazy" decoding="async" class="ids-logo-new" />
+				</picture>
+			</div>
+		</div>
+	</div>
+
+	<div class="ids-row">
+		<span class="ids-k">Palette</span>
+		<ul class="ids-palette">
+			{palette.map((p) => (
+				<li><span class="ids-swatch" style={`--c:${p.hex}`}></span><b>{p.name}</b><small>{p.job}</small></li>
+			))}
+		</ul>
+	</div>
+
+	<div class="ids-row">
+		<span class="ids-k">Buttons</span>
+		<div class="ids-pair">
+			<div class="ids-before">
+				<span class="ids-tag">Before</span>
+				<div class="ids-btns old">
+					{buttons.map((b) => <span style={`--c:${b.hex}`}>{b.label}</span>)}
+				</div>
+			</div>
+			<svg class="ids-arrow" viewBox="0 0 40 16" aria-hidden="true"><path d="M0 8h36M29 2l7 6-7 6" /></svg>
+			<div class="ids-after">
+				<span class="ids-tag">After</span>
+				<div class="ids-btns new">
+					{buttons.map((b) => (
+						<span style={`--c:${b.hex}`}>
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d={b.d} /></svg>{b.label}
+						</span>
+					))}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ids-row">
+		<span class="ids-k">Icons, every state</span>
+		<table class="ids-icons">
+			<caption class="visually-hidden">Six action icons, each in four states</caption>
+			<thead><tr><td></td>{states.map((s) => <th scope="col">{s}</th>)}</tr></thead>
+			<tbody>
+				{icons.map((ic) => (
+					<tr>
+						<th scope="row">{ic.name}</th>
+						{states.map((s) => (
+							<td><span class:list={['ids-icon', `st-${s.toLowerCase()}`]} style={`--c:${ic.hex}`} aria-label={`${ic.name}, ${s.toLowerCase()}`} role="img">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d={ic.d} /></svg>
+							</span></td>
+						))}
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+	<figcaption>The identity and design system, redrawn from my original files: one mark, one palette where every colour has a job, one button family and one icon set with every state.</figcaption>
+</figure>
+
+<style>
+	.idsheet { border-top: 3px solid var(--ink); }
+	.ids-row {
+		display: grid;
+		gap: var(--space-3);
+		padding: var(--space-4) 0;
+		border-bottom: 1px solid var(--hairline);
+		align-items: center;
+	}
+	@media (min-width: 800px) { .ids-row { grid-template-columns: 9rem minmax(0, 1fr); gap: var(--space-5); } }
+	.ids-k { font-family: var(--font-display); font-size: var(--fs-small); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); align-self: start; padding-top: 4px; }
+	.ids-pair { display: grid; grid-template-columns: minmax(0, 1fr) 2rem minmax(0, 1fr); gap: var(--space-4); align-items: end; }
+	@media (max-width: 599px) { .ids-pair { grid-template-columns: 1fr; } .ids-arrow { transform: rotate(90deg); justify-self: start; } }
+	.ids-tag { display: block; margin-bottom: var(--space-2); font-family: var(--font-display); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+	.ids-after .ids-tag { color: var(--ink); }
+	.ids-arrow { width: 2rem; fill: none; stroke: var(--ink); stroke-width: 2; }
+	.ids-logo-old { width: 12rem; height: auto; }
+	.ids-logo-new { width: 15rem; height: auto; }
+	.idsheet img { border-radius: 0; }
+
+	.ids-palette { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: var(--space-3); }
+	.ids-palette li { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); column-gap: var(--space-2); align-items: center; font-family: var(--font-display); font-size: var(--fs-small); }
+	.ids-swatch { grid-row: span 2; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--c); }
+	.ids-palette b { font-weight: 600; color: var(--ink); }
+	.ids-palette small { font-size: .75rem; color: var(--muted); line-height: 1.3; }
+
+	.ids-btns { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+	.ids-btns span { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; }
+	.ids-btns.old span { font-family: var(--font-body); padding: 2px 8px; border: 1px solid var(--c); color: var(--c); border-radius: 2px; background: var(--bg); }
+	.ids-btns.new span { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; padding: 7px 14px; border-radius: 999px; background: var(--c); color: #fff; }
+	.ids-btns.new svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+	.ids-icons { border-collapse: collapse; }
+	.ids-icons thead th { font-family: var(--font-display); font-weight: 400; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 0 var(--space-3) var(--space-2) 0; text-align: center; }
+	.ids-icons tbody th { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-small); color: var(--ink); text-align: left; padding: 4px var(--space-4) 4px 0; white-space: nowrap; }
+	.ids-icons td { padding: 4px var(--space-3) 4px 0; text-align: center; }
+	.ids-icon { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 6px; background: var(--c); color: #fff; }
+	.ids-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+	.ids-icon.st-hover { background: color-mix(in srgb, var(--c) 70%, #fff); }
+	.ids-icon.st-click { background: color-mix(in srgb, var(--c) 72%, #000); }
+	.ids-icon.st-disabled { background: #e6e6e6; color: #fff; }
+</style>
