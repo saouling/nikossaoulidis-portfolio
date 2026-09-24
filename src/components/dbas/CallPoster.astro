@@ -1,0 +1,266 @@
+---
+// DBAS: one of the installation's instruction posters, made usable. The
+// poster's steps (pick up, dial, wait, hang up) light up as you do them,
+// beside a working rotary dial. Sound, all synthesised, only after the
+// visitor's own click: the Swedish dial tone when you pick up (425 Hz,
+// continuous), the pulse clicks as the dial runs back (one per unit, ten
+// a second, like the real mechanism), then the ringback (425 Hz, one
+// second on, five off). The poster says plainly that nobody will answer
+// here, because this page is not the other museum. The line and headline
+// come from the real leaflet and poster.
+//
+// Geometry: angles are degrees clockwise from twelve o'clock. The finger
+// stop sits at 120°. Digit n (1–9, with 0 as 10) sits 30 + 30n degrees
+// before the stop, so dialling n turns the plate 30 + 30n degrees.
+const C = 100;
+const R = 68;
+const STOP = 120;
+const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const pos = (d: number) => {
+	const n = d === 0 ? 10 : d;
+	const a = ((STOP - (30 + 30 * n)) * Math.PI) / 180;
+	return { x: C + R * Math.sin(a), y: C - R * Math.cos(a), travel: 30 + 30 * n, pulses: n };
+};
+const holes = digits.map((d) => ({ d, ...pos(d) }));
+const disc = `M ${C - 96} ${C} a 96 96 0 1 0 192 0 a 96 96 0 1 0 -192 0 Z`;
+const hole = (x: number, y: number, r: number) => `M ${x - r} ${y} a ${r} ${r} 0 1 0 ${2 * r} 0 a ${r} ${r} 0 1 0 ${-2 * r} 0 Z`;
+const plate = [disc, ...holes.map((h) => hole(h.x, h.y, 14)), hole(C, C, 38)].join(' ');
+const stopA = (STOP * Math.PI) / 180;
+const steps = [
+	{ id: 'pickup', title: 'Pick up the phone', note: 'You’ll hear the dial tone.' },
+	{ id: 'dial', title: 'Dial the other museum', note: 'In the museum the number is on the card. Here, any seven digits will do.' },
+	{ id: 'wait', title: 'And wait', note: 'Nobody will answer here: this is a web page, not Mölndal. But you can listen to it ring.' },
+	{ id: 'hangup', title: 'Hang up', note: 'Put the phone down whenever you like.' },
+];
+---
+
+<figure class="cp wide" data-call>
+	<div class="cp-poster">
+		<div class="cp-copy">
+			<p class="cp-name">Don’t be a Stranger</p>
+			<p class="cp-sub">Rotate the dial and talk to someone who might just make your day.</p>
+			<p class="cp-head">To make a call</p>
+			<ol class="cp-steps">
+				{steps.map((s, i) => (
+					<li data-step={s.id}>
+						<span class="cp-n">{i + 1}</span>
+						<span>
+							<span class="cp-title">{s.title}</span>
+							<span class="cp-note">{s.note}</span>
+						</span>
+					</li>
+				))}
+			</ol>
+			<div class="cp-controls">
+				<button type="button" class="cp-btn" data-hook aria-pressed="false">Pick up</button>
+				<button type="button" class="cp-btn cp-quiet" data-sound aria-pressed="true">Sound on</button>
+			</div>
+			<p class="cp-status" data-status aria-live="polite">The phone is on the hook.</p>
+			<p class="cp-foot">You might connect. You might not. But the moment is yours.</p>
+		</div>
+		<div class="cp-phone">
+			<svg class="cp-dial" viewBox="0 0 200 200" role="group" aria-label="A rotary dial. Choose a finger hole to dial that digit.">
+				<circle class="cp-card" cx={C} cy={C} r="96" />
+				{holes.map((h) => <text class="cp-num" x={h.x} y={h.y} dy="0.35em" aria-hidden="true">{h.d}</text>)}
+				<g class="cp-plate" data-plate><path d={plate} fill-rule="evenodd" /></g>
+				<circle class="cp-centre" cx={C} cy={C} r="36" />
+				<text class="cp-centre-num" x={C} y={C + 5} aria-hidden="true" data-number>– – – – – – –</text>
+				<path class="cp-stop" d={`M ${C + 84 * Math.sin(stopA)} ${C - 84 * Math.cos(stopA)} L ${C + 104 * Math.sin(stopA)} ${C - 104 * Math.cos(stopA)}`} />
+				{holes.map((h) => (
+					<circle class="cp-hole" cx={h.x} cy={h.y} r="14" tabindex="0" role="button" aria-label={`Dial ${h.d}`} data-digit={h.d} data-travel={h.travel} data-pulses={h.pulses} />
+				))}
+			</svg>
+		</div>
+	</div>
+	<figcaption>The instructions from the installation, working. It’s slow on purpose: the dial always runs back at its own pace, and every call might go unanswered.</figcaption>
+</figure>
+
+<script>
+	for (const root of document.querySelectorAll<HTMLElement>('[data-call]')) {
+		const plate = root.querySelector<SVGGElement>('[data-plate]')!;
+		const number = root.querySelector<SVGTextElement>('[data-number]')!;
+		const status = root.querySelector<HTMLElement>('[data-status]')!;
+		const hook = root.querySelector<HTMLButtonElement>('[data-hook]')!;
+		const soundBtn = root.querySelector<HTMLButtonElement>('[data-sound]')!;
+		const stepEls = Object.fromEntries([...root.querySelectorAll<HTMLElement>('[data-step]')].map((el) => [el.dataset.step!, el]));
+		const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		let offHook = false;
+		let dialled: number[] = [];
+		let busy = false;
+		let ringing = false;
+		let sound = true;
+		let timers: number[] = [];
+		let ctx: AudioContext | null = null;
+		let toneOsc: OscillatorNode | null = null;
+
+		const later = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms));
+		const step = (id: string | null) => Object.entries(stepEls).forEach(([k, el]) => el.classList.toggle('is-now', k === id));
+		const showNumber = () => { number.textContent = Array.from({ length: 7 }, (_, i) => (i < dialled.length ? dialled[i] : '–')).join(' '); };
+		const audio = () => {
+			if (!sound) return null;
+			try { ctx ??= new AudioContext(); if (ctx.state === 'suspended') ctx.resume(); return ctx; } catch { return null; }
+		};
+		const tone = (on: boolean) => {
+			if (!on) { try { toneOsc?.stop(); } catch { /* already stopped */ } toneOsc = null; return; }
+			const a = audio();
+			if (!a || toneOsc) return;
+			const g = a.createGain();
+			g.gain.value = 0.035;
+			toneOsc = a.createOscillator();
+			toneOsc.frequency.value = 425;
+			toneOsc.connect(g).connect(a.destination);
+			toneOsc.start();
+		};
+		// One short click per pulse, ten a second, like the dial's own contacts.
+		const clicks = (n: number, over: number) => {
+			const a = audio();
+			if (!a) return;
+			const gap = Math.min(0.1, over / 1000 / n);
+			for (let i = 0; i < n; i++) {
+				const t = a.currentTime + 0.05 + i * gap;
+				const o = a.createOscillator();
+				const g = a.createGain();
+				o.type = 'square';
+				o.frequency.value = 900;
+				g.gain.setValueAtTime(0.05, t);
+				g.gain.exponentialRampToValueAtTime(0.0001, t + 0.012);
+				o.connect(g).connect(a.destination);
+				o.start(t);
+				o.stop(t + 0.015);
+			}
+		};
+
+		const hangUp = (msg = 'The phone is on the hook.') => {
+			timers.forEach(clearTimeout);
+			timers = [];
+			tone(false);
+			offHook = false;
+			busy = false;
+			ringing = false;
+			dialled = [];
+			plate.style.transition = 'none';
+			plate.style.transform = '';
+			root.classList.remove('is-off', 'is-ringing');
+			hook.textContent = 'Pick up';
+			hook.setAttribute('aria-pressed', 'false');
+			showNumber();
+			step(null);
+			status.textContent = msg;
+		};
+		const pickUp = () => {
+			offHook = true;
+			root.classList.add('is-off');
+			hook.textContent = 'Hang up';
+			hook.setAttribute('aria-pressed', 'true');
+			tone(true);
+			step('pickup');
+			status.textContent = 'Dial tone. Now dial any seven digits.';
+			later(900, () => { if (offHook && !dialled.length) step('dial'); });
+		};
+		const ring = () => {
+			ringing = true;
+			root.classList.add('is-ringing');
+			step('wait');
+			status.textContent = 'Ringing…';
+			for (let i = 0; i < 3; i++) {
+				later(600 + i * 6000, () => tone(true));
+				later(600 + i * 6000 + 1000, () => tone(false));
+			}
+			later(15600, () => {
+				ringing = false;
+				root.classList.remove('is-ringing');
+				step('hangup');
+				status.textContent = 'No answer this time. You might connect. You might not. Hang up whenever you like.';
+			});
+		};
+		const dial = (d: number, travel: number, pulses: number) => {
+			if (busy || ringing || dialled.length >= 7) return;
+			if (!offHook) pickUp();
+			tone(false);
+			step('dial');
+			busy = true;
+			const forward = still ? 0 : travel * 3.2;
+			const back = still ? 0 : Math.max(pulses * 100, travel * 5.5);
+			plate.style.transition = `transform ${forward}ms cubic-bezier(.3,.1,.3,1)`;
+			plate.style.transform = `rotate(${travel}deg)`;
+			later(forward + (still ? 0 : 120), () => {
+				plate.style.transition = `transform ${back}ms linear`;
+				plate.style.transform = 'rotate(0deg)';
+				clicks(pulses, Math.max(back, pulses * 60));
+				later(back, () => {
+					busy = false;
+					dialled.push(d);
+					showNumber();
+					if (dialled.length === 7) ring();
+					else status.textContent = `${7 - dialled.length} to go.`;
+				});
+			});
+		};
+
+		root.querySelectorAll<SVGCircleElement>('[data-digit]').forEach((h) => {
+			const go = () => dial(Number(h.dataset.digit), Number(h.dataset.travel), Number(h.dataset.pulses));
+			h.addEventListener('click', go);
+			h.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+		});
+		root.addEventListener('keydown', (e) => {
+			if (!/^[0-9]$/.test(e.key)) return;
+			const h = root.querySelector<SVGCircleElement>(`[data-digit="${e.key}"]`);
+			if (h) dial(Number(e.key), Number(h.dataset.travel), Number(h.dataset.pulses));
+		});
+		hook.addEventListener('click', () => (offHook ? hangUp('You hung up.') : pickUp()));
+		soundBtn.addEventListener('click', () => {
+			sound = !sound;
+			if (!sound) tone(false);
+			soundBtn.setAttribute('aria-pressed', String(sound));
+			soundBtn.textContent = sound ? 'Sound on' : 'Sound off';
+		});
+	}
+</script>
+
+<style>
+	.cp { margin-block: var(--space-6); }
+	.cp-poster {
+		display: grid;
+		gap: var(--space-5);
+		align-items: center;
+		border: 3px solid var(--ink);
+		padding: var(--space-5);
+		background: var(--bg);
+	}
+	@media (min-width: 760px) {
+		.cp-poster { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-6); }
+	}
+	.cp-name { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); line-height: 1; color: var(--ink); letter-spacing: -0.01em; }
+	.cp-sub { margin: var(--space-2) 0 0; font-family: var(--font-display); font-size: var(--fs-small); color: var(--ink); }
+	.cp-head { margin: var(--space-4) 0 var(--space-2); font-family: var(--font-display); font-weight: 700; font-size: var(--fs-small); text-transform: uppercase; letter-spacing: .04em; color: var(--ink); }
+	.cp-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+	.cp-steps li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: var(--space-2); align-items: start; opacity: .55; transition: opacity .25s; }
+	.cp-steps li.is-now { opacity: 1; }
+	.cp-n { display: inline-grid; place-items: center; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--ink); color: var(--on-dark); font-family: var(--font-display); font-size: .75rem; }
+	.cp-steps li.is-now .cp-n { background: var(--blue); }
+	.cp-title { display: block; font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: var(--fs-small); letter-spacing: .03em; color: var(--ink); }
+	.cp-note { display: block; font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+	.cp-controls { display: flex; gap: var(--space-2); margin-top: var(--space-4); }
+	.cp-btn { font: inherit; font-family: var(--font-display); font-size: var(--fs-small); padding: 7px 14px; border: 1px solid var(--ink); background: var(--ink); color: var(--on-dark); cursor: pointer; }
+	.cp-btn:hover { background: var(--blue-ink); border-color: var(--blue-ink); }
+	.cp-btn.cp-quiet { background: var(--bg); color: var(--ink); }
+	.cp-btn.cp-quiet:hover { color: var(--blue-ink); border-color: var(--blue-ink); background: var(--bg); }
+	.cp-status { margin: var(--space-3) 0 0; min-height: 3em; font-family: var(--font-body); font-style: italic; color: var(--ink); }
+	.cp-foot { margin: var(--space-3) 0 0; padding-top: var(--space-2); border-top: 1px solid var(--ink); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-small); color: var(--ink); }
+
+	.cp-phone { display: grid; place-items: center; }
+	.cp-dial { width: 100%; max-width: 22rem; height: auto; display: block; overflow: visible; }
+	.cp-card { fill: var(--bg); stroke: var(--ink); stroke-width: 1.5; }
+	.cp-num { font-family: var(--font-display); font-size: 13px; text-anchor: middle; fill: var(--ink); }
+	.cp-plate { transform-origin: 100px 100px; }
+	.cp-plate path { fill: var(--blue); }
+	.cp-centre { fill: var(--bg); stroke: var(--ink); stroke-width: 1; }
+	.cp-centre-num { font-family: var(--font-display); font-size: 8.5px; text-anchor: middle; fill: var(--ink); letter-spacing: .5px; }
+	.cp-stop { stroke: var(--ink); stroke-width: 5; }
+	.cp-hole { fill: transparent; cursor: pointer; outline: none; }
+	.cp-hole:hover, .cp-hole:focus-visible { stroke: var(--blue-ink); stroke-width: 2.5; }
+	.cp.is-ringing .cp-dial { animation: cp-shake 1s steps(8) 1; }
+	.cp figcaption { margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); }
+	@keyframes cp-shake { 0%, 100% { transform: none; } 25% { transform: rotate(-1.5deg); } 75% { transform: rotate(1.5deg); } }
+	@media (prefers-reduced-motion: reduce) { .cp.is-ringing .cp-dial { animation: none; } .cp-steps li { transition: none; } }
+</style>

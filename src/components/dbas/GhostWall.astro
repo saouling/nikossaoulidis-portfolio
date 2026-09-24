@@ -1,90 +1,98 @@
 ---
-// DBAS: the thesis's "wall of ghosting" (fig. 5.14), redrawn. The original
-// collage is screenshots of real LinkedIn messages and emails with people's
-// names and addresses, so it cannot be published; this keeps only the
-// channel, the organisation and the date visible in it, and never a
-// person. Most got no reply. The one blue card is the yes that started it.
-const sent = [
-	{ via: 'LinkedIn', to: 'Ericsson', when: '10 Nov 2024' },
-	{ via: 'LinkedIn', to: 'Ericsson Research', when: '10 Nov 2024' },
-	{ via: 'LinkedIn', to: 'Ericsson', when: '11 Nov 2024' },
-	{ via: 'LinkedIn', to: 'Telenor', when: '12 Nov 2024' },
-	{ via: 'LinkedIn', to: 'Telia', when: '12 Nov 2024' },
-	{ via: 'LinkedIn', to: 'Telmore', when: '12 Nov 2024' },
-	{ via: 'LinkedIn', to: 'TDC NET', when: '12 Nov 2024' },
-	{ via: 'LinkedIn', to: 'TDC NET', when: '13 Nov 2024' },
-	{ via: 'LinkedIn', to: 'Ericsson', when: '14 Nov 2024' },
-	{ via: 'Email', to: 'Telmore', when: '' },
-	{ via: 'Email', to: 'Gothenburg Art Museum', when: '' },
-	{ via: 'Email', to: 'Museum of World Culture', when: '' },
-	{ via: 'Email', to: 'Universeum', when: '' },
-	{ via: 'Email', to: 'TDC NET', when: '' },
-	{ via: 'LinkedIn', to: 'TDC NET', when: '17 Dec 2024' },
+// DBAS: the thesis's "wall of ghosting" (fig. 5.14), redrawn as a pile of
+// overlapping notes. The original is screenshots of real messages with
+// people's names, so this keeps only the channel and an anonymous letter
+// per organisation (the same letter where the same place was written to
+// twice), no dates, no names. Most got no reply. Röhsska, the one yes,
+// sits on top. Positions and tilts are fixed so it never reshuffles.
+const notes = [
+	{ via: 'LinkedIn', to: 'Company A', x: 2, y: 6, t: -4 },
+	{ via: 'Email', to: 'Museum A', x: 17, y: 30, t: 3 },
+	{ via: 'LinkedIn', to: 'Company B', x: 33, y: 2, t: -2 },
+	{ via: 'LinkedIn', to: 'Company A', x: 50, y: 22, t: 5 },
+	{ via: 'Email', to: 'Company C', x: 66, y: 4, t: -3 },
+	{ via: 'LinkedIn', to: 'Company D', x: 80, y: 28, t: 2 },
+	{ via: 'Email', to: 'Museum B', x: 6, y: 52, t: 2 },
+	{ via: 'LinkedIn', to: 'Company E', x: 24, y: 64, t: -5 },
+	{ via: 'Email', to: 'Museum C', x: 42, y: 56, t: 4 },
+	{ via: 'LinkedIn', to: 'Company C', x: 60, y: 62, t: -2 },
+	{ via: 'Email', to: 'Company D', x: 76, y: 56, t: 3 },
+	{ via: 'LinkedIn', to: 'Company A', x: 12, y: 16, t: 1 },
+	{ via: 'LinkedIn', to: 'Company F', x: 70, y: 40, t: -4 },
+	{ via: 'Email', to: 'Museum D', x: 30, y: 40, t: 2 },
 ];
-// Fixed offsets so the wall is the same on every load.
-const tilt = [-2, 1.5, -1, 2.5, -1.5, 1, -2.5, 2, -0.5, 1.5, -2, 0.5, 2, -1, 1];
 ---
 
 <figure class="ghost wide">
-	<ul class="ghost-wall">
-		{sent.map((m, i) => (
-			<li style={`--t:${tilt[i % tilt.length]}deg`}>
-				<span class="ghost-via">{m.via}</span>
-				<span class="ghost-to">{m.to}</span>
-				{m.when && <span class="ghost-when">{m.when}</span>}
-				<span class="ghost-lines" aria-hidden="true"><i></i><i></i><i></i></span>
-			</li>
-		))}
-		<li class="ghost-yes" style="--t:-1deg">
+	<div class="ghost-pile">
+		<ul aria-label="Unanswered messages">
+			{notes.map((n) => (
+				<li style={`--x:${n.x}%; --y:${n.y}%; --t:${n.t}deg`}>
+					<span class="ghost-via">{n.via}</span>
+					<span class="ghost-to">{n.to}</span>
+					<span class="ghost-lines" aria-hidden="true"><i></i><i></i><i></i></span>
+				</li>
+			))}
+		</ul>
+		<p class="ghost-yes">
 			<span class="ghost-via">First museum</span>
 			<span class="ghost-to">Röhsska</span>
-			<span class="ghost-when">Nov 2024</span>
 			<span class="ghost-reply">Yes.</span>
-		</li>
-	</ul>
+		</p>
+	</div>
 	<figcaption>Some of the messages I sent to companies and museums in Sweden and Denmark, redrawn from my thesis without anyone’s name. Most got no reply. One early yes, from Röhsska, kept it alive.</figcaption>
 </figure>
 
 <style>
 	.ghost { margin-block: var(--space-6); }
-	.ghost-wall {
-		list-style: none;
-		margin: 0;
-		padding: var(--space-4) 0;
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
-		gap: var(--space-3);
-	}
-	.ghost-wall li {
+	.ghost-pile { position: relative; height: 26rem; }
+	.ghost-pile ul { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+	.ghost-pile li {
+		position: absolute;
+		left: var(--x);
+		top: var(--y);
+		width: 11rem;
 		transform: rotate(var(--t));
 		border: 1px solid var(--hairline);
 		background: var(--bg);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
 		padding: var(--space-2) var(--space-3);
-		display: flex;
-		flex-direction: column;
+		display: grid;
 		gap: 2px;
 		font-family: var(--font-display);
 		font-size: var(--fs-small);
 		color: var(--muted);
 	}
 	.ghost-via { font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; }
-	.ghost-to { color: var(--ink); opacity: .7; }
-	.ghost-when { font-variant-numeric: tabular-nums; font-size: .75rem; }
+	.ghost-to { color: var(--ink); opacity: .75; }
 	.ghost-lines { display: grid; gap: 4px; margin-top: 6px; }
 	.ghost-lines i { display: block; height: 3px; background: var(--hairline); }
 	.ghost-lines i:nth-child(2) { width: 80%; }
 	.ghost-lines i:nth-child(3) { width: 55%; }
-	.ghost-wall .ghost-yes { border: 2px solid var(--blue); color: var(--ink); }
-	.ghost-yes .ghost-to { opacity: 1; font-weight: 600; }
-	.ghost-reply { margin-top: 6px; font-family: var(--font-body); font-style: italic; font-size: var(--fs-body); color: var(--blue-ink); }
-	@media (max-width: 599px) {
-		.ghost-wall { grid-template-columns: 1fr 1fr; gap: var(--space-2); }
-		.ghost-lines { display: none; }
-		.ghost-wall li { padding: 6px 8px; }
+	.ghost-yes {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%) rotate(-1.5deg);
+		z-index: 2;
+		margin: 0;
+		width: 14rem;
+		padding: var(--space-3) var(--space-4);
+		display: grid;
+		gap: 2px;
+		background: var(--bg);
+		border: 3px solid var(--blue);
+		box-shadow: 0 10px 24px rgba(0, 0, 0, .14);
+		font-family: var(--font-display);
+		color: var(--ink);
 	}
+	.ghost-yes .ghost-to { opacity: 1; font-weight: 600; font-size: var(--fs-h3); }
+	.ghost-reply { font-family: var(--font-body); font-style: italic; font-size: var(--fs-h2); line-height: 1.1; color: var(--blue-ink); }
 	.ghost figcaption { margin-top: var(--space-3); font-size: var(--fs-small); color: var(--muted); }
-	@media (prefers-reduced-motion: no-preference) {
-		.ghost-wall li { transition: transform .2s ease; }
-		.ghost-wall li:hover { transform: rotate(0deg); }
+	@media (max-width: 599px) {
+		.ghost-pile { height: 30rem; }
+		.ghost-pile li { width: 8.5rem; padding: 6px 8px; }
+		.ghost-pile li:nth-child(n+11) { display: none; }
+		.ghost-lines { display: none; }
 	}
 </style>

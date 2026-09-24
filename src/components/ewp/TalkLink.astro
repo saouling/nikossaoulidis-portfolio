@@ -1,0 +1,52 @@
+---
+// EWP: the Erasmus Goes Digital recording. Its owner has turned off
+// embedding (YouTube's oEmbed answers 401), so an iframe can only ever
+// show "Video unavailable". Instead: a drawn card in the page's own
+// language that opens the recording at the start of my part. The
+// official thumbnail is a stock photo, so it isn't used.
+const href = 'https://www.youtube.com/watch?v=U4R6U_Dt7d8&t=2978s';
+---
+
+<figure class="talk">
+	<a class="talk-card" href={href} target="_blank" rel="noopener">
+		<span class="talk-play" aria-hidden="true">
+			<svg viewBox="0 0 64 64"><rect width="64" height="64" /><polygon points="24,18 48,32 24,46" /></svg>
+		</span>
+		<span class="talk-text">
+			<span class="talk-time">49:38 → 1:03:00</span>
+			<span class="talk-title">Feedback on dashboard usability survey and improvements in the pipeline</span>
+			<span class="talk-event">Erasmus Goes Digital, a European University Foundation webinar</span>
+			<span class="talk-go">Watch on YouTube<span class="visually-hidden"> (opens in a new tab)</span></span>
+		</span>
+	</a>
+	<figcaption>A much younger me, attempting to speak at a conference in front of more than a thousand people.</figcaption>
+</figure>
+
+<style>
+	.talk { margin-block: var(--space-6); }
+	.talk-card {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: var(--space-5);
+		align-items: center;
+		padding: var(--space-5);
+		border: 3px solid var(--ink);
+		color: var(--ink);
+		text-decoration: none;
+	}
+	.talk-card:hover, .talk-card:focus-visible { border-color: var(--blue-ink); }
+	.talk-card:hover .talk-go, .talk-card:focus-visible .talk-go { color: var(--blue-ink); }
+	.talk-play svg { width: 5rem; height: 5rem; display: block; }
+	.talk-play rect { fill: var(--red); }
+	.talk-play polygon { fill: var(--bg); }
+	.talk-text { display: grid; gap: var(--space-1); }
+	.talk-time { font-family: var(--font-display); font-variant-numeric: tabular-nums; font-size: var(--fs-small); color: var(--muted); }
+	.talk-title { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h3); line-height: 1.25; }
+	.talk-event { font-size: var(--fs-small); color: var(--body); }
+	.talk-go { margin-top: var(--space-2); font-family: var(--font-display); font-size: var(--fs-small); text-decoration: underline; text-underline-offset: 3px; }
+	.talk figcaption { margin-top: var(--space-3); font-family: var(--font-body); font-style: italic; color: var(--ink); }
+	@media (max-width: 599px) {
+		.talk-card { grid-template-columns: 1fr; gap: var(--space-3); padding: var(--space-4); }
+		.talk-play svg { width: 3.5rem; height: 3.5rem; }
+	}
+</style>
