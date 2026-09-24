@@ -97,7 +97,10 @@ const entries = defineCollection({
 			alt: z.string().min(1),
 		}),
 		atAGlance: z.array(z.object({ label: z.string().min(1), value: z.string().min(1) })).min(1),
-		// Outbound links shown under the label plate (the paper, a prototype).
+		// A short record beside the label plate (what it is, what was tested),
+		// in the same ruled style as a case study's summary, but not links.
+		record: z.array(z.object({ label: z.string().min(1), text: z.string().min(1) })).default([]),
+		// Outbound links shown under the record (the paper, a prototype).
 		links: z.array(z.object({ label: z.string().min(1), href: z.string().url() })).default([]),
 	}),
 });

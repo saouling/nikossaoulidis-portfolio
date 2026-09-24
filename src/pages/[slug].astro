@@ -30,7 +30,8 @@ const isCaseStudy = entry.collection === 'case-studies';
 const heroVideo = isCaseStudy ? entry.data.heroVideo : undefined;
 const heroVideoCaption = isCaseStudy ? entry.data.heroVideoCaption : undefined;
 const summary = isCaseStudy ? entry.data.summary : undefined;
-const links = isCaseStudy ? [] : entry.data.links;
+const links = isCaseStudy ? [] : (entry.data.links ?? []);
+const record = isCaseStudy ? [] : (entry.data.record ?? []);
 const heroWebp = heroImage.src.replace(/\.(jpe?g|png)$/i, '.webp');
 
 const href = `/${entry.id}/`;
@@ -77,6 +78,18 @@ const summaryRows = summary
 							</ol>
 						</nav>
 					)}
+					{!isCaseStudy && (
+						<div class="obj-aside">
+							{record.length > 0 && (
+								<dl class="obj-summary obj-entry-record">
+									{record.map((r) => (
+										<div>
+											<dt class="obj-summary-label">{r.label}</dt>
+											<dd class="obj-summary-text">{r.text}</dd>
+										</div>
+									))}
+								</dl>
+							)}
 					{links.length > 0 && (
 						<ul class="obj-links">
 							{links.map((l) => (
@@ -88,6 +101,8 @@ const summaryRows = summary
 								</li>
 							))}
 						</ul>
+					)}
+						</div>
 					)}
 				</div>
 			</div>

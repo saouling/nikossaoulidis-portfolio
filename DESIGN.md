@@ -183,7 +183,7 @@ A white page with ink type. Three Bauhaus colours each have one job, so each col
 - **Ultramarine Ink** (interactive state): the focus ring, the text caret, the hover and focus colour of index titles, summary labels, sub-index links and the next-object title, the primary button's hover fill, and the lens disclosure's +/− mark.
 
 ### Tertiary
-- **Ochre Gold** (form only): the triangle form (Ericsson) and nothing else in CSS. Gold also appears in Nikos's own diagrams, which are raster images. It never carries text or UI.
+- **Ochre Gold** (form and diagram only): the triangle form (Ericsson), and Ericsson's diagrams drawn in code, where it marks structure: spec frames' top edges, gold-edged method chips, overlays and notes in the before canvas, trend lines. It never fills behind text and never carries UI; text on or beside gold is ink on white.
 
 ### Neutral
 - **Ink**: headings, the name, index titles, label-plate values, the 1px ink rules (index head, summary top, section-heading rules, plate borders, display-case frame), the fact-grid's 3px frame and gaps, and the Learnings cell.

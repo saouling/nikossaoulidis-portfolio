@@ -90,18 +90,18 @@ const habits = [
 			<p class="sheet-sub">Practical methods and habits for cross-discipline collaboration · EDC 2026</p>
 		</header>
 
-		<p class="sheet-section"><span class="sheet-mark square" aria-hidden="true"></span>Co-creation methods</p>
+		<h4 class="sheet-section">Co-creation methods</h4>
 		<ol class="sheet-methods">
 			{methods.map((m) => (
 				<li class="sheet-card">
-					<span class="sheet-kind">{m.kind}</span>
 					<span class="sheet-name">{m.name}</span>
-					<span class="sheet-when">{m.when}</span>
 					<ol class="sheet-steps">{m.steps.map((s) => <li>{s}</li>)}</ol>
 					<p class="sheet-why">
 						{m.why.map((w) => (w.href ? <a href={w.href} target="_blank" rel="noopener">{w.t}</a> : w.t))}
 					</p>
 					<dl class="sheet-meta">
+						<div><dt>When</dt><dd>{m.when}</dd></div>
+						<div><dt>Kind</dt><dd>{m.kind}</dd></div>
 						<div><dt>Time</dt><dd>{m.time}</dd></div>
 						<div><dt>Group</dt><dd>{m.group}</dd></div>
 					</dl>
@@ -113,7 +113,7 @@ const habits = [
 			</li>
 		</ol>
 
-		<p class="sheet-section"><span class="sheet-mark circle" aria-hidden="true"></span>Daily habits</p>
+		<h4 class="sheet-section">Daily habits</h4>
 		<ul class="sheet-habits">
 			{habits.map((h) => (
 				<li class="sheet-card">
@@ -155,20 +155,14 @@ const habits = [
 	}
 	.sheet-sub { margin: 0; font-family: var(--font-display); font-size: var(--fs-small); color: var(--muted); max-width: 32ch; }
 	.sheet-section {
-		display: flex;
-		align-items: center;
-		gap: var(--space-2);
 		margin: var(--space-5) 0 var(--space-3);
-		max-width: none;
+		padding-bottom: var(--space-2);
+		border-bottom: 1px solid var(--hairline);
 		font-family: var(--font-display);
-		font-size: var(--fs-small);
-		text-transform: uppercase;
-		letter-spacing: .12em;
+		font-weight: 600;
+		font-size: var(--fs-body);
 		color: var(--ink);
 	}
-	.sheet-section::after { content: ""; flex: 1; height: 1px; background: var(--hairline); }
-	.sheet-mark { width: 9px; height: 9px; background: var(--gold); flex: none; }
-	.sheet-mark.circle { border-radius: 50%; }
 	.sheet-methods, .sheet-habits { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
 	@media (min-width: 720px) {
 		.sheet-methods { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -182,26 +176,7 @@ const habits = [
 	}
 	.sheet-ask { border: 1px solid var(--ink); border-top: 6px solid var(--gold); justify-content: flex-end; }
 	.sheet-ask .sheet-name { font-size: var(--fs-h3); }
-	.sheet-kind {
-		align-self: flex-start;
-		margin-bottom: var(--space-2);
-		padding: 2px 8px;
-		background: var(--ink);
-		color: var(--on-dark);
-		font-family: var(--font-display);
-		font-size: .68rem;
-		text-transform: uppercase;
-		letter-spacing: .08em;
-	}
 	.sheet-name { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-body); color: var(--ink); }
-	.sheet-when {
-		font-family: var(--font-display);
-		font-size: .72rem;
-		text-transform: uppercase;
-		letter-spacing: .05em;
-		color: var(--muted);
-		margin-top: 2px;
-	}
 	.sheet-steps { list-style: decimal; margin: var(--space-2) 0 0; padding-left: 1.2em; font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
 	.sheet-steps li + li { margin-top: 2px; }
 	.sheet-why {
@@ -213,8 +188,9 @@ const habits = [
 		color: var(--body);
 		flex: 1;
 	}
-	.sheet-meta { display: flex; gap: var(--space-3); margin: var(--space-2) 0 0; font-family: var(--font-display); font-size: .72rem; color: var(--muted); }
-	.sheet-meta div { display: flex; gap: 4px; }
+	.sheet-meta { margin: var(--space-2) 0 0; border-top: 1px solid var(--hairline); font-family: var(--font-display); font-size: .72rem; }
+	.sheet-meta div { display: grid; grid-template-columns: 3.4rem 1fr; gap: var(--space-2); padding-top: 4px; }
+	.sheet-meta dt { text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 	.sheet-meta dd { color: var(--ink); }
 	.sheet-text { margin: var(--space-1) 0 0; font-size: var(--fs-small); line-height: 1.45; flex: 1; }
 	.sheet-rule {

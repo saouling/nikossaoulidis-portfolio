@@ -689,6 +689,7 @@ section, .section {
    1120px container, for dense content (a handout sheet) that is too
    cramped at the reading measure but shouldn't bleed full-width. */
 .case-body > .wide { grid-column: content-start / -2; margin-block: var(--space-5); }
+.case-body > ul:not([class]), .case-body > ol:not([class]) { margin-block: var(--space-3); }
 .case-body > h2:first-child { margin-top: 0; }
 .case-body > h2 { padding-top: var(--space-4); border-top: 1px solid var(--ink); }
 
@@ -725,6 +726,9 @@ section, .section {
 
 /* Compact entries (04 to 06): outbound links sit where a case study's
    summary would, as a short ruled list. */
+.obj-aside { display: grid; gap: var(--space-4); align-content: start; }
+.obj-entry-record { margin: 0; border-top: 1px solid var(--ink); }
+.obj-entry-record > div { padding: var(--space-3) 0; border-bottom: 1px solid var(--hairline); display: grid; gap: var(--space-1); }
 .obj-links { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); align-self: start; }
 .obj-links li { border-bottom: 1px solid var(--hairline); }
 .obj-links a {
