@@ -381,12 +381,14 @@ This is the complete set of patterns the site ships, checked against the build o
 | Hero image / video | `.hero-figure`, `.hero-video` | every case study; video on DBAS |
 | Sub-records | `SubRecord` / `.sub-index`, `.sub-plate` | Ericsson |
 | Ratings ledger (mean on a scale, n and scale always in the caption) | `Ratings` / `.ratings` | DBAS (pilot feedback forms) |
-| Case body wide column | `.case-body > .wide` | Ericsson (dense diagrams that are cramped at the reading measure) |
+| Case body wide column | `.case-body > .wide` | Ericsson, DBAS, EWP (dense diagrams that are cramped at the reading measure) |
 | Ericsson diagrams (scoped styles, drawn in code, NDA-safe) | `components/ericsson/`: `DeliveryBeforeAfter`, `SpecRule`, `AuditFramework`, `HandoffLoop`, `HandoutSheet`, `CardSystem`, `AssistantCanvas`, `SpecToCode` | Ericsson only |
+| DBAS diagrams (scoped styles, drawn in code; museum red/blue kept for Röhsska/Mölndal) | `components/dbas/`: `DbasProcess`, `PilotRounds`, `ThemesLedger`, `LeafletEvolution`, `LensGrid`, `MuseumCompare` | DBAS only |
+| EWP diagrams (scoped styles, drawn in code; status swatches are the product's own colours, shown as a specimen) | `components/ewp/`: `ModuleMatrix`, `StatusSystem` | EWP only |
+| Desktop + phone screen pair | `.figure-grid.ewp-screens` | EWP |
 | Column grid | `.col-grid.cols-3` | Ericsson |
 | Museum pair / block | `.museum-pair`, `.museum-block` | DBAS |
 | Ink-grid | `.ink-grid` | DBAS |
-| Lens disclosure | `.lens` | DBAS |
 | Post-it board | `PostitBoard` | DBAS |
 | Next-object footer | `.obj-next` | every object page, in catalogue order 01 → 06 → 01 |
 | Entry links | `.obj-links` | compact entries 04–06 (where a case study has its summary) |
@@ -397,7 +399,7 @@ This is the complete set of patterns the site ships, checked against the build o
 | Form fields | `.form-field` | Contact |
 
 ### Named Rule: Diagrams drawn in code
-A diagram is built in HTML, CSS and SVG, not exported as an image, whenever its content is structure, numbers or text: real text stays selectable and translatable, it is crisp at any width, it reflows on phones (a loop becomes a list, side-by-side panels stack), and every number comes from the sources in `reference/PROJECT-REFERENCE.md`. Diagrams use ink, hairlines and the object's own form colour (gold for Ericsson), sharp frames, and drawn marks, never text glyphs. Photographs stay photographs.
+A diagram is built in HTML, CSS and SVG, not exported as an image, whenever its content is structure, numbers or text: real text stays selectable and translatable, it is crisp at any width, it reflows on phones (a loop becomes a list, side-by-side panels stack), and every number comes from the sources in `reference/PROJECT-REFERENCE.md`. Diagrams use ink, hairlines and the object's own form colour (gold for Ericsson, blue for DBAS, red for EWP), sharp frames, and drawn marks, never text glyphs. Photographs stay photographs, and a photograph never carries a label or caption baked into its pixels: labels, arrows and version marks are drawn in code around it (DBAS's leaflet versions).
 
 ## Accessibility commitments
 

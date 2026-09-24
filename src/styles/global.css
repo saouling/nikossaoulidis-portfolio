@@ -1009,43 +1009,6 @@ figcaption {
 }
 .figure-grid.ewp-screens img { aspect-ratio: auto; object-fit: initial; border: 1px solid var(--hairline); }
 
-/* ---------- Guideline disclosures (Session B11 round 5) ----------
-   Each of the four lenses: the film question is the clickable <summary>,
-   the guideline text is hidden until opened — a native <details>, same
-   zero-JS mechanism the Filmstrip used, but a full-width card rather
-   than a small pill, since the point here is separating "the question"
-   from "the guideline" physically, not just visually. */
-.lens {
-  border: 1px solid var(--hairline);
-  margin-top: var(--space-3);
-}
-.lens summary {
-  cursor: pointer;
-  list-style: none;
-  padding: var(--space-4);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--fs-body);
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-.lens summary::-webkit-details-marker { display: none; }
-.lens summary::marker { content: ''; }
-.lens summary::after {
-  content: "";
-  margin-left: auto;
-  flex: none;
-  width: 1rem;
-  height: 1rem;
-  background: var(--blue-ink);
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1v14M1 8h14' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-.lens[open] summary { border-bottom: 1px solid var(--hairline); }
-.lens[open] summary::after { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 8h14' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E"); }
-.lens-body { padding: var(--space-4); }
-.lens-body p:last-child { margin-bottom: 0; }
 
 .two-col {
   display: grid;
