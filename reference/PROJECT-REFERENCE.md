@@ -307,18 +307,14 @@ language, every team solving the same problem differently.
 - define success metrics up front
 - bring developers in earlier (learned at Ericsson)
 
-**Recording (found 2026-09-24):** Nikos's talk "Feedback on Dashboard usability survey &
-improvements in the pipeline" is in *Erasmus Goes Digital – Updates for the EWP Dashboard
-users*, YouTube `U4R6U_Dt7d8`, published 6 April 2022, his part at 49:38–1:03:00
-(moderator Nikos Liolios). The survey had 927 responses (EUF write-up). The Autumn 2022
-edition (`W9s_TKC5H5k`, November 2022) has Ghent University and DG EAC, but the dashboard
-update there is by Konstantinos Karaoglanoglou, not Nikos. So "December 2022" is likely
-wrong: **ask Nikos.** His LinkedIn post on it credits **Ioannis Zachros** as co-designer of
-the mockups: **ask whether to credit.**
+**Recording:** Nikos's talk "Feedback on Dashboard usability survey & improvements in the
+pipeline" is in *Erasmus Goes Digital – Updates for the EWP Dashboard users*, YouTube
+`U4R6U_Dt7d8`, published 6 April 2022, his part at 49:38–1:03:00. Embedding is disabled
+by the owner. **Confirmed by Nikos (2026-09-24): April 2022.** The survey had 927
+responses. Nikos asked not to mention co-designers of the mockups.
 
 **Talk:** "Erasmus Goes Digital", a European University Foundation webinar,
-co-presented with Ghent University and DG EAC. **Date:** December 2022 (confirmed by Nikos; the CV's
-Aug 2022 is wrong). **Still open:** the About page says Aug 2022 to **Jun** 2023, the CV
+with speakers from EUF, DG EAC and GÉANT (Ghent was in the November edition, not his). **Date:** April 2022 (confirmed by Nikos after the recording surfaced; earlier "December" and the CV's Aug 2022 are wrong). **Still open:** the About page says Aug 2022 to **Jun** 2023, the CV
 says to **Jul** 2023.
 
 ---
@@ -428,7 +424,7 @@ The source folder has no deck for it, so ask Nikos if more material exists.
 
 - **The Ericsson Developer Conference talk was in April 2026.** The CV's "Mar 2026" is
   wrong. The About page is right; fix the CV PDF when it is next edited.
-- **Erasmus Goes Digital was in December 2022.** The CV's "Aug 2022" is wrong; the About
+- **Erasmus Goes Digital was in April 2022** (corrected from December after the recording surfaced). The CV's "Aug 2022" is wrong; the About
   page is right.
 - **LightHouse:** there is no more material than the Figma prototype and one image.
   Kept as object 06 on Claude's recommendation (the only pure interface piece; it costs
