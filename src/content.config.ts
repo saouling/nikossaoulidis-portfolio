@@ -67,7 +67,7 @@ const caseStudies = defineCollection({
 				state: z.string().optional(),
 			})),
 		}).optional(),
-		cases: z.array(z.object({ case: z.enum(['a', 'b', 'c']), no: z.string(), name: z.string() })).optional(),
+		cases: z.array(z.object({ case: z.enum(['a', 'b', 'c']), no: z.string(), name: z.string(), result: z.string().optional() })).optional(),
 		heroImage: z.object({
 			src: z.string().min(1),
 			width: z.number(),

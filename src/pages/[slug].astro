@@ -72,13 +72,6 @@ const summaryRows = summary
 					<LabelPlate object={object} fields={plateFields} />
 					{summaryRows.length > 0 && (
 						<nav class="obj-summary" aria-label="Summary">
-							{cases.length > 0 && (
-								<ul class="obj-summary-key">
-									{cases.map((c) => (
-										<li><CaseMark mark={c.case} /><span class="cat-no">{c.no}</span>{c.name}</li>
-									))}
-								</ul>
-							)}
 							<ol>
 								{summaryRows.map((row) => (
 									<li>
@@ -97,6 +90,20 @@ const summaryRows = summary
 									</li>
 								))}
 							</ol>
+							{cases.length > 0 && (
+								<ul class="obj-cases">
+									{cases.map((c, i) => (
+										<li>
+											<a href={`#case-${i + 1}`}>
+												<CaseMark mark={c.case} class="obj-case-mark" />
+												<span class="cat-no">{c.no}</span>
+												<span class="obj-case-name">{c.name}</span>
+												{c.result && <span class="obj-case-result">{c.result}</span>}
+											</a>
+										</li>
+									))}
+								</ul>
+							)}
 						</nav>
 					)}
 					{!isCaseStudy && (

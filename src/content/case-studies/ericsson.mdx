@@ -11,38 +11,14 @@ rail:
     - { id: case-3, no: 01c, label: Generative UI, mark: c }
     - { id: how-it-went, label: Results and lessons }
 cases:
-  - { case: a, no: 01a, name: AI-ready deliveries }
-  - { case: b, no: 01b, name: Build better together }
-  - { case: c, no: 01c, name: Generative UI }
+  - { case: a, no: 01a, name: AI-ready deliveries, result: "Adopted as the team-wide delivery standard" }
+  - { case: b, no: 01b, name: Build better together, result: "A conference talk, and a handout people still use" }
+  - { case: c, no: 01c, name: Generative UI, result: "A US back-end team used it to show live data" }
 summary:
-  problem:
-    - case: a
-      text: "Developers generated UI code straight from Figma files built for humans, and the AI built the sticky notes too."
-    - case: b
-      text: "Design and development worked in sequence: each discipline reacting to decisions already made, with nobody else in the room."
-    - case: c
-      text: "Our telecom dashboards hold far more data than one static layout can show, and building a new one for every role is slow."
-  did:
-    - case: a
-      text: "Audited our files, built the delivery-for-ai skill that separates screens from specs, and tested it with a developer over four rounds."
-    - case: b
-      text: "Co-created time-boxed methods and daily habits with Frida Edstam, and put them on a one-page handout."
-    - case: c
-      text: "Rebuilt the card as one content-driven component, and proposed an assistant plus a canvas that assembles whole layouts."
-  went:
-    - case: a
-      text: "Adopted as the team-wide delivery standard."
-    - case: b
-      text: "A talk at the Ericsson Developer Conference in April 2026, and a handout people still use."
-    - case: c
-      text: "A US back-end team used the component to show live data."
-  learned:
-    - case: a
-      text: "Screens say what it looks like, specs say how it behaves. Mix them and the AI invents things."
-    - case: b
-      text: "Workshops are the easy part. The daily habits are what stick."
-    - case: c
-      text: "The deliverable is becoming a system of rules, not a screen."
+  problem: "Three gaps between design and development: design files the AI misread, teams working in sequence instead of together, and dashboards too static for the data behind them."
+  did: "Built an AI-ready delivery skill, co-created team methods with Frida Edstam, and designed a canvas-and-assistant dashboard on one content-driven card."
+  went: "The delivery method became the team standard, the methods became a conference talk and a handout, and a US team shipped the card on live data."
+  learned: "Bring developers in from week one. The job is shifting towards defining constraints and judging what comes back."
 heroImage:
   src: "/images/ericsson/collage.jpg"
   width: 1900

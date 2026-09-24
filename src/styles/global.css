@@ -740,10 +740,16 @@ main > section, .section {
    the index and the summary, so the three cases stay tellable apart. */
 .sub-mark { font-size: 3.25rem; align-self: start; }
 .sub-index .case-mark { font-size: 1.35rem; align-self: center; }
-.obj-summary-key { list-style: none; margin: 0 0 var(--space-3); padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-family: var(--font-display); font-size: var(--fs-small); color: var(--ink); }
-.obj-summary-key li { display: flex; align-items: center; gap: var(--space-2); }
-.obj-summary-key .case-mark { font-size: 1.15rem; }
-.obj-summary-key .cat-no { padding: 0; }
+/* Case cards under a per-object summary (Ericsson): one per case, its
+   letter mark, number, name and result, each linking to its record. */
+.obj-cases { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; gap: var(--space-2); }
+@media (min-width: 600px) { .obj-cases { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.obj-cases a { display: grid; align-content: start; gap: 2px; height: 100%; padding: var(--space-3); border: 1px solid var(--ink); color: var(--ink); text-decoration: none; font-family: var(--font-display); }
+.obj-cases a:hover, .obj-cases a:focus-visible { border-color: var(--blue-ink); color: var(--blue-ink); }
+.obj-case-mark { font-size: 2rem; margin-bottom: var(--space-2); }
+.obj-cases .cat-no { padding: 0; font-size: var(--fs-small); }
+.obj-case-name { font-weight: 600; line-height: 1.2; }
+.obj-case-result { margin-top: var(--space-1); font-size: var(--fs-small); color: var(--muted); line-height: 1.35; }
 .obj-summary-cases { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
 .obj-summary-cases li { border: 0; display: grid; grid-template-columns: 1.4rem minmax(0, 1fr); gap: var(--space-2); font-size: var(--fs-small); line-height: 1.5; max-width: 60ch; }
 .obj-summary-cases .case-mark { font-size: 1.15rem; margin-top: .15em; }
@@ -1460,3 +1466,62 @@ blockquote.pull.boxed {
 .case-body figcaption { margin-top: var(--space-3); }
 .case-body .ink-grid p { margin-top: var(--space-2); }
 .case-body > h2 + h3, .case-body > h2 + .sub-title { margin-top: var(--flow-prose); }
+
+/* ---------- Margin column (Swiss editorial grid) ----------
+   From 1000px the case body is a text column plus a margin column. Wide
+   figures span both; everything else keeps to the text column, and the
+   margin carries what belongs beside it: every caption, and each section's
+   number. Text plus margin always fill the same width as a wide figure,
+   so the space to the right of the prose is structure, not leftover. */
+.obj[data-form="triangle"] { --obj-tone: var(--gold-ink); }
+.obj[data-form="circle"]   { --obj-tone: var(--blue); }
+.obj[data-form="square"]   { --obj-tone: var(--red); }
+.case-body { counter-reset: section; }
+@media (min-width: 1000px) {
+  .case-body { --margin-gap: var(--space-5); }
+  /* Section headings run their rule across text and margin, with the
+     section's number at the far end in the object's colour. */
+  .case-body > h2 {
+    grid-column: content-start / -2;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    counter-increment: section;
+  }
+  .case-body > h2::after {
+    content: counter(section, decimal-leading-zero);
+    margin-left: auto;
+    font-family: var(--font-display);
+    font-size: var(--fs-small);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .06em;
+    color: var(--obj-tone, var(--muted));
+  }
+  /* A content-width figure: media in the text column, caption in the margin,
+     bottom-aligned like a museum label. */
+  .case-body > figure:not(.wide):not(.breakout):has(> figcaption) {
+    grid-column: content-start / -2;
+    display: grid;
+    grid-template-columns: min(var(--measure), 100%) minmax(0, 1fr);
+    column-gap: var(--margin-gap);
+    max-width: none;
+    align-items: end;
+  }
+  .case-body > figure:not(.wide):not(.breakout):has(> figcaption) > * { grid-column: 1; }
+  .case-body > figure:not(.wide):not(.breakout):has(> figcaption) > figcaption {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+    max-width: 22rem;
+  }
+  /* A supporting image is narrower than the text: its label sits right beside it. */
+  .case-body > figure.figure-support:has(> figcaption) { grid-template-columns: minmax(0, 480px) minmax(0, 22rem); }
+  /* Wide figures: the caption starts at the margin column, under the figure. */
+  .case-body > .wide > figcaption,
+  .case-body > figure.wide > figcaption,
+  .case-body > div.wide:not(.figure-grid) > figure > figcaption,
+  .case-body > .breakout figcaption:last-child {
+    margin-left: calc(min(var(--measure), 100%) + var(--margin-gap));
+    max-width: 22rem;
+  }
+}
